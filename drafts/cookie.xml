@@ -35,7 +35,7 @@
       domain name (FQDN) of a host (i.e., a completely specified domain name
       ending in a top-level domain such as .com or .uk), or the numeric
       Internet Protocol (IP) address of a host.
-      <!-- TODO: The fully qualified domain name is preferred; use of numeric IP
+      <!-- The fully qualified domain name is preferred; use of numeric IP
       addresses is strongly discouraged.--></t>
 
       <t>The terms request-host and request-URI refer to the values the client
@@ -104,7 +104,7 @@
         (informally, a sequence of non-special, non-white space characters) from
         the HTTP/1.1 specification [RFC 2068] to describe their syntax.</t>
 
-        <t>TODO: Test this grammar.</t>
+        <t>[TODO: Test this grammar.]</t>
 
         <figure>
           <artwork>
@@ -147,13 +147,13 @@
 
           <t>An origin server may include multiple Set-Cookie headers in a
           response.  Note that an intervening gateway could fold multiple such
-          headers into a single header.  TODO: Investigate how UAs cope with
-          such folded headers.</t>
+          headers into a single header.  [TODO: Investigate how UAs cope with
+          such folded headers.]</t>
         </section>
         <section title="Set-Cookie Syntax">
           <t>The syntax for the Set-Cookie response header is</t>
 
-          <t>TODO: Valdiate this syntax.</t>
+          <t>[TODO: Valdiate this syntax.]</t>
 
           <figure>
             <artwork>
@@ -165,11 +165,11 @@
    cookie-av       =       &quot;Comment&quot; &quot;=&quot; value
                    |       &quot;Domain&quot; &quot;=&quot; value
                    |       &quot;Max-Age&quot; &quot;=&quot; value
-                           TODO: Expires is clearly missing.
+                           [TODO: Expires is clearly missing.]
                    |       &quot;Path&quot; &quot;=&quot; value
                    |       &quot;Secure&quot;
                    |       &quot;Version&quot; &quot;=&quot; 1*DIGIT
-                           TODO: Version is likely a fantasy.
+                           [TODO: Version is likely a fantasy.]
             </artwork>
           </figure>
 
@@ -267,8 +267,8 @@
   </middle>
   <back>
     <section title="Acknowledgements">
-      <t>This document borrows heavily from RFC 2109.  TODO: Figure out the
-      proper way to credit the authors of RFC 2109.</t>
+      <t>This document borrows heavily from RFC 2109.  [TODO: Figure out the
+      proper way to credit the authors of RFC 2109.]</t>
     </section>
   </back>
 </rfc>
