@@ -123,7 +123,35 @@
         <t>NOTE: The syntax above allows whitespace between the attribute and
         the = sign.</t>
       </section>
+      <section title="Origin Server Role">
+        <section title="General">
+          <t>The origin server initiates a session, if it so desires.  (Note
+          that &quot;session&quot; here does not refer to a persistent network
+          connection but to a logical session created from HTTP requests and
+          responses.  The presence or absence of a persistent connection should
+          have no effect on the use of cookie-derived sessions).  To initiate a
+          session, the origin server returns an extra response header to the
+          client, Set-Cookie.  (The details follow later.)</t>
 
+          <t>A user agent returns a Cookie request header (see below) to the
+          origin server if it chooses to continue a session.  The origin server
+          may ignore it or use it to determine the current state of the
+          session.  It may send the client a Set-Cookie response header
+          with the same or different information, or it may send no Set-Cookie
+          header at all.<!-- The origin server effectively ends a session by
+          sending the client a Set-Cookie header with Max-Age=0. --></t>
+
+          <t>Servers may return a Set-Cookie response headers with any
+          response.  User agents should send Cookie request headers, subject to
+          other rules detailed below, with every request.</t>
+
+          <t>An origin server may include multiple Set-Cookie headers in a
+          response.  Note that an intervening gateway could fold multiple such
+          headers into a single header.  TODO: Investigate how UAs cope with
+          such folded headers.</t>
+        </section>
+
+      </section>
     </section>
   </middle>
   <back>
