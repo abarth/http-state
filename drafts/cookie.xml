@@ -44,7 +44,7 @@
       Note that request-host must be a FQHN.  Hosts names can be specified
       either as an IP address or a FQHN string.  Sometimes we compare one host
       name with another.  Host A's name domain-matches host B's if
-      <list>
+      <list style="symbols">
         <t>both host names are IP addresses and their host name strings match
         exactly; or</t>
 
