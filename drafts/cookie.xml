@@ -93,9 +93,36 @@
       </t>
     </section>
     <section title="Outline">
-    <t>We outline here a way for an origin server to send state information to
-    the user agent, and for the user agent to return the state information to
-    the origin server.</t>
+      <t>We outline here a way for an origin server to send state information to
+      the user agent, and for the user agent to return the state information to
+      the origin server.</t>
+
+      <section title="Syntax: General">
+        <t>The two state management headers, Set-Cookie and Cookie, have common
+        syntactic properties involving attribute-value pairs.  The following
+        grammar uses the notation, and tokens DIGIT (decimal digits) and token
+        (informally, a sequence of non-special, non-white space characters) from
+        the HTTP/1.1 specification [RFC 2068] to describe their syntax.</t>
+
+        <t>TODO: Test this grammar.</t>
+
+        <figure>
+          <artwork>
+   av-pairs        =       av-pair *(&quot;;&quot; av-pair)
+   av-pair         =       attr [&quot;=&quot; value]        ; optional value
+   attr            =       token
+   value           =       word
+   word            =       token | quoted-string
+          </artwork>
+        </figure>
+
+        <t>Attributes (names) (attr) are case-insensitive.  White space is
+        permitted between tokens.  Note that while the above syntax description
+        shows value as optional, most attrs require them.</t>
+
+        <t>NOTE: The syntax above allows whitespace between the attribute and
+        the = sign.</t>
+      </section>
 
     </section>
   </middle>
