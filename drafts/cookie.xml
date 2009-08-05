@@ -27,6 +27,44 @@
     <section anchor="intro" title="Introduction">
       <t>This document defines the HTTP Cookie and Set-Cookie header.</t>
     </section>
+    <section title="Terminology">
+      <t>The terms user agent, client, server, proxy, and origin server have
+      the same meaning as in the HTTP/1.0 specification.</t>
+
+      <t>Fully-qualified host name (FQHN) means either the fully-qualified
+      domain name (FQDN) of a host (i.e., a completely specified domain name
+      ending in a top-level domain such as .com or .uk), or the numeric
+      Internet Protocol (IP) address of a host.
+      <!-- TODO: The fully qualified domain name is preferred; use of numeric IP
+      addresses is strongly discouraged.--></t>
+
+      <t>The terms request-host and request-URI refer to the values the client
+      would send to the server as, respectively, the host (but not port) and
+      abs_path portions of the absoluteURI (http_URL) of the HTTP request line.
+      Note that request-host must be a FQHN.  Hosts names can be specified
+      either as an IP address or a FQHN string.  Sometimes we compare one host
+      name with another.  Host A's name domain-matches host B's if
+      <list>
+        <t>both host names are IP addresses and their host name strings match
+        exactly; or</t>
+
+        <t>both host names are FQDN strings and their host name strings match
+        exactly; or</t>
+
+        <t>A is a FQDN string and has the form NB, where N is a non-empty name
+        string, B has the form .B, and B is a FQDN string.  (So, x.y.com
+        domain-matches .y.com but not y.com.)</t>
+      </list>
+      </t>
+
+      <t>Note that domain-match is not a commutative operation: a.b.c.com
+      domain-matches .c.com, but not the reverse.</t>
+
+      <t>Because it was used in Netscape's original implementation of state
+      management, we will use the term cookie to refer to the state information
+      that passes between an origin server and user agent, and that gets stored
+      by the user agent.</t>
+    </section>
   </middle>
   <back>
   </back>
