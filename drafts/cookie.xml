@@ -65,6 +65,33 @@
       that passes between an origin server and user agent, and that gets stored
       by the user agent.</t>
     </section>
+    <section title="State and Sessions">
+      <t>This document describes a way to create stateful sessions with HTTP
+      requests and responses.  HTTP servers respond to each client request
+      without relating that request to previous or subsequent requests; the
+      technique allows clients and servers that wish to exchange state
+      information to place HTTP requests and responses within a larger context,
+      which we term a &quot;session&quot;.  This context might be used to
+      create, for example, a &quot;shopping cart&quot;, in which user
+      selections can be aggregated before purchase, or a magazine browsing
+      system, in which a user's previous reading affects which offerings are
+      presented.</t>
+
+      <t>There are, of course, many different potential contexts and thus many
+      different potential types of session.  The designers' paradigm for
+      sessions created by the exchange of cookies has these key attributes:
+      <list style="numbers">
+        <t>Each session has a beginning and an end.</t>
+
+        <t>Each session is relatively short-lived.</t>
+
+        <t>Either the user agent or the origin server may terminate a
+        session.</t>
+
+        <t>The session is implicit in the exchange of state information.</t>
+      </list>
+      </t>
+    </section>
   </middle>
   <back>
   </back>
