@@ -92,6 +92,12 @@
       </list>
       </t>
     </section>
+    <section title="Outline">
+    <t>We outline here a way for an origin server to send state information to
+    the user agent, and for the user agent to return the state information to
+    the origin server.</t>
+
+    </section>
   </middle>
   <back>
   </back>
