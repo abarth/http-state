@@ -150,6 +150,117 @@
           headers into a single header.  TODO: Investigate how UAs cope with
           such folded headers.</t>
         </section>
+        <section title="Set-Cookie Syntax">
+          <t>The syntax for the Set-Cookie response header is</t>
+
+          <t>TODO: Valdiate this syntax.</t>
+
+          <figure>
+            <artwork>
+   set-cookie      =       &quot;Set-Cookie:&quot; cookies
+   cookies         =       1#cookie
+   cookie          =       NAME &quot;=&quot; VALUE *(&quot;;&quot; cookie-av)
+   NAME            =       attr
+   VALUE           =       value
+   cookie-av       =       &quot;Comment&quot; &quot;=&quot; value
+                   |       &quot;Domain&quot; &quot;=&quot; value
+                   |       &quot;Max-Age&quot; &quot;=&quot; value
+                           TODO: Expires is clearly missing.
+                   |       &quot;Path&quot; &quot;=&quot; value
+                   |       &quot;Secure&quot;
+                   |       &quot;Version&quot; &quot;=&quot; 1*DIGIT
+                           TODO: Version is likely a fantasy.
+            </artwork>
+          </figure>
+
+          <t>Informally, the Set-Cookie response header comprises the token
+          Set-Cookie:, followed by a comma-separated list of one or more
+          cookies.  Each cookie begins with a NAME=VALUE pair, followed by zero
+          or more semi-colon-separated attribute-value pairs.  The specific
+          attributes and the semantics of their values follows.  The NAME=VALUE
+          attribute-value pair must come first in each cookie.  The others, if
+          present, can occur in any order.  If an attribute appears more than
+          once in a cookie, the behavior is undefined.  [TODO: Test what happens
+          when attributes are multiply defined.]
+          <list>
+            <t>NAME=VALUE
+            <list>
+              <t>Required.  The name of the state information
+              (&quot;cookie&quot;) is NAME, and its value is VALUE.  NAMEs that
+              begin with $ are reserved for other uses and must not be used by
+              applications.  [TODO: I suspect the $ rule is a fantasy.]  The
+              VALUE is opaque to the user agent and may be
+              anything the origin server chooses to send, possibly in a
+              server-selected printable ASCII encoding.   &quot;Opaque&quot;
+              implies that the content is of interest and relevance only to the
+              origin server.  The content may, in fact, be readable by anyone
+              that examines the Set-Cookie header.</t>
+            </list>
+            </t>
+
+            <t>Comment=comment
+            <list>
+              <t>Optional.  Because cookies can contain private information
+              about a user, the Cookie attribute allows an origin server to
+              document its intended use of a cookie.  The user can inspect the
+              information to decide whether to initiate or continue a session
+              with this cookie.  [TODO: Does this actually exist?]</t>
+            </list>
+            </t>
+
+            <t>Domain=domain
+            <list>
+              <t>Optional.  The Domain attribute specifies the domain for which
+              the cookie is valid.  An explicitly specified domain must always
+              start with a dot.  [TODO: Test what happens without a dot.]</t>
+            </list>
+            </t>
+
+            <t>Max-Age=delta-seconds
+            <list>
+              <t>Optional.  The Max-Age attribute defines the lifetime of the
+              cookie, in seconds.  The delta-seconds value is a decimal
+              non-negative integer.  [TODO: Test negative integers.]  After
+              delta-seconds seconds elapse, the client should discard the
+              cookie.  A value of zero means the cookie should be discarded
+              immediately.</t>
+            </list>
+            </t>
+
+            <t>Path=path
+            <list>
+              <t>Optional.  The Path attribute specifies the subset of URLs to
+              which this cookie applies.</t>
+            </list>
+            </t>
+
+            <t>Secure
+            <list>
+              <t>Optional.  The Secure attribute (with no value) directs the
+              user agent to use only (unspecified) secure means to contact the
+              origin server whenever it sends back this cookie.  [TODO: We
+              should give better implementation advice than this.]</t>
+
+              <t>The user agent (possibly under the user's control) may
+              determine what level of security it considers appropriate for
+              &quot;secure&quot; cookies.  The Secure attribute should be
+              considered security advice from the server to the user agent,
+              indicating that it is in the session's interest to protect
+              the confidentiality of the cookie's value.</t>
+            </list>
+            </t>
+
+            <t>Version=version
+            <list>
+              <t>Required [TODO: Unlikely].  The Version attribute, a decimal
+              integer, identifies to which version of the state management
+              specification the cookie conforms.  For this specification,
+              Version=1 applies.  [TODO: Remove this attribute.]</t>
+            </list>
+            </t>
+          </list>
+          </t>
+        </section>
 
       </section>
     </section>
