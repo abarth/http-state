@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?rfc toc="yes"?>
+<?xml-stylesheet type="text/xml" href="rfc2629.xslt"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<rfc ipr="trust200902" docName="draft-abarth-cookie">
+  <front>
+    <title abbrev="HTTP State Management Mechanism">
+      HTTP State Management Mechanism
+    </title>
+    <author initials="A." surname="Barth" fullname="Adam Barth">
+      <organization abbrev="U.C. Berkeley">
+        University of California, Berkeley
+      </organization>
+      <address>
+        <email>abarth@eecs.berkeley.edu</email>
+        <uri>http://www.adambarth.com/</uri>
+      </address>
+    </author>
+    <date month="August" year="2009"/>
+    <workgroup>http-state Working Group</workgroup>
+    <keyword>Internet-Draft</keyword>
+    <abstract>
+      <t>This document defines the HTTP Cookie and Set-Cookie headers.</t>
+    </abstract>
+  </front>
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <t>This document defines the HTTP Cookie and Set-Cookie header.</t>
+    </section>
+  </middle>
+  <back>
+  </back>
+</rfc>
