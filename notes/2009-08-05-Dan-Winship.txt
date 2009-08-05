@@ -1,0 +1,136 @@
+Message-ID: <4A79C12F.6020903@gmail.com>
+Date: Wed, 05 Aug 2009 13:28:15 -0400
+From: Dan Winship <dan.winship@gmail.com>
+To: "http-state@ietf.org" <http-state@ietf.org>
+Subject: [http-state] some notes on cookies
+
+When I was implementing cookie handling for libsoup, I set up Firefox to
+log all cookie-related activity for a few weeks and then went over the
+logs afterward trying to learn things. Here are some things I found.
+
+
+Netscape vs RFC 2109 vs RFC 2965
+--------------------------------
+
+I didn't see a single Set-Cookie2 header from any of the sites I visited
+during that time.
+(http://www.nextthing.org/archives/2005/08/07/fun-with-http-headers and
+http://code.google.com/webstats/2005-12/httpheaders.html, both from late
+2005, suggest Set-Cookie is [was?] about 100 times more common than
+Set-Cookie2, but in my experience of "web sites I actually visit", it
+was infinity times more common.)
+http://www.mnot.net/blog/2006/10/27/cookie_fun says that among browsers,
+only Opera supports Set-Cookie2. (That was pre-Chrome, but I'm assuming
+Chrome does not support it either.)
+
+A handful of sites return cookies with Version=1 (ie, RFC 2109), but
+this is generally a lie; they are no more likely to parse according to
+the RFC 2109 grammar than cookies without Version=1. No cookie included
+any RFC 2109 or 2965 attributes other than Version and Max-Age.
+
+Lots of cookies include both Max-Age and Expires (making them violate
+both the Netscape spec and RFC 2109). Very few had *only* Max-Age. (I am
+not sure which browsers understand Max-Age, or what they do when both
+Max-Age and Expires are present, but don't match.)
+
+
+Parsing
+-------
+
+Every cookie NAME I saw matched the Netscape spec rule ("a sequence of
+characters excluding semi-colon, comma and white space [and ending
+with an equals sign]"). (Actually, all but two of them matched the RFC
+2109 rule, "token", as well.)
+
+99% of the cookie VALUEs matched the Netscape spec rule ("a sequence of
+characters excluding semi-colon, comma and white space"), but some had
+commas or spaces (often both) in the VALUE.
+
+Many many VALUEs did not match the RFC 2109 rule (token|quoted-string).
+A handful of cookies do put quotes around the VALUE, but
+http://codereview.chromium.org/17045 suggests that all browsers but
+Firefox treat the quotes the same as they'd treat any other character.
+Firefox's behavior is odd; it parses the VALUE as a quoted-string
+(meaning it could in theory include a semicolon), but then includes the
+quotes as part of the parsed value. For all the quoted cookie values I
+saw, Firefox's behavior was equivalent to other browsers.
+
+Other than HttpOnly, Version, and Max-Age, no cookie had any attributes
+that weren't defined in the Netscape spec. (Note that neither the
+Netscape spec nor 2109 allows unrecognized attributes to appear, which
+is something we should fix, since I believe all clients just ignore
+unrecognized attributes.)
+
+RFC 2109 allows attribute values to be quoted-strings, but I only saw
+one cookie that did this, and it was coming from an ad server, so even
+if browsers parsed it completely bogusly, users would never notice and
+complain, so this doesn't provide any evidence about how browsers treat
+quoted attribute values.
+
+Some cookies included an erroneous trailing ";".
+
+
+Expires
+-------
+
+The majority of cookies with an Expires attribute used the date syntax
+specified by the most-recent version of the Netscape spec:
+
+    Wdy, DD-Mon-YYYY HH:MM:SS GMT
+
+(which is to say, an rfc1123-date with the spaces in the date part
+replaced with hyphens). However, about 1/3 of cookies used some
+other format instead, such as:
+
+    Wdy, DD Mon YYYY HH:MM:SS GMT     [1]
+    Wdy, DD-Mon-YY HH:MM:SS GMT       [2]
+    Weekday, DD-Mon-YY HH:MM:SS GMT   [3]
+
+[1] is an unmodified rfc1123-date and is the most popular alternative
+format, especially when you include cookies set from javascript, where
+Netscape had explicitly told web authors that they could use
+Date.toGMTString when setting document.cookie.
+(http://web.archive.org/web/20080208100914/http://wp.netscape.com/eng/mozilla/3.0/handbook/javascript/advtopic.htm)
+
+[2] is the date format given in the original version of the Netscape
+spec (which is also quoted in RFC 2109). [3] is the format used by the
+*example* in the Netscape spec (both original and updated versions),
+which doesn't actually match its own definition.
+
+There were also various other not-quite-right formats, including every
+other possible combination of 2- and 4-digit years, and of
+zero-prefixed, space-prefixed, and non-prefixed single-digit days. The
+absolute worst was "Wdy Mon DD HH:MM:SS YYYY GMT", which is an *invalid*
+asctime-date (a real asctime-date doesn't specify "GMT"), making it
+three degrees of separation away from being reasonable, but it's the
+format used by "a certain well-known online bookseller", so browsers
+really have no choice but to accept it.
+
+So... "Clients SHOULD accept any string they can manage to extract any
+remotely plausible date out of." Or something.
+
+It may also be worth warning implementors explicitly about
+overflow/underflow; some sites issue cookies with expiration dates
+outside the range of 32-bit time_t.
+
+
+Path
+----
+
+The Netscape spec says that:
+
+    the path "/foo" would match "/foobar"
+
+but this is crazy and I don't think anyone actually implements it that way.
+
+RFC 2109 says that the Path specified in a Set-Cookie must be a prefix
+of the Request-URI, but the original spec did not make this requirement,
+and since some sites require the original behavior, browsers don't
+implement the RFC 2109 rule; any web page on a given host is allowed to
+set a cookie with any Path. Thus, Path cannot be used as a security
+measure; it's solely an optimization, used to inform the browser that it
+can save bandwidth by sending certain cookies only to the resources
+that actually care about them.
+
+
+-- Dan
