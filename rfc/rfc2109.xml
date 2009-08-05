@@ -1,22 +1,22 @@
-<?xml version="1.0"?>
-<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<?rfc toc="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<!DOCTYPE rfc [
+  <!ENTITY MAY "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>MAY</bcp14>">
+  <!ENTITY MUST "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>MUST</bcp14>">
+  <!ENTITY MUST-NOT "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>MUST NOT</bcp14>">
+  <!ENTITY OPTIONAL "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>OPTIONAL</bcp14>">
+  <!ENTITY RECOMMENDED "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>RECOMMENDED</bcp14>">
+  <!ENTITY REQUIRED "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>REQUIRED</bcp14>">
+  <!ENTITY SHALL "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>SHALL</bcp14>">
+  <!ENTITY SHALL-NOT "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>SHALL NOT</bcp14>">
+  <!ENTITY SHOULD "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>SHOULD</bcp14>">
+  <!ENTITY SHOULD-NOT "<bcp14 xmlns='http://purl.org/net/xml2rfc/ext'>SHOULD NOT</bcp14>">
+]>
+<?rfc toc="no"?>
+<?rfc symrefs="no"?>
 
-<!--
-     ASCII to XML transformation by Invisible Worlds, Inc.
-     http://invisible.net/
-     Last transformation: 03-Feb-1999, 02:03:51
-
-     Cannonical version of this document is at:
-     http://info.internet.isi.edu/in-notes/rfc/files/rfc2109.txt
-
-     Implementors should verify all content with
-     cannonical version.  Failure to do so may result in
-     protocol failures.
--->
-
-<rfc number="2109"
-     category="std">
+<rfc number="2109" category="std"
+     xmlns:x='http://purl.org/net/xml2rfc/ext'>
 <front>
 <title>HTTP State Management Mechanism</title>
 <author initials="D.M." surname="Kristol" fullname="David M. Kristol">
@@ -33,7 +33,7 @@
 </address>
 </author>
 <author initials="L." surname="Montulli" fullname="Lou Montulli">
-<organization>Netscape Communications Corp.</organization>
+<organization abbrev="Netscape Communications">Netscape Communications Corp.</organization>
 <address>
 <postal>
 <street>501 E. Middlefield Rd.</street>
@@ -49,19 +49,17 @@
 <keyword>hypertext transfer protocol</keyword>
 </front>
 <middle>
-<!-- RFC original section: (1.) -->
 <section title="ABSTRACT">
 <t>
    This document specifies a way to create a stateful session with HTTP
    requests and responses.  It describes two new headers, Cookie and
    Set-Cookie, which carry state information between participating
    origin servers and user agents.  The method described here differs
-   from Netscape&apos;s Cookie proposal, but it can interoperate with
-   HTTP/1.0 user agents that use Netscape&apos;s method.  (See the HISTORICAL
+   from Netscape's Cookie proposal, but it can interoperate with
+   HTTP/1.0 user agents that use Netscape's method.  (See the HISTORICAL
    section.)
 </t>
 </section>
-<!-- RFC original section: (2.) -->
 <section title="TERMINOLOGY">
 <t>
    The terms user agent, client, server, proxy, and origin server have
@@ -80,36 +78,39 @@
    would send to the server as, respectively, the host (but not port)
    and abs_path portions of the absoluteURI (http_URL) of the HTTP
    request line.  Note that request-host must be a FQHN.
+</t>
+<t>
    Hosts names can be specified either as an IP address or a FQHN
-   string.  Sometimes we compare one host name with another.  Host A&apos;s
-   name domain-matches host B&apos;s if
-<list>
-<t>
-   * both host names are IP addresses and their host name strings match
-     exactly; or
-</t>
-<t>
-   * both host names are FQDN strings and their host name strings match
-     exactly; or
-</t>
-<t>
-   * A is a FQDN string and has the form NB, where N is a non-empty name
-     string, B has the form .B&apos;, and B&apos; is a FQDN string.  (So, x.y.com
-     domain-matches .y.com but not y.com.)
-</t></list>
+   string.  Sometimes we compare one host name with another.  Host A's
+   name domain-matches host B's if
+<list style="symbols">
+  <t>
+    both host names are IP addresses and their host name strings match
+    exactly; or
+  </t>
+  <t>
+    both host names are FQDN strings and their host name strings match
+    exactly; or
+  </t>
+  <t>
+    A is a FQDN string and has the form NB, where N is a non-empty name
+    string, B has the form .B', and B' is a FQDN string.  (So, x.y.com
+    domain-matches .y.com but not y.com.)
+  </t>
+</list>
 </t>
 <t>
    Note that domain-match is not a commutative operation: a.b.c.com
    domain-matches .c.com, but not the reverse.
 </t>
 <t>
-   Because it was used in Netscape&apos;s original implementation of state
+   Because it was used in Netscape's original implementation of state
    management, we will use the term cookie to refer to the state
    information that passes between an origin server and user agent, and
    that gets stored by the user agent.
 </t>
 </section>
-<!-- RFC original section: (3.) -->
+
 <section title="STATE AND SESSIONS">
 <t>
    This document describes a way to create stateful sessions with HTTP
@@ -117,33 +118,33 @@
    client request without relating that request to previous or
    subsequent requests; the technique allows clients and servers that
    wish to exchange state information to place HTTP requests and
-   responses within a larger context, which we term a &quot;session&quot;.  This
-   context might be used to create, for example, a &quot;shopping cart&quot;, in
+   responses within a larger context, which we term a "session".  This
+   context might be used to create, for example, a "shopping cart", in
    which user selections can be aggregated before purchase, or a
-   magazine browsing system, in which a user&apos;s previous reading affects
+   magazine browsing system, in which a user's previous reading affects
    which offerings are presented.
 </t>
 <t>
    There are, of course, many different potential contexts and thus many
-   different potential types of session.  The designers&apos; paradigm for
+   different potential types of session.  The designers' paradigm for
    sessions created by the exchange of cookies has these key attributes:
-<list>
-<t>
-      1.  Each session has a beginning and an end.
-</t>
-<t>
-      2.  Each session is relatively short-lived.
-</t>
-<t>
-      3.  Either the user agent or the origin server may terminate a
-          session.
-</t>
-<t>
-      4.  The session is implicit in the exchange of state information.
+<list style="numbers">
+  <t>
+    Each session has a beginning and an end.
+  </t>
+  <t>
+    Each session is relatively short-lived.
+  </t>
+  <t>
+    Either the user agent or the origin server may terminate a
+    session.
+  </t>
+  <t>
+    The session is implicit in the exchange of state information.
 </t></list>
 </t>
 </section>
-<!-- RFC original section: (4.) -->
+
 <section title="OUTLINE">
 <t>
    We outline here a way for an origin server to send state information
@@ -155,7 +156,7 @@
    programs, unless the server provides more sophisticated state
    management support.  (See Implementation Considerations, below.)
 </t>
-<!-- RFC original section: (4.1) -->
+
 <section title="Syntax:  General">
 <t>
    The two state management headers, Set-Cookie and Cookie, have common
@@ -165,9 +166,9 @@
    characters) from the HTTP/1.1 specification [RFC 2068] to describe
    their syntax.
 </t>
-<figure><artwork>
-   av-pairs        =       av-pair *(&quot;;&quot; av-pair)
-   av-pair         =       attr [&quot;=&quot; value]        ; optional value
+<figure><artwork type="abnf2616">
+   av-pairs        =       av-pair *(";" av-pair)
+   av-pair         =       attr ["=" value]        ; optional value
    attr            =       token
    value           =       word
    word            =       token | quoted-string
@@ -182,15 +183,13 @@
    the = sign.
 </t>
 </section>
-<!-- RFC original section: (4.2) -->
+
 <section title="Origin Server Role">
-<t>
-</t>
-<!-- RFC original section: (4.2.1) -->
+
 <section title="General">
 <t>
    The origin server initiates a session, if it so desires.  (Note that
-   &quot;session&quot; here does not refer to a persistent network connection but
+   "session" here does not refer to a persistent network connection but
    to a logical session created from HTTP requests and responses.  The
    presence or absence of a persistent connection should have no effect
    on the use of cookie-derived sessions).  To initiate a session, the
@@ -217,23 +216,23 @@
    headers into a single header.
 </t>
 </section>
-<!-- RFC original section: (4.2.2) -->
+
 <section title="Set-Cookie Syntax">
 <t>
    The syntax for the Set-Cookie response header is
 </t>
-<figure><artwork>
-   set-cookie      =       &quot;Set-Cookie:&quot; cookies
+<figure><artwork type="abnf2616">
+   set-cookie      =       "Set-Cookie:" cookies
    cookies         =       1#cookie
-   cookie          =       NAME &quot;=&quot; VALUE *(&quot;;&quot; cookie-av)
+   cookie          =       NAME "=" VALUE *(";" cookie-av)
    NAME            =       attr
    VALUE           =       value
-   cookie-av       =       &quot;Comment&quot; &quot;=&quot; value
-                   |       &quot;Domain&quot; &quot;=&quot; value
-                   |       &quot;Max-Age&quot; &quot;=&quot; value
-                   |       &quot;Path&quot; &quot;=&quot; value
-                   |       &quot;Secure&quot;
-                   |       &quot;Version&quot; &quot;=&quot; 1*DIGIT
+   cookie-av       =       "Comment" "=" value
+                   |       "Domain" "=" value
+                   |       "Max-Age" "=" value
+                   |       "Path" "=" value
+                   |       "Secure"
+                   |       "Version" "=" 1*DIGIT
 </artwork></figure>
 <t>
    Informally, the Set-Cookie response header comprises the token Set-
@@ -245,98 +244,93 @@
    value pair must come first in each cookie.  The others, if present,
    can occur in any order.  If an attribute appears more than once in a
    cookie, the behavior is undefined.
-<list>
-<t>
-   NAME=VALUE
-<list>
-<t>
-      Required.  The name of the state information (&quot;cookie&quot;) is NAME,
-      and its value is VALUE.  NAMEs that begin with $ are reserved for
-      other uses and must not be used by applications.
-      The VALUE is opaque to the user agent and may be anything the
-      origin server chooses to send, possibly in a server-selected
-      printable ASCII encoding.  &quot;Opaque&quot; implies that the content is of
-      interest and relevance only to the origin server.  The content
-      may, in fact, be readable by anyone that examines the Set-Cookie
-      header.
-</t></list>
 </t>
 <t>
-   Comment=comment
-<list>
+  NAME=VALUE
+  <list><t>
+      Required.  The name of the state information ("cookie") is NAME,
+      and its value is VALUE.  NAMEs that begin with $ are reserved for
+      other uses and must not be used by applications.
+  </t>
+  <t>
+      The VALUE is opaque to the user agent and may be anything the
+      origin server chooses to send, possibly in a server-selected
+      printable ASCII encoding.  "Opaque" implies that the content is of
+      interest and relevance only to the origin server.  The content
+      may, in fact, be readable by anyone that examines the Set-Cookie
+      header. 
+  </t></list>
+</t>
 <t>
+  Comment=comment
+  <list><t>
       Optional.  Because cookies can contain private information about a
       user, the Cookie attribute allows an origin server to document its
       intended use of a cookie.  The user can inspect the information to
       decide whether to initiate or continue a session with this cookie.
-</t></list>
+  </t></list>
 </t>
 <t>
-   Domain=domain
-<list>
-<t>
+  Domain=domain
+  <list><t>
       Optional.  The Domain attribute specifies the domain for which the
       cookie is valid.  An explicitly specified domain must always start
       with a dot.
-</t></list>
+  </t></list>
 </t>
 <t>
-   Max-Age=delta-seconds
-<list>
-<t>
+  Max-Age=delta-seconds
+  <list><t>
       Optional.  The Max-Age attribute defines the lifetime of the
       cookie, in seconds.  The delta-seconds value is a decimal non-
       negative integer.  After delta-seconds seconds elapse, the client
       should discard the cookie.  A value of zero means the cookie
       should be discarded immediately.
-</t></list>
+  </t></list>
 </t>
 <t>
-   Path=path
-<list>
-<t>
+  Path=path
+  <list><t>
       Optional.  The Path attribute specifies the subset of URLs to
       which this cookie applies.
-</t></list>
+  </t></list>
 </t>
 <t>
-   Secure
-<list>
-<t>
+  Secure
+  <list><t>
       Optional.  The Secure attribute (with no value) directs the user
       agent to use only (unspecified) secure means to contact the origin
       server whenever it sends back this cookie.
-</t>
-<t>
-      The user agent (possibly under the user&apos;s control) may determine
-      what level of security it considers appropriate for &quot;secure&quot;
+  </t>
+  <t>
+      The user agent (possibly under the user's control) may determine
+      what level of security it considers appropriate for "secure"
       cookies.  The Secure attribute should be considered security
       advice from the server to the user agent, indicating that it is in
-      the session&apos;s interest to protect the cookie contents.
-</t></list>
+      the session's interest to protect the cookie contents.
+  </t></list>
 </t>
 <t>
-   Version=version
-<list>
-<t>
+  Version=version
+  <list><t>
       Required.  The Version attribute, a decimal integer, identifies to
       which version of the state management specification the cookie
       conforms.  For this specification, Version=1 applies.
-</t></list>
-</t></list>
+  </t>
+</list>
 </t>
 </section>
-<!-- RFC original section: (4.2.3) -->
+
 <section title="Controlling Caching">
 <t>
    An origin server must be cognizant of the effect of possible caching
    of both the returned resource and the Set-Cookie header.  Caching
-   &quot;public&quot; documents is desirable.  For example, if the origin server
-   wants to use a public document such as a &quot;front door&quot; page as a
+   "public" documents is desirable.  For example, if the origin server
+   wants to use a public document such as a "front door" page as a
    sentinel to indicate the beginning of a session for which a Set-
    Cookie response header must be generated, the page should be stored
-   in caches &quot;pre-expired&quot; so that the origin server will see further
-   requests.  &quot;Private documents&quot;, for example those that contain
+   in caches "pre-expired" so that the origin server will see further
+   requests.  "Private documents", for example those that contain
    information strictly private to a session, should not be cached in
    shared caches.
 </t>
@@ -348,34 +342,35 @@
 <t>
    The origin server should send the following additional HTTP/1.1
    response headers, depending on circumstances:
-<list>
-<t>
-   * To suppress caching of the Set-Cookie header: Cache-control: no-
-     cache=&quot;set-cookie&quot;.
-</t></list>
+<list style="symbols">
+  <t>
+    To suppress caching of the Set-Cookie header: Cache-control: no-
+    cache="set-cookie".
+  </t>
+</list>
 </t>
 <t>
    and one of the following:
-<list>
-<t>
-   * To suppress caching of a private document in shared caches: Cache-
-     control: private.
-</t>
-<t>
-   * To allow caching of a document and require that it be validated
-     before returning it to the client: Cache-control: must-revalidate.
-</t>
-<t>
-   * To allow caching of a document, but to require that proxy caches
-     (not user agent caches) validate it before returning it to the
-     client: Cache-control: proxy-revalidate.
-</t>
-<t>
-   * To allow caching of a document and request that it be validated
-     before returning it to the client (by &quot;pre-expiring&quot; it):
-     Cache-control: max-age=0.  Not all caches will revalidate the
-     document in every case.
-</t></list>
+<list style="symbols">
+  <t>
+    To suppress caching of a private document in shared caches: Cache-
+    control: private.
+  </t>
+  <t>
+    To allow caching of a document and require that it be validated
+    before returning it to the client: Cache-control: must-revalidate.
+  </t>
+  <t>
+    To allow caching of a document, but to require that proxy caches
+    (not user agent caches) validate it before returning it to the
+    client: Cache-control: proxy-revalidate.
+  </t>
+  <t>
+    To allow caching of a document and request that it be validated
+    before returning it to the client (by "pre-expiring" it):
+    Cache-control: max-age=0.  Not all caches will revalidate the
+    document in every case.
+  </t></list>
 </t>
 <t>
    HTTP/1.1 servers must send Expires: old-date (where old-date is a
@@ -389,86 +384,91 @@
 </t>
 </section>
 </section>
-<!-- RFC original section: (4.3) -->
+
 <section title="User Agent Role">
 <t>
 </t>
-<!-- RFC original section: (4.3.1) -->
+
 <section title="Interpreting Set-Cookie">
 <t>
    The user agent keeps separate track of state information that arrives
    via Set-Cookie response headers from each origin server (as
    distinguished by name or IP address and port).  The user agent
    applies these defaults for optional attributes that are missing:
-<list>
-<t>
-   VersionDefaults to &quot;old cookie&quot; behavior as originally specified by
-          Netscape.  See the HISTORICAL section.
-</t>
-<t>
-   Domain Defaults to the request-host.  (Note that there is no dot at
-          the beginning of request-host.)
-</t>
-<t>
-   Max-AgeThe default behavior is to discard the cookie when the user
-          agent exits.
-</t>
-<t>
-   Path   Defaults to the path of the request URL that generated the
-          Set-Cookie response, up to, but not including, the
-          right-most /.
-</t>
-<t>
-   Secure If absent, the user agent may send the cookie over an
-          insecure channel.
-</t></list>
+<list style="hanging">
+  <t hangText="Version">
+    Defaults to "old cookie" behavior as originally specified by
+    Netscape.  See the HISTORICAL section.
+  </t>
+  <t hangText="Domain">
+    Defaults to the request-host.  (Note that there is no dot at
+    the beginning of request-host.)
+  </t>
+  <t hangText="Max-Age">
+    The default behavior is to discard the cookie when the user
+    agent exits.
+  </t>
+  <t hangText="Path">
+    Defaults to the path of the request URL that generated the
+    Set-Cookie response, up to, but not including, the
+    right-most /.
+  </t>
+  <t hangText="Secure">
+    If absent, the user agent may send the cookie over an
+    insecure channel.
+  </t>
+</list>
 </t>
 </section>
-<!-- RFC original section: (4.3.2) -->
+
 <section title="Rejecting Cookies">
 <t>
    To prevent possible security or privacy violations, a user agent
    rejects a cookie (shall not store its information) if any of the
    following is true:
-<list>
-<t>
-   * The value for the Path attribute is not a prefix of the request-
-     URI.
-</t>
-<t>
-   * The value for the Domain attribute contains no embedded dots or
-     does not start with a dot.
-</t>
-<t>
-   * The value for the request-host does not domain-match the Domain
-     attribute.
-</t>
-<t>
-   * The request-host is a FQDN (not IP address) and has the form HD,
-     where D is the value of the Domain attribute, and H is a string
-     that contains one or more dots.
-</t></list>
+<list style="symbols">
+  <t>
+    The value for the Path attribute is not a prefix of the request-
+    URI.
+  </t>
+  <t>
+    The value for the Domain attribute contains no embedded dots or
+    does not start with a dot.
+  </t>
+  <t>
+    The value for the request-host does not domain-match the Domain
+    attribute.
+  </t>
+  <t>
+    The request-host is a FQDN (not IP address) and has the form HD,
+    where D is the value of the Domain attribute, and H is a string
+    that contains one or more dots.
+  </t>
+</list>
 </t>
 <t>
    Examples:
-<list>
-<t>
-   * A Set-Cookie from request-host y.x.foo.com for Domain=.foo.com
-     would be rejected, because H is y.x and contains a dot.
-   * A Set-Cookie from request-host x.foo.com for Domain=.foo.com would
-     be accepted.
-</t>
-<t>
-   * A Set-Cookie with Domain=.com or Domain=.com., will always be
-     rejected, because there is no embedded dot.
-</t>
-<t>
-   * A Set-Cookie with Domain=ajax.com will be rejected because the
-     value for Domain does not begin with a dot.
-</t></list>
+<list style="symbols">
+  <t>
+    A Set-Cookie from request-host y.x.foo.com for Domain=.foo.com
+    would be rejected, because H is y.x and contains a dot.
+  </t>
+  <t>
+    A Set-Cookie from request-host x.foo.com for Domain=.foo.com would
+    be accepted.
+  </t>
+  <t>
+    A Set-Cookie with Domain=.com or Domain=.com., will always be
+    rejected, because there is no embedded dot.
+  </t>
+  <t>
+    A Set-Cookie with Domain=ajax.com will be rejected because the
+    value for Domain does not begin with a dot.
+  </t>
+</list>
 </t>
 </section>
-<!-- RFC original section: (4.3.3) -->
+
 <section title="Cookie Management">
 <t>
    If a user agent receives a Set-Cookie response header whose NAME is
@@ -493,7 +493,7 @@
 </t>
 <t>
    User agents should allow the user to control cookie destruction.  An
-   infrequently-used cookie may function as a &quot;preferences file&quot; for
+   infrequently-used cookie may function as a "preferences file" for
    network applications, and a user may wish to keep it even if it is
    the least-recently-used cookie.  One possible implementation would be
    an interface that allows the permanent storage of a cookie through a
@@ -505,35 +505,36 @@
    information.
 </t>
 </section>
-<!-- RFC original section: (4.3.4) -->
+
 <section title="Sending Cookies to the Origin Server">
 <t>
    When it sends a request to an origin server, the user agent sends a
    Cookie request header to the origin server if it has cookies that are
    applicable to the request, based on
-<list>
-<t>
-   * the request-host;
-</t>
-<t>
-   * the request-URI;
-</t>
-<t>
-   * the cookie&apos;s age.
-</t></list>
+<list style="symbols">
+  <t>
+    the request-host;
+  </t>
+  <t>
+    the request-URI;
+  </t>
+  <t>
+    the cookie's age.
+  </t>
+</list>
 </t>
 <t>
    The syntax for the header is:
 </t>
-<figure><artwork>
-   cookie          =       &quot;Cookie:&quot; cookie-version
-                           1*((&quot;;&quot; | &quot;,&quot;) cookie-value)
-   cookie-value    =       NAME &quot;=&quot; VALUE [&quot;;&quot; path] [&quot;;&quot; domain]
-   cookie-version  =       &quot;$Version&quot; &quot;=&quot; value
+<figure><artwork type="abnf2616">
+   cookie          =       "Cookie:" cookie-version
+                           1*((";" | ",") cookie-value)
+   cookie-value    =       NAME "=" VALUE [";" path] [";" domain]
+   cookie-version  =       "$Version" "=" value
    NAME            =       attr
    VALUE           =       value
-   path            =       &quot;$Path&quot; &quot;=&quot; value
-   domain          =       &quot;$Domain&quot; &quot;=&quot; value
+   path            =       "$Path" "=" value
+   domain          =       "$Domain" "=" value
 </artwork></figure>
 <t>
    The value of the cookie-version attribute must be the value from the
@@ -560,7 +561,7 @@
    Domain Selection
 <list>
 <t>
-        The origin server&apos;s fully-qualified host name must domain-match
+        The origin server's fully-qualified host name must domain-match
         the Domain attribute of the cookie.
 </t></list>
 </t>
@@ -593,7 +594,7 @@
    as the separator between cookie-values for future compatibility.
 </t>
 </section>
-<!-- RFC original section: (4.3.5) -->
+
 <section title="Sending Cookies in Unverifiable Transactions">
 <t>
    Users must have control over sessions in order to ensure privacy.
@@ -627,7 +628,7 @@
 <t>
    User agents may offer configurable options that allow the user agent,
    or any autonomous programs that the user agent executes, to ignore
-   the above rule, so long as these override options default to &quot;off&quot;.
+   the above rule, so long as these override options default to "off".
 </t>
 <t>
    Many current user agents already provide a review option that would
@@ -640,7 +641,7 @@
    could display the action to be taken if the user were to select that
    button.) However, even this would not make all links verifiable; for
    example, links to automatically loaded images would not normally be
-   subject to &quot;mouse pointer&quot; verification.
+   subject to "mouse pointer" verification.
 </t>
 <t>
    Many user agents also provide the option for a user to view the HTML
@@ -651,7 +652,7 @@
 </t>
 </section>
 </section>
-<!-- RFC original section: (4.4) -->
+
 <section title="How an Origin Server Interprets the Cookie Header">
 <t>
    A user agent returns much of the information in the Set-Cookie header
@@ -664,9 +665,9 @@
    previous cookie, the value applies to the cookie mechanism as a
    whole.  For example, consider the cookie
 </t>
-<figure><artwork>
-   Cookie: $Version=&quot;1&quot;; Customer=&quot;WILE_E_COYOTE&quot;;
-           $Path=&quot;/acme&quot;
+<figure><artwork type="example">
+   Cookie: $Version="1"; Customer="WILE_E_COYOTE";
+           $Path="/acme"
 </artwork></figure>
 <t>
    $Version applies to the cookie mechanism as a whole (and gives the
@@ -675,34 +676,37 @@
    Customer cookie was defined in a Set-Cookie response header.
 </t>
 </section>
-<!-- RFC original section: (4.5) -->
+
 <section title="Caching Proxy Role">
 <t>
    One reason for separating state information from both a URL and
    document content is to facilitate the scaling that caching permits.
    To support cookies, a caching proxy must obey these rules already in
    the HTTP specification:
-<list>
-<t>
-   * Honor requests from the cache, if possible, based on cache validity
-     rules.
-</t>
-<t>
-   * Pass along a Cookie request header in any request that the proxy
-     must make of another server.
-</t>
-<t>
-   * Return the response to the client.  Include any Set-Cookie response
-     header.
-   * Cache the received response subject to the control of the usual
-     headers, such as Expires, Cache-control: no-cache, and Cache-
-     control: private,
-</t>
-<t>
-   * Cache the Set-Cookie subject to the control of the usual header,
-     Cache-control: no-cache=&quot;set-cookie&quot;.  (The Set-Cookie header
-     should usually not be cached.)
-</t></list>
+<list style="symbols">
+  <t>
+    Honor requests from the cache, if possible, based on cache validity
+    rules.
+  </t>
+  <t>
+    Pass along a Cookie request header in any request that the proxy
+    must make of another server.
+  </t>
+  <t>
+    Return the response to the client.  Include any Set-Cookie response
+    header.
+  </t>
+  <t>
+    Cache the received response subject to the control of the usual
+    headers, such as Expires, Cache-control: no-cache, and Cache-
+    control: private,
+  </t>
+  <t>
+    Cache the Set-Cookie subject to the control of the usual header,
+    Cache-control: no-cache="set-cookie".  (The Set-Cookie header
+    should usually not be cached.)
+  </t>
+</list>
 </t>
 <t>
    Proxies must not introduce Set-Cookie (Cookie) headers of their own
@@ -710,104 +714,98 @@
 </t>
 </section>
 </section>
-<!-- RFC original section: (5.) -->
+
 <section title="EXAMPLES">
-<t>
-</t>
-<!-- RFC original section: (5.1) -->
+
 <section title="Example 1">
 <t>
    Most detail of request and response headers has been omitted.  Assume
    the user agent has no stored cookies.
 </t>
-<t>
-     1.  User Agent -&gt; Server
+<t><list style="numbers"> 
+  <t>
+    User Agent -&gt; Server
+<figure><artwork type='message/http: msgtype="request"'>
+    POST /acme/login HTTP/1.1
+    [form data]
+</artwork>
+<postamble>
+    User identifies self via a form.
+</postamble>
+</figure>
+  </t>
+  <t>
+    Server -&gt; User Agent
+<figure><artwork type='message/http: msgtype="response"'>
+    HTTP/1.1 200 OK
+    Set-Cookie: Customer="WILE_E_COYOTE"; Version="1"; Path="/acme"
+</artwork>
+<postamble>Cookie reflects user's identity.</postamble>
+</figure>
+  </t>
+  <t>
+  User Agent -&gt; Server
+<figure><artwork type='message/http: msgtype="request"'>
+    POST /acme/pickitem HTTP/1.1
+    Cookie: $Version="1"; Customer="WILE_E_COYOTE"; $Path="/acme"
+    [form data]
+</artwork>
+<postamble>User selects an item for "shopping basket."</postamble>
+</figure>
+  </t>
+  <t>
+    Server -&gt; User Agent
+<figure><artwork type='message/http: msgtype="response"'>
+    HTTP/1.1 200 OK
+    Set-Cookie: Part_Number="Rocket_Launcher_0001"; Version="1";
+            Path="/acme"
+</artwork>
+<postamble>Shopping basket contains an item.</postamble>
+</figure>
+  </t>
+  <t>
+    User Agent -&gt; Server
+<figure><artwork type='message/http: msgtype="request"'>
+    POST /acme/shipping HTTP/1.1
+    Cookie: $Version="1";
+            Customer="WILE_E_COYOTE"; $Path="/acme";
+            Part_Number="Rocket_Launcher_0001"; $Path="/acme"
+    [form data]
+</artwork>
+<postamble>User selects shipping method from form.</postamble>
+</figure>
+  </t>
+  <t>
+    Server -&gt; User Agent
+<figure><artwork type='message/http: msgtype="response"'>
+    HTTP/1.1 200 OK
+    Set-Cookie: Shipping="FedEx"; Version="1"; Path="/acme"
+</artwork>
+<postamble>New cookie reflects shipping method.</postamble>
+</figure>
+  </t>
+  <t>
+    User Agent -&gt; Server
+<figure><artwork type='message/http: msgtype="request"'>
+    POST /acme/process HTTP/1.1
+    Cookie: $Version="1";
+            Customer="WILE_E_COYOTE"; $Path="/acme";
+            Part_Number="Rocket_Launcher_0001"; $Path="/acme";
+            Shipping="FedEx"; $Path="/acme"
+    [form data]
+</artwork>
+<postamble>User chooses to process order.</postamble>
+</figure>
+  </t>
+  <t>
+    Server -&gt; User Agent
+<figure><artwork type='message/http: msgtype="response"'>
+    HTTP/1.1 200 OK
+</artwork>
+<postamble>Transaction is complete.</postamble>
+</figure>
 </t>
-<figure><artwork>
-         POST /acme/login HTTP/1.1
-         [form data]
-</artwork></figure>
-<t>
-         User identifies self via a form.
-</t>
-<t>
-     2.  Server -&gt; User Agent
-</t>
-<figure><artwork>
-         HTTP/1.1 200 OK
-         Set-Cookie: Customer=&quot;WILE_E_COYOTE&quot;; Version=&quot;1&quot;; Path=&quot;/acme&quot;
-</artwork></figure>
-<t>
-         Cookie reflects user&apos;s identity.
-</t>
-<t>
-     3.  User Agent -&gt; Server
-</t>
-<figure><artwork>
-         POST /acme/pickitem HTTP/1.1
-         Cookie: $Version=&quot;1&quot;; Customer=&quot;WILE_E_COYOTE&quot;; $Path=&quot;/acme&quot;
-         [form data]
-</artwork></figure>
-<t>
-         User selects an item for &quot;shopping basket.&quot;
-</t>
-<t>
-     4.  Server -&gt; User Agent
-</t>
-<figure><artwork>
-         HTTP/1.1 200 OK
-         Set-Cookie: Part_Number=&quot;Rocket_Launcher_0001&quot;; Version=&quot;1&quot;;
-                 Path=&quot;/acme&quot;
-</artwork></figure>
-<t>
-         Shopping basket contains an item.
-</t>
-<t>
-     5.  User Agent -&gt; Server
-</t>
-<figure><artwork>
-         POST /acme/shipping HTTP/1.1
-         Cookie: $Version=&quot;1&quot;;
-                 Customer=&quot;WILE_E_COYOTE&quot;; $Path=&quot;/acme&quot;;
-                 Part_Number=&quot;Rocket_Launcher_0001&quot;; $Path=&quot;/acme&quot;
-         [form data]
-</artwork></figure>
-<t>
-         User selects shipping method from form.
-</t>
-<t>
-     6.  Server -&gt; User Agent
-</t>
-<figure><artwork>
-         HTTP/1.1 200 OK
-         Set-Cookie: Shipping=&quot;FedEx&quot;; Version=&quot;1&quot;; Path=&quot;/acme&quot;
-</artwork></figure>
-<t>
-         New cookie reflects shipping method.
-</t>
-<t>
-     7.  User Agent -&gt; Server
-</t>
-<figure><artwork>
-         POST /acme/process HTTP/1.1
-         Cookie: $Version=&quot;1&quot;;
-                 Customer=&quot;WILE_E_COYOTE&quot;; $Path=&quot;/acme&quot;;
-                 Part_Number=&quot;Rocket_Launcher_0001&quot;; $Path=&quot;/acme&quot;;
-                 Shipping=&quot;FedEx&quot;; $Path=&quot;/acme&quot;
-         [form data]
-</artwork></figure>
-<t>
-         User chooses to process order.
-</t>
-<t>
-     8.  Server -&gt; User Agent
-</t>
-<figure><artwork>
-         HTTP/1.1 200 OK
-</artwork></figure>
-<t>
-         Transaction is complete.
-</t>
+</list></t>
 <t>
    The user agent makes a series of requests on the origin server, after
    each of which it receives a new cookie.  All the cookies have the
@@ -816,7 +814,7 @@
    request contains all the cookies received so far.
 </t>
 </section>
-<!-- RFC original section: (5.2) -->
+
 <section title="Example 2">
 <t>
    This example illustrates the effect of the Path attribute.  All
@@ -827,26 +825,26 @@
    Imagine the user agent has received, in response to earlier requests,
    the response headers
 </t>
-<figure><artwork>
-   Set-Cookie: Part_Number=&quot;Rocket_Launcher_0001&quot;; Version=&quot;1&quot;;
-           Path=&quot;/acme&quot;
+<figure><artwork type="example">
+Set-Cookie: Part_Number="Rocket_Launcher_0001"; Version="1";
+        Path="/acme"
 </artwork></figure>
 <t>
    and
 </t>
-<figure><artwork>
-   Set-Cookie: Part_Number=&quot;Riding_Rocket_0023&quot;; Version=&quot;1&quot;;
-           Path=&quot;/acme/ammo&quot;
+<figure><artwork type="example">
+Set-Cookie: Part_Number="Riding_Rocket_0023"; Version="1";
+        Path="/acme/ammo"
 </artwork></figure>
 <t>
    A subsequent request by the user agent to the (same) server for URLs
    of the form /acme/ammo/...  would include the following request
    header:
 </t>
-<figure><artwork>
-   Cookie: $Version=&quot;1&quot;;
-           Part_Number=&quot;Riding_Rocket_0023&quot;; $Path=&quot;/acme/ammo&quot;;
-           Part_Number=&quot;Rocket_Launcher_0001&quot;; $Path=&quot;/acme&quot;
+<figure><artwork type="example">
+Cookie: $Version="1";
+        Part_Number="Riding_Rocket_0023"; $Path="/acme/ammo";
+        Part_Number="Rocket_Launcher_0001"; $Path="/acme"
 </artwork></figure>
 <t>
    Note that the NAME=VALUE pair for the cookie with the more specific
@@ -858,26 +856,26 @@
    A subsequent request by the user agent to the (same) server for a URL
    of the form /acme/parts/ would include the following request header:
 </t>
-<figure><artwork>
-   Cookie: $Version=&quot;1&quot;; Part_Number=&quot;Rocket_Launcher_0001&quot;; $Path=&quot;/acme&quot;
+<figure><artwork type="example">
+Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
 </artwork></figure>
 <t>
-   Here, the second cookie&apos;s Path attribute /acme/ammo is not a prefix
+   Here, the second cookie's Path attribute /acme/ammo is not a prefix
    of the request URL, /acme/parts/, so the cookie does not get
    forwarded to the server.
 </t>
 </section>
 </section>
-<!-- RFC original section: (6.) -->
+
 <section title="IMPLEMENTATION CONSIDERATIONS">
 <t>
    Here we speculate on likely or desirable details for an origin server
    that implements state management.
 </t>
-<!-- RFC original section: (6.1) -->
+
 <section title="Set-Cookie Content">
 <t>
-   An origin server&apos;s content should probably be divided into disjoint
+   An origin server's content should probably be divided into disjoint
    application areas, some of which require the use of state
    information.  The application areas can be distinguished by their
    request URLs.  The Set-Cookie header can incorporate information
@@ -891,49 +889,49 @@
    information to be a key to a server-side resource.  Of course, using
    a database creates some problems that this state management
    specification was meant to avoid, namely:
-<list>
+<list style="numbers">
 <t>
-     1.  keeping real state on the server side;
+         keeping real state on the server side;
 </t>
 <t>
-     2.  how and when to garbage-collect the database entry, in case the
+         how and when to garbage-collect the database entry, in case the
          user agent terminates the session by, for example, exiting.
 </t></list>
 </t>
 </section>
-<!-- RFC original section: (6.2) -->
+
 <section title="Stateless Pages">
 <t>
    Caching benefits the scalability of WWW.  Therefore it is important
    to reduce the number of documents that have state embedded in them
    inherently.  For example, if a shopping-basket-style application
-   always displays a user&apos;s current basket contents on each page, those
-   pages cannot be cached, because each user&apos;s basket&apos;s contents would
+   always displays a user's current basket contents on each page, those
+   pages cannot be cached, because each user's basket's contents would
    be different.  On the other hand, if each page contains just a link
-   that allows the user to &quot;Look at My Shopping Basket&quot;, the page can be
+   that allows the user to "Look at My Shopping Basket", the page can be
    cached.
 </t>
 </section>
-<!-- RFC original section: (6.3) -->
+
 <section title="Implementation Limits">
 <t>
    Practical user agent implementations have limits on the number and
-   size of cookies that they can store.  In general, user agents&apos; cookie
+   size of cookies that they can store.  In general, user agents' cookie
    support should have no fixed limits.  They should strive to store as
    many frequently-used cookies as possible.  Furthermore, general-use
    user agents should provide each of the following minimum capabilities
    individually, although not necessarily simultaneously:
-<list>
+<list style="symbols">
 <t>
-      * at least 300 cookies
+        at least 300 cookies
 </t>
 <t>
-      * at least 4096 bytes per cookie (as measured by the size of the
+        at least 4096 bytes per cookie (as measured by the size of the
         characters that comprise the cookie non-terminal in the syntax
         description of the Set-Cookie header)
 </t>
 <t>
-      * at least 20 cookies per unique host or domain name
+        at least 20 cookies per unique host or domain name
 </t></list>
 </t>
 <t>
@@ -950,7 +948,7 @@
    Applications should use as few and as small cookies as possible, and
    they should cope gracefully with the loss of a cookie.
 </t>
-<!-- RFC original section: (6.3.1) -->
+
 <section title="Denial of Service Attacks">
 <t>
    User agents may choose to set an upper bound on the number of cookies
@@ -964,11 +962,9 @@
 </section>
 </section>
 </section>
-<!-- RFC original section: (7.) -->
+
 <section title="PRIVACY">
-<t>
-</t>
-<!-- RFC original section: (7.1) -->
+
 <section title="User Agent Control">
 <t>
    An origin server could create a Set-Cookie header to track the path
@@ -981,35 +977,35 @@
    interface through which the user is given this control is left
    unspecified.  However, the control mechanisms provided shall at least
    allow the user
-<list>
+<list style="symbols">
 <t>
-      * to completely disable the sending and saving of cookies.
+        to completely disable the sending and saving of cookies.
 </t>
 <t>
-      * to determine whether a stateful session is in progress.
+        to determine whether a stateful session is in progress.
 </t>
 <t>
-      * to control the saving of a cookie on the basis of the cookie&apos;s
+        to control the saving of a cookie on the basis of the cookie's
         Domain attribute.
 </t></list>
 </t>
 <t>
    Such control could be provided by, for example, mechanisms
-<list>
+<list style="symbols">
 <t>
-      * to notify the user when the user agent is about to send a cookie
+        to notify the user when the user agent is about to send a cookie
         to the origin server, offering the option not to begin a session.
 </t>
 <t>
-      * to display a visual indication that a stateful session is in
+        to display a visual indication that a stateful session is in
         progress.
 </t>
 <t>
-      * to let the user decide which cookies, if any, should be saved
+        to let the user decide which cookies, if any, should be saved
         when the user concludes a window or user agent session.
 </t>
 <t>
-      * to let the user examine the contents of a cookie at any time.
+        to let the user examine the contents of a cookie at any time.
 </t></list>
 </t>
 <t>
@@ -1023,7 +1019,7 @@
    When the user agent terminates execution, it should let the user
    discard all state information.  Alternatively, the user agent may ask
    the user whether state information should be retained; the default
-   should be &quot;no&quot;.  If the user chooses to retain state information, it
+   should be "no".  If the user chooses to retain state information, it
    would be restored the next time the user agent runs.
 </t>
 <t>
@@ -1033,12 +1029,12 @@
    up.
 </t>
 </section>
-<!-- RFC original section: (7.2) -->
+
 <section title="Protocol Design">
 <t>
    The restrictions on the value of the Domain attribute, and the rules
    concerning unverifiable transactions, are meant to reduce the ways
-   that cookies can &quot;leak&quot; to the &quot;wrong&quot; site.  The intent is to
+   that cookies can "leak" to the "wrong" site.  The intent is to
    restrict cookies to one, or a closely related set of hosts.
    Therefore a request-host is limited as to what values it can set for
    Domain.  We consider it acceptable for hosts host1.foo.com and
@@ -1050,22 +1046,20 @@
 </t>
 </section>
 </section>
-<!-- RFC original section: (8.) -->
+
 <section title="SECURITY CONSIDERATIONS">
-<t>
-</t>
-<!-- RFC original section: (8.1) -->
+
 <section title="Clear Text">
 <t>
    The information in the Set-Cookie and Cookie headers is unprotected.
    Two consequences are:
-<list>
+<list style="numbers">
 <t>
-   1.  Any sensitive information that is conveyed in them is exposed
+       Any sensitive information that is conveyed in them is exposed
        to intruders.
 </t>
 <t>
-   2.  A malicious intermediary could alter the headers as they travel
+       A malicious intermediary could alter the headers as they travel
        in either direction, with unpredictable results.
 </t></list>
 </t>
@@ -1077,39 +1071,36 @@
    causing failures.
 </t>
 </section>
-<!-- RFC original section: (8.2) -->
+
 <section title="Cookie Spoofing">
 <t>
    Proper application design can avoid spoofing attacks from related
    domains.  Consider:
-<list>
-<t>
-     1.  User agent makes request to victim.cracker.edu, gets back
+<list style="numbers">
+<x:lt><t>
+         User agent makes request to victim.cracker.edu, gets back
          cookie session_id=&quot;1234&quot; and sets the default domain
          victim.cracker.edu.
-</t>
-<t>
-     2.  User agent makes request to spoof.cracker.edu, gets back
+</t></x:lt>
+<x:lt><t>
+         User agent makes request to spoof.cracker.edu, gets back
          cookie session-id=&quot;1111&quot;, with Domain=&quot;.cracker.edu&quot;.
-</t>
-<t>
-     3.  User agent makes request to victim.cracker.edu again, and
+</t></x:lt>
+<x:lt><t>
+         User agent makes request to victim.cracker.edu again, and
          passes
-</t></list>
-</t>
-<figure><artwork>
-         Cookie: $Version=&quot;1&quot;;
-                         session_id=&quot;1234&quot;;
-                         session_id=&quot;1111&quot;; $Domain=&quot;.cracker.edu&quot;
+<figure><artwork type="example">
+    Cookie: $Version="1";
+                    session_id="1234";
+                    session_id="1111"; $Domain=".cracker.edu"
 </artwork></figure>
-<t><list><t>
+</t><t>
          The server at victim.cracker.edu should detect that the second
          cookie was not one it originated by noticing that the Domain
          attribute is not for itself and ignore it.
-</t></list>
-</t>
+</t></x:lt></list></t>
 </section>
-<!-- RFC original section: (8.3) -->
+
 <section title="Unexpected Cookie Sharing">
 <t>
    A user agent should make every attempt to prevent the sharing of
@@ -1123,12 +1114,12 @@
 </t>
 </section>
 </section>
-<!-- RFC original section: (9.) -->
+
 <section title="OTHER, SIMILAR, PROPOSALS">
 <t>
    Three other proposals have been made to accomplish similar goals.
-   This specification is an amalgam of Kristol&apos;s State-Info proposal and
-   Netscape&apos;s Cookie proposal.
+   This specification is an amalgam of Kristol's State-Info proposal and
+   Netscape's Cookie proposal.
 </t>
 <t>
    Brian Behlendorf proposed a Session-ID header that would be user-
@@ -1145,23 +1136,21 @@
    them, or to distinguish multiple users on a shared machine.  Cookies
    are server-initiated, so the cookie mechanism described here gives
    users control over something that would otherwise take place without
-   the users&apos; awareness.  Furthermore, cookies convey rich, server-
+   the users' awareness.  Furthermore, cookies convey rich, server-
    selected information, whereas session IDs comprise user-selected,
    simple information.
 </t>
 </section>
-<!-- RFC original section: (10.) -->
+
 <section title="HISTORICAL">
-<t>
-</t>
-<!-- RFC original section: (10.1) -->
-<section title="Compatibility With Netscape&apos;s Implementation">
+
+<section title="Compatibility With Netscape's Implementation">
 <t>
    HTTP/1.0 clients and servers may use Set-Cookie and Cookie headers
-   that reflect Netscape&apos;s original cookie proposal.  These notes cover
+   that reflect Netscape's original cookie proposal.  These notes cover
    inter-operation between &quot;old&quot; and &quot;new&quot; cookies.
 </t>
-<!-- RFC original section: (10.1.1) -->
+
 <section title="Extended Cookie Header">
 <t>
    This proposal adds attribute-value pairs to the Cookie request header
@@ -1179,13 +1168,13 @@
    attribute.
 </t>
 </section>
-<!-- RFC original section: (10.1.2) -->
+
 <section title="Expires and Max-Age">
 <t>
-   Netscape&apos;s original proposal defined an Expires header that took a
+   Netscape's original proposal defined an Expires header that took a
    date value in a fixed-length variant format in place of Max-Age:
 </t>
-<figure><artwork>
+<figure><artwork type="example">
    Wdy, DD-Mon-YY HH:MM:SS GMT
 </artwork></figure>
 <t>
@@ -1195,25 +1184,25 @@
    Expires.
 </t>
 </section>
-<!-- RFC original section: (10.1.3) -->
+
 <section title="Punctuation">
 <t>
-   In Netscape&apos;s original proposal, the values in attribute-value pairs
+   In Netscape's original proposal, the values in attribute-value pairs
    did not accept &quot;-quoted strings.  Origin servers should be cautious
    about sending values that require quotes unless they know the
    receiving user agent understands them (i.e., &quot;new&quot; cookies).  A
    (&quot;new&quot;) user agent should only use quotes around values in Cookie
-   headers when the cookie&apos;s version(s) is (are) all compliant with this
+   headers when the cookie's version(s) is (are) all compliant with this
    specification or later.
 </t>
 <t>
-   In Netscape&apos;s original proposal, no whitespace was permitted around
+   In Netscape's original proposal, no whitespace was permitted around
    the = that separates attribute-value pairs.  Therefore such
    whitespace should be used with caution in new implementations.
 </t>
 </section>
 </section>
-<!-- RFC original section: (10.2) -->
+
 <section title="Caching and HTTP/1.0">
 <t>
    Some caches, such as those conforming to HTTP/1.0, will inevitably
@@ -1236,19 +1225,12 @@
 </t>
 </section>
 </section>
-<!-- RFC original section: (11.) -->
+
 <section title="ACKNOWLEDGEMENTS">
 <t>
    This document really represents the collective efforts of the
    following people, in addition to the authors: Roy Fielding, Marc
    Hedlund, Ted Hardie, Koen Holtman, Shel Kaphan, Rohit Khare.
-</t>
-</section>
-<!-- RFC original section: (12.) -->
-<section title="AUTHORS&apos; ADDRESSES (BOILERPLATE)">
-<t>
-This RFC contained boilerplate in this section which has been moved
-to the RFC2223-compliant unnumbered section &quot;Author&apos;s Address.&quot;
 </t>
 </section>
 </middle>
