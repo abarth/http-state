@@ -127,5 +127,9 @@
     </section>
   </middle>
   <back>
+    <section title="Acknowledgements">
+      <t>This document borrows heavily from RFC 2109.  TODO: Figure out the
+      proper way to credit the authors of RFC 2109.</t>
+    </section>
   </back>
 </rfc>
