@@ -700,7 +700,11 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
         to the server.</t>
       </section>
     </section>
+    <section title="Implementation Considerations">
+      <t>Here we speculate on likely or desirable details for an origin server
+      that implements state management.</t>
 
+    </section>
   </middle>
   <back>
     <section title="Acknowledgements">
