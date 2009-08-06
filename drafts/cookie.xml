@@ -513,8 +513,37 @@
       <section title="How an Origin Server Interprets the Cookie Header">
         <t>[TODO: This section appears to be nonsense.]</t>
       </section>
+      <section title="Caching Proxy Role">
+        <t>One reason for separating state information from both a URL and
+        document content is to facilitate the scaling that caching permits.  To
+        support cookies, a caching proxy must obey these rules already in the
+        HTTP specification [TODO: If they're already in the HTTP specification,
+        aren't they redundant here?]:
+        <list style="symbols">
+          <t>Honor requests from the cache, if possible, based on cache
+          validity rules.</t>
 
+          <t>Pass along a Cookie request header in any request that the proxy
+          must make of another server.</t>
+
+          <t>Return the response to the client.  Include any Set-Cookie
+          response header.</t>
+
+          <t>Cache the received response subject to the control of the usual
+          headers, such as Expires, Cache-Control: no-cache, and Cache-Control:
+          private.</t>
+
+          <t>Cache the Set-Cookie subject to the control of the usual header,
+          Cache-Control: no-cache="set-cookie".  (The Set-Cookie header should
+          usually not be cached.)</t>
+        </list>
+        </t>
+
+        <t>Proxies must not introduce Set-Cookie (Cookie) headers of their own
+        in proxy responses (requests).</t>
+      </section>
     </section>
+
   </middle>
   <back>
     <section title="Acknowledgements">
