@@ -502,6 +502,12 @@
           comma (,) as the separator between cookie-values for future
           compatibility.  [TODO: Test whether servers actually do this.]</t>
         </section>
+        <section title="Sending Cookies in Unverifiable Transactions">
+          <t>[TODO: This entire section seems like a fantasy.]</t>
+
+          <t>[TODO: Consider explaining how third-party cookie blocking
+          works.]</t>
+        </section>
 
       </section>
     </section>
