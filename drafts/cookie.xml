@@ -754,6 +754,17 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
         they should cope gracefully with the loss of a cookie.  [TODO: Could
         mention latency issues that arise from having tons of cookies.] </t>
 
+        <section title="Denial of Service Attacks">
+          <t>User agents may choose to set an upper bound on the number of
+          cookies to be stored from a given host or domain name or on the size
+          of the cookie information.  Otherwise, a malicious server could
+          attempt to flood a user agent with many cookies, or large cookies, on
+          successive responses, which would force out cookies the user agent
+          had received from other servers.  However, the minima specified above
+          should still be supported.  [TODO: These minima still let an attacker
+          exhaust the entire cookie store.  There's not much we can do about it
+          though.]</t>
+        </section>
       </section>
     </section>
   </middle>
