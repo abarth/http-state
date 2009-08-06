@@ -396,6 +396,42 @@
           </list>
           </t>
         </section>
+        <section title="Cookie Management">
+          <t>If a user agent receives a Set-Cookie response header whose NAME
+          is the same as a pre-existing cookie, and whose Domain and Path
+          attribute values exactly (string) match those of a pre-existing
+          cookie, the new cookie supersedes the old.  However, if the
+          Set-Cookie has a value for Max-Age of zero, the (old and new) cookie
+          is discarded.  Otherwise cookies accumulate until they expire
+          (resources permitting), at which time they are discarded.  [TODO: Do
+          cookies really accumulate like this?  Also, need to talk about
+          Expires]</t>
+
+          <t>Because user agents have finite space in which to store cookies,
+          they may also discard older cookies to make space for newer ones,
+          using, for example, a least-recently-used algorithm, along with
+          constraints on the maximum number of cookies that each origin server
+          may set.  [TODO: Consider recommending a cookie eviction strategy
+          that works in practice.]</t>
+
+          <t>If a Set-Cookie response header includes a Comment attribute, the
+          user agent should store that information in a human-readable form
+          with the cookie and should display the comment text as part of a
+          cookie inspection user interface.  [TODO: I think the Comment
+          attribute is a fantasy.]</t>
+
+          <t>User agents should allow the user to control cookie destruction.
+          An infrequently-used cookie may function as a "preferences file" for
+          network applications, and a user may wish to keep it even if it is
+          the least-recently-used cookie.  One possible implementation would be
+          an interface that allows the permanent storage of a cookie through a
+          checkbox (or, conversely, its immediate destruction).  [TODO:
+          Remove?]</t>
+
+          <t>Privacy considerations dictate that the user have considerable
+          control over cookie management.  The PRIVACY section contains more
+          information.</t>
+        </section>
 
       </section>
     </section>
