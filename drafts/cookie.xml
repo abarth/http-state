@@ -508,8 +508,12 @@
           <t>[TODO: Consider explaining how third-party cookie blocking
           works.]</t>
         </section>
-
       </section>
+
+      <section title="How an Origin Server Interprets the Cookie Header">
+        <t>[TODO: This section appears to be nonsense.]</t>
+      </section>
+
     </section>
   </middle>
   <back>
