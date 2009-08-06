@@ -815,6 +815,13 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
         chooses to retain state information, it would be restored the next time
         the user agent runs.</t>
       </section>
+      <section title="Protocol Design">
+        <t>The restrictions on the value of the Domain attribute are meant to
+        reduce the ways that cookies can "leak" to the "wrong" site.  The
+        intent is to restrict cookies to one, or a closely related set of
+        hosts.  Therefore a request-host is limited as to what values it can
+        set for Domain.</t>
+      </section>
 
     </section>
   </middle>
