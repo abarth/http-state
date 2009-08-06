@@ -704,6 +704,26 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
       <t>Here we speculate on likely or desirable details for an origin server
       that implements state management.</t>
 
+      <section title="Set-Cookie Content">
+        <t>An origin server's content should probably be divided into disjoint
+        application areas, some of which require the use of state information.
+        The application areas can be distinguished by their request URLs.  The
+        Set-Cookie header can incorporate information about the application
+        areas by setting the Path attribute for each one.</t>
+
+        <t>The session information can obviously be clear or encoded text that
+        describes state.  However, if it grows too large, it can become
+        unwieldy.  Therefore, an implementor might choose for the session
+        information to be a key to a server-side resource.  [TODO: Describe
+        briefly how to generate a decent session key.]</t>
+
+        <t>[TODO: We could recommend that servers encrypt and mac their cookie
+        data.]</t>
+
+        <t>[TODO: Mention issues that arise from having multiple concurrent
+        sessions.]</t>
+      </section>
+
     </section>
   </middle>
   <back>
