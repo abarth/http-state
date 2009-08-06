@@ -723,7 +723,38 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
         <t>[TODO: Mention issues that arise from having multiple concurrent
         sessions.]</t>
       </section>
+      <section title="Implementation Limits">
+        <t>Practical user agent implementations have limits on the number and
+        size of cookies that they can store.  In general, user agents' cookie
+        support should have no fixed limits.  [TODO: Why not?]  They should
+        strive to store as many frequently-used cookies as possible.
+        Furthermore, general-use user agents should provide each of the
+        following minimum capabilities individually, although not necessarily
+        simultaneously:  [TODO: Where do these numbers come from?]
+        <list style="symbols">
+          <t>at least 300 cookies</t>
 
+          <t>at least 4096 bytes per cookie (as measured by the size of the
+          characters that comprise the cookie non-terminal in the syntax
+          description of the Set-Cookie header)</t>
+
+          <t>at least 20 cookies per unique host or domain name</t>
+        </list>
+        </t>
+
+        <t>User agents created for specific purposes or for limited-capacity
+        devices should provide at least 20 cookies of 4096 bytes, to ensure
+        that the user can interact with a session-based origin server.</t>
+
+        <t>The information in a Set-Cookie response header must be retained in
+        its entirety.  If for some reason there is inadequate space to store
+        the cookie, it must be discarded, not truncated.</t>
+
+        <t>Applications should use as few and as small cookies as possible, and
+        they should cope gracefully with the loss of a cookie.  [TODO: Could
+        mention latency issues that arise from having tons of cookies.] </t>
+
+      </section>
     </section>
   </middle>
   <back>
