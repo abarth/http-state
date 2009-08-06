@@ -822,6 +822,29 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
         hosts.  Therefore a request-host is limited as to what values it can
         set for Domain.</t>
       </section>
+    </section>
+    <section title="Security Considerations">
+      <section title="Clear Text">
+        <t>The information in the Set-Cookie and Cookie headers is
+        transmitted in the clear.  Three consequences are:
+        <list style="numbers">
+          <t>Any sensitive information that is conveyed in in the headers is
+          exposed to an easedropper.</t>
+
+          <t>A malicious intermediary could alter the headers as they travel
+          in either direction, with unpredictable results.</t>
+
+          <t>A malicious client could alter the Cookie header before
+          transmission, with unpredictable results.</t>
+        </list>
+        </t>
+
+        <t>These facts imply that information of a personal and/or financial
+        nature should be sent over a secure channel.  For less sensitive
+        information, or when the content of the header is a database key, an
+        origin server should be vigilant to prevent a bad Cookie value from
+        causing failures.</t>
+      </section>
 
     </section>
   </middle>
