@@ -319,6 +319,39 @@
           HTTP/1.1 proxies.</t>
         </section>
       </section>
+
+      <section title="User Agent Role">
+        <section title="Interpreting Set-Cookie">
+          <t>The user agent keeps separate track of state information that
+          arrives via Set-Cookie response headers from each origin server (as
+          distinguished by name or IP address and port).  The user agent
+          applies these defaults for optional attributes that are missing:
+          <list style="hanging">
+            <t hangText="Version">Defaults to "old cookie" behavior as
+            originally specified by Netscape.  See the HISTORICAL section.
+            [TODO: Unlikely.]</t>
+
+            <t hangText="Domain">Defaults to the request-host.  (Note that
+            there is no dot at the beginning of request-host.)  [TODO: This is
+            important to test!]</t>
+
+            <t hangText="Max-Age">The default behavior is to discard the cookie
+            when the user agent exits.  [TODO: Interaction with Expires.]</t>
+
+            <t hangText="Expires">The default behavior is to discard the cookie
+            when the user agent exits.  [TODO: Interaction with Max-Age.]</t>
+
+            <t hangText="Path">Defaults to the path of the request URL that
+            generated the Set-Cookie response, up to, but not including, the
+            right-most /.  [TODO: Test!]</t>
+
+            <t hangText="Secure">If absent, the user agent may send the cookie
+            over an insecure channel.</t>
+          </list>
+          </t>
+        </section>
+
+      </section>
     </section>
   </middle>
   <back>
