@@ -343,10 +343,56 @@
 
             <t hangText="Path">Defaults to the path of the request URL that
             generated the Set-Cookie response, up to, but not including, the
-            right-most /.  [TODO: Test!]</t>
+            right-most /.  [TODO: Test!  This seems wrong for paths that are
+            just a single slash]</t>
 
             <t hangText="Secure">If absent, the user agent may send the cookie
             over an insecure channel.</t>
+          </list>
+          </t>
+        </section>
+        <section title="Rejecting Cookies">
+          <t>To prevent possible security or privacy violations, a user agent
+          must reject a cookie (shall not store its information) if any of the
+          following is true:
+          <list style="symbols">
+            <t>The value of the Path attribute is not a prefix of the
+            request-URI.  [TODO: This is a lie.]</t>
+
+            <t>The value for the Domain attribute contains no embedded dots or
+            does not start with a dot.</t>
+
+            <t>The value for the request-host does not domain-match the Domain
+            attribute.  [TODO: Test whether you can set a cookie for a
+            subdomain of yourself.]</t>
+
+            <t>The request-host is a FQDN (not IP address) and has the form HD,
+            where D is the value of the Domain attribute, and H is a string
+            that contains one or more dots.  [TODO: I don't think this is
+            right.  foo.bar.baz.com can set a cookie for .baz.com]</t>
+
+            <t>[TODO: Need to interact with public suffix list!]</t>
+          </list>
+          </t>
+
+          <t>Examples:
+          <list style="symbols">
+            <t>A Set-Cookie from request-host y.x.foo.com for Domain=.foo.com
+            would be rejected, because H is y.x and contains a dot.  [TODO: I
+            don't think this is right.]</t>
+
+            <t>A Set-Cookie from request-host x.foo.com for Domain=.foo.com
+            would be accepted.</t>
+
+            <t>A Set-Cookie with Domain=.com or Domain=.com., will be rejected,
+            because there is no embedded dot.</t>
+
+            <t>A Set-Cookie with Domain=foo.com will be rejected because the
+            value for Domain does not begin with a dot.  [TODO: This seems
+            unlikely, but test!]</t>
+
+            <t>A Set-Cookie with Domain=.co.uk will be rejected because .co.uk
+            is a public suffix.</t>
           </list>
           </t>
         </section>
