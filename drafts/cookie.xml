@@ -432,6 +432,76 @@
           control over cookie management.  The PRIVACY section contains more
           information.</t>
         </section>
+        <section title="Sending Cookies to the Origin Server">
+          <t>When it sends a request to an origin server, the user agent sends
+          a Cookie request header to the origin server if it has cookies that
+          are applicable to the request, based on
+          <list style="symbols">
+            <t>the request-host,</t>
+
+            <t>the request-URI, and</t>
+
+            <t>the cookie's age.</t>
+          </list>
+          </t>
+
+          <t>The syntax for the header is:</t>
+
+          <figure>
+            <artwork type="abnf2616">
+<![CDATA[
+   cookie          =       "Cookie:" cookie-version
+                           1*((";" | ",") cookie-value)
+   cookie-value    =       NAME "=" VALUE [";" path] [";" domain]
+   cookie-version  =       "$Version" "=" value
+   NAME            =       attr
+   VALUE           =       value
+   path            =       "$Path" "=" value
+   domain          =       "$Domain" "=" value
+]]>
+            </artwork>
+          </figure>
+
+          <t>[TODO: This syntax is entirely wrong.]</t>
+
+          <t>The following rules apply to choosing applicable cookie-values
+          from among all the cookies the user agent has.
+          <list>
+            <t>Domain Selection
+            <list>
+              <t>The origin server's fully-qualified host name must
+              domain-match the Domain attribute of the cookie.</t>
+            </list>
+            </t>
+
+            <t>Path Selection
+            <list>
+              <t>The Path attribute of the cookie must match a prefix of the
+              request-URI.  [TODO: Need a more complex algorithm here involving
+              the / character.]</t>
+            </list>
+            </t>
+
+            <t>Max-Age Selection
+            <list>
+              <t>Cookies that have expired should have been discarded and thus
+              are not forwarded to an origin server.</t>
+            </list>
+            </t>
+          </list>
+          </t>
+
+          <t>If multiple cookies satisfy the criteria above, they are ordered
+          in the Cookie header such that those with more specific Path
+          attributes precede those with less specific.  Ordering with respect
+          to other attributes (e.g., Domain) is unspecified.  [TODO: Figure out
+          the correct ordering.]</t>
+
+          <t>Note: For backward compatibility, the separator in the Cookie
+          header is semi-colon (;) everywhere.  A server should also accept
+          comma (,) as the separator between cookie-values for future
+          compatibility.  [TODO: Test whether servers actually do this.]</t>
+        </section>
 
       </section>
     </section>
