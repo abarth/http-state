@@ -22,7 +22,6 @@ import shutil
 import SocketServer
 import sys
 import time
-import pyftpdlib.ftpserver
 
 try:
   import hashlib
@@ -1013,55 +1012,21 @@ def main(options, args):
 
   port = options.port
 
-  if options.server_type == SERVER_HTTP:
-    if options.cert:
-      # let's make sure the cert file exists.
-      if not os.path.isfile(options.cert):
-        print 'specified cert file not found: ' + options.cert + ' exiting...'
-        return
-      # No support for HTTPS at the moment.
-      # server = HTTPSServer(('127.0.0.1', port), TestPageHandler, options.cert)
-      print 'HTTPS server started on port %d...' % port
-    else:
-      server = StoppableHTTPServer(('127.0.0.1', port), TestPageHandler)
-      print 'HTTP server started on port %d...' % port
-
-    server.data_dir = MakeDataDir()
-    server.file_root_url = options.file_root_url
-    MakeDumpDir(server.data_dir)
-
-  # means FTP Server
+  if options.cert:
+    # let's make sure the cert file exists.
+    if not os.path.isfile(options.cert):
+      print 'specified cert file not found: ' + options.cert + ' exiting...'
+      return
+    # No support for HTTPS at the moment.
+    # server = HTTPSServer(('127.0.0.1', port), TestPageHandler, options.cert)
+    print 'HTTPS server started on port %d...' % port
   else:
-    my_data_dir = MakeDataDir()
+    server = StoppableHTTPServer(('127.0.0.1', port), TestPageHandler)
+    print 'HTTP server started on port %d...' % port
 
-    def line_logger(msg):
-      if (msg.find("kill") >= 0):
-        server.stop = True
-        print 'shutting down server'
-        sys.exit(0)
-
-    # Instantiate a dummy authorizer for managing 'virtual' users
-    authorizer = pyftpdlib.ftpserver.DummyAuthorizer()
-
-    # Define a new user having full r/w permissions and a read-only
-    # anonymous user
-    authorizer.add_user('chrome', 'chrome', my_data_dir, perm='elradfmw')
-
-    authorizer.add_anonymous(my_data_dir)
-
-    # Instantiate FTP handler class
-    ftp_handler = pyftpdlib.ftpserver.FTPHandler
-    ftp_handler.authorizer = authorizer
-    pyftpdlib.ftpserver.logline = line_logger
-
-    # Define a customized banner (string returned when client connects)
-    ftp_handler.banner = ("pyftpdlib %s based ftpd ready." %
-                          pyftpdlib.ftpserver.__ver__)
-
-    # Instantiate FTP server class and listen to 127.0.0.1:port
-    address = ('127.0.0.1', port)
-    server = pyftpdlib.ftpserver.FTPServer(address, ftp_handler)
-    print 'FTP server started on port %d...' % port
+  server.data_dir = MakeDataDir()
+  server.file_root_url = options.file_root_url
+  MakeDumpDir(server.data_dir)
 
   try:
     server.serve_forever()
@@ -1071,10 +1036,6 @@ def main(options, args):
 
 if __name__ == '__main__':
   option_parser = optparse.OptionParser()
-  option_parser.add_option("-f", '--ftp', action='store_const',
-                           const=SERVER_FTP, default=SERVER_HTTP,
-                           dest='server_type',
-                           help='FTP or HTTP server default HTTP')
   option_parser.add_option('', '--port', default='8888', type='int',
                            help='Port used by the server')
   option_parser.add_option('', '--data-dir', dest='data_dir',
