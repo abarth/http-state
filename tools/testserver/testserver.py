@@ -22,8 +22,6 @@ import shutil
 import SocketServer
 import sys
 import time
-import tlslite
-import tlslite.api
 import pyftpdlib.ftpserver
 
 try:
@@ -51,32 +49,6 @@ class StoppableHTTPServer(BaseHTTPServer.HTTPServer):
     while not self.stop:
       self.handle_request()
     self.socket.close()
-
-class HTTPSServer(tlslite.api.TLSSocketServerMixIn, StoppableHTTPServer):
-  """This is a specialization of StoppableHTTPerver that add https support."""
-
-  def __init__(self, server_address, request_hander_class, cert_path):
-    s = open(cert_path).read()
-    x509 = tlslite.api.X509()
-    x509.parse(s)
-    self.cert_chain = tlslite.api.X509CertChain([x509])
-    s = open(cert_path).read()
-    self.private_key = tlslite.api.parsePEMKey(s, private=True)
-
-    self.session_cache = tlslite.api.SessionCache()
-    StoppableHTTPServer.__init__(self, server_address, request_hander_class)
-
-  def handshake(self, tlsConnection):
-    """Creates the SSL connection."""
-    try:
-      tlsConnection.handshakeServer(certChain=self.cert_chain,
-                                    privateKey=self.private_key,
-                                    sessionCache=self.session_cache)
-      tlsConnection.ignoreAbruptClose = True
-      return True
-    except tlslite.api.TLSError, error:
-      print "Handshake failure:", str(error)
-      return False
 
 class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
@@ -1047,7 +1019,8 @@ def main(options, args):
       if not os.path.isfile(options.cert):
         print 'specified cert file not found: ' + options.cert + ' exiting...'
         return
-      server = HTTPSServer(('127.0.0.1', port), TestPageHandler, options.cert)
+      # No support for HTTPS at the moment.
+      # server = HTTPSServer(('127.0.0.1', port), TestPageHandler, options.cert)
       print 'HTTPS server started on port %d...' % port
     else:
       server = StoppableHTTPServer(('127.0.0.1', port), TestPageHandler)
