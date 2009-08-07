@@ -283,15 +283,6 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     self.wfile.write('Use <pre>%s?http://dest...</pre>' % redirect_name)
     self.wfile.write('</body></html>')
 
-def MakeDumpDir(data_dir):
-  """Create directory named 'dump' where uploaded data via HTTP POST request
-  will be stored. If the directory already exists all files and subdirectories
-  will be deleted."""
-  dump_dir = os.path.join(data_dir, 'dump');
-  if os.path.isdir(dump_dir):
-    shutil.rmtree(dump_dir)
-  os.mkdir(dump_dir)
-
 def MakeDataDir():
   if not options.data_dir:
     print 'please specify a data dir. exiting...'
@@ -324,7 +315,6 @@ def main(options, args):
 
   server.data_dir = MakeDataDir()
   server.file_root_url = options.file_root_url
-  MakeDumpDir(server.data_dir)
 
   try:
     server.serve_forever()
