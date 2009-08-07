@@ -3,7 +3,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-"""This is a simple HTTP server used for testing Chrome.
+"""This is a simple HTTP server used for testing cookies.
 
 It supports several test URLs, as specified by the handlers in TestPageHandler.
 It defaults to living on localhost:8888.
@@ -31,7 +31,6 @@ except ImportError:
   _new_md5 = md5.new
 
 SERVER_HTTP = 0
-SERVER_FTP = 1
 
 debug_output = sys.stderr
 def debug(str):
@@ -53,45 +52,15 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
   def __init__(self, request, client_address, socket_server):
     self._connect_handlers = [
-      self.RedirectConnectHandler,
-      self.ServerAuthConnectHandler,
       self.DefaultConnectResponseHandler]
     self._get_handlers = [
       self.KillHandler,
-      self.NoCacheMaxAgeTimeHandler,
-      self.NoCacheTimeHandler,
-      self.CacheTimeHandler,
-      self.CacheExpiresHandler,
-      self.CacheProxyRevalidateHandler,
-      self.CachePrivateHandler,
-      self.CachePublicHandler,
-      self.CacheSMaxAgeHandler,
-      self.CacheMustRevalidateHandler,
-      self.CacheMustRevalidateMaxAgeHandler,
-      self.CacheNoStoreHandler,
-      self.CacheNoStoreMaxAgeHandler,
-      self.CacheNoTransformHandler,
       self.CookieParserHandler,
       self.CookieParserResultHandler,
-      self.DownloadHandler,
-      self.DownloadFinishHandler,
-      self.EchoHeader,
-      self.EchoAllHandler,
       self.FileHandler,
-      self.RealFileWithCommonHeaderHandler,
-      self.RealBZ2FileWithCommonHeaderHandler,
-      self.AuthBasicHandler,
-      self.AuthDigestHandler,
-      self.SlowServerHandler,
-      self.ContentTypeHandler,
-      self.ServerRedirectHandler,
-      self.ClientRedirectHandler,
       self.DefaultResponseHandler]
     self._post_handlers = [
-      self.WriteFile,
-      self.EchoTitleHandler,
-      self.EchoAllHandler,
-      self.EchoHandler] + self._get_handlers
+      ] + self._get_handlers
 
     self._mime_types = {
       'gif': 'image/gif',
