@@ -1,0 +1,2 @@
+#!/bin/sh
+python ../tools/testserver/testserver.py --data-dir data
