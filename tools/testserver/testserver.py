@@ -163,9 +163,9 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     self.end_headers()
     
     if actual == expected:
-      self.wfile.write("PASS")
+      self.wfile.write("PASS\n")
     else:
-      self.wfile.write("FAIL\nActual: %s\nExpected: %s" % (actual, expected))
+      self.wfile.write("FAIL\nActual: %s\nExpected: %s\n" % (actual, expected))
 
     return True
 
