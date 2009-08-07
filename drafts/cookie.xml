@@ -546,7 +546,7 @@
     <section title="Examples">
       <section title="Example 1">
         <t>Most detail of request and response headers has been omitted.
-        Assume the user agent has no stored cookies.</t>
+        Assume the user agent has no stored cookies.
         <list style="numbers"> 
           <t>User Agent -&gt; Server
             <figure>
@@ -639,7 +639,7 @@
         </t>
 
         <t>[TODO: This example is really silly.  We shouldn't be recommending
-        this at all.]
+        this at all.]</t>
 
         <t>The user agent makes a series of requests on the origin server,
         after each of which it receives a new cookie.  All the cookies have the
