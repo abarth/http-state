@@ -845,7 +845,24 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
         origin server should be vigilant to prevent a bad Cookie value from
         causing failures.</t>
       </section>
+      <section title="Cookie Spoofing">
+        <t>[TODO: Mention integrity issue where a sibling domain can inject
+        cookies.]</t>
 
+        <t>[TODO: Mention integrity issue where a HTTP can inject cookies
+        into HTTPS.]</t>
+      </section>
+      <section title="Unexpected Cookie Sharing">
+        <t>A user agent should make every attempt to prevent the sharing of
+        session information between hosts that are in different domains.
+        Embedded or inlined objects may cause particularly severe privacy
+        problems if they can be used to share cookies between disparate
+        hosts.  For example, a malicious server could embed cookie
+        information for host a.com in a URI for host b.com.  User agent
+        implementors are strongly encouraged to prevent this sort of
+        exchange whenever possible.  [TODO: How are they supposed to do
+        this?  This section makes little sense.]</t>
+      </section>
     </section>
   </middle>
   <back>
