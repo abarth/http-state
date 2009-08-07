@@ -7,8 +7,6 @@
 
 It supports several test URLs, as specified by the handlers in TestPageHandler.
 It defaults to living on localhost:8888.
-It can use https if you specify the flag --https=CERT where CERT is the path
-to a pem file containing the certificate and private key that should be used.
 To shut it down properly, visit localhost:8888/kill.
 """
 
@@ -22,13 +20,6 @@ import shutil
 import SocketServer
 import sys
 import time
-
-try:
-  import hashlib
-  _new_md5 = hashlib.md5
-except ImportError:
-  import md5
-  _new_md5 = md5.new
 
 SERVER_HTTP = 0
 
@@ -301,17 +292,8 @@ def main(options, args):
 
   port = options.port
 
-  if options.cert:
-    # let's make sure the cert file exists.
-    if not os.path.isfile(options.cert):
-      print 'specified cert file not found: ' + options.cert + ' exiting...'
-      return
-    # No support for HTTPS at the moment.
-    # server = HTTPSServer(('127.0.0.1', port), TestPageHandler, options.cert)
-    print 'HTTPS server started on port %d...' % port
-  else:
-    server = StoppableHTTPServer(('127.0.0.1', port), TestPageHandler)
-    print 'HTTP server started on port %d...' % port
+  server = StoppableHTTPServer(('127.0.0.1', port), TestPageHandler)
+  print 'HTTP server started on port %d...' % port
 
   server.data_dir = MakeDataDir()
   server.file_root_url = options.file_root_url
@@ -328,10 +310,6 @@ if __name__ == '__main__':
                            help='Port used by the server')
   option_parser.add_option('', '--data-dir', dest='data_dir',
                            help='Directory from which to read the files')
-  option_parser.add_option('', '--https', dest='cert',
-                           help='Specify that https should be used, specify '
-                           'the path to the cert containing the private key '
-                           'the server should use')
   option_parser.add_option('', '--file-root-url', default='/files/',
                            help='Specify a root URL for files served.')
   options, args = option_parser.parse_args()
