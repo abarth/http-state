@@ -71,7 +71,7 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
       self.CacheNoStoreHandler,
       self.CacheNoStoreMaxAgeHandler,
       self.CacheNoTransformHandler,
-      self.CookieTestHandler,
+      self.CookieParserHandler,
       self.DownloadHandler,
       self.DownloadFinishHandler,
       self.EchoHeader,
@@ -158,7 +158,7 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     return True
 
-  def CookieTestHandler(self):
+  def CookieParserHandler(self):
     """The default handler for cookie tests."""
 
     if not self._ShouldHandleRequest("/cookie-parser"):
