@@ -72,6 +72,7 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
       self.CacheNoStoreMaxAgeHandler,
       self.CacheNoTransformHandler,
       self.CookieParserHandler,
+      self.CookieParserResultHandler,
       self.DownloadHandler,
       self.DownloadFinishHandler,
       self.EchoHeader,
@@ -159,7 +160,7 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     return True
 
   def CookieParserHandler(self):
-    """The default handler for cookie tests."""
+    """The handler for cookie parser tests."""
 
     if not self._ShouldHandleRequest("/cookie-parser"):
       return False
@@ -187,6 +188,40 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     self.end_headers()
 
     self.wfile.write("")
+
+    return True
+
+  def CookieParserResultHandler(self):
+    """The handler that checks cookie parser test results."""
+
+    if not self._ShouldHandleRequest("/cookie-parser-result"):
+      return False
+
+    query_char = self.path.find('?')
+    if query_char != -1:
+      test_number = self.path[query_char+1:]
+
+    path = os.path.join(self.server.data_dir, "parser", test_number + "-expected")
+    if not os.path.isfile(path):
+      print "Test not found " + test_number + " full path:" + path
+      self.send_error(404)
+      return True
+
+    f = open(path, "r")
+    data = f.read()
+    f.close()
+
+    actual_cookie_header = self.headers.getheader('cookie')
+    expected_cookie_header = re.findall('Cookie:\s*(.*)', data)[0]
+
+    self.send_response(200)
+    self.send_header("Content-Type", "text/plain")
+    self.end_headers()
+    
+    if actual_cookie_header == expected_cookie_header:
+      self.wfile.write("PASS")
+    else:
+      self.wfile.write("FAIL\nActual: %s\nExpected: %s" % (actual_cookie_header, expected_cookie_header))
 
     return True
 
