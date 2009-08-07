@@ -287,8 +287,9 @@ def MakeDataDir():
 
 def main(options, args):
   # redirect output to a log file so it doesn't spam the unit test output
-  logfile = open('testserver.log', 'w')
-  sys.stderr = sys.stdout = logfile
+  # Let's spam the console for now.
+  # logfile = open('testserver.log', 'w')
+  # sys.stderr = sys.stdout = logfile
 
   port = options.port
 
