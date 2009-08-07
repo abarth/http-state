@@ -989,21 +989,15 @@ def MakeDumpDir(data_dir):
   os.mkdir(dump_dir)
 
 def MakeDataDir():
-  if options.data_dir:
-    if not os.path.isdir(options.data_dir):
-      print 'specified data dir not found: ' + options.data_dir + ' exiting...'
-      return None
-    my_data_dir = options.data_dir
-  else:
-    # Create the default path to our data dir, relative to the exe dir.
-    my_data_dir = os.path.dirname(sys.argv[0])
-    my_data_dir = os.path.join(my_data_dir, "..", "..", "..", "..",
-                                   "test", "data")
+  if not options.data_dir:
+    print 'please specify a data dir. exiting...'
+    return None
 
-    #TODO(ibrar): Must use Find* funtion defined in google\tools
-    #i.e my_data_dir = FindUpward(my_data_dir, "test", "data")
+  if not os.path.isdir(options.data_dir):
+    print 'specified data dir not found: ' + options.data_dir + ' exiting...'
+    return None
 
-  return my_data_dir
+  return options.data_dir
 
 def main(options, args):
   # redirect output to a log file so it doesn't spam the unit test output
