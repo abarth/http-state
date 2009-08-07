@@ -21,6 +21,15 @@
     <keyword>Internet-Draft</keyword>
     <abstract>
       <t>This document defines the HTTP Cookie and Set-Cookie headers.</t>
+
+      <t>NOTE:
+      <list>
+        <t>This document is currently a "straw-man" cookie proposal.  Much of
+        the text herein is completely wrong.  If you have suggestions for
+        improving the draft, please send email to http-state@ietf.org.
+        Suggestions with test cases are especially appriciated.</t>
+      </list>
+      </t>
     </abstract>
   </front>
   <middle>
@@ -34,9 +43,9 @@
       <t>Fully-qualified host name (FQHN) means either the fully-qualified
       domain name (FQDN) of a host (i.e., a completely specified domain name
       ending in a top-level domain such as .com or .uk), or the numeric
-      Internet Protocol (IP) address of a host.
-      <!-- The fully qualified domain name is preferred; use of numeric IP
-      addresses is strongly discouraged.--></t>
+      Internet Protocol (IP) address of a host.  The fully qualified domain
+      name is preferred; use of numeric IP addresses is strongly discouraged.
+      [TODO: What does "strongly discouraged" mean?]</t>
 
       <t>The terms request-host and request-URI refer to the values the client
       would send to the server as, respectively, the host (but not port) and
@@ -71,11 +80,10 @@
       without relating that request to previous or subsequent requests; the
       technique allows clients and servers that wish to exchange state
       information to place HTTP requests and responses within a larger context,
-      which we term a &quot;session&quot;.  This context might be used to
-      create, for example, a &quot;shopping cart&quot;, in which user
-      selections can be aggregated before purchase, or a magazine browsing
-      system, in which a user's previous reading affects which offerings are
-      presented.</t>
+      which we term a "session".  This context might be used to create, for
+      example, a "shopping cart", in which user selections can be aggregated
+      before purchase, or a magazine browsing system, in which a user's
+      previous reading affects which offerings are presented.</t>
 
       <t>There are, of course, many different potential contexts and thus many
       different potential types of session.  The designers' paradigm for
@@ -104,12 +112,14 @@
         (informally, a sequence of non-special, non-white space characters) from
         the HTTP/1.1 specification [RFC 2068] to describe their syntax.</t>
 
-        <t>[TODO: Test this grammar.]</t>
+        <t>[TODO: Test this grammar.  I think there are many, many issue with
+        this grammer.  For example, this grammar seems to permit whitespace
+        around the "=", but I don't think that actually works.]</t>
 
         <figure>
           <artwork>
-   av-pairs        =       av-pair *(&quot;;&quot; av-pair)
-   av-pair         =       attr [&quot;=&quot; value]        ; optional value
+   av-pairs        =       av-pair *(";" av-pair)
+   av-pair         =       attr ["=" value]        ; optional value
    attr            =       token
    value           =       word
    word            =       token | quoted-string
@@ -121,25 +131,26 @@
         shows value as optional, most attrs require them.</t>
 
         <t>NOTE: The syntax above allows whitespace between the attribute and
-        the = sign.</t>
+        the = sign.  [TODO: This is probably wrong, however.]</t>
       </section>
       <section title="Origin Server Role">
         <section title="General">
           <t>The origin server initiates a session, if it so desires.  (Note
-          that &quot;session&quot; here does not refer to a persistent network
+          that "session" here does not refer to a persistent network
           connection but to a logical session created from HTTP requests and
-          responses.  The presence or absence of a persistent connection should
-          have no effect on the use of cookie-derived sessions).  To initiate a
-          session, the origin server returns an extra response header to the
-          client, Set-Cookie.  (The details follow later.)</t>
+          responses.  The presence or absence of a persistent connection
+          should have no effect on the use of cookie-derived sessions).  To
+          initiate a session, the origin server returns an extra response
+          header to the client, Set-Cookie.  (The details follow later.)</t>
 
           <t>A user agent returns a Cookie request header (see below) to the
           origin server if it chooses to continue a session.  The origin server
           may ignore it or use it to determine the current state of the
           session.  It may send the client a Set-Cookie response header
           with the same or different information, or it may send no Set-Cookie
-          header at all.<!-- The origin server effectively ends a session by
-          sending the client a Set-Cookie header with Max-Age=0. --></t>
+          header at all.  The origin server effectively ends a session by
+          sending the client a Set-Cookie header with Max-Age=0.  [TODO: Need
+          to say something about Expires here.]</t>
 
           <t>Servers may return a Set-Cookie response headers with any
           response.  User agents should send Cookie request headers, subject to
@@ -157,18 +168,19 @@
 
           <figure>
             <artwork>
-   set-cookie      =       &quot;Set-Cookie:&quot; cookies
+   set-cookie      =       "Set-Cookie:" cookies
    cookies         =       1#cookie
-   cookie          =       NAME &quot;=&quot; VALUE *(&quot;;&quot; cookie-av)
+   cookie          =       NAME "=" VALUE *(";" cookie-av)
    NAME            =       attr
    VALUE           =       value
-   cookie-av       =       &quot;Comment&quot; &quot;=&quot; value
-                   |       &quot;Domain&quot; &quot;=&quot; value
-                   |       &quot;Max-Age&quot; &quot;=&quot; value
+   cookie-av       =       "Comment" "=" value
+                   |       "Domain" "=" value
+                   |       "Max-Age" "=" value
                            [TODO: Expires is clearly missing.]
-                   |       &quot;Path&quot; &quot;=&quot; value
-                   |       &quot;Secure&quot;
-                   |       &quot;Version&quot; &quot;=&quot; 1*DIGIT
+                   |       "Path" "=" value
+                   |       "Secure"
+                           [TODO: HTTPOnly is also missing.]
+                   |       "Version" "=" 1*DIGIT
                            [TODO: Version is likely a fantasy.]
             </artwork>
           </figure>
@@ -186,12 +198,12 @@
             <t>NAME=VALUE
             <list>
               <t>Required.  The name of the state information
-              (&quot;cookie&quot;) is NAME, and its value is VALUE.  NAMEs that
+              ("cookie") is NAME, and its value is VALUE.  NAMEs that
               begin with $ are reserved for other uses and must not be used by
               applications.  [TODO: I suspect the $ rule is a fantasy.]  The
               VALUE is opaque to the user agent and may be
               anything the origin server chooses to send, possibly in a
-              server-selected printable ASCII encoding.   &quot;Opaque&quot;
+              server-selected printable ASCII encoding.   "Opaque"
               implies that the content is of interest and relevance only to the
               origin server.  The content may, in fact, be readable by anyone
               that examines the Set-Cookie header.</t>
@@ -243,7 +255,7 @@
 
               <t>The user agent (possibly under the user's control) may
               determine what level of security it considers appropriate for
-              &quot;secure&quot; cookies.  The Secure attribute should be
+              "secure" cookies.  The Secure attribute should be
               considered security advice from the server to the user agent,
               indicating that it is in the session's interest to protect
               the confidentiality of the cookie's value.</t>
