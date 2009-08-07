@@ -71,6 +71,7 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
       self.CacheNoStoreHandler,
       self.CacheNoStoreMaxAgeHandler,
       self.CacheNoTransformHandler,
+      self.CookieTestHandler,
       self.DownloadHandler,
       self.DownloadFinishHandler,
       self.EchoHeader,
@@ -154,6 +155,37 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     self.wfile.write('<html><head><title>%s</title></head></html>' %
                      time.time())
+
+    return True
+
+  def CookieTestHandler(self):
+    """The default handler for cookie tests."""
+
+    if not self._ShouldHandleRequest("/cookie-parser"):
+      return False
+
+    # TODO: Read from request.
+    test_number = "0001"
+
+    path = os.path.join(self.server.data_dir, "parser", test_number + "-test")
+    if not os.path.isfile(path):
+      print "Test not found " + test_number + " full path:" + path
+      self.send_error(404)
+      return True
+
+    self.send_response(302)
+
+    f = open(path, "r")
+    for line in f:
+      # "name: value"
+      name, value = re.findall('(\S+):\s*(.*)', line)[0]
+      self.send_header(name, value)
+    f.close()
+
+    self.send_header("Location", "/cookie-parser-result?" + test_number)
+    self.end_headers()
+
+    self.wfile.write("")
 
     return True
 
