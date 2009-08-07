@@ -154,17 +154,18 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     data = f.read()
     f.close()
 
-    actual_cookie_header = self.headers.getheader('cookie')
-    expected_cookie_header = re.findall('Cookie:\s*(.*)', data)[0]
+    actual = self.headers.getheader('cookie')
+    expected_headers = re.findall('Cookie:\s*(.*)', data)
+    expected = expected_headers[0] if len(expected_headers) == 1 else None
 
     self.send_response(200)
     self.send_header("Content-Type", "text/plain")
     self.end_headers()
     
-    if actual_cookie_header == expected_cookie_header:
+    if actual == expected:
       self.wfile.write("PASS")
     else:
-      self.wfile.write("FAIL\nActual: %s\nExpected: %s" % (actual_cookie_header, expected_cookie_header))
+      self.wfile.write("FAIL\nActual: %s\nExpected: %s" % (actual, expected))
 
     return True
 
