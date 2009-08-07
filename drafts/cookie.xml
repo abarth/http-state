@@ -864,6 +864,10 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
         this?  This section makes little sense.]</t>
       </section>
     </section>
+    <section title="Other, Similar, Proposals">
+      <t>[TODO: Describe relation to the Netscape Cookie Spec, RFC 2109,
+      RFC 2629, and cookie-v2.]</t>
+    </section>
   </middle>
   <back>
     <section title="Acknowledgements">
