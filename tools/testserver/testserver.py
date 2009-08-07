@@ -164,8 +164,9 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     if not self._ShouldHandleRequest("/cookie-parser"):
       return False
 
-    # TODO: Read from request.
-    test_number = "0001"
+    query_char = self.path.find('?')
+    if query_char != -1:
+      test_number = self.path[query_char+1:]
 
     path = os.path.join(self.server.data_dir, "parser", test_number + "-test")
     if not os.path.isfile(path):
