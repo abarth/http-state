@@ -157,9 +157,9 @@
           other rules detailed below, with every request.</t>
 
           <t>An origin server may include multiple Set-Cookie headers in a
-          response.  Note that an intervening gateway could fold multiple such
-          headers into a single header.  [TODO: Investigate how UAs cope with
-          such folded headers.]</t>
+          response.  Note that an intervening gateway MUST NOT fold multiple
+          Set-Cookie headers into a single header.  [TODO: Investigate how UAs
+          cope with folded headers.]</t>
         </section>
         <section title="Set-Cookie Syntax">
           <t>The syntax for the Set-Cookie response header is</t>
