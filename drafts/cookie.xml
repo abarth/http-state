@@ -384,8 +384,6 @@
             where D is the value of the Domain attribute, and H is a string
             that contains one or more dots.  [TODO: I don't think this is
             right.  foo.bar.baz.com can set a cookie for .baz.com]</t>
-
-            <t>[TODO: Need to interact with public suffix list!]</t>
           </list>
           </t>
 
@@ -406,7 +404,7 @@
             unlikely, but test!]</t>
 
             <t>A Set-Cookie with Domain=.co.uk will be rejected because .co.uk
-            is a public suffix.</t>
+            is a [TODO: public suffix].</t>
           </list>
           </t>
         </section>
@@ -887,6 +885,12 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
     <section title="Acknowledgements">
       <t>This document borrows heavily from RFC 2109.  [TODO: Figure out the
       proper way to credit the authors of RFC 2109.]</t>
+    </section>
+    <section>
+      <t>Tabled items:
+      <list style="symbols">
+        <t>Public suffix.</t>
+      </list>
     </section>
   </back>
 </rfc>
