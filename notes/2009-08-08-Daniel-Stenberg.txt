@@ -1,0 +1,64 @@
+Message-ID: <alpine.DEB.2.00.0908082250350.13839@yvahk2.pbagnpgbe.fr>
+Date: Sat, 8 Aug 2009 23:23:32 +0200 (CEST)
+From: Daniel Stenberg <daniel@haxx.se>
+To: HTTP State <http-state@ietf.org>
+Subject: [http-state] maximum cookie length supported
+
+On Sat, 8 Aug 2009, Adam Barth wrote:
+
+>> I'm curious about the maximum length a cookie value can have in actual 
+>> browsers... I figure we should have a recommended minimum length a client 
+>> should support. If possible.
+>
+> Go ahead and gather data on this point and report back.
+
+I just went ahead and wrote a CGI script that redirects to itself and grows a 
+cookie and stores its length in a URL field like "cookie.cgi?len=200" until 
+the length in the URL and the actual cookie length no longer matches.
+
+Here's a few results from various browsers:
+
+Firefox 3.0.12:         4000
+Firefox 3.5:            4000
+curl 7.19.5:          4999
+IE 8:                   5000
+Opera 10.00 beta:       4000
+Android 1.5 browser:    4000
+Chrome 3.0.195.6:       4000
+Wget 1.11.4:            7000[*]
+mobile safari (iphone): 8000
+lynx 2.8.7dev.9:        4000
+
+I think we can safely say that most browsers support at least 4000 characters 
+cookie contents.
+
+[*] = this reports "500 Internal Server Error" on 8000, which I don't 
+understand why but haven't bothered much more about.
+
+The test is live here: http://daniel.haxx.se/test/longcookie.cgi Feel free to 
+use it if you want to try out other browsers, without torturing it of course!
+
+And the perl script that runs it looks like this:
+
+require "CGI.pm";
+
+$len = CGI::param('len');
+$c = CGI::cookie('data');
+
+print "Content-Type: text/html\n";
+
+if($len == length($c)) {
+     $c .= "A" x 1000;
+     $len += 1000;
+     print "Set-Cookie: data=$c\n";
+
+     print "Location: longcookie.cgi?len=$len\n";
+     print "\nmoo\n";
+}
+else {
+     printf "\nMax cookie length: %d\n", length($c);
+}
+
+-- 
+
+  / daniel.haxx.se
