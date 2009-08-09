@@ -74,14 +74,15 @@ def create_tool(tool, path):
     'curl': CURL
   }
   if tool not in known_tools.keys():
-    print 'Unknown tool "' + tool + '"'
+    if tool:
+      print 'Unknown tool "' + tool + '"'
     print 'The known tools are:\n * ' + '\n * '.join(known_tools.keys())
     exit(1)
 
   tool_factory = known_tools[tool]
   return tool_factory(path)
 
-def tests():
+def all_tests():
   process = subprocess.Popen('./list-test-urls',
                              shell=True,
                              stdin=subprocess.PIPE,
@@ -91,8 +92,15 @@ def tests():
   process.wait()
   return test_list[0].splitlines()
 
-def main(tool, path):
-  feed_tests_to_tool(tests(), create_tool(tool, path))
+def main(options, args):
+  if options.all:
+    tests = all_tests()
+  else:
+    if len(args) < 1:
+      print 'Please specify a test to run.'
+      exit(1)
+    tests = [args[0]]
+  feed_tests_to_tool(tests, create_tool(options.tool, options.path))
 
 def options():
   option_parser = optparse.OptionParser()
@@ -100,8 +108,10 @@ def options():
                            help="Which implementation to tests.")
   option_parser.add_option("", "--path", default=None,
                            help="Where to find the implementation.")
+  option_parser.add_option("", "--all", default=False, action="store_true",
+                           help="Run all the tests.")
   return option_parser
 
 if __name__ == "__main__":
   options, args = options().parse_args()
-  main(options.tool, options.path)
+  main(options, args)
