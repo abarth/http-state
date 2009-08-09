@@ -187,6 +187,16 @@
             </artwork>
           </figure>
 
+          <t>Let a WS character be either a U+20 (SPACE) or a U+09 (TAB) character.</t>
+
+          <t>Here's the parsing rule for NAME:
+          <list style="numbers">
+            <t>Ignore any leading WS.</t>
+            <t>Consume bytes until you reach "=" or ";".</t>
+            <t>Let NAME be the consumed bytes with any trailing WS removed.</t>
+          </list>
+          </t>
+
           <t>Informally, the Set-Cookie response header comprises the token
           Set-Cookie:, followed by a comma-separated list of one or more
           cookies.  Each cookie begins with a NAME=VALUE pair, followed by zero
@@ -886,11 +896,12 @@ Cookie: $Version="1"; Part_Number="Rocket_Launcher_0001"; $Path="/acme"
       <t>This document borrows heavily from RFC 2109.  [TODO: Figure out the
       proper way to credit the authors of RFC 2109.]</t>
     </section>
-    <section>
+    <section title="Tabled Items">
       <t>Tabled items:
       <list style="symbols">
         <t>Public suffix.</t>
       </list>
+      </t>
     </section>
   </back>
 </rfc>
