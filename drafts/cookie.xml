@@ -261,7 +261,7 @@
               represents the lifetime of the cookie, measured in seconds
               from the moment the user agent receives the cookie.</t>
               
-              <t hangTest="Processing Model">When the user agent receives a
+              <t hangText="Processing Model">When the user agent receives a
               cookie with a Max-Age attribute of delta-seconds and
               delta-seconds is not 0, the user agent MUST set the cookie's
               expiration date to the current time plus delta-seconds.  If
@@ -280,7 +280,7 @@
               represents the lifetime of the cookie, repesented as the point
               in time at which the cookie expires.</t>
 
-              <t hangTest="Processing Model">When the user agent receives a
+              <t hangText="Processing Model">When the user agent receives a
               cookie with an Expires attribute, the user agent MUST set the
               cookie's expiration time to the date represented by the
               attribute's value.  If the user agent receieves a cookie with
@@ -313,7 +313,7 @@
               <t hangText="Semantics">The user agent SHOULD protect the
               confidentiality of cookies with the Secure attribute.</t>
 
-              <t hangTest="Processing Model">The user agent MUST NOT include
+              <t hangText="Processing Model">The user agent MUST NOT include
               cookies with the Secure attribute when generating a cookie
               string for an "insecure" context.</t>
             </list>
@@ -332,7 +332,7 @@
               confidentiality of cookies with the HttpOnly attribute from
               "unpriviledged" principals.</t>
 
-              <t hangTest="Processing Model">The user agent MUST NOT include
+              <t hangText="Processing Model">The user agent MUST NOT include
               cookies with the HttpOnly attribute when generated a cookie
               string for a context executing on behalf of an "unprivileged"
               principal.</t>
