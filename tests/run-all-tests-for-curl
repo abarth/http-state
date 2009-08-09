@@ -1,2 +1,2 @@
 #!/bin/sh
-./list-test-urls | xargs -t -n1 curl -L -c /dev/null
+./list-test-urls | xargs -n1 curl -L -c /dev/null

@@ -1,7 +1,7 @@
 #!/bin/sh
 for f in data/parser/*-test; do
  c=`echo $f | sed -e 's:.*/::g'`;
- num=`echo $c | sed -e 's:[^0-9]::g'`
+ num=`echo $c | sed -e 's/-test//g'`
 
  echo "http://localhost:8888/cookie-parser?$num"
 done

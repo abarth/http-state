@@ -144,17 +144,22 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     if query_char != -1:
       test_number = self.path[query_char+1:]
 
+    actual = self.headers.getheader('cookie')
+
     path = os.path.join(self.server.data_dir, "parser", test_number + "-expected")
     if not os.path.isfile(path):
-      print "Test not found " + test_number + " full path:" + path
-      self.send_error(404)
+      self.send_response(404)
+      self.send_header("Content-Type", "text/plain")
+      self.end_headers()
+      self.wfile.write("Test not found " + test_number + " full path:" + path + "\n")
+      if actual:
+        self.wfile.write("Received Cookie: " + actual + "\n")
       return True
 
     f = open(path, "r")
     data = f.read()
     f.close()
 
-    actual = self.headers.getheader('cookie')
     expected_headers = re.findall('Cookie:\s*(.*)', data)
     expected = expected_headers[0] if len(expected_headers) == 1 else None
 
