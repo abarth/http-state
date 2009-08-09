@@ -172,19 +172,41 @@
 
             <t>If the header contains a ';' character:
             <list>
-              <t>let the name-value pair be the characters up to, but not
-              including, the first ';'</t>
+              <t>let the name-value string be the characters up to, but not
+              including, the first ';'.</t>
             </list>
             otherwise:
             <list>
-              <t>let the name-value pair be all the character contained in
+              <t>let the name-value string be all the character contained in
               the header.</t>
             </list>
+            </t>
 
-            <t>Remove any leading or trailing space from the name-value
-            pair.</t>
+            <t>Remove any leading LWS from the name-value string.</t>
 
+            <t>If the first character of the name-value string is '=',
+            remove it.</t>
 
+            <t>If the name-value string does not contain a '=' character:
+            <list>
+              <t>the name string is empty, and the value string is the entire
+              name-value string.</t>
+            </list>
+            Otherwise:
+            <list>
+              <t>the name string is the characters up to, but not including, the first '='
+              character, and the value string is the characters after the
+              first '=' character .</t>
+            </list>
+            </t>
+
+            <t>Remove any leading or trailing space from the name
+            string.</t>
+
+            <t>Remove any leading or trailing space from the value
+            string.</t>
+
+            <t>The *cookie name* is</t>
           </list>
           </t>
 
