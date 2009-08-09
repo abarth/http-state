@@ -233,16 +233,12 @@
           received a cookie* from the origin server with name cookie-name,
           value cookie-value, and attributes cookie-attributes.</t>
 
-          <t>[TODO: What should we do with this text?]  The name of the
-          state information ("cookie") is NAME, and its value is VALUE.
-          NAMEs that begin with $ are reserved for other uses and must not
-          be used by applications.  [TODO: I suspect the $ rule is a
-          fantasy.]  The VALUE is opaque to the user agent and may be
-          anything the origin server chooses to send, possibly in a
-          server-selected printable ASCII encoding.  "Opaque" implies that
-          the content is of interest and relevance only to the origin
-          server.  The content may, in fact, be readable by anyone that
-          examines the Set-Cookie header.</t>
+          <t>The cookie-value is opaque to the user agent and MAY be anything
+          the origin server chooses to send, possibly in a server-selected
+          printable ASCII encoding.  "Opaque" implies that the content is of
+          interest and relevance only to the origin server.  The content may,
+          in fact, be readable by anyone who examines the Set-Cookie
+          header.</t>
         </section>
         <section title="Cookie Attributes">
           <t>[TODO: Test what happens when attributes are multiply
