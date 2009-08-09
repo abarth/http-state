@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import optparse
+import os
 import subprocess
 import sys
 
@@ -63,6 +64,23 @@ class Chromium:
         print line.rstrip()
       line = self._process.stdout.readline()
 
+class TestServer:
+  def start(self):
+    self._process = subprocess.Popen(['./run-test-server'],
+                                     stdin=subprocess.PIPE,
+                                     stdout=open(os.devnull, 'w'),
+                                     stderr=subprocess.STDOUT)
+
+  def stop(self):
+    if not self._process:
+      return
+    kill_process = subprocess.Popen(['curl', '--silent', 'http://localhost:8888/kill'],
+                                    stdin=subprocess.PIPE,
+                                    stdout=open(os.devnull, 'w'),
+                                    stderr=subprocess.STDOUT)
+    kill_process.wait()
+    self._process = None
+
 def feed_tests_to_tool(tests, tool):
   for test in tests:
     if test:
@@ -100,7 +118,10 @@ def main(options, args):
       print 'Please specify a test to run.'
       exit(1)
     tests = [args[0]]
+  server = TestServer()
+  server.start()
   feed_tests_to_tool(tests, create_tool(options.tool, options.path))
+  server.stop()
 
 def options():
   option_parser = optparse.OptionParser()

@@ -1,3 +1,2 @@
 #!/bin/sh
-./list-test-urls
 python ../tools/testserver/testserver.py --data-dir data
