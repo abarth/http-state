@@ -172,31 +172,32 @@
 
             <t>If the header contains a ';' character:
             <list>
-              <t>let the name-value string be the characters up to, but not
-              including, the first ';'.</t>
+              <t>the name-value string is characters up to, but not
+              including, the first ';', and the unparsed-cookie-attributes
+              are the remainder of the header (including the ';' in
+              question).</t>
             </list>
-            otherwise:
+            Otherwise:
             <list>
-              <t>let the name-value string be all the character contained in
-              the header.</t>
+              <t>the name-value string is all the character contained in the
+              header, and the unparsed-cookis-attribues is the empty
+              string.</t>
             </list>
             </t>
 
-            <t>Remove any leading LWS from the name-value string.</t>
+            <t>If the first non-LWS character of the name-value string is
+            '=', remove it.</t>
 
-            <t>If the first character of the name-value string is '=',
-            remove it.</t>
-
-            <t>If the name-value string does not contain a '=' character:
-            <list>
-              <t>the name string is empty, and the value string is the entire
-              name-value string.</t>
-            </list>
-            Otherwise:
+            <t>If the name-value string contains a '=' character:
             <list>
               <t>the name string is the characters up to, but not including, the first '='
               character, and the value string is the characters after the
               first '=' character .</t>
+            </list>
+            Otherwise:
+            <list>
+              <t>the name string is empty, and the value string is the entire
+              name-value string.</t>
             </list>
             </t>
 
@@ -206,10 +207,22 @@
             <t>Remove any leading or trailing space from the value
             string.</t>
 
-            <t>The *cookie name* is</t>
+            <t>The cookie-name is the name string.</t>
+
+            <t>The cookie-value is the value string.</t>
           </list>
           </t>
 
+          <t>The user agent MUST use the following algorithm to parse the
+          unparsed-attributes:
+          <list style="numbers">
+            <t>[TODO: Figure out how to parse cookie attributes.]
+          </list>
+          </t>
+
+          <t>After parsing the Set-Cookie heaer, the user agent *has
+          recieved a cookie* from the origin server with name cookie-name,
+          value cookie-value, and attributes cookie-attributes.</t>
         </section>
         <section title="Set-Cookie Syntax">
           <t>The syntax for the Set-Cookie response header is</t>
