@@ -223,7 +223,7 @@
           <t>The user agent MUST use the following algorithm to parse the
           unparsed-attributes:
           <list style="numbers">
-            <t>[TODO: Figure out how to parse cookie attributes.]
+            <t>[TODO: Figure out how to parse cookie attributes.]</t>
           </list>
           </t>
 
@@ -251,8 +251,7 @@
           <t>When the user agent receives a cookie, the user agent records
           the cookie in its cookie store.  If the cookie is accompanied by
           attributes, the attributes the cookie's default behavior.  This
-          section describes the semantics of the cookie attributes.</t>
-
+          section describes the semantics of the cookie attributes.
           <list>
             <t>Max-Age
             <list style="hanging">
