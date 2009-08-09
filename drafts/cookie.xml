@@ -307,20 +307,42 @@
             </t>
 
             <t>Secure
-            <list>
-              <t>Optional.  The Secure attribute (with no value) directs the
-              user agent to use only (unspecified) secure means to contact the
-              origin server whenever it sends back this cookie.  [TODO: We
-              should give better implementation advice than this.]</t>
+            <list style="hanging">
+              <t hangText="Syntax">The empty string.</t>
 
-              <t>The user agent (possibly under the user's control) may
-              determine what level of security it considers appropriate for
-              "secure" cookies.  The Secure attribute should be
-              considered security advice from the server to the user agent,
-              indicating that it is in the session's interest to protect
-              the confidentiality of the cookie's value.</t>
+              <t hangText="Semantics">The user agent SHOULD protect the
+              confidentiality of cookies with the Secure attribute.</t>
+
+              <t hangTest="Processing Model">The user agent MUST NOT include
+              cookies with the Secure attribute when generating a cookie
+              string for an "insecure" context.</t>
             </list>
             </t>
+              
+            <t>Note: The notion of an "insecure" context is not defined by
+            this document.  Typically, implemenations protect the
+            confidentiality of Secure cookies using transport-layer
+            security, such as TLS [RFC????].</t>
+
+            <t>HttpOnly
+            <list style="hanging">
+              <t hangText="Syntax">The empty string.</t>
+
+              <t hangText="Semantics">The user agent MUST protect
+              confidentiality of cookies with the HttpOnly attribute from
+              "unpriviledged" principals.</t>
+
+              <t hangTest="Processing Model">The user agent MUST NOT include
+              cookies with the HttpOnly attribute when generated a cookie
+              string for a context executing on behalf of an "unprivileged"
+              principal.</t>
+            </list>
+            </t>
+
+            <t>Note: The notion of an "unpriviledge" principal is not
+            defined by this document.  Typically, implemenations protect the
+            confidentiality of HttpOnly cookies from scripts executing on
+            behalf of remote servers.</t>
           </list>
           </t>
         </section>
