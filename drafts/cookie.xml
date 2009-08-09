@@ -162,6 +162,13 @@
           cope with folded headers.]</t>
         </section>
         <section title="Set-Cookie Syntax">
+          <t>Informally, the Set-Cookie response header comprises the token
+          Set-Cookie:, followed by a comma-separated list of one or more
+          cookies.  Each cookie begins with a NAME=VALUE pair, followed by
+          zero or more semi-colon-separated attribute-value pairs.  The
+          NAME=VALUE attribute-value pair must come first in each
+          cookie.</t>
+          
           <t>Let an LWS character be either a U+20 (SPACE) or a U+09 (TAB)
           character.</t>
 
@@ -220,53 +227,39 @@
           </list>
           </t>
 
-          <t>After parsing the Set-Cookie heaer, the user agent *has
+          <t>[TODO: Can parsing a cookie ever fail?]</t>
+
+          <t>After parsing the Set-Cookie header, the user agent *has
           recieved a cookie* from the origin server with name cookie-name,
           value cookie-value, and attributes cookie-attributes.</t>
+
+          <t>[TODO: What should we do with this text?]  The name of the
+          state information ("cookie") is NAME, and its value is VALUE.
+          NAMEs that begin with $ are reserved for other uses and must not
+          be used by applications.  [TODO: I suspect the $ rule is a
+          fantasy.]  The VALUE is opaque to the user agent and may be
+          anything the origin server chooses to send, possibly in a
+          server-selected printable ASCII encoding.  "Opaque" implies that
+          the content is of interest and relevance only to the origin
+          server.  The content may, in fact, be readable by anyone that
+          examines the Set-Cookie header.</t>
         </section>
-        <section title="Set-Cookie Syntax">
-          <t>[TODO: Valdiate this syntax.]</t>
+        <section title="Cookie Attributes">
+          <t>[TODO: Test what happens when attributes are multiply
+          defined.]</t>
 
-          <t>Informally, the Set-Cookie response header comprises the token
-          Set-Cookie:, followed by a comma-separated list of one or more
-          cookies.  Each cookie begins with a NAME=VALUE pair, followed by zero
-          or more semi-colon-separated attribute-value pairs.  The specific
-          attributes and the semantics of their values follows.  The NAME=VALUE
-          attribute-value pair must come first in each cookie.  The others, if
-          present, can occur in any order.  If an attribute appears more than
-          once in a cookie, the behavior is undefined.  [TODO: Test what happens
-          when attributes are multiply defined.]
+          <t>When the user agent receives a cookie, the user agent records
+          the cookie in its cookie store.  If the cookie is accompanied by
+          attributes, the attributes the cookie's default behavior.  This
+          section describes the semantics of the cookie attributes.</t>
+
           <list>
-            <t>NAME=VALUE
-            <list>
-              <t>Required.  The name of the state information
-              ("cookie") is NAME, and its value is VALUE.  NAMEs that
-              begin with $ are reserved for other uses and must not be used by
-              applications.  [TODO: I suspect the $ rule is a fantasy.]  The
-              VALUE is opaque to the user agent and may be
-              anything the origin server chooses to send, possibly in a
-              server-selected printable ASCII encoding.   "Opaque"
-              implies that the content is of interest and relevance only to the
-              origin server.  The content may, in fact, be readable by anyone
-              that examines the Set-Cookie header.</t>
-            </list>
-            </t>
-
-            <t>Comment=comment
-            <list>
-              <t>Optional.  Because cookies can contain private information
-              about a user, the Cookie attribute allows an origin server to
-              document its intended use of a cookie.  The user can inspect the
-              information to decide whether to initiate or continue a session
-              with this cookie.  [TODO: Does this actually exist?]</t>
-            </list>
-            </t>
-
             <t>Domain=domain
             <list>
-              <t>Optional.  The Domain attribute specifies the domain for which
-              the cookie is valid.  An explicitly specified domain must always
-              start with a dot.  [TODO: Test what happens without a dot.]</t>
+              <t>[TODO: Test Domain.]  The Domain attribute specifies the
+              domain for which the cookie is valid.  An explicitly specified
+              domain must always start with a dot.  [TODO: Test what happens
+              without a dot.]</t>
             </list>
             </t>
 
