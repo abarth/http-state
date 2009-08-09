@@ -27,7 +27,7 @@
         <t>This document is currently a "straw-man" cookie proposal.  Much of
         the text herein is completely wrong.  If you have suggestions for
         improving the draft, please send email to http-state@ietf.org.
-        Suggestions with test cases are especially appriciated.</t>
+        Suggestions with test cases are especially appreciated.</t>
       </list>
       </t>
     </abstract>
@@ -178,16 +178,16 @@
             <t>[TODO: Deal with ',' characters.]</t>
 
             <t>If the header contains a ';' character:
-            <list>
+            <list style="empty">
               <t>the name-value string is characters up to, but not
               including, the first ';', and the unparsed-cookie-attributes
               are the remainder of the header (including the ';' in
               question).</t>
             </list>
             Otherwise:
-            <list>
+            <list style="empty">
               <t>the name-value string is all the character contained in the
-              header, and the unparsed-cookis-attribues is the empty
+              header, and the unparsed-cookie-attributes is the empty
               string.</t>
             </list>
             </t>
@@ -196,13 +196,13 @@
             '=', remove it.</t>
 
             <t>If the name-value string contains a '=' character:
-            <list>
+            <list style="empty">
               <t>the name string is the characters up to, but not including, the first '='
               character, and the value string is the characters after the
               first '=' character .</t>
             </list>
             Otherwise:
-            <list>
+            <list style="empty">
               <t>the name string is empty, and the value string is the entire
               name-value string.</t>
             </list>
@@ -230,7 +230,7 @@
           <t>[TODO: Can parsing a cookie ever fail?]</t>
 
           <t>After parsing the Set-Cookie header, the user agent *has
-          recieved a cookie* from the origin server with name cookie-name,
+          received a cookie* from the origin server with name cookie-name,
           value cookie-value, and attributes cookie-attributes.</t>
 
           <t>[TODO: What should we do with this text?]  The name of the
@@ -265,7 +265,7 @@
               <t hangText="Processing">When the user agent receives a cookie
               with a Max-Age attribute of delta-seconds and delta-seconds is
               not 0, the user agent MUST set the cookie's expiration date to
-              the current time plus delta-seconds.  If the user agent receieves
+              the current time plus delta-seconds.  If the user agent receives
               a cookie with a Max-Age attribute of 0, the user agent MUST
               discard the cookie immediately.  [TODO: Test behavior of 0.]
               [TODO: Test interaction with Expires.]</t>
@@ -278,13 +278,13 @@
               <t hangText="Syntax">A cookie-date (see Section [TODO]).</t>
 
               <t hangText="Semantics">The value of the Expires attribute
-              represents the lifetime of the cookie, repesented as the point
+              represents the lifetime of the cookie, represented as the point
               in time at which the cookie expires.</t>
 
               <t hangText="Processing">When the user agent receives a cookie
               with an Expires attribute, the user agent MUST set the cookie's
               expiration time to the date represented by the attribute's value.
-              If the user agent receieves a cookie with an Expires attribute
+              If the user agent receives a cookie with an Expires attribute
               that represents a date in the past, the user agent MUST discard
               the cookie immediately.  [TODO: Test past behavior.]  [TODO: Test
               interaction with Max-Age.]</t>
@@ -316,7 +316,7 @@
             </t>
 
             <t>Note: The notion of an "insecure" context is not defined by
-            this document.  Typically, implemenations protect the
+            this document.  Typically, implementations protect the
             confidentiality of Secure cookies using transport-layer
             security, such as TLS [RFC????].</t>
           </section>
@@ -327,7 +327,7 @@
 
               <t hangText="Semantics">The user agent MUST protect
               confidentiality of cookies with the HttpOnly attribute from
-              "unpriviledged" principals.</t>
+              "unprivileged" principals.</t>
 
               <t hangText="Processing Model">The user agent MUST NOT include
               cookies with the HttpOnly attribute when generated a cookie
@@ -336,15 +336,15 @@
             </list>
             </t>
 
-            <t>Note: The notion of an "unpriviledge" principal is not
-            defined by this document.  Typically, implemenations protect the
+            <t>Note: The notion of an "unprivileged" principal is not
+            defined by this document.  Typically, implementations protect the
             confidentiality of HttpOnly cookies from scripts executing on
             behalf of remote servers.</t>
           </section>
         </section>
         <section title="Controlling Caching">
           <t>[TODO: Should we go into this much detail here?  This seems
-          redudant with the HTTP specs.]</t>
+          redundant with the HTTP specs.]</t>
 
           <t>An origin server must be cognizant of the effect of possible
           caching of both the returned resource and the Set-Cookie header.
