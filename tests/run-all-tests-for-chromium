@@ -66,6 +66,13 @@ def main(test_shell_path):
   test_shell = TestShell(test_shell_path)
   feed_tests_to_test_shell(tests, test_shell)
 
+def usage():
+  print "Usage: run_all_tests_for_chromium <test_shell>"
+  print "       <test_shell> = path to Chromium's test_shell executable"
+
 if __name__ == "__main__":
+  if len(sys.argv) < 2:
+    usage()
+    sys.exit(0)
   test_shell_path = sys.argv[1]
   main(test_shell_path)
