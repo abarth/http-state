@@ -162,6 +162,34 @@
           cope with folded headers.]</t>
         </section>
         <section title="Set-Cookie Syntax">
+          <t>Let an LWS character be either a U+20 (SPACE) or a U+09 (TAB)
+          character.</t>
+
+          <t>A user agent MUST use the following algorithm to parse the
+          Set-Cookie header:
+          <list style="numbers">
+            <t>[TODO: Deal with ',' characters.]</t>
+
+            <t>If the header contains a ';' character:
+            <list>
+              <t>let the name-value pair be the characters up to, but not
+              including, the first ';'</t>
+            </list>
+            otherwise:
+            <list>
+              <t>let the name-value pair be all the character contained in
+              the header.</t>
+            </list>
+
+            <t>Remove any leading or trailing space from the name-value
+            pair.</t>
+
+
+          </list>
+          </t>
+
+        </section>
+        <section title="Set-Cookie Syntax">
           <t>The syntax for the Set-Cookie response header is</t>
 
           <t>[TODO: Valdiate this syntax.]</t>
@@ -186,8 +214,6 @@
                            [TODO: Version is likely a fantasy.]
             </artwork>
           </figure>
-
-          <t>Let a WS character be either a U+20 (SPACE) or a U+09 (TAB) character.</t>
 
           <t>Here's the parsing rule for NAME:
           <list style="numbers">
