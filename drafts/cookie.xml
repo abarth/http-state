@@ -225,38 +225,7 @@
           value cookie-value, and attributes cookie-attributes.</t>
         </section>
         <section title="Set-Cookie Syntax">
-          <t>The syntax for the Set-Cookie response header is</t>
-
           <t>[TODO: Valdiate this syntax.]</t>
-
-          <figure>
-            <artwork>
-   set-cookie      =       "Set-Cookie:" cookies
-   cookies         =       1#cookie
-   cookie          =       NAME "=" VALUE *(";" cookie-av)
-   NAME            =       attr
-   VALUE           =       value
-   cookie-av       =       "Comment" "=" value
-                           [TODO: Daniel Stenberg has never seen a cookie with
-                           a comment.]
-                   |       "Domain" "=" value
-                   |       "Max-Age" "=" value
-                           [TODO: Expires is clearly missing.]
-                   |       "Path" "=" value
-                   |       "Secure"
-                           [TODO: HTTPOnly is also missing.]
-                   |       "Version" "=" 1*DIGIT
-                           [TODO: Version is likely a fantasy.]
-            </artwork>
-          </figure>
-
-          <t>Here's the parsing rule for NAME:
-          <list style="numbers">
-            <t>Ignore any leading WS.</t>
-            <t>Consume bytes until you reach "=" or ";".</t>
-            <t>Let NAME be the consumed bytes with any trailing WS removed.</t>
-          </list>
-          </t>
 
           <t>Informally, the Set-Cookie response header comprises the token
           Set-Cookie:, followed by a comma-separated list of one or more
