@@ -56,7 +56,6 @@ def get_tests():
   return tests[0].splitlines()
 
 def feed_tests_to_test_shell(tests, test_shell):
-  print len(tests)
   for test in tests:
     if test:
       test_shell.run_test(test)
