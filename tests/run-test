@@ -70,6 +70,7 @@ class TestServer:
                                      stdin=subprocess.PIPE,
                                      stdout=open(os.devnull, 'w'),
                                      stderr=subprocess.STDOUT)
+    #TODO: We need to wait for the server to come up.
 
   def stop(self):
     if not self._process:
