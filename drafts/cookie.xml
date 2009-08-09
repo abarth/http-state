@@ -254,7 +254,44 @@
           section describes the semantics of the cookie attributes.</t>
 
           <list>
-            <t>Domain=domain
+            <t>Max-Age
+            <list style="hanging">
+              <t hangText="Syntax">A sequence of ASCII numerals.</t>
+
+              <t hangText="Semantics">The value of the Max-Age attribute
+              represents the lifetime of the cookie, measured in seconds
+              from the moment the user agent receives the cookie.</t>
+              
+              <t hangTest="Processing Model">When the user agent receives a
+              cookie with a Max-Age attribute of delta-seconds and
+              delta-seconds is not 0, the user agent MUST set the cookie's
+              expiration date to the current time plus delta-seconds.  If
+              the user agent receieves a cookie with a Max-Age attribute of
+              0, the user agent MUST discard the cookie immediately.  [TODO:
+              Test behavior of 0.]  [TODO: Test interaction with
+              Expires.]</t>
+            </list>
+            </t>
+
+            <t>Expires
+            <list style="hanging">
+              <t hangText="Syntax">A cookie-date (see Section [TODO]).</t>
+
+              <t hangText="Semantics">The value of the Expires attribute
+              represents the lifetime of the cookie, repesented as the point
+              in time at which the cookie expires.</t>
+
+              <t hangTest="Processing Model">When the user agent receives a
+              cookie with an Expires attribute, the user agent MUST set the
+              cookie's expiration time to the date represented by the
+              attribute's value.  If the user agent receieves a cookie with
+              an Expires attribute that represents a date in the past, the
+              user agent MUST discard the cookie immediately.  [TODO: Test
+              past behavior.]  [TODO: Test interaction with Max-Age.]</t>
+            </list>
+            </t>
+
+            <t>Domain
             <list>
               <t>[TODO: Test Domain.]  The Domain attribute specifies the
               domain for which the cookie is valid.  An explicitly specified
@@ -263,21 +300,10 @@
             </list>
             </t>
 
-            <t>Max-Age=delta-seconds
-            <list>
-              <t>Optional.  The Max-Age attribute defines the lifetime of the
-              cookie, in seconds.  The delta-seconds value is a decimal
-              non-negative integer.  [TODO: Test negative integers.]  After
-              delta-seconds seconds elapse, the client should discard the
-              cookie.  A value of zero means the cookie should be discarded
-              immediately.</t>
-            </list>
-            </t>
-
             <t>Path=path
             <list>
-              <t>Optional.  The Path attribute specifies the subset of URLs to
-              which this cookie applies.</t>
+              <t>[TODO: Test path.]  The Path attribute specifies the subset
+              of URLs to which this cookie applies.</t>
             </list>
             </t>
 
