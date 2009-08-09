@@ -1,0 +1,107 @@
+#!/usr/bin/python
+
+import optparse
+import subprocess
+import sys
+
+class CURL:
+  def __init__(self, path):
+    pass
+
+  def run_test(self, url):
+    print url + ":",
+    self._process = subprocess.Popen(['curl', '-L', '--silent', '-c', '/dev/null', url],
+                               stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.STDOUT)
+    self._process.wait()
+    self._consume_output()
+    self._prcesss = None
+
+  def _consume_output(self):
+    print self._process.stdout.read().strip()
+
+class Chromium:
+  def __init__(self, path):
+    if not path:
+      print 'Chromium requies the path to test_shell.'
+      exit(1)
+    self._path = path
+
+  def run_test(self, url):
+    print url + ":",
+    self._start()
+    self._process.stdin.write(url + '\n')
+    self._process.stdin.flush()
+    self._consume_output()
+    self._stop()
+
+  def _start(self):
+    """Start the test shell process."""
+    self._process = subprocess.Popen([self._path, '--layout-tests'],
+                                     stdin=subprocess.PIPE,
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.STDOUT)
+
+  def _stop(self):
+    """Kill the test shell process."""
+    if not self._process:
+      return
+    self._process.stdin.close()
+    self._process.stdout.close()
+    if self._process.stderr:
+      self._test_shell_proc.stderr.close()
+    if sys.platform not in ('win32', 'cygwin'):
+      subprocess.Popen(['kill', '-9', str(self._process.pid)])
+    self._process = None
+
+  def _consume_output(self):
+    """Read and print the output from test shell."""
+    line = self._process.stdout.readline()
+    while line.rstrip() != '#EOF':
+      if not line.startswith('#URL:') and line.strip() != '':
+        print line.rstrip()
+      line = self._process.stdout.readline()
+
+def feed_tests_to_tool(tests, tool):
+  for test in tests:
+    if test:
+      tool.run_test(test)
+
+def create_tool(tool, path):
+  known_tools = {
+    'chromium': Chromium,
+    'curl': CURL
+  }
+  if tool not in known_tools.keys():
+    print 'Unknown tool "' + tool + '"'
+    print 'The known tools are:\n * ' + '\n * '.join(known_tools.keys())
+    exit(1)
+
+  tool_factory = known_tools[tool]
+  return tool_factory(path)
+
+def tests():
+  process = subprocess.Popen('./list-test-urls',
+                             shell=True,
+                             stdin=subprocess.PIPE,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT)
+  test_list = process.communicate()
+  process.wait()
+  return test_list[0].splitlines()
+
+def main(tool, path):
+  feed_tests_to_tool(tests(), create_tool(tool, path))
+
+def options():
+  option_parser = optparse.OptionParser()
+  option_parser.add_option("", "--tool",
+                           help="Which implementation to tests.")
+  option_parser.add_option("", "--path", default=None,
+                           help="Where to find the implementation.")
+  return option_parser
+
+if __name__ == "__main__":
+  options, args = options().parse_args()
+  main(options.tool, options.path)

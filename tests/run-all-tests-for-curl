@@ -1,2 +1,0 @@
-#!/bin/sh
-./list-test-urls | xargs -n1 curl -L -c /dev/null
