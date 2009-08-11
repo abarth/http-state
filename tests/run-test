@@ -17,10 +17,37 @@ class CURL:
                                stderr=subprocess.STDOUT)
     self._process.wait()
     self._consume_output()
-    self._prcesss = None
+    self._process = None
 
   def _consume_output(self):
     print self._process.stdout.read().strip()
+
+class Safari:
+  def __init__(self, path):
+    if not path:
+      print 'Safari requies the path to DumpRenderTree.'
+      exit(1)
+    self._path = path
+
+  def run_test(self, url):
+    print url + ":",
+    self._process = subprocess.Popen([self._path, url],
+                               stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.STDOUT)
+    self._process.wait()
+    self._consume_output()
+    self._process = None
+
+  def _consume_output(self):
+    # Ignore the first line, which contains the Content-Type.
+    line = self._process.stdout.readline()
+    assert(line.startswith('Content-Type'))
+    line = self._process.stdout.readline()
+    while line.rstrip() != '#EOF':
+      if line.strip() != '':
+        print line.rstrip()
+      line = self._process.stdout.readline()
 
 class Chromium:
   def __init__(self, path):
@@ -89,8 +116,9 @@ def feed_tests_to_tool(tests, tool):
 
 def create_tool(tool, path):
   known_tools = {
-    'chromium': Chromium,
-    'curl': CURL
+    'curl': CURL,
+    'safari': Safari,
+    'chromium': Chromium
   }
   if tool not in known_tools.keys():
     if tool:
