@@ -110,11 +110,11 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     query_char = self.path.find('?')
     if query_char != -1:
-      test_number = self.path[query_char+1:]
+      test = self.path[query_char+1:]
 
-    path = os.path.join(self.server.data_dir, "parser", test_number + "-test")
+    path = self._parser_test_path(test)
     if not os.path.isfile(path):
-      print "Test not found " + test_number + " full path:" + path
+      print "Test not found " + test + " full path:" + path
       self.send_error(404)
       return True
 
@@ -127,7 +127,7 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
       self.send_header(name, value)
     f.close()
 
-    self.send_header("Location", "/cookie-parser-result?" + test_number)
+    self.send_header("Location", "/cookie-parser-result?" + test)
     self.end_headers()
 
     self.wfile.write("")
@@ -142,16 +142,16 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     query_char = self.path.find('?')
     if query_char != -1:
-      test_number = self.path[query_char+1:]
+      test = self.path[query_char+1:]
 
     actual = self.headers.getheader('cookie')
 
-    path = os.path.join(self.server.data_dir, "parser", test_number + "-expected")
+    path = self._parser_expected_path(test)
     if not os.path.isfile(path):
       self.send_response(404)
       self.send_header("Content-Type", "text/plain")
       self.end_headers()
-      self.wfile.write("Test not found " + test_number + " full path:" + path + "\n")
+      self.wfile.write("Test not found " + test + " full path:" + path + "\n")
       if actual:
         self.wfile.write("Received Cookie: " + actual + "\n")
       return True
@@ -174,9 +174,18 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     if actual == expected:
       self.wfile.write("PASS\n")
     else:
-      self.wfile.write("FAIL\nActual: %s\nExpected: %s\n" % (actual, expected))
+      f = open(self._parser_test_path(test), "r")
+      test_case = f.read()
+      f.close()
+      self.wfile.write("FAIL\nActual: %s\nExpected: %s\nTest Case:\n%s" % (actual, expected, test_case))
 
     return True
+
+  def _parser_test_path(self, test):
+    return os.path.join(self.server.data_dir, "parser", test + "-test")
+
+  def _parser_expected_path(self, test):
+    return os.path.join(self.server.data_dir, "parser", test + "-expected")
 
   def FileHandler(self):
     """This handler sends the contents of the requested file.  Wow, it's like
