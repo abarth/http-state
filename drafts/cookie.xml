@@ -337,6 +337,17 @@
             confidentiality of HttpOnly cookies from scripts executing on
             behalf of remote servers.</t>
           </section>
+
+          <t>[TODO: Noting this here for lack of a better place.]  Mozilla
+          comments indicate
+          <list style="symbols">
+            <t>Cookies are returned by order of creation time (oldest first,
+            newest last)</t>
+
+            <t>Cookies are evicted by order of lastAccessed time, if the limit
+            on cookies per host (50) is reached</t>
+          </list>
+          </t>
         </section>
         <section title="Controlling Caching">
           <t>[TODO: Should we go into this much detail here?  This seems
