@@ -1,0 +1,2 @@
+Set-Cookie: foo=bar; max-age=60
+Set-Cookie: newfoo=bar; max-age=60
