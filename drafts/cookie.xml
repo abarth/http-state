@@ -580,7 +580,7 @@
         <t>When the user agent removes cookies from the cookie store, the
         user agent MUST remove cookies in the following priority order:
         <list style="numbers">
-          <t>A cookie with an expiry date in the past.
+          <t>A cookie with an expiry date in the past.</t>
 
           <t>A cookie that shares a domain field with more than 50 other
           cookies in the cookie store.</t>
