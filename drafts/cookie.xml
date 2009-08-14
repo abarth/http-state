@@ -193,15 +193,19 @@
         <section title="Cookie Attributes">
           <t>This section describes the semantics of a number of cookie attributes.</t>
 
+          <t>[TODO: Move the processing model to the user agent conformance section.]</t>
           <section title="Max-Age">
             <t>
             <list style="hanging">
               <t hangText="Syntax">A sequence of ASCII numerals.</t>
 
               <t hangText="Semantics">The value of the Max-Age attribute
-              represents the lifetime of the cookie, measured in seconds
-              from the moment the user agent receives the cookie.</t>
-              
+              represents the maximum lifetime of the cookie, measured in
+              seconds from the moment the user agent receives the cookie. If
+              the server does not supply an Expires or a Max-Age attribute,
+              the lifetime of the cookie is limited to the current session (as
+              defined by the user agent).</t>
+
               <t hangText="Processing">When the user agent receives a cookie
               with a Max-Age attribute of delta-seconds and delta-seconds is
               not 0, the user agent MUST set the cookie's expiration date to
@@ -219,8 +223,11 @@
               very forgiving date parers; see Section [TODO]).</t>
 
               <t hangText="Semantics">The value of the Expires attribute
-              represents the lifetime of the cookie, represented as the point
-              in time at which the cookie expires.</t>
+              represents the maximum lifetime of the cookie, represented as
+              the point in time at which the cookie expires. If the server
+              does not supply an Expires or a Max-Age attribute, the lifetime
+              of the cookie is limited to the current session (as defined by
+              the user agent).</t>
 
               <t hangText="Processing">When the user agent receives a cookie
               with an Expires attribute, the user agent MUST set the cookie's
