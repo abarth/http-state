@@ -482,32 +482,53 @@
         the cookie in its cookie store.  If the cookie is accompanied by
         attributes that modify the cookie's default behavior.</t>
 
-        <t>The user agent stores the following information about each
-        cookie:
+        <t>The user agent stores the following fields about each cookie:
         <list style="symbols">
           <t>name (a sequence of bytes)</t>
           <t>value (a sequence of bytes)</t>
-          <t>expiration (a date)</t>
+          <t>expiry (a date)</t>
           <t>domain (a cookie-domain)</t>
           <t>path (a cookie-path)</t>
           <t>last-access (a date)</t>
           <t>host-only (a Boolean)</t>
+          <t>session-only (a Boolean)</t>
           <t>secure-only (a Boolean)</t>
           <t>http-only (a Boolean)</t>
         </list>
         </t>
 
-        <t>When the user agent *receives a cookie*, the user agent MUST
-        follow the following algorithm:
+        <t>When the user agent receives a cookie, the user agent MUST follow
+        the following algorithm:
         <list style="numbers">
           <t>Create a new cookie based on the parsed Set-Cookie
           header (see below).</t>
 
-          <t>Remove from the cookie store all cookies that have the same
-          name, domain 
+          <t>Remove from the cookie store all cookies that have the share
+          the same name, domain, path, and host-only fields as the newly
+          created cookie.  [TODO: Valiate this list!]</t> 
+
+          <t>Insert the newly created cookie into the cookie store.</t>
         </list>
         </t>
 
+        <t>To create a new cookie based on the parsed Set-Cookie header, the
+        user agent MUST use the following algorithm:
+        <list style="numbers">
+          <t>Create a new cookie with the following default field values:
+          <list style="symbols">
+            <t>name = the cookie's name</t>
+            <t>value = the cookie's value</t>
+            <t>expiry = the latest representable date</t>
+            <t>domain = the FQDN of the origin server</t>
+            <t>path = the path portion of the Request-URI [TODO: Test me!]</t>
+            <t>last-access = the date and time the cookie was received</t>
+            <t>host-only = true</t>
+            <t>secure-only = false</t>
+            <t>http-only = false</t>
+          </list>
+          </t>
+        </list>
+        </t>
 
         <t>The user agent keeps separate track of state information that
         arrives via Set-Cookie response headers from each origin server (as
