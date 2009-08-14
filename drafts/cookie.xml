@@ -516,8 +516,8 @@
         <list style="numbers">
           <t>Create a new cookie with the following default field values:
           <list style="symbols">
-            <t>name = the cookie's name</t>
-            <t>value = the cookie's value</t>
+            <t>name = the cookie-name</t>
+            <t>value = the cookie-value</t>
             <t>expiry = the latest representable date</t>
             <t>domain = the FQDN of the origin server</t>
             <t>path = the path portion of the Request-URI [TODO: Test me!]</t>
@@ -525,6 +525,19 @@
             <t>host-only = true</t>
             <t>secure-only = false</t>
             <t>http-only = false</t>
+          </list>
+          </t>
+
+          <t>Update the default field values according to the
+          cookie-attributes:
+          <list style="hanging">
+            <t hangText="expiry">If the cookie-attributes contain an Expires
+            or a Max-Age attribute, convert the first such attribute into a
+            date and store the value into the expiry field.</t>
+
+            <t>ddd</t>
+
+            <t hangTest="domain">ddd</t>
           </list>
           </t>
         </list>
