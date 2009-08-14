@@ -100,74 +100,95 @@
       </list>
       </t>
     </section>
-    <section title="Outline">
+    <section title="Overview">
       <t>We outline here a way for an origin server to send state information to
       the user agent, and for the user agent to return the state information to
       the origin server.</t>
 
-      <section title="Syntax: General">
-        <t>The two state management headers, Set-Cookie and Cookie, have common
-        syntactic properties involving attribute-value pairs.  The following
-        grammar uses the notation, and tokens DIGIT (decimal digits) and token
-        (informally, a sequence of non-special, non-white space characters) from
-        the HTTP/1.1 specification [RFC 2068] to describe their syntax.</t>
+      <t>The two state management headers, Set-Cookie and Cookie, have common
+      syntactic properties involving attribute-value pairs.  The following
+      grammar uses the notation, and tokens DIGIT (decimal digits) and token
+      (informally, a sequence of non-special, non-white space characters) from
+      the HTTP/1.1 specification [RFC 2068] to describe their syntax.</t>
 
-        <t>[TODO: Test this grammar.  I think there are many, many issue with
-        this grammer.  For example, this grammar seems to permit whitespace
-        around the "=", but I don't think that actually works.]</t>
+      <section title="Examples">
+      </section>
+
+    </section>
+    <section title="Server Conformance">
+      <section title="General">
+        <t>The origin server initiates a session, if it so desires.  (Note
+        that "session" here does not refer to a persistent network
+        connection but to a logical session created from HTTP requests and
+        responses.  The presence or absence of a persistent connection
+        should have no effect on the use of cookie-derived sessions).  To
+        initiate a session, the origin server returns an extra response
+        header to the client, Set-Cookie.  (The details follow later.)</t>
+
+        <t>A user agent returns a Cookie request header (see below) to the
+        origin server if it chooses to continue a session.  The origin server
+        may ignore it or use it to determine the current state of the
+        session.  It may send the client a Set-Cookie response header
+        with the same or different information, or it may send no Set-Cookie
+        header at all.  The origin server effectively ends a session by
+        sending the client a Set-Cookie header with Max-Age=0.  [TODO: Need
+        to say something about Expires here.]</t>
+
+        <t>Servers may return a Set-Cookie response headers with any
+        response.  User agents should send Cookie request headers, subject to
+        other rules detailed below, with every request.</t>
+
+        <t>An origin server may include multiple Set-Cookie headers in a
+        response.  Note that an intervening gateway MUST NOT fold multiple
+        Set-Cookie headers into a single header.  [TODO: Investigate how UAs
+        cope with folded headers.]</t>
+      </section>
+      <section title="Syntax">
+        <t>Informally, the Set-Cookie response header comprises the token
+        Set-Cookie:, followed by a comma-separated list of one or more
+        cookies.  Each cookie begins with a name-value-pair, followed by
+        zero or more semi-colon-separated attribute-value pairs.  The
+        NAME=VALUE attribute-value pair must come first in each
+        cookie.</t>
 
         <figure>
           <artwork>
-   av-pairs        =       av-pair *(";" av-pair)
-   av-pair         =       attr ["=" value]        ; optional value
-   attr            =       token
-   value           =       word
-   word            =       token | quoted-string
+        name-value-pairs = name-value-pair *(";" name-value-pair)
+        name-value-pair  = name ["=" value]        ; optional value
+        name             = token
+        value            = token
           </artwork>
         </figure>
 
-        <t>Attributes (names) (attr) are case-insensitive.  White space is
-        permitted between tokens.  Note that while the above syntax description
-        shows value as optional, most attrs require them.</t>
+        <t>[TODO: Investigate what token actually means.]</t>
+
+        <t>Attributes names are case-insensitive.  White space is
+        permitted between tokens.  Note that although the above syntax description
+        shows value as optional, some attributes require values.</t>
 
         <t>NOTE: The syntax above allows whitespace between the attribute and
-        the = sign.  [TODO: This is probably wrong, however.]</t>
+        the = sign.  Servers wishing to interoperate with some legacy user agents
+        might wish to elide this extra white space to maximize compatibility.</t>
+      </section>
+      <section title="Semantics">
+      </section>
+    </section>
+    <section title="User Agent Conformance"
+      <section title="Syntax">
+      </section>
+      <section title="Processing Model">
+      </section>
+    </section>
+
+    <section title="Outline">
+
+      <section title="Syntax: General">
+
+
+
       </section>
       <section title="Origin Server Role">
-        <section title="General">
-          <t>The origin server initiates a session, if it so desires.  (Note
-          that "session" here does not refer to a persistent network
-          connection but to a logical session created from HTTP requests and
-          responses.  The presence or absence of a persistent connection
-          should have no effect on the use of cookie-derived sessions).  To
-          initiate a session, the origin server returns an extra response
-          header to the client, Set-Cookie.  (The details follow later.)</t>
-
-          <t>A user agent returns a Cookie request header (see below) to the
-          origin server if it chooses to continue a session.  The origin server
-          may ignore it or use it to determine the current state of the
-          session.  It may send the client a Set-Cookie response header
-          with the same or different information, or it may send no Set-Cookie
-          header at all.  The origin server effectively ends a session by
-          sending the client a Set-Cookie header with Max-Age=0.  [TODO: Need
-          to say something about Expires here.]</t>
-
-          <t>Servers may return a Set-Cookie response headers with any
-          response.  User agents should send Cookie request headers, subject to
-          other rules detailed below, with every request.</t>
-
-          <t>An origin server may include multiple Set-Cookie headers in a
-          response.  Note that an intervening gateway MUST NOT fold multiple
-          Set-Cookie headers into a single header.  [TODO: Investigate how UAs
-          cope with folded headers.]</t>
-        </section>
         <section title="Set-Cookie Syntax">
-          <t>Informally, the Set-Cookie response header comprises the token
-          Set-Cookie:, followed by a comma-separated list of one or more
-          cookies.  Each cookie begins with a NAME=VALUE pair, followed by
-          zero or more semi-colon-separated attribute-value pairs.  The
-          NAME=VALUE attribute-value pair must come first in each
-          cookie.</t>
           
           <t>Let an LWS character be either a U+20 (SPACE) or a U+09 (TAB)
           character.</t>
