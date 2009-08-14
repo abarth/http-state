@@ -446,6 +446,8 @@
 
         <t>[TODO: Can parsing a cookie ever fail?]</t>
 
+        <t>[TODO: Convert Max-Age to a date during parsing.]</t>
+
         <t>When the user agent finishes parsing the Set-Cookie header, the
         user agent *receives a cookie* from the origin server with name
         cookie-name, value cookie-value, and attributes
@@ -490,8 +492,8 @@
           <t>domain (a cookie-domain)</t>
           <t>path (a cookie-path)</t>
           <t>last-access (a date)</t>
-          <t>host-only (a Boolean)</t>
           <t>session-only (a Boolean)</t>
+          <t>host-only (a Boolean)</t>
           <t>secure-only (a Boolean)</t>
           <t>http-only (a Boolean)</t>
         </list>
@@ -501,7 +503,54 @@
         the following algorithm:
         <list style="numbers">
           <t>Create a new cookie based on the parsed Set-Cookie
-          header (see below).</t>
+          header:
+          <list style="numbers">
+            <t>Create a new cookie with the following default field values:
+            <list style="symbols">
+              <t>name = the cookie-name</t>
+              <t>value = the cookie-value</t>
+              <t>expiry = the latest representable date</t>
+              <t>domain = the request-host</t>
+              <t>path = the path of the request URL that generated the
+              Set-Cookie response, up to, but not including, the right-most
+              /  [TODO: Test!  This seems wrong for paths that are just a
+              single slash]</t>
+              <t>last-access = the date and time the cookie was received</t>
+              <t>session-only = true</t>
+              <t>host-only = true</t>
+              <t>secure-only = false</t>
+              <t>http-only = false</t>
+            </list>
+            </t>
+
+            <t>Update the default field values according to the
+            cookie-attributes:
+            <list style="hanging">
+              <t hangText="expiry">If the cookie-attributes contains at least
+              one Expires or a Max-Age attribute, store the value of the
+              [TODO: first] such attribute in the expiry field.  Store the
+              value false in the session-only field.</t>
+
+              <t hangText="domain">If the cookie-attributes contains at least
+              one Domain attribute, store the value of the [TODO: first] such
+              attribute in the domain field.  Store the value false in the
+              host-only field.</t>
+
+              <t hangText="path">If the cookie-attributes contains at least
+              one Path attribute, store the value of the [TODO: first] such
+              attribute in the path field.</t>
+
+              <t hangText="secure-only">If the cookie-attributes contains at least
+              one Secure attribute, store the value true in the secure-only
+              field.</t>
+
+              <t hangText="http-only">If the cookie-attributes contains at
+              least one HttpOnly attribute, store the value true in the
+              http-only field.</t>
+            </list>
+            </t>
+          </list>
+          </t>
 
           <t>Remove from the cookie store all cookies that have the share
           the same name, domain, path, and host-only fields as the newly
@@ -511,69 +560,6 @@
         </list>
         </t>
 
-        <t>To create a new cookie based on the parsed Set-Cookie header, the
-        user agent MUST use the following algorithm:
-        <list style="numbers">
-          <t>Create a new cookie with the following default field values:
-          <list style="symbols">
-            <t>name = the cookie-name</t>
-            <t>value = the cookie-value</t>
-            <t>expiry = the latest representable date</t>
-            <t>domain = the FQDN of the origin server</t>
-            <t>path = the path portion of the Request-URI [TODO: Test me!]</t>
-            <t>last-access = the date and time the cookie was received</t>
-            <t>host-only = true</t>
-            <t>secure-only = false</t>
-            <t>http-only = false</t>
-          </list>
-          </t>
-
-          <t>Update the default field values according to the
-          cookie-attributes:
-          <list style="hanging">
-            <t hangText="expiry">If the cookie-attributes contain an Expires
-            or a Max-Age attribute, convert the first such attribute into a
-            date and store the value into the expiry field.</t>
-
-            <t>ddd</t>
-
-            <t hangTest="domain">ddd</t>
-          </list>
-          </t>
-        </list>
-        </t>
-
-        <t>The user agent keeps separate track of state information that
-        arrives via Set-Cookie response headers from each origin server (as
-        distinguished by name or IP address and port).  The user agent
-        applies these defaults for optional attributes that are missing:
-        <list style="hanging">
-          <t hangText="Version">Defaults to "old cookie" behavior as
-          originally specified by Netscape.  See the HISTORICAL section.
-          [TODO: Unlikely.]</t>
-
-          <t hangText="Domain">Defaults to the request-host.  (Note that
-          there is no dot at the beginning of request-host.)  [TODO: This is
-          important to test!]</t>
-
-          <t hangText="Max-Age">The default behavior is to discard the cookie
-          when the user agent exits.  [TODO: Interaction with Expires.]</t>
-
-          <t hangText="Expires">The default behavior is to discard the cookie
-          when the user agent exits.  [TODO: Interaction with Max-Age.]</t>
-
-          <t hangText="Path">Defaults to the path of the request URL that
-          generated the Set-Cookie response, up to, but not including, the
-          right-most /.  [TODO: Test!  This seems wrong for paths that are
-          just a single slash]</t>
-
-          <t hangText="Secure">If absent, the user agent may send the cookie
-          over an insecure channel.</t>
-        </list>
-        </t>
-
-        <t>[TODO: Test what happens when attributes are multiply
-        defined.]</t>
       </section>
       <section title="The Cookie Header">
         <t>[TODO: Noting this here for lack of a better place.]  Mozilla
