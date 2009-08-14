@@ -491,6 +491,7 @@
           <t>expiry (a date)</t>
           <t>domain (a cookie-domain)</t>
           <t>path (a cookie-path)</t>
+          <t>creation (a date)</t>
           <t>last-access (a date)</t>
           <t>session-only (a Boolean)</t>
           <t>host-only (a Boolean)</t>
@@ -515,6 +516,7 @@
               Set-Cookie response, up to, but not including, the right-most
               /  [TODO: Test!  This seems wrong for paths that are just a
               single slash]</t>
+              <t>last-access = the date and time the cookie was received</t>
               <t>last-access = the date and time the cookie was received</t>
               <t>session-only = true</t>
               <t>host-only = true</t>
@@ -576,18 +578,19 @@
         cookies).</t>
 
         <t>When the user agent removes cookies from the cookie store, the
-        user agent MUST remove cookies with a maximal removal-priority:
-        <list style="symbols">
-          <t>A cookie with an expiry date in the past has a removal-priority
-          of 2.</t>
+        user agent MUST remove cookies in the following priority order:
+        <list style="numbers">
+          <t>A cookie with an expiry date in the past.
 
           <t>A cookie that shares a domain field with more than 50 other
-          cookies in the cookie store has a removal-priority of 1.</t>
+          cookies in the cookie store.</t>
+
+          <t>All other cookies.</t>
         </list>
         </t>
 
-        <t>If two cookies have the same removal-priority, the user agent
-        MUST remove the cookie with the least-recent last-access date.</t>
+        <t>If two cookies have the same removal priority, the user agent
+        MUST remove the cookie with the least-recent last-access date first.</t>
       </section>
       <section title="The Cookie Header">
         <t>[TODO: Noting this here for lack of a better place.]  Mozilla
