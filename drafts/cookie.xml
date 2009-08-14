@@ -380,7 +380,12 @@
       </section>
     </section>
     <section title="User Agent Conformance">
-      <section title="Syntax">
+      <t>Not all origin servers conform to the behavior specified in the
+      previous section.  To ensure interoperability, user agents MUST
+      process cookies in a manner that is "black-box" indistinguishable from
+      the requirements in this section.</t>
+
+      <section title="Parsing the Set-Cookie Header">
         <t>Let an LWS character be either a U+20 (SPACE) or a U+09 (TAB)
         character.</t>
 
@@ -441,11 +446,12 @@
 
         <t>[TODO: Can parsing a cookie ever fail?]</t>
 
-        <t>After parsing the Set-Cookie header, the user agent *has
-        received a cookie* from the origin server with name cookie-name,
-        value cookie-value, and attributes cookie-attributes.</t>
+        <t>When the user agent finishes parsing the Set-Cookie header, the
+        user agent *receives a cookie* from the origin server with name
+        cookie-name, value cookie-value, and attributes
+        cookie-attributes.</t>
       </section>
-      <section title="Cookie Dates">
+      <section title="Parsing Cookie Dates">
         <t>Basically, cookie dates are a mess for historical reasons.</t>
 
         <t>To be compatible with legacy servers, however, user agents should
@@ -471,13 +477,28 @@
 
         <t>[TODO: More information about mystery-date.]</t>
       </section>
-      <section title="Processing Model">
+      <section title="Storage Model">
         <t>When the user agent receives a cookie, the user agent records
         the cookie in its cookie store.  If the cookie is accompanied by
-        attributes, the attributes the cookie's default behavior.</t>
+        attributes that modify the cookie's default behavior.</t>
 
-        <t>[TODO: Test what happens when attributes are multiply
-        defined.]</t>
+        <t>The user agent stores the following information about each
+        cookie:
+        <list style="symbols">
+          <t>name (a sequence of bytes)</t>
+          <t>value (a sequence of bytes)</t>
+          <t>expiration (a date)</t>
+          <t>last-access (a date)</t>
+          <t>host (a FQDN)</t>
+          <t>domain (a cookie-domain)</t>
+          <t>path (a cookie-path)</t>
+          <t>secure (a Boolean)</t>
+          <t>http-only (a Boolean)</t>
+        </list>
+        </t>
+
+        <t>When the user agent *receives a cookie*</t>
+
 
         <t>The user agent keeps separate track of state information that
         arrives via Set-Cookie response headers from each origin server (as
@@ -507,6 +528,9 @@
           over an insecure channel.</t>
         </list>
         </t>
+
+        <t>[TODO: Test what happens when attributes are multiply
+        defined.]</t>
       </section>
       <section title="The Cookie Header">
         <t>[TODO: Noting this here for lack of a better place.]  Mozilla
