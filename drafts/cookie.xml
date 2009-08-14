@@ -241,9 +241,9 @@
           </section>
           <section title="Domain">
             <t>[TODO: Test Domain.]  The Domain attribute specifies the domain
-            for which the cookie is valid.  An explicitly specified domain must
-            always start with a dot.  [TODO: Test what happens without a
-            dot.]</t>
+            for which the cookie is valid.  The leading dot isn't required.
+            If there is no Domain attribute, the default is to return the
+            cookie only to the origin server.</t>
           </section>
           <section title="Path">
             <t>[TODO: Test path.]  The Path attribute specifies the subset of
