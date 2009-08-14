@@ -153,10 +153,12 @@
 
         <figure>
           <artwork>
+            <![CDATA[
         name-value-pairs = name-value-pair *(";" name-value-pair)
         name-value-pair  = name ["=" value]        ; optional value
         name             = token
         value            = token
+            ]]>
           </artwork>
         </figure>
 
@@ -402,6 +404,7 @@
         accept dates formated according to this grammar:
         <figure>
           <artwork>
+            <![CDATA[
       cookie-date       = rfc1123-like-date / mystery-date
       rfc1123-like-date = weekday "," SP rfc1123-like-dmy SP time SP "GMT"
       weekday           = "Monday" / "Mon" / "Tuesday" / "Tue" / ...
@@ -413,6 +416,7 @@
       time              = 2DIGIT ":" 2DIGIT ":" 2DIGIT
 
       mystery-date      = *CHAR ; see below
+            ]]>
           </artwork>
         </figure>
         </t>
@@ -567,7 +571,7 @@
 
         <figure>
           <artwork type="abnf2616">
-      <![CDATA[
+            <![CDATA[
          cookie          =       "Cookie:" cookie-version
                                  1*((";" | ",") cookie-value)
          cookie-value    =       NAME "=" VALUE [";" path] [";" domain]
@@ -576,7 +580,7 @@
          VALUE           =       value
          path            =       "$Path" "=" value
          domain          =       "$Domain" "=" value
-      ]]>
+            ]]>
           </artwork>
         </figure>
 
