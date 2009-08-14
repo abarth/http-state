@@ -352,6 +352,31 @@
           </list>
           </t>
         </section>
+        <section title="Cookie Dates">
+          <t>Basically, cookie dates are a mess for historical reasons.  We
+          recommend that servers use rfc1123 dates [cite].</t>
+
+          <t>To be compatible with legacy servers, however, user agents should
+          accept dates formated according to this grammar:
+          <figure>
+            <artwork>
+  cookie-date       = rfc1123-like-date / mystery-date
+  rfc1123-like-date = weekday "," SP rfc1123-like-dmy SP time SP "GMT"
+  weekday           = "Monday" / "Mon" / "Tuesday" / "Tue" / ...
+  rfc1123-like-dmy  = day dmy-div month dmy-div year
+  dmy-div           = SP / "-"
+  day               = 2DIGIT / *1SP DIGIT
+  month             = "Jan" / "Feb" / ...
+  year              = 2DIGIT / 4DIGIT
+  time              = 2DIGIT ":" 2DIGIT ":" 2DIGIT
+
+  mystery-date      = *CHAR ; see below
+            </artwork>
+          </figure>
+          </t>
+
+          <t>[TODO: More information about mystery-date.]</t>
+        </section>
         <section title="Controlling Caching">
           <t>[TODO: Should we go into this much detail here?  This seems
           redundant with the HTTP specs.]</t>
