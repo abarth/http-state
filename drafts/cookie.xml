@@ -488,16 +488,25 @@
           <t>name (a sequence of bytes)</t>
           <t>value (a sequence of bytes)</t>
           <t>expiration (a date)</t>
-          <t>last-access (a date)</t>
-          <t>host (a FQDN)</t>
           <t>domain (a cookie-domain)</t>
           <t>path (a cookie-path)</t>
-          <t>secure (a Boolean)</t>
+          <t>last-access (a date)</t>
+          <t>host-only (a Boolean)</t>
+          <t>secure-only (a Boolean)</t>
           <t>http-only (a Boolean)</t>
         </list>
         </t>
 
-        <t>When the user agent *receives a cookie*</t>
+        <t>When the user agent *receives a cookie*, the user agent MUST
+        follow the following algorithm:
+        <list style="numbers">
+          <t>Create a new cookie based on the parsed Set-Cookie
+          header (see below).</t>
+
+          <t>Remove from the cookie store all cookies that have the same
+          name, domain 
+        </list>
+        </t>
 
 
         <t>The user agent keeps separate track of state information that
