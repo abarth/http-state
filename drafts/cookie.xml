@@ -560,6 +560,19 @@
         </list>
         </t>
 
+        <t>The user agent MUST remove a cookie from the cookie store if any
+        of the following conditions are met:
+        <list style="symbols">
+          <t>A cookie exists in the cookie store with an expiry date in the
+          past.</t>
+
+          <t>More than 3000 cookies exist in the cookie store.</t>
+
+          <t>More than 50 cookies exist in the cookie store with the same
+          domain field.</t>
+        </list>
+        </t>
+
       </section>
       <section title="The Cookie Header">
         <t>[TODO: Noting this here for lack of a better place.]  Mozilla
