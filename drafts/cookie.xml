@@ -143,45 +143,55 @@
         Set-Cookie headers into a single header.  [TODO: Investigate how UAs
         cope with folded headers.]</t>
       </section>
-      <section title="Syntax">
-        <t>Informally, the Set-Cookie response header comprises the token
-        Set-Cookie:, followed by a comma-separated list of one or more
-        cookies.  Each cookie begins with a name-value-pair, followed by
-        zero or more semi-colon-separated attribute-value pairs.  The
-        NAME=VALUE attribute-value pair must come first in each
-        cookie.</t>
+      <section title="Set-Cookie">
+        <section title="Syntax">
+          <t>Informally, the Set-Cookie response header comprises the token
+          Set-Cookie:, followed by a comma-separated list of one or more
+          cookies.  Each cookie begins with a name-value-pair, followed by
+          zero or more semi-colon-separated attribute-value pairs.  The
+          NAME=VALUE attribute-value pair must come first in each
+          cookie.</t>
 
-        <figure>
-          <artwork>
-            <![CDATA[
-        set-cookie       = "Set-Cookie:" name-value-pairs
-        name-value-pairs = name-value-pair *(";" name-value-pair)
-        name-value-pair  = name ["=" value]        ; optional value
-        name             = token
-        value            = token
-            ]]>
-          </artwork>
-        </figure>
+          <figure>
+            <artwork>
+              <![CDATA[
+          set-cookie-header = "Set-Cookie:" name-value-pairs
+          name-value-pairs  = name-value-pair *(";" name-value-pair)
+          name-value-pair   = name ["=" value]        ; optional value
+          name              = token
+          value             = token
+              ]]>
+            </artwork>
+          </figure>
 
-        <t>[TODO: Investigate what token actually means.]</t>
+          <t>[TODO: Investigate what token actually means.]</t>
 
-        <t>Attributes names are case-insensitive.  White space is
-        permitted between tokens.  Note that although the above syntax description
-        shows value as optional, some attributes require values.</t>
+          <t>Attributes names are case-insensitive.  White space is
+          permitted between tokens.  Note that although the above syntax description
+          shows value as optional, some attributes require values.</t>
 
-        <t>The cookie-value is opaque to the user agent and MAY be anything
-        the origin server chooses to send, possibly in a server-selected
-        printable ASCII encoding.  "Opaque" implies that the content is of
-        interest and relevance only to the origin server.  The content may,
-        in fact, be readable by anyone who examines the Set-Cookie
-        header.</t>
+          <t>The cookie-value is opaque to the user agent and MAY be anything
+          the origin server chooses to send, possibly in a server-selected
+          printable ASCII encoding.  "Opaque" implies that the content is of
+          interest and relevance only to the origin server.  The content may,
+          in fact, be readable by anyone who examines the Set-Cookie
+          header.</t>
 
-        <t>NOTE: The syntax above allows whitespace between the attribute and
-        the = sign.  Servers wishing to interoperate with some legacy user agents
-        might wish to elide this extra white space to maximize compatibility.</t>
+          <t>NOTE: The syntax above allows whitespace between the attribute and
+          the = sign.  Servers wishing to interoperate with some legacy user agents
+          might wish to elide this extra white space to maximize compatibility.</t>
+        </section>
       </section>
       <section title="Semantics">
+        <t>When the user agent receives a Set-Cookie header, the user agent stores
+        the cookie in its cookie store.  When the user agent makes another HTTP request
+        to the origin server, the user agent will return the cookie in the Cookie header.</t>
+
+        <t>The server can override the default handling of cookies by specifying a number
+        of cookie attributes.  User agents ignore unrecognized cookie attributes.</t>
+
         <section title="Cookie Attributes">
+          <t>This section describes the semantics of a number of cookie attributes.</t>
 
           <section title="Max-Age">
             <t>
@@ -272,6 +282,23 @@
             confidentiality of HttpOnly cookies from scripts executing on
             behalf of remote servers.</t>
           </section>
+        </section>
+      </section>
+      <section title="Cookie">
+        <section title="Syntax">
+          <figure>
+            <artwork>
+              <![CDATA[
+          cookie-header     = "Cookie:" name-value-pairs
+          name-value-pairs  = name-value-pair *(";" name-value-pair)
+          name-value-pair   = name "=" value
+          name              = token
+          value             = token
+              ]]>
+            </artwork>
+          </figure>
+        </section>
+        <section title="Semantics">
         </section>
       </section>
       <section title="Controlling Caching">
