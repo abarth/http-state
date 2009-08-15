@@ -629,23 +629,28 @@
             creation dates.</t>
           <list>
           </t>
+
+          <t>Update the last-access field of each cookie in the cookie-list
+          to the current date.</t>
+
+          <t>Serialize the cookie-list into a cookie-string:
+          <list style="numbers">
+            <t>Process each cookie in the cookie-list in order:
+            <list style="numbers">
+              <t>Ouput the cookie's name field.</t>
+
+              <t>Ouput the character U+3D ("=")</t>
+
+              <t>Ouput the cookie's value field.</t>
+
+              <t>If there is an unprocessed cookie in the cookie-list, ouput
+              the characters U+3B and U+20 ("; ")</t>
+            </list>
+            </t>
+          </list>
+          </t>
         </list>
         </t>
-
-        <t>[TODO: Noting this here for lack of a better place.]  Mozilla
-        comments indicate
-        <list style="symbols">
-          <t>Cookies are returned by order of creation time (oldest first,
-          newest last)</t>
-        </list>
-        </t>
-
-
-        <t>Note: The notion of an "unprivileged" principal is not
-        defined by this document.  Typically, implementations protect the
-        confidentiality of HttpOnly cookies from scripts executing on
-        behalf of remote servers.</t>
-        [RFC????].</t>
       </section>
       <section title="Rejecting Cookies">
         <t>To prevent possible security or privacy violations, a user agent
