@@ -524,7 +524,8 @@
 
           <t>Remove from the cookie store all cookies that have the share
           the same name, domain, path, and host-only fields as the newly
-          created cookie.  [TODO: Valiate this list!]</t> 
+          created cookie.  [TODO: Valiate this list!]  [TODO: There's some
+          funny business around http-only here.]</t> 
 
           <t>Insert the newly created cookie into the cookie store.</t>
         </list>
