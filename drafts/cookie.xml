@@ -602,7 +602,9 @@
             <t>The cookie's path field must path-match the URI's path.</t>
 
             <t>If the cookie's host-only flag is set, the cookie's domain
-            field must denote exactly the same FQDN as the URI's host.</t>
+            field must denote exactly the same FQDN as the URI's host.
+            [TODO: Internet Explorer does not implement this requirement but
+            most other major implementations do.]</t>
 
             <t>If the cookie's secure-only field is true, then the SECURE
             flag must be true.</t>
