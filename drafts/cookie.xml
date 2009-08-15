@@ -564,7 +564,7 @@
         </t>
 
         <t>If two cookies have the same removal priority, the user agent
-        MUST evict the cookie with the least-recent last-access date
+        MUST evict the cookie with the least recent last-access date
         first.</t>
 
         <t>When the user agent exits, the user agent MUST remove from the
@@ -594,13 +594,13 @@
 
         <t>When generating a cookie-string for use in an HTTP request,
         the user agent MUST set the HTTP flag to true.  Otherwise, the user
-        agent MUST set the secure flag to false.</t>
+        agent MUST set the HTTP flag to false.</t>
 
         <t>The user agent MUST use the following algorithm to compute the
         cookie-string from a cookie store and from a URI:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
-          that meet the following requiremnts:
+          that meet the following requirements:
           <list style="symbols">
             <t>The cookie's domain field must domain-match the URI's
             host. [TODO: Spec me]</t>
@@ -619,9 +619,7 @@
             <t>If the cookie's http-only field is true, then the HTTP flag
             must be true.</t>
           </list>
-          </t>
-
-          <t>NOTE: The Cookie header will not contain any expired cookies
+          NOTE: The Cookie header will not contain any expired cookies
           because cookies past their expiry date are removed from the cookie
           store immediately.</t>
 
@@ -639,20 +637,17 @@
           <t>Update the last-access field of each cookie in the cookie-list
           to the current date.</t>
 
-          <t>Serialize the cookie-list into a cookie-string:
+          <t>Serialize the cookie-list into a cookie-string by processing each
+          cookie in the cookie-list in order:
           <list style="numbers">
-            <t>Process each cookie in the cookie-list in order:
-            <list style="numbers">
-              <t>Ouput the cookie's name field.</t>
+            <t>Output the cookie's name field.</t>
 
-              <t>Ouput the character U+3D ("=")</t>
+            <t>Output the character U+3D ("=")</t>
 
-              <t>Ouput the cookie's value field.</t>
+            <t>Output the cookie's value field.</t>
 
-              <t>If there is an unprocessed cookie in the cookie-list, ouput
-              the characters U+3B and U+20 ("; ")</t>
-            </list>
-            </t>
+            <t>If there is an unprocessed cookie in the cookie-list, output
+            the characters U+3B and U+20 ("; ")</t>
           </list>
           </t>
         </list>
