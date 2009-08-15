@@ -562,12 +562,6 @@
         <list style="symbols">
           <t>Cookies are returned by order of creation time (oldest first,
           newest last)</t>
-
-          <t>Cookies are evicted by order of lastAccessed time, if the limit
-          on cookies per host (50) is reached</t>
-
-          <t>Cookies are evicted by order of lastAccessed time, if the limit
-          on total cookies (3000) is reached</t>
         </list>
         </t>
 
