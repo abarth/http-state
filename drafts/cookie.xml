@@ -557,6 +557,16 @@
         MUST remove the cookie with the least-recent last-access date first.</t>
       </section>
       <section title="The Cookie Header">
+        <t>When the user agent generates an HTTP request for a particular
+        URI, the user agent SHOULD attach exactly one HTTP named Cookie if
+        the cookie-string (defined below) for that URI is non-empty.
+
+        <t>A user agent MAY elide the Cookie header in its entirety if the
+        user agent is configured to block sending cookie for this particular
+        request.</t>
+
+        <t>ddd</t>
+
         <t>[TODO: Noting this here for lack of a better place.]  Mozilla
         comments indicate
         <list style="symbols">
