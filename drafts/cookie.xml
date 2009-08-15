@@ -593,8 +593,8 @@
         <t>The user agent MUST use the following algorithm to compute the
         cookie-string from a cookie store and from a URI:
         <list style="numbers">
-          <t>Let cookie-set be the set of cookies from the cookie-store that
-          meet the following requiremnts:
+          <t>Let cookie-list be the set of cookies from the cookie store
+          that meet the following requiremnts:
           <list style="symbols">
             <t>The cookie's domain field must domain-match the URI's
             host.</t>
@@ -617,6 +617,12 @@
           <t>NOTE: The Cookie header will not contain any expired cookies
           because cookies past their expiry date are removed from the cookie
           store immediately.</t>
+
+          <t>Sort the cookie-list in the following order:
+          <list style="numbers">
+            <t>dd</t>
+          <list>
+          </t>
         </list>
         </t>
 
