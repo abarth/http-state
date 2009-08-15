@@ -248,9 +248,10 @@
             <list style="hanging">
               <t hangText="Syntax">The empty string.</t>
 
-              <t hangText="Semantics">The user agent MUST protect
-              confidentiality of cookies with the HttpOnly attribute from
-              "unprivileged" principals.</t>
+              <t hangText="Semantics">The user agent SHOULD protect
+              confidentiality of cookies with the HttpOnly attribute by
+              including HttpOnly cookies only when generating cookie strings
+              for use in HTTP requests.</t>
             </list>
             </t>
           </section>
