@@ -461,7 +461,7 @@
           <t>path (a cookie-path)</t>
           <t>creation (a date)</t>
           <t>last-access (a date)</t>
-          <t>session-only (a Boolean)</t>
+          <t>persistent (a Boolean)</t>
           <t>host-only (a Boolean)</t>
           <t>secure-only (a Boolean)</t>
           <t>http-only (a Boolean)</t>
@@ -486,7 +486,7 @@
               single slash]</t>
               <t>last-access = the date and time the cookie was received</t>
               <t>last-access = the date and time the cookie was received</t>
-              <t>session-only = true</t>
+              <t>persistent = false</t>
               <t>host-only = true</t>
               <t>secure-only = false</t>
               <t>http-only = false</t>
@@ -499,7 +499,7 @@
               <t hangText="expiry">If the cookie-attributes contains at least
               one Expires or a Max-Age attribute, store the value of the
               [TODO: first] such attribute in the expiry field.  Store the
-              value false in the session-only field.</t>
+              value true in the persistent field.</t>
 
               <t hangText="domain">If the cookie-attributes contains at least
               one Domain attribute, store the value of the [TODO: first] such
@@ -530,7 +530,7 @@
         </list>
         </t>
 
-        <t>The user agent MUST remove a cookie from the cookie store if
+        <t>The user agent MUST evict a cookie from the cookie store if
         either of the following conditions are met:
         <list style="symbols">
           <t>A cookie exists in the cookie store with an expiry date in the
@@ -541,12 +541,12 @@
         </list>
         </t>
 
-        <t>The user agent MAY remove cookies from the cookie store if the
+        <t>The user agent MAY evict cookies from the cookie store if the
         cookie store exceeds some maximum storage bound (such as 3000
         cookies).</t>
 
-        <t>When the user agent removes cookies from the cookie store, the
-        user agent MUST remove cookies in the following priority order:
+        <t>When the user agent evicts cookies from the cookie store, the
+        user agent MUST evict cookies in the following priority order:
         <list style="numbers">
           <t>A cookie with an expiry date in the past.</t>
 
@@ -558,7 +558,11 @@
         </t>
 
         <t>If two cookies have the same removal priority, the user agent
-        MUST remove the cookie with the least-recent last-access date first.</t>
+        MUST evict the cookie with the least-recent last-access date
+        first.</t>
+
+        <t>When the user agent exits, the user agent MUST remove from the
+        cookie store all cookies with the persistent field set to false.</t>
       </section>
       <section title="The Cookie Header">
         <t>When the user agent generates an HTTP request for a particular
