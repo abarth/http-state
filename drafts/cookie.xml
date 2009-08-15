@@ -581,7 +581,8 @@
 
         <t>When generating a cookie-string from a URI with a "secure"
         scheme, the user agent MUST set the SECURE flag to true.  Otherwise,
-        the user agent MUST set the SECURE flag to false.
+        the user agent MUST set the SECURE flag to false.  [TODO: Make this
+        less clumsy.]
         <list style="empty">
           <t>NOTE: The notion of an "secure" scheme is not defined by this
           document.  Typically, user agents consider a scheme secure if
@@ -593,7 +594,8 @@
 
         <t>When generating a cookie-string for use in an HTTP request,
         the user agent MUST set the HTTP flag to true.  Otherwise, the user
-        agent MUST set the HTTP flag to false.</t>
+        agent MUST set the HTTP flag to false.  [TODO: Make this less
+        clumsy.]</t>
 
         <t>The user agent MUST use the following algorithm to compute the
         cookie-string from a cookie store and from a URI:
