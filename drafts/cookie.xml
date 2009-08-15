@@ -181,17 +181,15 @@
           the = sign.  Servers wishing to interoperate with some legacy user agents
           might wish to elide this extra white space to maximize compatibility.</t>
         </section>
-      </section>
-      <section title="Semantics">
-        <t>When the user agent receives a Set-Cookie header, the user agent stores
-        the cookie in its cookie store.  When the user agent makes another HTTP request
-        to the origin server, the user agent will return the cookie in the Cookie header.</t>
+        <section title="Semantics">
+          <t>When the user agent receives a Set-Cookie header, the user
+          agent stores the cookie in its cookie store.  When the user agent
+          makes another HTTP request to the origin server, the user agent
+          will return the cookie in the Cookie header.</t>
 
-        <t>The server can override the default handling of cookies by specifying a number
-        of cookie attributes.  User agents ignore unrecognized cookie attributes.</t>
-
-        <section title="Cookie Attributes">
-          <t>This section describes the semantics of a number of cookie attributes.</t>
+          <t>The server can override the default handling of cookies by
+          specifying a number of cookie attributes.  User agents ignore
+          unrecognized cookie attributes.</t>
 
           <section title="Max-Age">
             <t>
