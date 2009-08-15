@@ -537,17 +537,14 @@
         </list>
         </t>
 
-        <t>The user agent MUST evict a cookie from the cookie store if
-        either of the following conditions are met:
-        <list style="symbols">
-          <t>A cookie exists in the cookie store with an expiry date in the
-          past.</t>
+        <t>The user agent MUST evict a cookie from the cookie store if A
+        cookie exists in the cookie store with an expiry date in the
+        past.</t>
 
-          <t>More than 50 cookies exist in the cookie store with the same
-          domain field.</t>
-        </list>
-        </t>
-
+        <t>The user agent MAY evict a cookie from the cookie store if the
+        number of cookies sharing a domain field exceeds some predetermined
+        upper bound (such as 50 cookies).</t>
+        
         <t>The user agent MAY evict cookies from the cookie store if the
         cookie store exceeds some maximum storage bound (such as 3000
         cookies).</t>
@@ -555,10 +552,10 @@
         <t>When the user agent evicts cookies from the cookie store, the
         user agent MUST evict cookies in the following priority order:
         <list style="numbers">
-          <t>A cookie with an expiry date in the past.</t>
+          <t>Cookies with an expiry date in the past.</t>
 
-          <t>A cookie that shares a domain field with more than 50 other
-          cookies in the cookie store.</t>
+          <t>Cookies that share a domain field more than a predetermined
+          number of other cookies.</t>
 
           <t>All other cookies.</t>
         </list>
