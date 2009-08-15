@@ -193,7 +193,6 @@
         <section title="Cookie Attributes">
           <t>This section describes the semantics of a number of cookie attributes.</t>
 
-          <t>[TODO: Move the processing model to the user agent conformance section.]</t>
           <section title="Max-Age">
             <t>
             <list style="hanging">
@@ -205,14 +204,6 @@
               the server does not supply an Expires or a Max-Age attribute,
               the lifetime of the cookie is limited to the current session (as
               defined by the user agent).</t>
-
-              <t hangText="Processing">When the user agent receives a cookie
-              with a Max-Age attribute of delta-seconds and delta-seconds is
-              not 0, the user agent MUST set the cookie's expiration date to
-              the current time plus delta-seconds.  If the user agent receives
-              a cookie with a Max-Age attribute of 0, the user agent MUST
-              discard the cookie immediately.  [TODO: Test behavior of 0.]
-              [TODO: Test interaction with Expires.]</t>
             </list>
             </t>
           </section>
@@ -228,14 +219,6 @@
               does not supply an Expires or a Max-Age attribute, the lifetime
               of the cookie is limited to the current session (as defined by
               the user agent).</t>
-
-              <t hangText="Processing">When the user agent receives a cookie
-              with an Expires attribute, the user agent MUST set the cookie's
-              expiration time to the date represented by the attribute's value.
-              If the user agent receives a cookie with an Expires attribute
-              that represents a date in the past, the user agent MUST discard
-              the cookie immediately.  [TODO: Test past behavior.]  [TODO: Test
-              interaction with Max-Age.]</t>
             </list>
             </t>
           </section>
@@ -256,17 +239,8 @@
 
               <t hangText="Semantics">The user agent SHOULD protect the
               confidentiality of cookies with the Secure attribute.</t>
-
-              <t hangText="Processing">The user agent MUST NOT include
-              cookies with the Secure attribute when generating a cookie
-              string for an "insecure" context.</t>
             </list>
             </t>
-
-            <t>Note: The notion of an "insecure" context is not defined by
-            this document.  Typically, implementations protect the
-            confidentiality of Secure cookies using transport-layer
-            security, such as TLS [RFC????].</t>
           </section>
           <section title="HttpOnly">
             <t>
@@ -276,18 +250,8 @@
               <t hangText="Semantics">The user agent MUST protect
               confidentiality of cookies with the HttpOnly attribute from
               "unprivileged" principals.</t>
-
-              <t hangText="Processing Model">The user agent MUST NOT include
-              cookies with the HttpOnly attribute when generated a cookie
-              string for a context executing on behalf of an "unprivileged"
-              principal.</t>
             </list>
             </t>
-
-            <t>Note: The notion of an "unprivileged" principal is not
-            defined by this document.  Typically, implementations protect the
-            confidentiality of HttpOnly cookies from scripts executing on
-            behalf of remote servers.</t>
           </section>
         </section>
       </section>
@@ -606,6 +570,16 @@
           on total cookies (3000) is reached</t>
         </list>
         </t>
+
+        <t>Note: The notion of an "insecure" context is not defined by this
+        document.  Typically, implementations protect the confidentiality of
+        Secure cookies using transport-layer security, such as TLS
+
+        <t>Note: The notion of an "unprivileged" principal is not
+        defined by this document.  Typically, implementations protect the
+        confidentiality of HttpOnly cookies from scripts executing on
+        behalf of remote servers.</t>
+        [RFC????].</t>
       </section>
       <section title="Rejecting Cookies">
         <t>To prevent possible security or privacy violations, a user agent
