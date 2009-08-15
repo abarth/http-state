@@ -226,7 +226,8 @@
             <t>[TODO: Test Domain.]  The Domain attribute specifies the domain
             for which the cookie is valid.  The leading dot isn't required.
             If there is no Domain attribute, the default is to return the
-            cookie only to the origin server.</t>
+            cookie only to the origin server.  [TODO: You can only set
+            cookies for related domains.]</t>
           </section>
           <section title="Path">
             <t>[TODO: Test path.]  The Path attribute specifies the subset of
@@ -504,7 +505,10 @@
               <t hangText="domain">If the cookie-attributes contains at least
               one Domain attribute, store the value of the [TODO: first] such
               attribute in the domain field.  Store the value false in the
-              host-only field.</t>
+              host-only field.  [TODO: Reject cookies for unrelated
+              domains.] [TODO: If the URL's host is an IP address, let
+              Domain to be an IP address if it matches the URL's host
+              exactly, but set the host-only flag. ]</t>
 
               <t hangText="path">If the cookie-attributes contains at least
               one Path attribute, store the value of the [TODO: first] such
