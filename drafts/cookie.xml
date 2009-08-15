@@ -611,6 +611,10 @@
             must be true.</t>
           </list>
           </t>
+
+          <t>NOTE: The Cookie header will not contain any expired cookies
+          because cookies past their expiry date are removed from the cookie
+          store immediately.</t>
         </list>
         </t>
 
