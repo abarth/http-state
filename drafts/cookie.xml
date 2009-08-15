@@ -722,18 +722,14 @@
         following minimum capabilities individually, although not necessarily
         simultaneously:  [TODO: Where do these numbers come from?]
         <list style="symbols">
-          <t>at least 300 cookies</t>
-
           <t>at least 4096 bytes per cookie (as measured by the size of the
           characters that comprise the cookie non-terminal in the syntax
           description of the Set-Cookie header)</t>
-
-          <t>at least 20 cookies per unique host or domain name</t>
         </list>
         </t>
 
         <t>User agents created for specific purposes or for limited-capacity
-        devices should provide at least 20 cookies of 4096 bytes, to ensure
+        devices should provide at least 50 cookies of 4096 bytes, to ensure
         that the user can interact with a session-based origin server.</t>
 
         <t>The information in a Set-Cookie response header must be retained in
