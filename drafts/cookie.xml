@@ -620,8 +620,13 @@
           store immediately.</t>
 
           <t>Sort the cookie-list in the following order:
-          <list style="numbers">
-            <t>dd</t>
+          <list style="symbols">
+            <t>Cookies with longer path fields are listed before cookies
+            with shorter path field.</t>
+
+            <t>Among cookies that have equal length path fields, cookies
+            with earlier creation dates are listed before cookies with later
+            creation dates.</t>
           <list>
           </t>
         </list>
