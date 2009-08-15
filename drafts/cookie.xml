@@ -570,7 +570,45 @@
         request.  For example, the user agent might wish to block sending
         cookies during "third-party" requests.</t>
 
-        <t>ddd</t>
+        <t>When generating a cookie-string from a URI with a "secure"
+        scheme, the user agent MUST set the SECURE flag to true.  Otherwise,
+        the user agent MUST set the SECURE flag to false.
+        <list style="empty">
+          <t>NOTE: The notion of an "secure" scheme is not defined by this
+          document.  Typically, user agents consider a scheme secure if
+          the scheme refers to a protocol that makes use of
+          transport-layer security, such as TLS.  For example, most user
+          agents consider "https" to be a secure scheme.</t>
+        </list>
+        </t>
+
+        <t>When generating a cookie-string for use in an HTTP request,
+        the user agent MUST set the HTTP flag to true.  Otherwise, the user
+        agent MUST set the secure flag to false.</t>
+
+        <t>The user agent MUST use the following algorithm to compute the
+        cookie-string from a cookie store and from a URI:
+        <list style="numbers">
+          <t>Let cookie-set be the set of cookies from the cookie-store that
+          meet the following requiremnts:
+          <list style="symbols">
+            <t>The cookie's domain field must domain-match the URI's
+            host.</t>
+
+            <t>The cookie's path field must path-match the URI's path.</t>
+
+            <t>If the cookie's host-only flag is set, the cookie's domain
+            field must denote exactly the same FQDN as the URI's host.</t>
+
+            <t>If the cookie's secure-only field is true, then the SECURE
+            flag must be true.</t>
+            
+            <t>If the cookie's http-only field is true, then the HTTP flag
+            must be true.</t>
+          </list>
+          </t>
+        </list>
+        </t>
 
         <t>[TODO: Noting this here for lack of a better place.]  Mozilla
         comments indicate
@@ -580,9 +618,6 @@
         </list>
         </t>
 
-        <t>Note: The notion of an "insecure" context is not defined by this
-        document.  Typically, implementations protect the confidentiality of
-        Secure cookies using transport-layer security, such as TLS
 
         <t>Note: The notion of an "unprivileged" principal is not
         defined by this document.  Typically, implementations protect the
