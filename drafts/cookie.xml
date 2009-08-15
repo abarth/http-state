@@ -444,9 +444,13 @@
         <t>[TODO: More information about mystery-date.]</t>
       </section>
       <section title="Storage Model">
-        <t>When the user agent receives a cookie, the user agent records
-        the cookie in its cookie store.  If the cookie is accompanied by
-        attributes that modify the cookie's default behavior.</t>
+        <t>When the user agent receives a cookie, the user agent SHOULD
+        record the cookie in its cookie store as follows.</t>
+
+        <t>A user agent MAY ignore received cookies in their entirety if the
+        user agent is configured to block receiving cookie for a particular
+        response.  For example, the user agent might wish to block receiving
+        cookies from "third-party" responses.</t>
 
         <t>The user agent stores the following fields about each cookie:
         <list style="symbols">
@@ -562,8 +566,9 @@
         the cookie-string (defined below) for that URI is non-empty.
 
         <t>A user agent MAY elide the Cookie header in its entirety if the
-        user agent is configured to block sending cookie for this particular
-        request.</t>
+        user agent is configured to block sending cookie for a particular
+        request.  For example, the user agent might wish to block sending
+        cookies during "third-party" requests.</t>
 
         <t>ddd</t>
 
