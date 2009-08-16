@@ -204,7 +204,8 @@
               seconds from the moment the user agent receives the cookie. If
               the server does not supply an Expires or a Max-Age attribute,
               the lifetime of the cookie is limited to the current session (as
-              defined by the user agent).</t>
+              defined by the user agent).  [TODO: IE doesn't seem to support
+              Max-Age...]</t>
             </list>
             </t>
           </section>
