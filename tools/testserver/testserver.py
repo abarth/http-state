@@ -166,9 +166,9 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     self.send_response(200)
     self.send_header("Content-Type", "text/plain")
     # Remove persistent test cookies.
-    self.send_header("Set-Cookie", "foo=deleted; Max-Age=0")
-    self.send_header("Set-Cookie", "foo2=deleted; Max-Age=0")
-    self.send_header("Set-Cookie", "foo3=deleted; Max-Age=0")
+    self.send_header("Set-Cookie", "foo=deleted; Expires=Fri, 07 Aug 2007 08:04:19 GMT")
+    self.send_header("Set-Cookie", "foo2=deleted; Expires=Fri, 07 Aug 2007 08:04:19 GMT")
+    self.send_header("Set-Cookie", "foo3=deleted; Expires=Fri, 07 Aug 2007 08:04:19 GMT")
     self.end_headers()
     
     if actual == expected:
