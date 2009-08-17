@@ -581,24 +581,6 @@
         request.  For example, the user agent might wish to block sending
         cookies during "third-party" requests.</t>
 
-        <t>When generating a cookie-string from a URI with a "secure"
-        scheme, the user agent MUST set the SECURE flag to true.  Otherwise,
-        the user agent MUST set the SECURE flag to false.  [TODO: Make this
-        less clumsy.]
-        <list style="empty">
-          <t>NOTE: The notion of an "secure" scheme is not defined by this
-          document.  Typically, user agents consider a scheme secure if
-          the scheme refers to a protocol that makes use of
-          transport-layer security, such as TLS.  For example, most user
-          agents consider "https" to be a secure scheme.</t>
-        </list>
-        </t>
-
-        <t>When generating a cookie-string for use in an HTTP request,
-        the user agent MUST set the HTTP flag to true.  Otherwise, the user
-        agent MUST set the HTTP flag to false.  [TODO: Make this less
-        clumsy.]</t>
-
         <t>The user agent MUST use the following algorithm to compute the
         cookie-string from a cookie store and from a URI:
         <list style="numbers">
@@ -616,11 +598,20 @@
             [TODO: Internet Explorer does not implement this requirement but
             most other major implementations do.]</t>
 
-            <t>If the cookie's secure-only field is true, then the SECURE
-            flag must be true.</t>
-            
-            <t>If the cookie's http-only field is true, then the HTTP flag
-            must be true.</t>
+            <t>If the cookie's secure-only field is true, then 
+            the URI's scheme must denote a "secure" protocol.
+            <list style="empty">
+              <t>NOTE: The notion of an "secure" protocol is not defined by
+              this document.  Typically, user agents consider a protocol
+              secure if the protocol makes use of transport-layer security,
+              such as TLS.  For example, most user agents consider "https"
+              to be a scheme that denotes a secure protocol.</t>
+            </list>
+            </t>
+
+            <t>If the cookie's http-only field is true, then include the
+            cookie only if the user agent is generating the cookie-string
+            for use in an HTTP request.</t>
           </list>
           NOTE: The Cookie header will not contain any expired cookies
           because cookies past their expiry date are removed from the cookie
