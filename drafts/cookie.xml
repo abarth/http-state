@@ -170,8 +170,9 @@
           <t>[TODO: Investigate what token actually means.]</t>
 
           <t>Attributes names are case-insensitive.  White space is
-          permitted between tokens.  Note that although the above syntax description
-          shows value as optional, some attributes require values.</t>
+          permitted between tokens.  Note that although the above syntax
+          description shows value as optional, some attributes require
+          values.</t>
 
           <t>The cookie-value is opaque to the user agent and MAY be anything
           the origin server chooses to send, possibly in a server-selected
@@ -180,9 +181,10 @@
           in fact, be readable by anyone who examines the Set-Cookie
           header.</t>
 
-          <t>NOTE: The syntax above allows whitespace between the attribute and
-          the = sign.  Servers wishing to interoperate with some legacy user agents
-          might wish to elide this extra white space to maximize compatibility.</t>
+          <t>NOTE: The syntax above allows whitespace between the attribute
+          and the U+3D ("=") character.  Servers wishing to interoperate
+          with some legacy user agents might wish to elide this extra white
+          space to maximize compatibility.</t>
         </section>
         <section title="Semantics">
           <t>When the user agent receives a Set-Cookie header, the user
@@ -195,7 +197,8 @@
           unrecognized cookie attributes.</t>
 
           <section title="Max-Age">
-            <t>
+            <t>[TODO: Consider removing Max-Age from the server conformance
+            section because it's not supported by IE.]
             <list style="hanging">
               <t hangText="Syntax">A sequence of ASCII numerals.</t>
 
@@ -204,16 +207,15 @@
               seconds from the moment the user agent receives the cookie. If
               the server does not supply an Expires or a Max-Age attribute,
               the lifetime of the cookie is limited to the current session (as
-              defined by the user agent).  [TODO: IE doesn't seem to support
-              Max-Age...]</t>
+              defined by the user agent).</t>
             </list>
             </t>
           </section>
           <section title="Expires">
             <t>
             <list style="hanging">
-              <t hangText="Syntax">An RFC 1123 date [cite].  (User agents use a
-              very forgiving date parers; see Section [TODO]).</t>
+              <t hangText="Syntax">An RFC 1123 date [cite].  (User agents
+              use a very forgiving date parers; see Section [TODO]).</t>
 
               <t hangText="Semantics">The value of the Expires attribute
               represents the maximum lifetime of the cookie, represented as
@@ -360,14 +362,14 @@
         <t>A user agent MUST use the following algorithm to parse the
         Set-Cookie header:
         <list style="numbers">
-          <t>[TODO: Deal with ',' characters.]</t>
+          <t>[TODO: Deal with "," characters.]</t>
 
-          <t>If the header contains a ';' character:
+          <t>If the header contains a U+3B (";") character:
           <list style="empty">
             <t>the name-value string is characters up to, but not
-            including, the first ';', and the unparsed-cookie-attributes
-            are the remainder of the header (including the ';' in
-            question).</t>
+            including, the first U+3B (";"), and the
+            unparsed-cookie-attributes are the remainder of the header
+            (including the U+3B (";") in question).</t>
           </list>
           Otherwise:
           <list style="empty">
@@ -378,13 +380,13 @@
           </t>
 
           <t>If the first non-LWS character of the name-value string is
-          '=', remove it.</t>
+          U+3D ("="), remove it.</t>
 
-          <t>If the name-value string contains a '=' character:
+          <t>If the name-value string contains a U+3D ("=") character:
           <list style="empty">
-            <t>the name string is the characters up to, but not including, the first '='
-            character, and the value string is the characters after the
-            first '=' character .</t>
+            <t>the name string is the characters up to, but not including,
+            the first U+3D ("=") character, and the value string is the
+            characters after the first U+3D ("=") character .</t>
           </list>
           Otherwise:
           <list style="empty">
@@ -517,9 +519,9 @@
               one Path attribute, store the value of the [TODO: first] such
               attribute in the path field.</t>
 
-              <t hangText="secure-only">If the cookie-attributes contains at least
-              one Secure attribute, store the value true in the secure-only
-              field.</t>
+              <t hangText="secure-only">If the cookie-attributes contains at
+              least one Secure attribute, store the value true in the
+              secure-only field.</t>
 
               <t hangText="http-only">If the cookie-attributes contains at
               least one HttpOnly attribute, store the value true in the
