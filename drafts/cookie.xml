@@ -544,11 +544,12 @@
 
         <t>The user agent MAY evict a cookie from the cookie store if the
         number of cookies sharing a domain field exceeds some predetermined
-        upper bound (such as 50 cookies).</t>
-        
+        upper bound (such as 50 cookies).  [TODO: Explain where 50 comes
+        from.]</t>
+
         <t>The user agent MAY evict cookies from the cookie store if the
         cookie store exceeds some maximum storage bound (such as 3000
-        cookies).</t>
+        cookies).  [TODO: Explain where 3000 comes from.]</t>
 
         <t>When the user agent evicts cookies from the cookie store, the
         user agent MUST evict cookies in the following priority order:
