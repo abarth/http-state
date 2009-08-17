@@ -643,9 +643,13 @@
           <t>Serialize the cookie-list into a cookie-string by processing each
           cookie in the cookie-list in order:
           <list style="numbers">
-            <t>Output the cookie's name field.</t>
+            <t>If the cookie's name field is non-empty:
+              <list style="numbers">
+              <t>Output the cookie's name field.</t>
 
-            <t>Output the character U+3D ("=")</t>
+              <t>Output the character U+3D ("=")</t>
+              </list>
+            </t>
 
             <t>Output the cookie's value field.</t>
 
