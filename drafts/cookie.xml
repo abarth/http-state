@@ -429,7 +429,7 @@
           <list style="numbers">
             <t>Let uri-path be the path portion of the URI from which the
             user agent received the cookie.  [TODO: Define this more
-            precisely/]</t>
+            precisely.]</t>
 
             <t>If the first character of the uri-path is not a "/"
             character, output "/" and skip the remaining steps.</t>
