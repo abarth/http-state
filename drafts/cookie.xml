@@ -438,7 +438,7 @@
             <list style="symbols">
               <t>Note: path field can never be empty!</t>
               <t>Path field must be a prefix of URI path</t>
-              <t>However, /foo doesn't match /foobar/baz<t>
+              <t>However, /foo doesn't match /foobar/baz</t>
               <t>/foo does match /foo/bar</t>
               <t>/foo/ does match /foo/bar</t>
               <t>/foo/ does match /foo//bar</t>
