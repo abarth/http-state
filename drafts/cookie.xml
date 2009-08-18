@@ -423,7 +423,25 @@
         cookie-name, value cookie-value, and attributes
         cookie-attributes.</t>
 
-        <section title="Parsing Cookie Paths">
+        <section title="Cookie Paths">
+          <t>The user agent MUST use the following algorithm to compute the
+          default-path of a cookie:
+          <list style="numbers">
+            <t>Let uri-path be the path portion of the URI from which the
+            user agent received the cookie.  [TODO: Define this more
+            precisely.]</t>
+
+            <t>If the first character of the uri-path is not a "/"
+            character, output "/" and skip the remaining steps.</t>
+
+            <t>If the uri-path contains only a single "/" character, output
+            "/" and skip the remaining steps.</t>
+
+            <t>Output the characters of the uri-path from the first
+            character up to, and but not including, the right-most "/".</t>
+          </list>
+          </t>
+
           <t>Notes (tests required!):
           <list style="symbols">
             <t>Supplied paths must start with a "/".</t>
@@ -490,7 +508,7 @@
           <t>value (a sequence of bytes)</t>
           <t>expiry (a date)</t>
           <t>domain (a cookie-domain)</t>
-          <t>path (a cookie-path)</t>
+          <t>path (a sequence of bytes)</t>
           <t>creation (a date)</t>
           <t>last-access (a date)</t>
           <t>persistent (a Boolean)</t>
@@ -512,10 +530,7 @@
               <t>value = the cookie-value</t>
               <t>expiry = the latest representable date</t>
               <t>domain = the request-host</t>
-              <t>path = the path of the request URL that generated the
-              Set-Cookie response, up to, but not including, the right-most
-              /  [TODO: Test!  This seems wrong for paths that are just a
-              single slash]</t>
+              <t>path = the cookie's default-path</t>
               <t>last-access = the date and time the cookie was received</t>
               <t>last-access = the date and time the cookie was received</t>
               <t>persistent = false</t>
