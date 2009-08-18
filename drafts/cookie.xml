@@ -444,6 +444,7 @@
               <t>/foo/ does match /foo//bar</t>
             </list>
             </t>
+            <t>[TODO: Test \ ? ; # $ % etc]</t> 
           </list>
           </t>
         </section>
