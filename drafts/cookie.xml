@@ -422,6 +422,31 @@
         user agent *receives a cookie* from the origin server with name
         cookie-name, value cookie-value, and attributes
         cookie-attributes.</t>
+
+        <section title="Parsing Cookie Paths">
+          <t>Notes (tests required!):
+          <list style="symbols">
+            <t>Supplied paths must start with a "/".</t>
+            <t>Defaults to current path, minus the leaf:
+            <list style="symbols">
+              <t>/foo/bar -> /foo</t>
+              <t>/foo -> /</t>
+              <t>/foo/ -> /foo</t>
+            </list>
+            </t>
+            <t>Matching rules:
+            <list style="symbols">
+              <t>Note: path field can never be empty!</t>
+              <t>Path field must be a prefix of URI path</t>
+              <t>However, /foo doesn't match /foobar/baz<t>
+              <t>/foo does match /foo/bar</t>
+              <t>/foo/ does match /foo/bar</t>
+              <t>/foo/ does match /foo//bar</t>
+            </list>
+            </t>
+          </list>
+          </t>
+        </section>
       </section>
       <section title="Parsing Cookie Dates">
         <t>Basically, cookie dates are a mess for historical reasons.</t>
