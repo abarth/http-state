@@ -442,6 +442,17 @@
           </list>
           </t>
 
+          <t>A request-path path-matches a cookie-path if the cookie-path is
+          a prefix of the request-path and at least one of the following
+          conditions hold:
+          <list style="bullets">
+            <t>The last character of the cookie-path is "/".</t>
+
+            <t>The first character of the request-path that is not
+            included in the cookie-path is a "/" character.</t>
+          </list>
+          </t>
+
           <t>Notes (tests required!):
           <list style="symbols">
             <t>Supplied paths must start with a "/".</t>
