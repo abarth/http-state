@@ -120,14 +120,18 @@ class TestPageHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     self.send_response(302)
 
+    have_sent_location = False
     f = open(path, "r")
     for line in f:
       # "name: value"
       name, value = re.findall('(\S+):\s*(.*)', line)[0]
+      if name.lower() == "location":
+        have_sent_location = True
       self.send_header(name, value)
     f.close()
 
-    self.send_header("Location", "/cookie-parser-result?" + test)
+    if not have_sent_location:
+      self.send_header("Location", "/cookie-parser-result?" + test)
     self.end_headers()
 
     self.wfile.write("")
