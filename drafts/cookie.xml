@@ -379,8 +379,9 @@
           </list>
           </t>
 
-          <t>If the first non-LWS character of the name-value string is
-          U+3D ("="), remove it.</t>
+          <t>If the first non-LWS character of the name-value string is U+3D
+          ("="), remove it.  [TODO: Test whether "=foo=bar" is a nameless
+          cookie.]</t>
 
           <t>If the name-value string contains a U+3D ("=") character:
           <list style="empty">
@@ -407,12 +408,49 @@
         </list>
         </t>
 
+
+        <t>The user agent MUST parse the unparsed-attributes according to the
+        following grammar:</t>
+        <figure>
+          <artwork>
+            <![CDATA[
+          unparsed-attributes  = *(";" attribute-value-pair)
+            ]]>
+          </artwork>
+        </figure>
+
         <t>The user agent MUST use the following algorithm to parse the
-        unparsed-attributes:
+        unparsed-attributes:</t>
         <list style="numbers">
-          <t>[TODO: Figure out how to parse cookie attributes.]</t>
+          <t>Consume the first character of the unparsed-attributes, which
+          must be a U+3B (";") character.</t>
+
+          <t>If the remaining unparsed-attributes contains a U+3B (";")
+          character:</t>
+          <list style="empty">
+            <t>Consume the characters of the unparsed-attributes up to, but
+            not including, the first U+3B (";") character.
+          </list>
+          Otherwise:
+          <list style="empty">
+            <t>Consume the remainder of the unparsed-attributes.</t>
+          </list>
+          The characters consumed in this step comprise the
+          attribute-value-pair string.</t>
+
+          <t>If the attribute-value-pair string contains a U+3D ("=") character:
+          <list style="empty">
+            <t>the name string is the characters up to, but not including,
+            the first U+3D ("=") character, and the value string is the
+            characters after the first U+3D ("=") character .</t>
+          </list>
+          Otherwise:
+          <list style="empty">
+            <t>the name string is empty, and the value string is the entire
+            name-value string.</t>
+          </list>
+          </t>
         </list>
-        </t>
 
         <t>[TODO: Can parsing a cookie ever fail?]</t>
 
