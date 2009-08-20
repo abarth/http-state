@@ -418,10 +418,10 @@
           must be a U+3B (";") character.</t>
 
           <t>If the remaining unparsed-attributes contains a U+3B (";")
-          character:</t>
+          character:
           <list style="empty">
             <t>Consume the characters of the unparsed-attributes up to, but
-            not including, the first U+3B (";") character.
+            not including, the first U+3B (";") character.</t>
           </list>
           Otherwise:
           <list style="empty">
@@ -499,7 +499,7 @@
           <t>A request-path path-matches a cookie-path if the cookie-path is
           a prefix of the request-path and at least one of the following
           conditions hold:
-          <list style="bullets">
+          <list style="symbols">
             <t>The last character of the cookie-path is "/".</t>
 
             <t>The first character of the request-path that is not
