@@ -408,20 +408,12 @@
         </list>
         </t>
 
-
-        <t>The user agent MUST parse the unparsed-attributes according to the
-        following grammar:</t>
-        <figure>
-          <artwork>
-            <![CDATA[
-          unparsed-attributes  = *(";" attribute-value-pair)
-            ]]>
-          </artwork>
-        </figure>
-
         <t>The user agent MUST use the following algorithm to parse the
         unparsed-attributes:</t>
         <list style="numbers">
+          <t>If the unparsed-attributes string is empty, skip the rest of these
+          steps.</t>
+
           <t>Consume the first character of the unparsed-attributes, which
           must be a U+3B (";") character.</t>
 
@@ -446,10 +438,21 @@
           </list>
           Otherwise:
           <list style="empty">
-            <t>the name string is empty, and the value string is the entire
-            name-value string.</t>
+            <t>the name string is the entire attribute-value-pair string, and
+            the value string is empty.</t>
           </list>
           </t>
+
+          <t>Remove any leading or trailing space from the name
+          string.</t>
+
+          <t>Remove any leading or trailing space from the value
+          string.</t>
+
+          <t>Parse the attribute name and value strings according to the
+          attribute specific rules below.</t>
+
+          <t>Return to Step 1.</t>
         </list>
 
         <t>[TODO: Can parsing a cookie ever fail?]</t>
@@ -462,6 +465,8 @@
         cookie-attributes.</t>
 
         <section title="Cookie Paths">
+          <t>[TODO: Case sensitivity?]</t>
+
           <t>The user agent MUST use the following algorithm to compute the
           default-path of a cookie:
           <list style="numbers">
