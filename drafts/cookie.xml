@@ -449,8 +449,19 @@
           <t>Remove any leading or trailing space from the value
           string.</t>
 
-          <t>Parse the attribute name and value strings according to the
-          attribute specific rules below.</t>
+          <t>If the name is a ASCII case-insensitive match for an entry in the
+          following table, process the value string as instructed.
+          <list style="hanging">
+            <t hangText="Max-Age">See Section [TODO].</t>
+            <t hangText="Expires">See Section [TODO].</t>
+            <t hangText="Domain">See Section [TODO].</t>
+            <t hangText="Path">See Section [TODO].</t>
+            <t hangText="Secure">Append the attribute Secure with an empty
+            value into the cookie-attribute-list.</t>
+            <t hangText="HttpOnly">Append the attribute HttpOnly with an empty
+            value into the cookie-attribute-list.</t>
+          </list>
+          </t>
 
           <t>Return to Step 1.</t>
         </list>
