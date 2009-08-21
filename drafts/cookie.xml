@@ -382,8 +382,8 @@
           <t>If the unparsed-attributes string is empty, skip the rest of these
           steps.</t>
 
-          <t>Consume the first character of the unparsed-attributes, which
-          must be a U+3B (";") character.</t>
+          <t>Consume the first character of the unparsed-attributes (which
+          will be a U+3B (";") character).</t>
 
           <t>If the remaining unparsed-attributes contains a U+3B (";")
           character:
@@ -398,27 +398,27 @@
           The characters consumed in this step comprise the
           attribute-value-pair string.</t>
 
-          <t>If the attribute-value-pair string contains a U+3D ("=") character:
+          <t>If the attribute-value-pair string contains a U+3D ("=")
+          character:
           <list style="empty">
-            <t>the name string is the characters up to, but not including,
-            the first U+3D ("=") character, and the value string is the
-            characters after the first U+3D ("=") character .</t>
+            <t>the (possibly empty) name string is the characters up to, but
+            not including, the first U+3D ("=") character, and the (possibly
+            empty) value string is the characters after the first U+3D ("=")
+            character .</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>the name string is the entire attribute-value-pair string, and
-            the value string is empty.</t>
+            <t>the name string is the entire attribute-value-pair string,
+            and the value string is empty.  (Note that this step differs
+            from the analogous step when parsing the name-value string.)</t>
           </list>
           </t>
 
-          <t>Remove any leading or trailing space from the name
-          string.</t>
+          <t>Remove any leading or trailing space from the name string and
+          the value string.</t>
 
-          <t>Remove any leading or trailing space from the value
-          string.</t>
-
-          <t>If the name is a ASCII case-insensitive match for an entry in the
-          following table, process the value string as instructed.
+          <t>If the name is a ASCII case-insensitive match for an entry in
+          the following table, process the value string as instructed.
           <list style="hanging">
             <t hangText="Max-Age">See Section [TODO].</t>
             <t hangText="Expires">See Section [TODO].</t>
