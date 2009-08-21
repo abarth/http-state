@@ -125,7 +125,8 @@
           <t>[TODO: Investigate what token actually means.]</t>
 
           <t>Attributes names are case-insensitive.  White space is
-          permitted between tokens.  Note that although the above syntax
+          permitted between tokens.  Servers MUST NOT include two attributes
+          with the same name.  Note that although the above syntax
           description shows value as optional, some attributes require
           values.</t>
 
@@ -145,11 +146,11 @@
           <t>When the user agent receives a Set-Cookie header, the user
           agent stores the cookie in its cookie store.  When the user agent
           makes another HTTP request to the origin server, the user agent
-          will return the cookie in the Cookie header.</t>
+          returns the cookie in the Cookie header.</t>
 
           <t>The server can override the default handling of cookies by
-          specifying a number of cookie attributes.  User agents ignore
-          unrecognized cookie attributes.</t>
+          specifying cookie attributes.  User agents ignore unrecognized
+          cookie attributes.</t>
 
           <section title="Max-Age">
             <t>[TODO: Consider removing Max-Age from the server conformance
