@@ -110,11 +110,11 @@
           <figure>
             <artwork>
               <![CDATA[
-          set-cookie-header = "Set-Cookie:" name-value-pairs
-          name-value-pairs  = name-value-pair *(";" name-value-pair)
-          name-value-pair   = name ["=" value]        ; optional value
-          name              = token
-          value             = *CHAR
+  set-cookie-header = "Set-Cookie:" name-value-pairs
+  name-value-pairs  = name-value-pair *(";" name-value-pair)
+  name-value-pair   = name ["=" value]        ; optional value
+  name              = token
+  value             = *CHAR
               ]]>
             </artwork>
           </figure>
@@ -241,11 +241,11 @@
           <figure>
             <artwork>
               <![CDATA[
-          cookie-header     = "Cookie:" name-value-pairs
-          name-value-pairs  = name-value-pair *(";" name-value-pair)
-          name-value-pair   = name "=" value
-          name              = token
-          value             = *CHAR
+  cookie-header     = "Cookie:" name-value-pairs
+  name-value-pairs  = name-value-pair *(";" name-value-pair)
+  name-value-pair   = name "=" value
+  name              = token
+  value             = *CHAR
               ]]>
             </artwork>
           </figure>
@@ -423,14 +423,14 @@
           <figure>
             <artwork>
               <![CDATA[
-            Attribute  |  Instruction
-           ------------+---------------------
-            Max-Age    |  See Section [TODO]
-            Expires    |  See Section [TODO] 
-            Domain     |  See Section [TODO]
-            Path       |  See Section [TODO]
-            Secure     |  See Section [TODO]
-            HttpOnly   |  See Section [TODO]
+       Attribute  |  Instruction
+      ------------+---------------------
+       Max-Age    |  See Section [TODO]
+       Expires    |  See Section [TODO] 
+       Domain     |  See Section [TODO]
+       Path       |  See Section [TODO]
+       Secure     |  See Section [TODO]
+       HttpOnly   |  See Section [TODO]
               ]]>
             </artwork>
           </figure>
