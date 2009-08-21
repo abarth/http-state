@@ -463,7 +463,7 @@
 
           <t>If delta-seconds is less than or equal to 0, then append an
           attribute named Expires (note the name conversion) to the
-          cookie-attriute-list with a value equal to the current date and
+          cookie-attribute-list with a value equal to the current date and
           time.</t>
 
           <t>If delta-seconds is strictly greater than 0, then append an
