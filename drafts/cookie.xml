@@ -208,10 +208,13 @@
           <section title="Secure">
             <t>
             <list style="hanging">
-              <t hangText="Syntax">The empty string.</t>
+              <t hangText="Syntax">Servers MUST NOT include a value.</t>
 
               <t hangText="Semantics">The user agent SHOULD protect the
-              confidentiality of cookies with the Secure attribute.</t>
+              confidentiality of cookies with the Secure attribute.  In
+              particular, user agents MUST NOT transmit cookie with the
+              Secure attribute over an "insecure" medium (where "insecure"
+              is defined by the user agent).</t>
             </list>
             </t>
           </section>
