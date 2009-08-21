@@ -439,16 +439,47 @@
           <t>Return to Step 1.</t>
         </list>
 
-        <t>[TODO: Can parsing a cookie ever fail?]</t>
-
-        <t>[TODO: Convert Max-Age to a date during parsing.]</t>
+        <t>[TODO: Can parsing a cookie ever fail?  Doesn't look like
+        it!  Well, unless you count "Set-Cookie: " as a fail...]</t>
 
         <t>When the user agent finishes parsing the Set-Cookie header, the
         user agent *receives a cookie* from the origin server with name
         cookie-name, value cookie-value, and attributes
         cookie-attributes.</t>
 
-        <section title="Cookie Paths">
+        <section title="The Max-Age Attribute">
+          <t>[TODO: Convert Max-Age to a date during parsing.]</t>
+        </section>
+        <section title="The Expires Attribute">
+          <t>Basically, cookie dates are a mess for historical reasons.</t>
+
+          <t>To be compatible with legacy servers, however, user agents should
+          accept dates formated according to this grammar:
+          <figure>
+            <artwork>
+              <![CDATA[
+      cookie-date       = rfc1123-like-date / mystery-date
+      rfc1123-like-date = weekday "," SP rfc1123-like-dmy SP time SP "GMT"
+      weekday           = "Monday" / "Mon" / "Tuesday" / "Tue" / ...
+      rfc1123-like-dmy  = day dmy-div month dmy-div year
+      dmy-div           = SP / "-"
+      day               = 2DIGIT / *1SP DIGIT
+      month             = "Jan" / "Feb" / ...
+      year              = 2DIGIT / 4DIGIT
+      time              = 2DIGIT ":" 2DIGIT ":" 2DIGIT
+
+      mystery-date      = *CHAR ; see below
+              ]]>
+            </artwork>
+          </figure>
+          </t>
+
+          <t>[TODO: More information about mystery-date.]</t>
+        </section>
+        <section title="The Domain Attribute">
+          <t>[TODO]</t>
+        </section>
+        <section title="The Path Attribute">
           <t>[TODO: Case sensitivity?]</t>
 
           <t>The user agent MUST use the following algorithm to compute the
@@ -503,32 +534,6 @@
             <t>[TODO: Test \ ? ; # $ % etc]</t> 
           </list>
           </t>
-        </section>
-        <section title="Parsing Cookie Dates">
-          <t>Basically, cookie dates are a mess for historical reasons.</t>
-
-          <t>To be compatible with legacy servers, however, user agents should
-          accept dates formated according to this grammar:
-          <figure>
-            <artwork>
-              <![CDATA[
-      cookie-date       = rfc1123-like-date / mystery-date
-      rfc1123-like-date = weekday "," SP rfc1123-like-dmy SP time SP "GMT"
-      weekday           = "Monday" / "Mon" / "Tuesday" / "Tue" / ...
-      rfc1123-like-dmy  = day dmy-div month dmy-div year
-      dmy-div           = SP / "-"
-      day               = 2DIGIT / *1SP DIGIT
-      month             = "Jan" / "Feb" / ...
-      year              = 2DIGIT / 4DIGIT
-      time              = 2DIGIT ":" 2DIGIT ":" 2DIGIT
-
-      mystery-date      = *CHAR ; see below
-              ]]>
-            </artwork>
-          </figure>
-          </t>
-
-          <t>[TODO: More information about mystery-date.]</t>
         </section>
         <section title="The Secure Attribute">
           <t>Append the attribute Secure with an empty value into the
