@@ -499,8 +499,6 @@
           <t>[TODO]</t>
         </section>
         <section title="The Path Attribute">
-          <t>[TODO: Case sensitivity?]</t>
-
           <t>The user agent MUST use the following algorithm to compute the
           default-path of a cookie:
           <list style="numbers">
