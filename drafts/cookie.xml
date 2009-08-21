@@ -503,6 +503,14 @@
         <section title="The Path Attribute">
           <t>[TODO: Case sensitivity?]</t>
 
+          <t>When the user agent receives a cookie attribute with a name
+          string that case-insensitively matches the string "Path", the user
+          agent MUST process the value string as follows.</t>
+
+          <t>If the value string is empty, then append an attribute named
+          Path to the cookie-attribute-list with a value equal to
+          default-path of the cookie.</t>
+
           <t>The user agent MUST use the following algorithm to compute the
           default-path of a cookie:
           <list style="numbers">
