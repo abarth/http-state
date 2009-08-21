@@ -90,7 +90,12 @@
         <t>[TODO: Put some examples here.</t>
       </section>
     </section>
-    <section title="Server Conformance">
+    <section title="Protocol Description">
+      <t>The cookie protocol consists of two HTTP headers: the Set-Cookie
+      header and the Cookie header.  The server sends the Set-Cookie header
+      is to the user agent in an HTTP reponse, causing the user agent to
+      modify the Cookie header it returns to the server.</t>
+ 
       <section title="Set-Cookie">
         <section title="Syntax">
           <t>Informally, the Set-Cookie response header comprises the token
