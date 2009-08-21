@@ -170,28 +170,40 @@
           <section title="Expires">
             <t>
             <list style="hanging">
-              <t hangText="Syntax">An RFC 1123 date [cite].  (User agents
-              use a very forgiving date parers; see Section [TODO]).</t>
+              <t hangText="Syntax">An RFC 1123 date [cite].  (Note that user
+              agents use very forgiving date parers; see Section
+              [TODO]).</t>
 
               <t hangText="Semantics">The value of the Expires attribute
               represents the maximum lifetime of the cookie, represented as
               the point in time at which the cookie expires. If the server
-              does not supply an Expires or a Max-Age attribute, the lifetime
-              of the cookie is limited to the current session (as defined by
-              the user agent).</t>
+              does not supply an Expires or a Max-Age attribute, the
+              lifetime of the cookie is limited to the current session (as
+              defined by the user agent).</t>
             </list>
             </t>
           </section>
           <section title="Domain">
-            <t>[TODO: Test Domain.]  The Domain attribute specifies the domain
-            for which the cookie is valid.  The leading dot isn't required.
-            If there is no Domain attribute, the default is to return the
-            cookie only to the origin server.  [TODO: You can only set
-            cookies for related domains.]</t>
+            <t>[TODO: Test Domain.]  The Domain attribute specifies the
+            domain for which the cookie is valid.  The leading dot isn't
+            required.  If there is no Domain attribute, the default is to
+            return the cookie only to the origin server.  [TODO: You can
+            only set cookies for related domains.]</t>
           </section>
           <section title="Path">
-            <t>[TODO: Test path.]  The Path attribute specifies the subset of
-            URLs to which this cookie applies.</t>
+            <list style="hanging">
+              <t hangText="Syntax">A sequence of characters beginning with a
+              "/" character.</t>
+
+              <t hangText="Semantics">The Path attribute specifies the scope
+              of the cookie within a given FQDN.  The user agent will
+              include a cookie in an HTTP request only if the Request-URI's
+              path matches, or is a subdirectory of, the cookie's Path
+              attribute (where the "/" character is interpreted as a
+              directory separator).  The default value for the Path
+              attribute is the directory of the Request-URI when the cookie
+              was received.</t>
+            </list>
           </section>
           <section title="Secure">
             <t>
