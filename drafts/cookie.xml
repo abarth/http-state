@@ -336,7 +336,8 @@
         <t>A user agent MUST use the following algorithm to parse the
         Set-Cookie header:
         <list style="numbers">
-          <t>[TODO: Deal with "," characters.]</t>
+          <t>[TODO: Deal with "," characters.  My current thinking is that
+          we don't actually have to do anything special for them.]</t>
 
           <t>If the header contains a U+3B (";") character:
           <list style="empty">
@@ -352,10 +353,6 @@
             string.</t>
           </list>
           </t>
-
-          <t>If the first non-LWS character of the name-value string is U+3D
-          ("="), remove it.  [TODO: Test whether "=foo=bar" is a nameless
-          cookie.]</t>
 
           <t>If the name-value string contains a U+3D ("=") character:
           <list style="empty">
