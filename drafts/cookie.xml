@@ -622,7 +622,7 @@
               mixing Max-Age and Expires.]</t>
 
               <t hangText="domain">If the cookie-attributes contains at least
-              one Domain attribute, store the value of the [TODO: first] such
+              one Domain attribute, store the value of the last such
               attribute in the domain field.  Store the value false in the
               host-only field.  [TODO: Reject cookies for unrelated
               domains.] [TODO: If the URL's host is an IP address, let
@@ -630,8 +630,8 @@
               exactly, but set the host-only flag. ]</t>
 
               <t hangText="path">If the cookie-attributes contains at least
-              one Path attribute, store the value of the [TODO: first] such
-              attribute in the path field.</t>
+              one Path attribute, store the value of the last such attribute
+              in the path field.</t>
 
               <t hangText="secure-only">If the cookie-attributes contains at
               least one Secure attribute, store the value true in the
