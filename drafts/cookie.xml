@@ -832,8 +832,7 @@
         into HTTPS.]</t>
       </section>
       <section title="Unexpected Cookie Sharing">
-        <t>A user agent should make every attempt to prevent the sharing of
-        session information between hosts that are in different domains.
+        <t>
         Embedded or inlined objects may cause particularly severe privacy
         problems if they can be used to share cookies between disparate
         hosts.  For example, a malicious server could embed cookie
