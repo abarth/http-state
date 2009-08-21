@@ -20,14 +20,12 @@
     <workgroup>None (yet)</workgroup>
     <keyword>Internet-Draft</keyword>
     <abstract>
-      <t>This document defines the HTTP Cookie and Set-Cookie headers.</t>
-
-      <t>NOTE:
+      <t>This document defines the HTTP Cookie and Set-Cookie headers.
       <list>
-        <t>This document is currently a "straw-man" cookie proposal.  Much of
-        the text herein is completely wrong.  If you have suggestions for
-        improving the draft, please send email to http-state@ietf.org.
-        Suggestions with test cases are especially appreciated.</t>
+        <t>NOTE: Much of the text herein is completely wrong.  If you have
+        suggestions for improving the draft, please send email to
+        http-state@ietf.org.  Suggestions with test cases are especially
+        appreciated.</t>
       </list>
       </t>
     </abstract>
@@ -53,70 +51,21 @@
       Note that request-host must be a FQHN.  Hosts names can be specified
       either as an IP address or a FQHN string.</t>
 
-      <t>[TODO: Move this to one of the conformance sections.]  Sometimes we
-      compare one host name with another.  Host A's name domain-matches host
-      B's if
-      <list style="symbols">
-        <t>both host names are IP addresses and their host name strings match
-        exactly; or</t>
-
-        <t>both host names are FQDN strings and their host name strings match
-        exactly; or</t>
-
-        <t>A is a FQDN string and has the form NB, where N is a non-empty name
-        string, B has the form .B, and B is a FQDN string.  (So, x.y.com
-        domain-matches .y.com but not y.com.)</t>
-      </list>
-      </t>
-
-      <t>Note that domain-match is not a commutative operation: a.b.c.com
-      domain-matches .c.com, but not the reverse.</t>
-
       <t>Because it was used in Netscape's original implementation of state
       management, we will use the term cookie to refer to the state information
       that passes between an origin server and user agent, and that gets stored
       by the user agent.</t>
     </section>
-    <section title="State and Sessions">
-      <t>This document describes a way to create stateful sessions with HTTP
-      requests and responses.  HTTP servers respond to each client request
-      without relating that request to previous or subsequent requests; the
-      technique allows clients and servers that wish to exchange state
-      information to place HTTP requests and responses within a larger context,
-      which we term a "session".  This context might be used to create, for
-      example, a "shopping cart", in which user selections can be aggregated
-      before purchase, or a magazine browsing system, in which a user's
-      previous reading affects which offerings are presented.</t>
-
-      <t>There are, of course, many different potential contexts and thus many
-      different potential types of session.  The designers' paradigm for
-      sessions created by the exchange of cookies has these key attributes:
-      <list style="numbers">
-        <t>Each session has a beginning and an end.</t>
-
-        <t>Each session is relatively short-lived.</t>
-
-        <t>Either the user agent or the origin server may terminate a
-        session.</t>
-
-        <t>The session is implicit in the exchange of state information.</t>
-      </list>
-      </t>
-    </section>
     <section title="Overview">
-      <t>We outline here a way for an origin server to send state information to
-      the user agent, and for the user agent to return the state information to
-      the origin server.</t>
+      <t>We outline here a way for an origin server to send state information
+      to the user agent, and for the user agent to return the state information
+      to the origin server.</t>
 
-      <t>The two state management headers, Set-Cookie and Cookie, have common
-      syntactic properties involving attribute-value pairs.  The following
-      grammar uses the notation, and tokens DIGIT (decimal digits) and token
-      (informally, a sequence of non-special, non-white space characters) from
-      the HTTP/1.1 specification [RFC 2068] to describe their syntax.</t>
+      <t>[TODO: Overview the Set-Cookie and Cookie headers.]</t>
 
       <section title="Examples">
+        <t>[TODO: Put some examples here.</t>
       </section>
-
     </section>
     <section title="Server Conformance">
       <section title="General">
