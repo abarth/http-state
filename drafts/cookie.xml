@@ -678,8 +678,16 @@
         MUST evict the cookie with the least recent last-access date
         first.</t>
 
-        <t>When the user agent exits, the user agent MUST remove from the
-        cookie store all cookies with the persistent field set to false.</t>
+        <t>When "the current session is over", the user agent MUST remove from
+        the cookie store all cookies with the persistent field set to
+        false.
+        <list>
+          <t>NOTE: This document does not define when "the current session
+          is over."  Many user agents remove non-persistent cookies when
+          they exit.  However, other user agent expire non-persistent
+          cookies using other heuristics.</t>
+        </list> 
+        </t>
       </section>
       <section title="The Cookie Header">
         <t>When the user agent generates an HTTP request for a particular
