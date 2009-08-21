@@ -42,24 +42,47 @@
       domain name (FQDN) of a host (i.e., a completely specified domain name
       ending in a top-level domain such as .com or .uk), or the numeric
       Internet Protocol (IP) address of a host.  The fully qualified domain
-      name is preferred; use of numeric IP addresses is strongly discouraged.
-      [TODO: What does "strongly discouraged" mean?]</t>
+      name is preferred; use of numeric IP addresses is strongly
+      discouraged.  [TODO: What does "strongly discouraged" mean?]</t>
 
-      <t>The terms request-host and request-URI refer to the values the client
-      would send to the server as, respectively, the host (but not port) and
-      abs_path portions of the absoluteURI (http_URL) of the HTTP request line.
-      Note that request-host must be a FQHN.  Hosts names can be specified
-      either as an IP address or a FQHN string.</t>
+      <t>The terms request-host and request-URI refer to the values the
+      client would send to the server as, respectively, the host (but not
+      port) and abs_path portions of the absoluteURI (http_URL) of the HTTP
+      request line.  Note that request-host must be a FQHN.  Hosts names can
+      be specified either as an IP address or a FQHN string.</t>
 
       <t>Because it was used in Netscape's original implementation of state
-      management, we will use the term cookie to refer to the state information
-      that passes between an origin server and user agent, and that gets stored
-      by the user agent.</t>
+      management, we will use the term cookie to refer to the state
+      information that passes between an origin server and user agent, and
+      that gets stored by the user agent.</t>
     </section>
     <section title="Overview">
-      <t>We outline here a way for an origin server to send state information
-      to the user agent, and for the user agent to return the state information
-      to the origin server.</t>
+      <t>We outline here a way for an origin server to send state
+      information to the user agent, and for the user agent to return the
+      state information to the origin server.</t>
+
+      <t>The origin server initiates a session, if it so desires, by
+      including a Set-Cookie header in an HTTP response.  (Note that
+      "session" here does not refer to a persistent network connection but
+      to a logical session created from HTTP requests and responses.  The
+      presence or absence of a persistent connection should have no effect
+      on the use of cookie-derived
+      sessions).</t>
+
+      <t>A user agent returns a Cookie request header (see below) to the
+      origin server if it chooses to continue a session.  The origin server
+      may ignore it or use it to determine the current state of the
+      session.  It may send the client a Set-Cookie response header
+      with the same or different information, or it may send no Set-Cookie
+      header at all.</t>
+
+      <t>Servers may return a Set-Cookie response headers with any
+      response.  User agents should send Cookie request headers, subject to
+      other rules detailed below, with every request.</t>
+
+      <t>An origin server may include multiple Set-Cookie headers in a
+      response.  Note that an intervening gateway MUST NOT fold multiple
+      Set-Cookie headers into a single header.</t>
 
       <t>[TODO: Overview the Set-Cookie and Cookie headers.]</t>
 
@@ -68,33 +91,6 @@
       </section>
     </section>
     <section title="Server Conformance">
-      <section title="General">
-        <t>The origin server initiates a session, if it so desires.  (Note
-        that "session" here does not refer to a persistent network
-        connection but to a logical session created from HTTP requests and
-        responses.  The presence or absence of a persistent connection
-        should have no effect on the use of cookie-derived sessions).  To
-        initiate a session, the origin server returns an extra response
-        header to the client, Set-Cookie.  (The details follow later.)</t>
-
-        <t>A user agent returns a Cookie request header (see below) to the
-        origin server if it chooses to continue a session.  The origin server
-        may ignore it or use it to determine the current state of the
-        session.  It may send the client a Set-Cookie response header
-        with the same or different information, or it may send no Set-Cookie
-        header at all.  The origin server effectively ends a session by
-        sending the client a Set-Cookie header with Max-Age=0.  [TODO: Need
-        to say something about Expires here.]</t>
-
-        <t>Servers may return a Set-Cookie response headers with any
-        response.  User agents should send Cookie request headers, subject to
-        other rules detailed below, with every request.</t>
-
-        <t>An origin server may include multiple Set-Cookie headers in a
-        response.  Note that an intervening gateway MUST NOT fold multiple
-        Set-Cookie headers into a single header.  [TODO: Investigate how UAs
-        cope with folded headers.]</t>
-      </section>
       <section title="Set-Cookie">
         <section title="Syntax">
           <t>Informally, the Set-Cookie response header comprises the token
