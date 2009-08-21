@@ -233,8 +233,8 @@
       </section>
       <section title="Cookie">
         <section title="Syntax">
-          <t>The user agent returns stored cookies to the origin server
-          in the cookie header.  The Cookie header shares a common syntax with
+          <t>The user agent returns stored cookies to the origin server in
+          the Cookie header.  The Cookie header shares a common syntax with
           the Set-Cookie header, but the semantics of the header differ
           dramatically.</t>
 
@@ -245,20 +245,24 @@
           name-value-pairs  = name-value-pair *(";" name-value-pair)
           name-value-pair   = name "=" value
           name              = token
-          value             = token
+          value             = *CHAR
               ]]>
             </artwork>
           </figure>
 
-          <t>NOTE: If the server supplies a Set-Cookie header that does
-          not conform to the grammar in Section TODO, the user agent might
-          not supply a Cookie header that conforms to the grammar in this
-          Section.</t>
+          <t>NOTE: If the server supplies a Set-Cookie header that does not
+          conform to the grammar in Section [TODO], the user agent might not
+          supply a Cookie header that conforms to the preceeding
+          grammar.</t>
         </section>
         <section title="Semantics">
-          <t>Each name-value-pair represents a cookie stored by the user agent.
-          The cookie name is returned in as the name and the cookie value is
-          returned as the value.</t>
+          <t>Each name-value-pair represents a cookie stored by the user
+          agent.  The cookie name is returned in as the name and the cookie
+          value is returned as the value.</t>
+
+          <t>The meaning of the cookies in the Cookie header is not defined
+          by this document.  Servers are expected to imbue these cookies
+          with server-specific semantics.</t>
         </section>
       </section>
       <section title="Controlling Caching">
