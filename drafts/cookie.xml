@@ -419,18 +419,22 @@
           the value string.</t>
 
           <t>If the name is a ASCII case-insensitive match for an entry in
-          the following table, process the value string as instructed.
-          <list style="hanging">
-            <t hangText="Max-Age">See Section [TODO].</t>
-            <t hangText="Expires">See Section [TODO].</t>
-            <t hangText="Domain">See Section [TODO].</t>
-            <t hangText="Path">See Section [TODO].</t>
-            <t hangText="Secure">Append the attribute Secure with an empty
-            value into the cookie-attribute-list.</t>
-            <t hangText="HttpOnly">Append the attribute HttpOnly with an empty
-            value into the cookie-attribute-list.</t>
-          </list>
-          </t>
+          the following table, process the value string as instructed.</t>
+
+          <figure>
+            <artwork>
+              <![CDATA[
+            Attribute  |  Instruction
+           ------------+---------------------
+            Max-Age    |  See Section [TODO]
+            Expires    |  See Section [TODO] 
+            Domain     |  See Section [TODO]
+            Path       |  See Section [TODO]
+            Secure     |  See Section [TODO]
+            HttpOnly   |  See Section [TODO]
+              ]]>
+            </artwork>
+          </figure>
 
           <t>Return to Step 1.</t>
         </list>
@@ -526,6 +530,14 @@
         </t>
 
         <t>[TODO: More information about mystery-date.]</t>
+      </section>
+      <section title="The Secure Attribute">
+        <t>Append the attribute Secure with an empty value into the
+        cookie-attribute-list.</t>
+      </section>
+      <section title="The HttpOnly Attribute">
+        <t>Append the attribute HttpOnly with an empty value into the
+        cookie-attribute-list.</t>
       </section>
       <section title="Storage Model">
         <t>When the user agent receives a cookie, the user agent SHOULD
