@@ -702,8 +702,7 @@
             <t>The cookie's domain field must domain-match the URI's
             host. [TODO: Spec me]</t>
 
-            <t>The cookie's path field must path-match the URI's path.
-            [TODO: Spec me]</t>
+            <t>The cookie's path field must path-match the URI's path.</t>
 
             <t>If the cookie's host-only flag is set, the cookie's domain
             field must denote exactly the same FQDN as the URI's host.
@@ -746,13 +745,8 @@
           <t>Serialize the cookie-list into a cookie-string by processing each
           cookie in the cookie-list in order:
           <list style="numbers">
-            <t>If the cookie's name field is non-empty:
-              <list style="numbers">
-              <t>Output the cookie's name field.</t>
-
-              <t>Output the character U+3D ("=")</t>
-              </list>
-            </t>
+            <t>If the cookie's name field is non-empty, output the cookie's
+            name field followed by the character U+3D ("=").</t>
 
             <t>Output the cookie's value field.</t>
 
