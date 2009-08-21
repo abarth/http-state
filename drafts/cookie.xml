@@ -356,9 +356,10 @@
 
           <t>If the name-value string contains a U+3D ("=") character:
           <list style="empty">
-            <t>the name string is the characters up to, but not including,
-            the first U+3D ("=") character, and the value string is the
-            characters after the first U+3D ("=") character .</t>
+            <t>the (possibly empty) name string is the characters up to, but
+            not including, the first U+3D ("=") character, and the (possibly
+            empty) value string is the characters after the first U+3D ("=")
+            character.</t>
           </list>
           Otherwise:
           <list style="empty">
@@ -368,14 +369,10 @@
           </t>
 
           <t>Remove any leading or trailing space from the name
-          string.</t>
+          string and the value string.</t>
 
-          <t>Remove any leading or trailing space from the value
-          string.</t>
-
-          <t>The cookie-name is the name string.</t>
-
-          <t>The cookie-value is the value string.</t>
+          <t>The cookie-name is the name string, and the cookie-value is the
+          value string.</t>
         </list>
         </t>
 
