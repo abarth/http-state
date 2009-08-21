@@ -463,7 +463,7 @@
 
           <t>If delta-seconds is less than or equal to 0, then append an
           attribute named Expires (note the name conversion) to the
-          cookie-attribute-list with a value equal to the current date and
+          cookie-attriute-list with a value equal to the current date and
           time.</t>
 
           <t>If delta-seconds is strictly greater than 0, then append an
@@ -502,15 +502,6 @@
         </section>
         <section title="The Path Attribute">
           <t>[TODO: Case sensitivity?]</t>
-
-          <t>When the user agent receives a cookie attribute with a name
-          string that case-insensitively matches the string "Path", the user
-          agent MUST process the value string as follows.</t>
-
-          <t>If the value string is empty, then append an attribute named
-          Path to the cookie-attribute-list with a value equal to
-          default-path of the cookie.</t>
-
           <t>The user agent MUST use the following algorithm to compute the
           default-path of a cookie:
           <list style="numbers">
@@ -540,29 +531,23 @@
           </list>
           </t>
 
-          <t>Notes (tests required!):
+          <t>When the user agent receives a cookie attribute with a name
+          string that case-insensitively matches the string "Path", the user
+          agent MUST process the value string as follows:
           <list style="symbols">
-            <t>Supplied paths must start with a "/".</t>
-            <t>Defaults to current path, minus the leaf:
-            <list style="symbols">
-              <t>/foo/bar -> /foo</t>
-              <t>/foo -> /</t>
-              <t>/foo/ -> /foo</t>
-            </list>
-            </t>
-            <t>Matching rules:
-            <list style="symbols">
-              <t>Note: path field can never be empty!</t>
-              <t>Path field must be a prefix of URI path</t>
-              <t>However, /foo doesn't match /foobar/baz</t>
-              <t>/foo does match /foo/bar</t>
-              <t>/foo/ does match /foo/bar</t>
-              <t>/foo/ does match /foo//bar</t>
-            </list>
-            </t>
-            <t>[TODO: Test \ ? ; # $ % etc]</t> 
+            <t>If the value string is empty, then append an attribute named
+            Path to the cookie-attribute-list with a value equal to
+            default-path of the cookie.</t>
+
+            <t>If the value string is non-empty and the first character is
+            "/", then append an attribute named Path to the
+            cookie-attribute-list with a value equal to value string.</t>
+
+            <t>Otherwise, ignore the attribute.</t>
           </list>
           </t>
+
+          <t>[TODO: Test \ ? ; # $ % etc]</t> 
         </section>
         <section title="The Secure Attribute">
           <t>Append the attribute Secure with an empty value into the
