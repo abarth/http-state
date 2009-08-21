@@ -802,62 +802,6 @@
         mention latency issues that arise from having tons of cookies.] </t>
       </section>
     </section>
-    <section title="Privacy">
-      <section title="User Agent Control">
-        <t>An origin server could create a Set-Cookie header to track the path
-        of a user through the server.  Users may object to this behavior as an
-        intrusive accumulation of information, even if their identity is not
-        evident.  (Identity might become evident if a user subsequently fills
-        out a form that contains identifying information.)  This state
-        management specification therefore requires that a user agent give the
-        user control over such a possible intrusion, although the interface
-        through which the user is given this control is left unspecified.
-        However, the control mechanisms provided shall at least allow the user
-        <list style="symbols">
-          <t>to completely disable the sending and saving of cookies,</t>
-
-          <t>to determine whether a stateful session is in progress, and</t>
-
-          <t>to control the saving of a cookie on the basis of the cookie's
-          Domain attribute.</t>
-        </list>
-        </t>
-
-        <t>Such control could be provided by, for example, mechanisms
-        <list style="symbols">
-          <t>to notify the user when the user agent is about to send a cookie
-          to the origin server, offering the option not to begin a session,</t>
-
-          <t>to display a visual indication that a stateful session is in
-          progress,</t>
-
-          <t>to let the user decide which cookies, if any, should be saved when
-          the user concludes a window or user agent session, or</t>
-
-          <t>to let the user examine the contents of a cookie at any time.</t>
-        </list>
-        </t>
-
-        <t>A user agent usually begins execution with no remembered state
-        information.  It should be possible to configure a user agent never to
-        send Cookie headers, in which case it can never sustain state with an
-        origin server.  (The user agent would then behave like one that is
-        unaware of how to handle Set-Cookie response headers.)</t>
-
-        <t>When the user agent terminates execution, it should let the user
-        discard all state information.  Alternatively, the user agent may ask
-        the user whether state information should be retained.  If the user
-        chooses to retain state information, it would be restored the next time
-        the user agent runs.</t>
-      </section>
-      <section title="Protocol Design">
-        <t>The restrictions on the value of the Domain attribute are meant to
-        reduce the ways that cookies can "leak" to the "wrong" site.  The
-        intent is to restrict cookies to one, or a closely related set of
-        hosts.  Therefore a request-host is limited as to what values it can
-        set for Domain.</t>
-      </section>
-    </section>
     <section title="Security Considerations">
       <section title="Clear Text">
         <t>The information in the Set-Cookie and Cookie headers is
