@@ -599,7 +599,6 @@
               <t>domain = the request-host</t>
               <t>path = the cookie's default-path</t>
               <t>last-access = the date and time the cookie was received</t>
-              <t>last-access = the date and time the cookie was received</t>
               <t>persistent = false</t>
               <t>host-only = true</t>
               <t>secure-only = false</t>
