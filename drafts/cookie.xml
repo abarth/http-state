@@ -223,9 +223,9 @@
               <t hangText="Syntax">Servers MUST NOT include a value.</t>
 
               <t hangText="Semantics">The user agent SHOULD protect
-              confidentiality of cookies with the HttpOnly attribute by
-              including HttpOnly cookies only when generating cookie strings
-              for use in HTTP requests.</t>
+              confidentiality of cookies with the HttpOnly attribute by not
+              allowing local scripts or other similar mechnisms to read their
+              contents.</t>
             </list>
             </t>
           </section>
