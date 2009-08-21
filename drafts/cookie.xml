@@ -445,7 +445,7 @@
         <t>When the user agent finishes parsing the Set-Cookie header, the
         user agent *receives a cookie* from the origin server with name
         cookie-name, value cookie-value, and attributes
-        cookie-attributes.</t>
+        cookie-attribute-list.</t>
 
         <section title="The Max-Age Attribute">
           <t>When the user agent receives a cookie attribute with a name
