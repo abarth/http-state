@@ -550,12 +550,18 @@
           <t>[TODO: Test \ ? ; # $ % etc]</t> 
         </section>
         <section title="The Secure Attribute">
-          <t>Append the attribute Secure with an empty value into the
-          cookie-attribute-list.</t>
+          <t>When the user agent receives a cookie attribute with a name
+          string that case-insensitively matches the string "Secure", the
+          user agent MUST append an attribute named Secure to the
+          cookie-attribute-list with an empty value regardless of the value
+          string.</t>
         </section>
         <section title="The HttpOnly Attribute">
-          <t>Append the attribute HttpOnly with an empty value into the
-          cookie-attribute-list.</t>
+          <t>When the user agent receives a cookie attribute with a name
+          string that case-insensitively matches the string "HttpOnly", the
+          user agent MUST append an attribute named Secure to the
+          cookie-attribute-list with an empty value regardless of the value
+          string.</t>
         </section>
       </section>
       <section title="Storage Model">
