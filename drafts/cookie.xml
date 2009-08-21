@@ -448,7 +448,28 @@
         cookie-attributes.</t>
 
         <section title="The Max-Age Attribute">
-          <t>[TODO: Convert Max-Age to a date during parsing.]</t>
+          <t>When the user agent receives a cookie attribute with a name
+          string that case-insensitively matches the string "Max-Age", the
+          user agent MUST process the value string as follows.</t>
+
+          <t>If the first character of the value string is not a DIGIT or a
+          "-" character, the user agent MUST ignore the attribute.</t>
+
+          <t>If the remainder of value string contains a non-DIGIT
+          character, the user agent MUST ignore the attribute.</t>
+
+          <t>Let delta-seconds be the contents of the value string converted
+          to an integer.</t>
+
+          <t>If delta-seconds is less than or equal to 0, then append an
+          attribute named Expires (note the name conversion) to the
+          cookie-attriute-list with a value equal to the current date and
+          time.</t>
+
+          <t>If delta-seconds is strictly greater than 0, then append an
+          attributes named Expiers (note the name conversion) to the
+          cookie-attribute-list with a value equal to the current date and
+          time plus delta-seconds seconds.</t>
         </section>
         <section title="The Expires Attribute">
           <t>Basically, cookie dates are a mess for historical reasons.</t>
