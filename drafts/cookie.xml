@@ -93,11 +93,11 @@
     <section title="Protocol Description">
       <t>The cookie protocol consists of two HTTP headers: the Set-Cookie
       header and the Cookie header.  The server sends the Set-Cookie header
-      is to the user agent in an HTTP reponse, causing the user agent to
+      is to the user agent in an HTTP response, causing the user agent to
       modify the Cookie header it returns to the server.</t>
 
       <t>This section describes the syntax and semantics of the protocol.
-      Detailed conformance requrements for user agents are given in Section
+      Detailed conformance requirements for user agents are given in Section
       [TODO].</t>
  
       <section title="Set-Cookie">
@@ -252,8 +252,7 @@
 
           <t>NOTE: If the server supplies a Set-Cookie header that does not
           conform to the grammar in Section [TODO], the user agent might not
-          supply a Cookie header that conforms to the preceeding
-          grammar.</t>
+          supply a Cookie header that conforms to the preceding grammar.</t>
         </section>
         <section title="Semantics">
           <t>Each name-value-pair represents a cookie stored by the user
@@ -316,7 +315,7 @@
         <t>HTTP/1.1 servers must send Expires: old-date (where old-date is a
         date long in the past) on responses containing Set-Cookie response
         headers unless they know for certain (by out of band means) that
-        there are no downsteam HTTP/1.0 proxies.  HTTP/1.1 servers may send
+        there are no downstream HTTP/1.0 proxies.  HTTP/1.1 servers may send
         other Cache-Control directives that permit caching by HTTP/1.1
         proxies in addition to the Expires: old-date directive; the
         Cache-Control directive will override the Expires: old-date for
@@ -463,11 +462,11 @@
 
           <t>If delta-seconds is less than or equal to 0, then append an
           attribute named Expires (note the name conversion) to the
-          cookie-attriute-list with a value equal to the current date and
+          cookie-attribute-list with a value equal to the current date and
           time.</t>
 
           <t>If delta-seconds is strictly greater than 0, then append an
-          attributes named Expiers (note the name conversion) to the
+          attributes named Expires (note the name conversion) to the
           cookie-attribute-list with a value equal to the current date and
           time plus delta-seconds seconds.</t>
         </section>
@@ -643,7 +642,7 @@
 
           <t>Remove from the cookie store all cookies that have the share
           the same name, domain, path, and host-only fields as the newly
-          created cookie.  [TODO: Valiate this list!]  [TODO: There's some
+          created cookie.  [TODO: Validate this list!]  [TODO: There's some
           funny business around http-only here.]</t> 
 
           <t>Insert the newly created cookie into the cookie store.</t>
@@ -808,7 +807,7 @@
         transmitted in the clear.  Three consequences are:
         <list style="numbers">
           <t>Any sensitive information that is conveyed in in the headers is
-          exposed to an easedropper.</t>
+          exposed to an eavesdropper.</t>
 
           <t>A malicious intermediary could alter the headers as they travel
           in either direction, with unpredictable results.</t>
