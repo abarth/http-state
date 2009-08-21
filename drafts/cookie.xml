@@ -472,10 +472,9 @@
           time plus delta-seconds seconds.</t>
         </section>
         <section title="The Expires Attribute">
-          <t>Basically, cookie dates are a mess for historical reasons.</t>
+          <t>[TODO: Basically, cookie dates are a mess for historical
+          reasons.]</t>
 
-          <t>To be compatible with legacy servers, however, user agents should
-          accept dates formated according to this grammar:
           <figure>
             <artwork>
               <![CDATA[
@@ -493,7 +492,6 @@
               ]]>
             </artwork>
           </figure>
-          </t>
 
           <t>[TODO: More information about mystery-date.]</t>
         </section>
@@ -502,6 +500,7 @@
         </section>
         <section title="The Path Attribute">
           <t>[TODO: Case sensitivity?]</t>
+
           <t>The user agent MUST use the following algorithm to compute the
           default-path of a cookie:
           <list style="numbers">
