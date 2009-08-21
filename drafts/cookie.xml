@@ -759,9 +759,6 @@
       </section>
     </section>
     <section title="Implementation Considerations">
-      <t>Here we speculate on likely or desirable details for an origin server
-      that implements state management.</t>
-
       <section title="Set-Cookie Content">
         <t>An origin server's content should probably be divided into disjoint
         application areas, some of which require the use of state information.
@@ -782,43 +779,27 @@
         sessions.]</t>
       </section>
       <section title="Implementation Limits">
-        <t>Practical user agent implementations have limits on the number and
-        size of cookies that they can store.  In general, user agents' cookie
-        support should have no fixed limits.  [TODO: Why not?]  They should
-        strive to store as many frequently-used cookies as possible.
-        Furthermore, general-use user agents should provide each of the
-        following minimum capabilities individually, although not necessarily
-        simultaneously:  [TODO: Where do these numbers come from?]
+        <t>Practical user agent implementations have limits on the number
+        and size of cookies that they can store.  General-use user agents
+        SHOULD provide each of the following minimum capabilities:
         <list style="symbols">
-          <t>at least 4096 bytes per cookie (as measured by the size of the
+          <t>At least 4096 bytes per cookie (as measured by the size of the
           characters that comprise the cookie non-terminal in the syntax
-          description of the Set-Cookie header)</t>
+          description of the Set-Cookie header).  [TODO: Validate]</t>
+
+          <t>At least 50 cookies per domain.  [TODO: History lesson]</t>
+
+          <t>At least 3000 cookies total.</t>
         </list>
         </t>
 
-        <t>User agents created for specific purposes or for limited-capacity
-        devices should provide at least 50 cookies of 4096 bytes, to ensure
-        that the user can interact with a session-based origin server.</t>
-
-        <t>The information in a Set-Cookie response header must be retained in
-        its entirety.  If for some reason there is inadequate space to store
-        the cookie, it must be discarded, not truncated.</t>
+        <t>The information in a Set-Cookie response header must be retained
+        in its entirety.  If for some reason there is inadequate space to
+        store the cookie, the cookie must be discarded, not truncated.</t>
 
         <t>Applications should use as few and as small cookies as possible, and
         they should cope gracefully with the loss of a cookie.  [TODO: Could
         mention latency issues that arise from having tons of cookies.] </t>
-
-        <section title="Denial of Service Attacks">
-          <t>User agents may choose to set an upper bound on the number of
-          cookies to be stored from a given host or domain name or on the size
-          of the cookie information.  Otherwise, a malicious server could
-          attempt to flood a user agent with many cookies, or large cookies, on
-          successive responses, which would force out cookies the user agent
-          had received from other servers.  However, the minima specified above
-          should still be supported.  [TODO: These minima still let an attacker
-          exhaust the entire cookie store.  There's not much we can do about it
-          though.]</t>
-        </section>
       </section>
     </section>
     <section title="Privacy">
