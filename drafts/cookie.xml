@@ -830,6 +830,11 @@
         origin server should be vigilant to prevent a bad Cookie value from
         causing failures.</t>
       </section>
+      <section title="Weak Isolation">
+        <t>[TODO: Weak isolation by port.]</t>
+
+        <t>[TODO: Weak isolation by scheme (e.g., ftp, gopher, etc).]</t>
+      </section>
       <section title="Cookie Spoofing">
         <t>[TODO: Mention integrity issue where a sibling domain can inject
         cookies.]</t>
