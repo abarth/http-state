@@ -504,15 +504,14 @@
           </list>
           </t>
         </section>
-      </section>
-      <section title="Parsing Cookie Dates">
-        <t>Basically, cookie dates are a mess for historical reasons.</t>
+        <section title="Parsing Cookie Dates">
+          <t>Basically, cookie dates are a mess for historical reasons.</t>
 
-        <t>To be compatible with legacy servers, however, user agents should
-        accept dates formated according to this grammar:
-        <figure>
-          <artwork>
-            <![CDATA[
+          <t>To be compatible with legacy servers, however, user agents should
+          accept dates formated according to this grammar:
+          <figure>
+            <artwork>
+              <![CDATA[
       cookie-date       = rfc1123-like-date / mystery-date
       rfc1123-like-date = weekday "," SP rfc1123-like-dmy SP time SP "GMT"
       weekday           = "Monday" / "Mon" / "Tuesday" / "Tue" / ...
@@ -524,20 +523,21 @@
       time              = 2DIGIT ":" 2DIGIT ":" 2DIGIT
 
       mystery-date      = *CHAR ; see below
-            ]]>
-          </artwork>
-        </figure>
-        </t>
+              ]]>
+            </artwork>
+          </figure>
+          </t>
 
-        <t>[TODO: More information about mystery-date.]</t>
-      </section>
-      <section title="The Secure Attribute">
-        <t>Append the attribute Secure with an empty value into the
-        cookie-attribute-list.</t>
-      </section>
-      <section title="The HttpOnly Attribute">
-        <t>Append the attribute HttpOnly with an empty value into the
-        cookie-attribute-list.</t>
+          <t>[TODO: More information about mystery-date.]</t>
+        </section>
+        <section title="The Secure Attribute">
+          <t>Append the attribute Secure with an empty value into the
+          cookie-attribute-list.</t>
+        </section>
+        <section title="The HttpOnly Attribute">
+          <t>Append the attribute HttpOnly with an empty value into the
+          cookie-attribute-list.</t>
+        </section>
       </section>
       <section title="Storage Model">
         <t>When the user agent receives a cookie, the user agent SHOULD
