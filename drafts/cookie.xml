@@ -341,20 +341,20 @@
 
           <t>If the header contains a U+3B (";") character:
           <list style="empty">
-            <t>the name-value string is characters up to, but not
+            <t>the name-value-pair string is characters up to, but not
             including, the first U+3B (";"), and the
             unparsed-cookie-attributes are the remainder of the header
             (including the U+3B (";") in question).</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>the name-value string is all the character contained in the
-            header, and the unparsed-cookie-attributes is the empty
+            <t>the name-value-pair string is all the character contained in
+            the header, and the unparsed-cookie-attributes is the empty
             string.</t>
           </list>
           </t>
 
-          <t>If the name-value string contains a U+3D ("=") character:
+          <t>If the name-value-pair string contains a U+3D ("=") character:
           <list style="empty">
             <t>the (possibly empty) name string is the characters up to, but
             not including, the first U+3D ("=") character, and the (possibly
@@ -364,7 +364,7 @@
           Otherwise:
           <list style="empty">
             <t>the name string is empty, and the value string is the entire
-            name-value string.</t>
+            name-value-pair string.</t>
           </list>
           </t>
 
@@ -410,7 +410,8 @@
           <list style="empty">
             <t>the name string is the entire attribute-value-pair string,
             and the value string is empty.  (Note that this step differs
-            from the analogous step when parsing the name-value string.)</t>
+            from the analogous step when parsing the name-value-pair
+            string.)</t>
           </list>
           </t>
 
