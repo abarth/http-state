@@ -224,8 +224,9 @@
 
               <t hangText="Semantics">The user agent SHOULD protect
               confidentiality of cookies with the HttpOnly attribute by not
-              allowing local scripts or other similar mechnisms to read their
-              contents.</t>
+              revealing their contents via "non-HTTP" APIs.  (Note that this
+              document does not define which APIs are "non-HTTP".)
+              </t>
             </list>
             </t>
           </section>
@@ -555,7 +556,7 @@
         <section title="The HttpOnly Attribute">
           <t>When the user agent receives a cookie attribute with a name
           string that case-insensitively matches the string "HttpOnly", the
-          user agent MUST append an attribute named Secure to the
+          user agent MUST append an attribute named HttpOnly to the
           cookie-attribute-list with an empty value regardless of the value
           string.</t>
         </section>
@@ -727,8 +728,9 @@
             </t>
 
             <t>If the cookie's http-only field is true, then include the
-            cookie only if the user agent is generating the cookie-string
-            for use in an HTTP request.</t>
+            cookie unless the cookie-string is begin generated for a
+            "non-HTTP" API.  (Note that this document does not define which
+            APIs are "non-HTTP".)</t>
           </list>
           NOTE: The Cookie header will not contain any expired cookies
           because cookies past their expiry date are removed from the cookie
