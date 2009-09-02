@@ -2,7 +2,7 @@
 <?rfc toc="yes"?>
 <?xml-stylesheet type="text/xml" href="rfc2629.xslt"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc ipr="pre5378Trust200902" docName="draft-abarth-cookie-03pre">
+<rfc ipr="pre5378Trust200902" docName="draft-abarth-cookie-03">
   <front>
     <title abbrev="HTTP State Management Mechanism">
       HTTP State Management Mechanism
@@ -333,8 +333,12 @@
         <t>Let an LWS character be either a U+20 (SPACE) or a U+09 (TAB)
         character.</t>
 
-        <t>A user agent MUST use the following algorithm to parse the
-        Set-Cookie header:
+        <t>When a user agent recieves an Set-Cookie header in an HTTP
+        response, the user agent *receives a set-cookie-string*
+        consisting of the value of the header.</t>
+
+        <t>A user agent MUST use the following algorithm to parse
+        set-cookie-strings:
         <list style="numbers">
           <t>[TODO: Deal with "," characters.  My current thinking is that
           we don't actually have to do anything special for them.]</t>
@@ -442,9 +446,9 @@
         <t>[TODO: Can parsing a cookie ever fail?  Doesn't look like
         it!  Well, unless you count "Set-Cookie: " as a fail...]</t>
 
-        <t>When the user agent finishes parsing the Set-Cookie header, the
-        user agent *receives a cookie* from the origin server with name
-        cookie-name, value cookie-value, and attributes
+        <t>When the user agent finishes parsing the set-cookie-string
+        header, the user agent *receives a cookie* from the origin server
+        with name cookie-name, value cookie-value, and attributes
         cookie-attribute-list.</t>
 
         <section title="The Max-Age Attribute">
