@@ -498,6 +498,8 @@
           </figure>
 
           <t>[TODO: More information about mystery-date.]</t>
+
+          <t>[TODO: Empty expires are session cookies.]</t>
         </section>
         <section title="The Domain Attribute">
           <t>[TODO]</t>
@@ -615,9 +617,9 @@
             cookie-attributes:
             <list style="hanging">
               <t hangText="expiry">If the cookie-attributes contains at
-              least one Expires attribute, store the value of the last such
-              attribute in the expiry field.  Store the value true in the
-              persistent field.  [TODO: Test that this really works when
+              least one non-empty Expires attribute, store the value of the
+              last such attribute in the expiry field.  Store the value true
+              in the persistent field.  [TODO: Test that this really works when
               mixing Max-Age and Expires.]</t>
 
               <t hangText="domain">If the cookie-attributes contains at least
