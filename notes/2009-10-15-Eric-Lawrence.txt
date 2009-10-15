@@ -1,0 +1,20 @@
+Message-id: <AC6003FB20010445910A12A6B964F33B1763EDE3@DF-M14-04.exchange.corp.microsoft.com>
+Date: Thu, 15 Oct 2009 20:05:19 +0000
+From: Eric Lawrence <ericlaw@exchange.microsoft.com>
+To: "Adam Barth (abarth@eecs.berkeley.edu)" <abarth@EECS.Berkeley.EDU>
+Subject: Cookies, Expires, and TimeZones
+
+Hey, Adam!
+
+I don't know if you've encountered this yet in your research into cookie
+differences, but the pre-RFC cookie spec demands that the Expires attribute
+use GMT as the timezone for the Expires value. Internet Explorer thus also
+requires GMT.
+
+We've recently determined that some servers (e.g. Facebook, on occasion)
+will send an Expires value which uses a different timezone (e.g. "PST")
+rather than GMT. It appears that some non-IE browsers support this, but IE
+does not and thus treats the received cookie as a session cookie.
+
+Eric Lawrence
+IE Security and Networking
