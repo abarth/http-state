@@ -519,24 +519,30 @@
           </t>
 
           <t>Process each data-token sequentially in the order the
-          date-tokens appear in the attribute value.</t>
+          date-tokens appear in the attribute value:
+          <list style="numbers">
+            <t>If the found-day-of-month flag is not set and the token matches
+            the day-of-month production, set the found-day-of-month flag and set
+            the day-of-month-value to the number denoted by the token.  Skip
+            the remaining sub-steps and continue to the next token.</t>
 
-          <t>If the found-day-of-month flag is not set and the token matches
-          the day-of-month production, set the found-day-of-month flag and set
-          the day-of-month-value to the number denoted by the token.</t>
+            <t>If the found-month flag is not set and the token matches the
+            month production, set the found-month flag and set the month-value
+            to the month denoted by the token.  Skip the remaining sub-steps
+            and continue to the next token.</t>
 
-          <t>If the found-month flag is not set and the token matches the
-          month production, set the found-month flag and set the month-value
-          to the month denoted by the token.</t>
+            <t>If the found-year flag is not set and the token matches the
+            year production, set the found-year flag and set the year-value
+            to the number denoted by the token.  Skip the remaining sub-steps
+            and continue to the next token.</t>
 
-          <t>If the found-year flag is not set and the token matches the
-          year production, set the found-year flag and set the year-value
-          to the number denoted by the token.</t>
-
-          <t>If the found-time flag is not set and the token matches the
-          time production, set the found-time flag and set the hour-value,
-          minute-value, and second-value to the numbers denoted by the
-          digits in the token, respectively.</t>
+            <t>If the found-time flag is not set and the token matches the
+            time production, set the found-time flag and set the hour-value,
+            minute-value, and second-value to the numbers denoted by the
+            digits in the token, respectively.  Skip the remaining sub-steps
+            and continue to the next token.</t>
+          </list>
+          </t>
 
           <t>Abort these steps if
           <list style="symbols">
@@ -566,8 +572,16 @@
           day-of-month-value, the month-value, the year-value, the hour-value,
           the minute-value, and the second-value, respectively.</t>
 
+          <t>If the expiry-time is later than the last date the user agent
+          can represent, the user agent MAY replace the expiry-time with the
+          last representable date.</t>
+
+          <t>If the expiry-time is earlier than the first date the user agent
+          can represent, the user agent MAY replace the expiry-time with the
+          first representable date.</t>
+
           <t>Append an attribute named Expires to the cookie-attribute-list
-          with a value equal to expiry-time.</t>
+          with a value equal to expiry-time.</t>          
         </section>
         <section title="The Domain Attribute">
           <t>[TODO]</t>
