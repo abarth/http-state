@@ -2,7 +2,7 @@
 <?rfc toc="yes"?>
 <?xml-stylesheet type="text/xml" href="rfc2629.xslt"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc ipr="pre5378Trust200902" docName="draft-abarth-cookie-04pre">
+<rfc ipr="pre5378Trust200902" docName="draft-abarth-cookie-04">
   <front>
     <title abbrev="HTTP State Management Mechanism">
       HTTP State Management Mechanism
@@ -16,7 +16,7 @@
         <uri>http://www.adambarth.com/</uri>
       </address>
     </author>
-    <date month="September" year="2009"/>
+    <date month="November" year="2009"/>
     <workgroup>None (yet)</workgroup>
     <keyword>Internet-Draft</keyword>
     <abstract>
