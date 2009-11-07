@@ -471,7 +471,7 @@
           time.</t>
 
           <t>If delta-seconds is strictly greater than 0, then append an
-          attributes named Expires (note the name conversion) to the
+          attribute named Expires (note the name conversion) to the
           cookie-attribute-list with a value equal to the current date and
           time plus delta-seconds seconds.</t>
         </section>
@@ -484,7 +484,7 @@
           user agent MUST process the value string as follows.</t>
 
           <t>If the attribute lacks a value or the value is the empty string,
-          then ignore the attribute and abort these steps.</t>
+          abort these steps.</t>
 
           <figure>
             <artwork>
@@ -524,6 +524,7 @@
             <t>set the day-of-month-value to the number denoted by the
             token.<t>
           </list>
+          </t>
 
           <t>If the found-month flag is not set and the token matches the
           month production, then:
@@ -531,6 +532,7 @@
             <t>set the found-month flag and</t>
             <t>set the month-value to the month denoted by the token.</t>
           </list>
+          </t>
 
           <t>If the found-year flag is not set and the token matches the
           year production, then:
@@ -538,6 +540,7 @@
             <t>set the found-year flag and</t>
             <t>set the year-value to the number denoted by the token.</t>
           </list>
+          </t>
 
           <t>If the found-time flag is not set and the token matches the
           time production, then:
@@ -546,25 +549,24 @@
             <t>set the hour-value, minute-value, and second-value to the
             numbers denoted by the digits in the token, respectively.</t>
           </list>
+          </t>
 
-          <t>If at least one of the found-day-of-month, found-month,
-          found-year, or found-time flags is not set, ignore the
-          attribute and abort these steps.</t>
+          <t>Abort these steps if
+          <list style="none">
+            <t>at least one of the found-day-of-month, found-month,
+            found-year, or found-time flags is not set,</t>
 
-          <t>If the day-of-month-value is less than 1 or greater than 31,
-          ignore the attribute and abort these steps.</t>
+            <t>the day-of-month-value is less than 1 or greater than 31,</t>
 
-          <t>If the year-value is less than 1601 or greater than 30827,
-          ignore the attribute and abort these steps.</t>
+            <t>the year-value is less than 1601 or greater than 30827,</t>
 
-          <t>If the hour-value is greater than 23, ignore the attribute and
-          abort these steps.</t>
+            <t>the hour-value is greater than 23,</t>
 
-          <t>If the minute-value is greater than 59, ignore the attribute and
-          abort these steps.</t>
+            <t>the minute-value is greater than 59, or</t>
 
-          <t>If the second-value is greater than 59, ignore the attribute and
-          abort these steps.</t>
+            <t>the second-value is greater than 59.</t>
+          </list>
+          </t>
 
           <t>If the year-value is greater than 68 and less than 100, increment
           the year-value by 1900.</t>
@@ -572,10 +574,13 @@
           <t>If the year-value is greater than or equal to 0 and less than
           69, increment the year-value by 2000.</t>
 
-          <t>The expiry-time of the attribute is the date whose day-of-month,
+          <t>Let the expiry-time be the date whose day-of-month,
           month, year, hour, minute, and second (in GMT) are the
           day-of-month-value, the month-value, the year-value, the hour-value,
           the minute-value, and the second-value, respectively.</t>
+
+          <t>Append an attribute named Expires to the cookie-attribute-list
+          with a value equal to expiry-time.</t>
         </section>
         <section title="The Domain Attribute">
           <t>[TODO]</t>
@@ -692,11 +697,11 @@
             <t>Update the default field values according to the
             cookie-attributes:
             <list style="hanging">
-              <t hangText="expiry">If the cookie-attributes contains at
-              least one non-empty Expires attribute, store the value of the
-              last such attribute in the expiry field.  Store the value true
-              in the persistent field.  [TODO: Test that this really works when
-              mixing Max-Age and Expires.]</t>
+              <t hangText="expiry">If the cookie-attributes contains at least
+              one valid Expires attribute, store the expiry-value of the last
+              such attribute in the expiry field. Store the value true in the
+              persistent field. [TODO: Test that this really works when mixing
+              Max-Age and Expires.]</t>
 
               <t hangText="domain">If the cookie-attributes contains at least
               one Domain attribute, store the value of the last such
