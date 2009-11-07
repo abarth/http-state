@@ -16,15 +16,17 @@ were never fully implemented in practice; RFC 2109, in addition to
 cookie_spec.html, more closely resemble real-world implementations
 than RFC 2965, even though RFC 2965 officially obsoletes the former.
 Compounding the problem are undocumented features (such as HTTPOnly),
-and widely varying behaviors among real-world implementations.
+and varying behaviors among real-world implementations.
 
-The working group will create a new RFC that obsoletes RFC 2965 and
+The working group will create a new RFC that obsoletes RFC 2109 and
 specifies Cookies as they are actually used in existing
 implementations and deployments.  Where differences exist among the
-most common implementations, the working group will document the
-variations and provide a recommended choice for updates and new
-implementations.  This will also facilitate interoperability among
-existing implementations if they so choose.
+most commonly used implementations, the working group will document
+the variations.  Where consensus exists among the most commonly used
+implementations, the working group will specify the consensus behavior.
+
+The working group will not introduce any new syntax or new semantics
+not already in common use.
 
 The following specifications, RFCs, Internet-Drafts and documents
 should be considered:
