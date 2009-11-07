@@ -107,6 +107,9 @@
           name-value-pair, followed by zero or more semi-colon-separated
           attribute-value pairs.</t>
 
+          <t>[TODO: Consider replacing this grammar with the one from
+          2009-11-07-Yui-Naruse.txt.]</t>
+
           <figure>
             <artwork>
               <![CDATA[
