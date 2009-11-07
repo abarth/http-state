@@ -191,6 +191,7 @@
             only set cookies for related domains.]</t>
           </section>
           <section title="Path">
+            <t>
             <list style="hanging">
               <t hangText="Syntax">A sequence of characters beginning with a
               "/" character.</t>
@@ -204,6 +205,7 @@
               attribute is the directory of the Request-URI when the cookie
               was received.</t>
             </list>
+          </t>
           </section>
           <section title="Secure">
             <t>
@@ -381,7 +383,7 @@
         </t>
 
         <t>The user agent MUST use the following algorithm to parse the
-        unparsed-attributes:</t>
+        unparsed-attributes:
         <list style="numbers">
           <t>If the unparsed-attributes string is empty, skip the rest of these
           steps.</t>
@@ -423,8 +425,7 @@
           the value string.</t>
 
           <t>If the name is a ASCII case-insensitive match for an entry in
-          the following table, process the value string as instructed.</t>
-
+          the following table, process the value string as instructed.
           <figure>
             <artwork>
               <![CDATA[
@@ -439,9 +440,11 @@
               ]]>
             </artwork>
           </figure>
+          </t>
 
           <t>Return to Step 1.</t>
         </list>
+        </t>
 
         <t>[TODO: Can parsing a cookie ever fail?  Doesn't look like
         it!  Well, unless you count "Set-Cookie: " as a fail...]</t>
@@ -486,49 +489,50 @@
           <t>If the attribute lacks a value or the value is the empty string,
           abort these steps.</t>
 
+          <t>Using the grammar below, divide the value of the attribute into
+          date-tokens.
           <figure>
             <artwork>
               <![CDATA[
-          cookie-date       = date-token-list
-          date-token-list   = date-token [ date-delimiter date-token-list ]
-          date-delimiter    = U+09 / U+20 / U+21 / U+22 / U+23 / U+24 / U+25 /
-                              U+26 / U+27 / U+28 / U+29 / U+2A / U+2B / U+2C /
-                              U+2D / U+2E / U+2F / U+3B / U+3C / U+3D / U+3E /
-                              U+3F / U+40 / U+5B / U+5C / U+5D / U+5E / U+5F /
-                              U+60 / U+7B / U+7C / U+7D / U+7E
-          date-token        = day-of-month / month / year / time / mystery
-          day-of-month      = 2DIGIT / DIGIT
-          month             = "jan" [mystery] / "feb" [mystery] /
-                              "mar" [mystery] / "apr" [mystery] /
-                              "may" [mystery] / "jun" [mystery] /
-                              "jul" [mystery] / "aug" [mystery] /
-                              "sep" [mystery] / "oct" [mystery] /
-                              "nov" [mystery] / "dec" [mystery]
-          year              = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
-          time              = 2DIGIT ":" 2DIGIT ":" 2DIGIT
-          mystery           = (anything except a date-delimiter)
+          cookie-date     = date-token-list
+          date-token-list = date-token [ delimiter date-token-list ]
+          delimiter       = U+09 / U+20 / U+21 / U+22 / U+23 / U+24 /
+                            U+25 / U+26 / U+27 / U+28 / U+29 / U+2A /
+                            U+2B / U+2C / U+2D / U+2E / U+2F / U+3B /
+                            U+3C / U+3D / U+3E / U+3F / U+40 / U+5B /
+                            U+5C / U+5D / U+5E / U+5F / U+60 / U+7B /
+                            U+7C / U+7D / U+7E
+          date-token      = day-of-month / month / year / time / mystery
+          day-of-month    = 2DIGIT / DIGIT
+          month           = "jan" [mystery] / "feb" [mystery] /
+                            "mar" [mystery] / "apr" [mystery] /
+                            "may" [mystery] / "jun" [mystery] /
+                            "jul" [mystery] / "aug" [mystery] /
+                            "sep" [mystery] / "oct" [mystery] /
+                            "nov" [mystery] / "dec" [mystery]
+          year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
+          time            = 2DIGIT ":" 2DIGIT ":" 2DIGIT
+          mystery         = (anything except a date-delimiter)
                   ]]>
             </artwork>
           </figure>
-
-          <t>Using the grammar above, divide the value of the attribute into
-          date-tokens.</t>
+          </t>
 
           <t>Process each data-token sequentially in the order the
           date-tokens appear in the attribute value.</t>
 
           <t>If the found-day-of-month flag is not set and the token matches
           the day-of-month production, then:
-          <list style="none">
+          <list style="empty">
             <t>set the found-day-of-month flag and</t>
             <t>set the day-of-month-value to the number denoted by the
-            token.<t>
+            token.</t>
           </list>
           </t>
 
           <t>If the found-month flag is not set and the token matches the
           month production, then:
-          <list style="none">
+          <list style="empty">
             <t>set the found-month flag and</t>
             <t>set the month-value to the month denoted by the token.</t>
           </list>
@@ -536,7 +540,7 @@
 
           <t>If the found-year flag is not set and the token matches the
           year production, then:
-          <list style="none">
+          <list style="empty">
             <t>set the found-year flag and</t>
             <t>set the year-value to the number denoted by the token.</t>
           </list>
@@ -544,7 +548,7 @@
 
           <t>If the found-time flag is not set and the token matches the
           time production, then:
-          <list style="none">
+          <list style="empty">
             <t>set the found-time flag and</t>
             <t>set the hour-value, minute-value, and second-value to the
             numbers denoted by the digits in the token, respectively.</t>
@@ -552,7 +556,7 @@
           </t>
 
           <t>Abort these steps if
-          <list style="none">
+          <list style="empty">
             <t>at least one of the found-day-of-month, found-month,
             found-year, or found-time flags is not set,</t>
 
