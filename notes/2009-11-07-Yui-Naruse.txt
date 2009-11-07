@@ -1,0 +1,77 @@
+Message-ID: <4AF55333.5040602@airemix.jp>
+Date: Sat, 07 Nov 2009 20:00:03 +0900
+From: "NARUSE, Yui" <naruse@airemix.jp>
+To: Adam Barth <ietf@adambarth.com>
+CC: http-state <http-state@ietf.org>
+Subject: Re: [http-state] Updated draft with Expires
+
+Adam Barth wrote:
+> I've replaced the vague date grammar for the Expires attribute with a
+> precise date parsing algorithm.  The web site won't let me upload a
+> new draft because the IETF meeting is happening soon, but I've
+> attached the draft to this message.
+> 
+> Next up...  the Domain attribute.
+
+Hi,
+
+I wrote Cookie syntax in ABNF.
+It is based on Netscape's draft and HttpOnly extension.
+
+Differences it and draft-abarth-cookie-03 are following,
+* cookie-pair is the first pair of Set-Cookie
+  (Netscape's spec and IE implementation)
+* name and value is http-token
+  (stricter than Netscape's spec, same as RFC 2965)
+* remove Max-Age
+* cookie-date allows only Netscape's Cookie date
+
+
+Set-Cookie      = "Set-Cookie:" [FWS] a-cookie [FWS]
+a-cookie        = cookie-pair *([FWS] ";" [FWS] cookie-av)
+cookie-av       = expires-av / domain-av / path-av
+                 / secure-av / httponly-av
+
+cookie-pair     = name [FWS] "=" [FWS] value
+name            = http-token
+value           = http-token                ; IE6+ doesn't allow TABs
+
+expires-av      = "Expires" [FWS] "=" [FWS] cookie-date
+cookie-date     = <Wdy, DD-Mon-YYYY HH:MM:SS GMT>      ; not RFC 2822
+
+domain-av       = "Domain" [FWS] "=" [FWS] domain-value
+domain-value    = ["."] dot-http-token     ; xx.yy doesn't work on IE
+dot-http-token  = "." / http-token
+
+path-av         = "Path" [FWS] "=" [FWS] path-value
+path-value      = abs_path
+abs_path        = <RFC 2616 abs_path>
+
+secure-av       = "Secure"
+httponly-av     = "HttpOnly"
+ 
+Cookie          = "Cookie:" [FWS] cookie-value
+                 *([FWS] ";" [FWS] cookie-value) [FWS]
+
+
+# RFC 2068 HTTP/1.1
+CHAR           = <any US-ASCII character (octets 0 - 127)>
+DIGIT          = <any US-ASCII digit "0".."9">
+CTL            = <any US-ASCII control character</pp>
+                 (octets 0 - 31) and DEL (127)>
+CR             = <US-ASCII CR, carriage return (13)>
+LF             = <US-ASCII LF, linefeed (10)>
+SP             = <US-ASCII SP, space (32)>
+HT             = <US-ASCII HT, horizontal-tab (9)>
+CRLF           = CR LF
+LWS            = [CRLF] 1*( SP | HT )
+HEX            = "A" | "B" | "C" | "D" | "E" | "F"
+                | "a" | "b" | "c" | "d" | "e" | "f" | DIGIT
+tspecials      = "(" | ")" | "<" | ">" | "@"
+                | "," | ";" | ":" | "\" | <">
+                | "/" | "[" | "]" | "?" | "="
+                | "{" | "}" | SP | HT
+token          = 1*<any CHAR except CTLs or tspecials>
+
+-- 
+NARUSE, Yui  <naruse@airemix.jp>
