@@ -25,11 +25,14 @@ most commonly used implementations, the working group will document
 the variations.  Where consensus exists among the most commonly used
 implementations, the working group will specify the consensus behavior.
 
-The working group will not introduce any new syntax or new semantics
+The working group must not introduce any new syntax or new semantics
 not already in common use.
 
-The following specifications, RFCs, Internet-Drafts and documents
-should be considered:
+The working group's specific deliverables are:
+* A standards-track document that is suitable to supersede RFC 2109
+* An informational document cataloguing the differences between major implementations
+
+In doing so, the working group should consider:
 
 * cookie_spec.html - Netscape Cookie Specification
    http://web.archive.org/web/20070805052634/http://wp.netscape.com/newsref/std/cookie_spec.html
@@ -50,3 +53,14 @@ should be considered:
 * HTTP Cookies: Standards, Privacy, and Politics by David M. Kristol
    http://arxiv.org/PS_cache/cs/pdf/0105/0105018v1.pdf
 
+Goals and Milestones:
+
+Jan 2010 - Feature-complete Internet-Draft of Cookie specification
+Mar 2010 - Feature-complete test suite of Cookie specification
+May 2010 - First fully conforming implementation in a major browser
+Jul 2010 - Last Call for Cookie specification
+Sep 2010 - Second fully conforming implementation in a major browser
+Nov 2010 - Submit Cookie specification to IESG for consideration as
+           a Draft Standard
+Nov 2010 - Submit deviation description to IESG for consideration as
+           Informational
