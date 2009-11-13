@@ -338,7 +338,7 @@
         <t>Let an LWS character be either a U+20 (SPACE) or a U+09 (TAB)
         character.</t>
 
-        <t>When a user agent recieves an Set-Cookie header in an HTTP
+        <t>When a user agent receives an Set-Cookie header in an HTTP
         response, the user agent *receives a set-cookie-string*
         consisting of the value of the header.</t>
 
@@ -587,7 +587,27 @@
           with a value equal to expiry-time.</t>          
         </section>
         <section title="The Domain Attribute">
-          <t>[TODO]</t>
+          <t>When the user agent receives a cookie attribute with a name
+          string that case-insensitively matches the string "Domain", the user
+          agent MUST process the value string as follows:
+          <list style="symbols">
+            <t>If the value string is empty, then ignore the attribute.
+            [TODO: Add a test for this with multiple Domain attributes.]</t>
+
+            <t>If the first character of the value string is ".", then append
+            an attribute named Domain to the cookie-attribute-list with a
+            value equal to value string excluding the leading "." character.</t>
+
+            <t>If the first character of the value string is not ".", then append
+            an attribute named Domain to the cookie-attribute-list with a
+            value equal to value string and mark the attribute as host-only.</t>
+
+            <t>[TODO: Deal with domains that have an insufficient number of
+            fields.]</t>
+
+            <t>Otherwise, ignore the attribute.</t>
+          </list>
+          </t>
         </section>
         <section title="The Path Attribute">
           <t>The user agent MUST use the following algorithm to compute the
@@ -625,7 +645,8 @@
           <list style="symbols">
             <t>If the value string is empty, then append an attribute named
             Path to the cookie-attribute-list with a value equal to
-            default-path of the cookie.</t>
+            default-path of the cookie.  [TODO: Is this right if there are
+            more than one path attribute?]</t>
 
             <t>If the value string is non-empty and the first character is
             "/", then append an attribute named Path to the
