@@ -3,5 +3,5 @@ for f in data/parser/*-test; do
  c=`echo $f | sed -e 's:.*/::g'`;
  num=`echo $c | sed -e 's/-test//g'`
 
- echo "http://cookie-test-1.dyndns.org:8888/cookie-parser?$num"
+ echo "http://home.example.org:8888/cookie-parser?$num"
 done
