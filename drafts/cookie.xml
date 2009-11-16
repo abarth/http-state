@@ -507,12 +507,12 @@
                         U+7C / U+7D / U+7E
       date-token      = day-of-month / month / year / time / mystery
       day-of-month    = 2DIGIT / DIGIT
-      month           = "jan" [mystery] / "feb" [mystery] /
-                        "mar" [mystery] / "apr" [mystery] /
-                        "may" [mystery] / "jun" [mystery] /
-                        "jul" [mystery] / "aug" [mystery] /
-                        "sep" [mystery] / "oct" [mystery] /
-                        "nov" [mystery] / "dec" [mystery]
+      month           = "jan" [ mystery ] / "feb" [ mystery ] /
+                        "mar" [ mystery ] / "apr" [ mystery ] /
+                        "may" [ mystery ] / "jun" [ mystery ] /
+                        "jul" [ mystery ] / "aug" [ mystery ] /
+                        "sep" [ mystery ] / "oct" [ mystery ] /
+                        "nov" [ mystery ] / "dec" [ mystery ]
       year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
       time            = 2DIGIT ":" 2DIGIT ":" 2DIGIT
       mystery         = (anything except a delimiter)
