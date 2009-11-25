@@ -499,12 +499,12 @@
               <![CDATA[
       cookie-date     = date-token-list
       date-token-list = date-token [ delimiter date-token-list ]
-      delimiter       = U+09 / U+20 / U+21 / U+22 / U+23 / U+24 /
-                        U+25 / U+26 / U+27 / U+28 / U+29 / U+2A /
-                        U+2B / U+2C / U+2D / U+2E / U+2F / U+3B /
-                        U+3C / U+3D / U+3E / U+3F / U+40 / U+5B /
-                        U+5C / U+5D / U+5E / U+5F / U+60 / U+7B /
-                        U+7C / U+7D / U+7E
+      delimiter       = %x09 / %x20 / %x21 / %x22 / %x23 / %x24 /
+                        %x25 / %x26 / %x27 / %x28 / %x29 / %x2A /
+                        %x2B / %x2C / %x2D / %x2E / %x2F / %x3B /
+                        %x3C / %x3D / %x3E / %x3F / %x40 / %x5B /
+                        %x5C / %x5D / %x5E / %x5F / %x60 / %x7B /
+                        %x7C / %x7D / %x7E
       date-token      = day-of-month / month / year / time / mystery
       day-of-month    = 2DIGIT / DIGIT
       month           = "jan" [ mystery ] / "feb" [ mystery ] /
