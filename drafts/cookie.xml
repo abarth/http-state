@@ -33,6 +33,18 @@
   <middle>
     <section anchor="intro" title="Introduction">
       <t>This document defines the HTTP Cookie and Set-Cookie header.</t>
+      
+      <section anchor="syntax-notation" title="Syntax Notation">
+        <t>This specification uses the Augmented Backus-Naur Form (ABNF)
+        notation of [RFC5234].</t>
+
+        <t>The following core rules are included by reference, as defined in
+        [RFC5234], Appendix B.1: ALPHA (letters), CR (carriage return), CRLF
+        (CR LF), CTL (controls), DIGIT (decimal 0-9), DQUOTE (double quote),
+        HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed), OCTET (any 8-bit
+        sequence of data), SP (space), VCHAR (any visible [USASCII] character),
+        and WSP (whitespace).</t>
+      </section>ß
     </section>
     <section title="Terminology">
       <t>The terms user agent, client, server, proxy, and origin server have
@@ -117,6 +129,7 @@
   name-value-pair   = name ["=" value]        ; optional value
   name              = token
   value             = *CHAR
+  token             = <token, as defined in Section 2.2 of RFC 2616>
             </artwork>
           </figure>
 
@@ -510,7 +523,7 @@
                         "nov" [ mystery ] / "dec" [ mystery ]
       year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
       time            = 2DIGIT ":" 2DIGIT ":" 2DIGIT
-      mystery         = (anything except a delimiter)
+      mystery         = <anything except a delimiter>
             </artwork>
           </figure>
           </t>
