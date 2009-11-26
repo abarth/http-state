@@ -55,14 +55,14 @@ In doing so, the working group should consider:
 
 Goals and Milestones:
 
-Jan 2010 - Feature-complete Internet-Draft of Cookie specification
-Mar 2010 - Feature-complete test suite of Cookie specification
-Apr 2010 - Feature-complete draft of deviation description
-May 2010 - First fully conforming implementation in a major browser
-Jul 2010 - Last Call for Cookie specification
-Aug 2010 - Last Call for deviation description
-Sep 2010 - Second fully conforming implementation in a major browser
-Nov 2010 - Submit Cookie specification to IESG for consideration as
+Mar 2010 - Feature-complete Internet-Draft of Cookie specification
+May 2010 - Feature-complete test suite of Cookie specification
+Jun 2010 - Feature-complete draft of deviation description
+Jul 2010 - First fully conforming implementation in a major browser
+Sep 2010 - Last Call for Cookie specification
+Oct 2010 - Last Call for deviation description
+Dec 2010 - Second fully conforming implementation in a major browser
+Jan 2010 - Submit Cookie specification to IESG for consideration as
            a Draft Standard
-Nov 2010 - Submit deviation description to IESG for consideration as
+Jan 2010 - Submit deviation description to IESG for consideration as
            Informational
