@@ -44,7 +44,7 @@
         HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed), OCTET (any 8-bit
         sequence of data), SP (space), VCHAR (any visible [USASCII] character),
         and WSP (whitespace).</t>
-      </section>ß
+      </section>
     </section>
     <section title="Terminology">
       <t>The terms user agent, client, server, proxy, and origin server have
@@ -124,12 +124,14 @@
 
           <figure>
             <artwork type="abnf">
+              <![CDATA[
   set-cookie-header = "Set-Cookie:" name-value-pairs
   name-value-pairs  = name-value-pair *(";" name-value-pair)
   name-value-pair   = name ["=" value]        ; optional value
   name              = token
   value             = *CHAR
   token             = <token, as defined in Section 2.2 of RFC 2616>
+              ]]>
             </artwork>
           </figure>
 
@@ -505,6 +507,7 @@
           date-tokens.
           <figure>
             <artwork type="abnf">
+              <![CDATA[
       cookie-date     = date-token-list
       date-token-list = date-token [ delimiter date-token-list ]
       delimiter       = %x09 / %x20 / %x21 / %x22 / %x23 / %x24 /
@@ -524,6 +527,7 @@
       year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
       time            = 2DIGIT ":" 2DIGIT ":" 2DIGIT
       mystery         = <anything except a delimiter>
+              ]]>
             </artwork>
           </figure>
           </t>
