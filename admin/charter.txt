@@ -18,19 +18,24 @@ than RFC 2965, even though RFC 2965 officially obsoletes the former.
 Compounding the problem are undocumented features (such as HTTPOnly),
 and varying behaviors among real-world implementations.
 
-The working group will create a new RFC that obsoletes RFC 2109 and
-specifies Cookies as they are actually used in existing
-implementations and deployments.  Where differences exist among the
-most commonly used implementations, the working group will document
-the variations.  Where consensus exists among the most commonly used
-implementations, the working group will specify the consensus behavior.
+The working group will create a new RFC that:
+ * obsoletes RFC 2109,
+ * updates RFC 2965 to the extent it overlaps or voids RFC 2109, and
+ * specifies Cookies as they are actually used in existing implementations
+   and deployments.
+Where differences exist among the most commonly used implementations, the
+working group will document the variations. Where consensus exists among the
+most commonly used implementations, the working group will specify the
+consensus behavior.
 
 The working group must not introduce any new syntax or new semantics
 not already in common use.
 
 The working group's specific deliverables are:
-* A standards-track document that is suitable to supersede RFC 2109 (likely based on draft-abarth-cookie)
-* An informational document cataloguing the differences between major implementations
+* A standards-track document that is suitable to supersede RFC 2109 (likely
+  based on draft-abarth-cookie)
+* An informational document cataloguing the differences between major
+  implementations
 
 In doing so, the working group should consider:
 
