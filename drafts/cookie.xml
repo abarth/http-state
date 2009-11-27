@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
 <?rfc toc="yes"?>
+<?rfc symrefs="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
 <rfc ipr="pre5378Trust200902" docName="draft-abarth-cookie-06pre">
   <front>
@@ -36,10 +37,10 @@
       
       <section anchor="syntax-notation" title="Syntax Notation">
         <t>This specification uses the Augmented Backus-Naur Form (ABNF)
-        notation of [RFC5234].</t>
+        notation of <xref target="RFC5234"/>.</t>
 
         <t>The following core rules are included by reference, as defined in
-        [RFC5234], Appendix B.1: ALPHA (letters), CR (carriage return), CRLF
+        <xref target="RFC5234"/>, Appendix B.1: ALPHA (letters), CR (carriage return), CRLF
         (CR LF), CTL (controls), DIGIT (decimal 0-9), DQUOTE (double quote),
         HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed), OCTET (any 8-bit
         sequence of data), SP (space), VCHAR (any visible [USASCII] character),
@@ -974,6 +975,67 @@
     </section>
   </middle>
   <back>
+    <references title="Normative References">
+
+      <reference anchor="RFC2616">
+        <front>
+          <title>Hypertext Transfer Protocol -- HTTP/1.1</title>
+          <author initials="R." surname="Fielding" fullname="R. Fielding">
+            <organization>University of California, Irvine</organization>
+            <address><email>fielding@ics.uci.edu</email></address>
+          </author>
+          <author initials="J." surname="Gettys" fullname="J. Gettys">
+            <organization>W3C</organization>
+            <address><email>jg@w3.org</email></address>
+          </author>
+          <author initials="J." surname="Mogul" fullname="J. Mogul">
+            <organization>Compaq Computer Corporation</organization>
+            <address><email>mogul@wrl.dec.com</email></address>
+          </author>
+          <author initials="H." surname="Frystyk" fullname="H. Frystyk">
+            <organization>MIT Laboratory for Computer Science</organization>
+            <address><email>frystyk@w3.org</email></address>
+          </author>
+          <author initials="L." surname="Masinter" fullname="L. Masinter">
+            <organization>Xerox Corporation</organization>
+            <address><email>masinter@parc.xerox.com</email></address>
+          </author>
+          <author initials="P." surname="Leach" fullname="P. Leach">
+            <organization>Microsoft Corporation</organization>
+            <address><email>paulle@microsoft.com</email></address>
+          </author>
+          <author initials="T." surname="Berners-Lee" fullname="T. Berners-Lee">
+            <organization>W3C</organization>
+            <address><email>timbl@w3.org</email></address>
+          </author>
+          <date month="June" year="1999"/>
+        </front>
+        <seriesInfo name="RFC" value="2616"/>
+      </reference>
+
+      <reference anchor="RFC5234">
+        <front>
+          <title abbrev="ABNF for Syntax Specifications">Augmented BNF for Syntax Specifications: ABNF</title>
+          <author initials="D." surname="Crocker" fullname="Dave Crocker" role="editor">
+            <organization>Brandenburg InternetWorking</organization>
+            <address>
+              <email>dcrocker@bbiw.net</email>
+            </address>  
+          </author>
+          <author initials="P." surname="Overell" fullname="Paul Overell">
+            <organization>THUS plc.</organization>
+            <address>
+              <email>paul.overell@thus.net</email>
+            </address>
+          </author>
+          <date month="January" year="2008"/>
+        </front>
+        <seriesInfo name="STD" value="68"/>
+        <seriesInfo name="RFC" value="5234"/>
+      </reference>
+    </references>
+  
+  
     <section title="Acknowledgements">
       <t>This document borrows heavily from RFC 2109.  [TODO: Figure out the
       proper way to credit the authors of RFC 2109.]</t>
