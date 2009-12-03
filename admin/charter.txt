@@ -69,7 +69,9 @@ Jul 2010 - First fully conforming implementation in a major browser
 Sep 2010 - Last Call for Cookie specification
 Oct 2010 - Last Call for deviation description
 Dec 2010 - Second fully conforming implementation in a major browser
-Jan 2010 - Submit Cookie specification to IESG for consideration as
+Jan 2011 - Submit Cookie specification to IESG for consideration as
            a Draft Standard
-Jan 2010 - Submit deviation description to IESG for consideration as
+Jan 2011 - Submit deviation description to IESG for consideration as
            Informational
+Mar 2011 - Close or recharter
+
