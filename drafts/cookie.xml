@@ -825,7 +825,7 @@
         cookies during "third-party" requests.</t>
 
         <t>The user agent MUST use the following algorithm to compute the
-        cookie-string from a cookie store and from a URI:
+        cookie-string from a cookie store and a URI:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
           that meet the following requirements:
@@ -877,6 +877,10 @@
           <t>Serialize the cookie-list into a cookie-string by processing each
           cookie in the cookie-list in order:
           <list style="numbers">
+            <t>If the cookie's name and value fields are both empty, skip the
+            remaining steps for this cookie and continue to the next cookie,
+            if any.</t>
+
             <t>If the cookie's name field is non-empty, output the cookie's
             name field followed by the character U+3D ("=").</t>
 
