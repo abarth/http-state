@@ -267,9 +267,13 @@
             </artwork>
           </figure>
 
-          <t>NOTE: If the server supplies a Set-Cookie header that does not
-          conform to the grammar in Section [TODO], the user agent might not
-          supply a Cookie header that conforms to the preceding grammar.</t>
+          <t>NOTE: If the server supplies Set-Cookie headers that conform
+          to the grammar in this section, then the user agent will return a
+          Cookie header that conforms to the grammar above.  However, if the
+          user agent receives a Set-Cookie header that deviates from the
+          grammar in this section, the requirements in the next section might
+          cause the user agent to return a Cookie header that deviates from
+          the preceding grammar.</t>
         </section>
         <section title="Semantics">
           <t>Each name-value-pair represents a cookie stored by the user
