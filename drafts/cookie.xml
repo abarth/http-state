@@ -863,7 +863,8 @@
           because cookies past their expiry date are removed from the cookie
           store immediately.</t>
 
-          <t>Sort the cookie-list in the following order:
+          <t>Sort the cookie-list in the following order [TODO: Consider
+          softening this requirement]:
           <list style="symbols">
             <t>Cookies with longer path fields are listed before cookies
             with shorter path field.</t>
