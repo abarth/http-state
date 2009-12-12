@@ -350,9 +350,6 @@
       the requirements in this section.</t>
 
       <section title="Parsing the Set-Cookie Header">
-        <t>Let an LWS character be either a U+20 (SPACE) or a U+09 (TAB)
-        character.</t>
-
         <t>When a user agent receives an Set-Cookie header in an HTTP
         response, the user agent *receives a set-cookie-string*
         consisting of the value of the header.</t>
@@ -367,13 +364,13 @@
           <list style="empty">
             <t>the name-value-pair string is characters up to, but not
             including, the first U+3B (";"), and the
-            unparsed-cookie-attributes are the remainder of the header
+            unparsed-attributes are the remainder of the header
             (including the U+3B (";") in question).</t>
           </list>
           Otherwise:
           <list style="empty">
             <t>the name-value-pair string is all the character contained in
-            the header, and the unparsed-cookie-attributes is the empty
+            the header, and the unparsed-attributes is the empty
             string.</t>
           </list>
           </t>
@@ -440,7 +437,8 @@
           </t>
 
           <t>Remove any leading or trailing space from the name string and
-          the value string.</t>
+          the value string.  [TODO: Should this be LWS?  What about vertical
+          tabs, etc.]</t>
 
           <t>If the name is a ASCII case-insensitive match for an entry in
           the following table, process the value string as instructed.
