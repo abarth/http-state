@@ -174,11 +174,11 @@
             <list style="hanging">
               <t hangText="Syntax">A sequence of ASCII numerals.</t>
 
-              <t hangText="Semantics">The value of the Max-Age attribute
-              represents the maximum lifetime of the cookie, measured in
-              seconds from the moment the user agent receives the cookie. If
-              the server does not supply an Expires or a Max-Age attribute,
-              the lifetime of the cookie is limited to the current session (as
+              <t hangText="Semantics">The Max-Age attribute indicates that
+              the cookie MUST NOT be returned to the server when its age is
+              greater than the specified number of seconds. If the server
+              does not supply an Expires or a Max-Age attribute, the
+              lifetime of the cookie is limited to the current session (as
               defined by the user agent).</t>
             </list>
             </t>
