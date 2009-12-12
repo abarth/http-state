@@ -22,6 +22,15 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+"""Experimental reference implementation of draft-abarth-cookie
+
+This module is an experiment to estimate the feasiblity of writing a reference
+implementation of draft-abarth-cookie.  It's also a tool to help me find bugs
+in the spec and in the tests.  Time will tell if this implementation is worth
+completing.
+"""
+
+
 class CookieAttribute(object):
     """Represents an attribute of a cookie."""
 
@@ -43,7 +52,6 @@ class CookieAttribute(object):
             "expires": self.parse_expires,
             "httponly": self.parse_httponly,
         }
-
         self.name = name.lower()
         self.value = parse_value[name](value)
 
