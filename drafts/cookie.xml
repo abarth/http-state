@@ -253,9 +253,10 @@
       <section title="Cookie">
         <section title="Syntax">
           <t>The user agent returns stored cookies to the origin server in
-          the Cookie header.  The Cookie header shares a common syntax with
-          the Set-Cookie header, but the semantics of the header differ
-          dramatically.</t>
+          the Cookie header.  If the server conforms to the requirements in
+          this section, the requirements in the next section will cause the
+          user agent to return a Cookie header that shares a common syntax
+          (but not a common semantics) with the Set-Cookie header.</t>
 
           <figure>
             <artwork type="abnf">
@@ -266,14 +267,6 @@
   value             = *CHAR
             </artwork>
           </figure>
-
-          <t>NOTE: If the server supplies Set-Cookie headers that conform
-          to the grammar in this section, then the user agent will return a
-          Cookie header that conforms to the grammar above.  However, if the
-          user agent receives a Set-Cookie header that deviates from the
-          grammar in this section, the requirements in the next section might
-          cause the user agent to return a Cookie header that deviates from
-          the preceding grammar.</t>
         </section>
         <section title="Semantics">
           <t>Each name-value-pair represents a cookie stored by the user
