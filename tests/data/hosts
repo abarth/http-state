@@ -1,5 +1,5 @@
-127.0.0.1 dyndns.org
-127.0.0.1 cookie-test-1.dyndns.org
-127.0.0.1 cookie-test-2.dyndns.org
-127.0.0.1 subdomain.cookie-test-1.dyndns.org
+127.0.0.1 example.org
+127.0.0.1 home.example.org
+127.0.0.1 sibling.example.org
+127.0.0.1 subdomain.home.example.org
 
