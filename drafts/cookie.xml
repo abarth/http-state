@@ -174,11 +174,11 @@
             <list style="hanging">
               <t hangText="Syntax">A sequence of ASCII numerals.</t>
 
-              <t hangText="Semantics">The value of the Max-Age attribute
-              represents the maximum lifetime of the cookie, measured in
-              seconds from the moment the user agent receives the cookie. If
-              the server does not supply an Expires or a Max-Age attribute,
-              the lifetime of the cookie is limited to the current session (as
+              <t hangText="Semantics">The Max-Age attribute indicates that
+              the cookie MUST NOT be returned to the server when its age is
+              greater than the specified number of seconds. If the server
+              does not supply an Expires or a Max-Age attribute, the
+              lifetime of the cookie is limited to the current session (as
               defined by the user agent).</t>
             </list>
             </t>
@@ -267,9 +267,13 @@
             </artwork>
           </figure>
 
-          <t>NOTE: If the server supplies a Set-Cookie header that does not
-          conform to the grammar in Section [TODO], the user agent might not
-          supply a Cookie header that conforms to the preceding grammar.</t>
+          <t>NOTE: If the server supplies Set-Cookie headers that conform
+          to the grammar in this section, then the user agent will return a
+          Cookie header that conforms to the grammar above.  However, if the
+          user agent receives a Set-Cookie header that deviates from the
+          grammar in this section, the requirements in the next section might
+          cause the user agent to return a Cookie header that deviates from
+          the preceding grammar.</t>
         </section>
         <section title="Semantics">
           <t>Each name-value-pair represents a cookie stored by the user
@@ -346,9 +350,6 @@
       the requirements in this section.</t>
 
       <section title="Parsing the Set-Cookie Header">
-        <t>Let an LWS character be either a U+20 (SPACE) or a U+09 (TAB)
-        character.</t>
-
         <t>When a user agent receives an Set-Cookie header in an HTTP
         response, the user agent *receives a set-cookie-string*
         consisting of the value of the header.</t>
@@ -359,17 +360,21 @@
           <t>[TODO: Deal with "," characters.  My current thinking is that
           we don't actually have to do anything special for them.]</t>
 
+          <t>If the set-cookie-string is empty or consists entirely of U+20
+          (SPACE) characters, the user agent MAY ignore the entirely.
+          [TODO: What about tabs?  Test what happens when for "; foo".]</t>
+
           <t>If the header contains a U+3B (";") character:
           <list style="empty">
             <t>the name-value-pair string is characters up to, but not
             including, the first U+3B (";"), and the
-            unparsed-cookie-attributes are the remainder of the header
+            unparsed-attributes are the remainder of the header
             (including the U+3B (";") in question).</t>
           </list>
           Otherwise:
           <list style="empty">
             <t>the name-value-pair string is all the character contained in
-            the header, and the unparsed-cookie-attributes is the empty
+            the header, and the unparsed-attributes is the empty
             string.</t>
           </list>
           </t>
@@ -436,7 +441,8 @@
           </t>
 
           <t>Remove any leading or trailing space from the name string and
-          the value string.</t>
+          the value string.  [TODO: Should this be LWS?  What about vertical
+          tabs, etc.]</t>
 
           <t>If the name is a ASCII case-insensitive match for an entry in
           the following table, process the value string as instructed.
@@ -859,7 +865,8 @@
           because cookies past their expiry date are removed from the cookie
           store immediately.</t>
 
-          <t>Sort the cookie-list in the following order:
+          <t>Sort the cookie-list in the following order [TODO: Consider
+          softening this requirement]:
           <list style="symbols">
             <t>Cookies with longer path fields are listed before cookies
             with shorter path field.</t>
