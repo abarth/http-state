@@ -587,10 +587,30 @@
           <t>If the year-value is greater than or equal to 0 and less than
           69, increment the year-value by 2000.</t>
 
-          <t>Let the expiry-time be the date whose day-of-month,
+          <t>Let the relative-expiry-time be the date whose day-of-month,
           month, year, hour, minute, and second (in GMT) are the
           day-of-month-value, the month-value, the year-value, the hour-value,
           the minute-value, and the second-value, respectively.</t>
+
+          <t>[TODO: Find a way to test this!]  If the user agent received
+          the set-cookie-string from an HTTP response that contains a Date
+          header field:
+          <list style="empty">
+            <t>Let server-time be the data obtained by parsing the contents of
+            the last Date header field using the date parsing algorithm. [TODO:
+            Refactor this not to be recursive.]</t>
+
+            <t>Let time-delta be the number of seconds between the server-time
+            and the relative-expiry-time.</t>
+
+            <t>Let the expiry-time be the current date and time plus
+            delta-seconds seconds.</t>
+          </list>
+          Otherwise:
+          <list style="empty">
+            <t>Let the expiry-time be the relative-expiry-time.</t>
+          </list>
+          </t>
 
           <t>If the expiry-time is later than the last date the user agent
           can represent, the user agent MAY replace the expiry-time with the
