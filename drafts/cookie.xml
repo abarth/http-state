@@ -360,6 +360,10 @@
           <t>[TODO: Deal with "," characters.  My current thinking is that
           we don't actually have to do anything special for them.]</t>
 
+          <t>If the set-cookie-string is empty or consists entirely of U+20
+          (SPACE) characters, the user agent MAY ignore the entirely.
+          [TODO: What about tabs?  Test what happens when for "; foo".]</t>
+
           <t>If the header contains a U+3B (";") character:
           <list style="empty">
             <t>the name-value-pair string is characters up to, but not
