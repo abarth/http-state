@@ -362,7 +362,7 @@
 
           <t>If the set-cookie-string is empty or consists entirely of U+20
           (SPACE) characters, the user agent MAY ignore the entirely.
-          [TODO: What about tabs?  Test what happens when for "; foo".]</t>
+          [TODO: What about tabs?]</t>
 
           <t>If the header contains a U+3B (";") character:
           <list style="empty">
