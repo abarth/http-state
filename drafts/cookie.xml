@@ -253,9 +253,10 @@
       <section title="Cookie">
         <section title="Syntax">
           <t>The user agent returns stored cookies to the origin server in
-          the Cookie header.  The Cookie header shares a common syntax with
-          the Set-Cookie header, but the semantics of the header differ
-          dramatically.</t>
+          the Cookie header.  If the server conforms to the requirements in
+          this section, the requirements in the next section will cause the
+          user agent to return a Cookie header that shares a common syntax
+          (but not a common semantics) with the Set-Cookie header.</t>
 
           <figure>
             <artwork type="abnf">
@@ -266,14 +267,6 @@
   value             = *CHAR
             </artwork>
           </figure>
-
-          <t>NOTE: If the server supplies Set-Cookie headers that conform
-          to the grammar in this section, then the user agent will return a
-          Cookie header that conforms to the grammar above.  However, if the
-          user agent receives a Set-Cookie header that deviates from the
-          grammar in this section, the requirements in the next section might
-          cause the user agent to return a Cookie header that deviates from
-          the preceding grammar.</t>
         </section>
         <section title="Semantics">
           <t>Each name-value-pair represents a cookie stored by the user
@@ -362,7 +355,7 @@
 
           <t>If the set-cookie-string is empty or consists entirely of U+20
           (SPACE) characters, the user agent MAY ignore the entirely.
-          [TODO: What about tabs?  Test what happens when for "; foo".]</t>
+          [TODO: What about tabs?]</t>
 
           <t>If the header contains a U+3B (";") character:
           <list style="empty">
@@ -588,10 +581,30 @@
           <t>If the year-value is greater than or equal to 0 and less than
           69, increment the year-value by 2000.</t>
 
-          <t>Let the expiry-time be the date whose day-of-month,
+          <t>Let the relative-expiry-time be the date whose day-of-month,
           month, year, hour, minute, and second (in GMT) are the
           day-of-month-value, the month-value, the year-value, the hour-value,
           the minute-value, and the second-value, respectively.</t>
+
+          <t>[TODO: Find a way to test this!]  If the user agent received
+          the set-cookie-string from an HTTP response that contains a Date
+          header field:
+          <list style="empty">
+            <t>Let server-time be the data obtained by parsing the contents of
+            the last Date header field using the date parsing algorithm. [TODO:
+            Refactor this not to be recursive.]</t>
+
+            <t>Let time-delta be the number of seconds between the server-time
+            and the relative-expiry-time.</t>
+
+            <t>Let the expiry-time be the current date and time plus
+            delta-seconds seconds.</t>
+          </list>
+          Otherwise:
+          <list style="empty">
+            <t>Let the expiry-time be the relative-expiry-time.</t>
+          </list>
+          </t>
 
           <t>If the expiry-time is later than the last date the user agent
           can represent, the user agent MAY replace the expiry-time with the
