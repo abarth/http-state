@@ -1,0 +1,10 @@
+How to run the tests:
+
+1) Append the contents of tests/data/hosts to /etc/hosts.
+2) In the tests/ directory run ./run-test-server.
+3) Visit the test URLs in the user agent you wish to tests.
+
+You can get a list of the test URLs by running ./list-test-urls.  The run-test
+script can also automatically run the tests for a number of user agents, but
+you might need to compile them from source to have the necessary binaries.
+
