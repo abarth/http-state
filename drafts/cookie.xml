@@ -389,7 +389,8 @@
           Otherwise:
           <list style="empty">
             <t>the name string is empty, and the value string is the entire
-            name-value-pair string.</t>
+            name-value-pair string. [TODO: This is not supported by every user
+            agent.]</t>
           </list>
           </t>
 
