@@ -118,6 +118,26 @@ class Chromium:
         print line.rstrip()
       line = self._process.stdout.readline()
 
+class Libsoup:
+  def __init__(self, path):
+    if not path:
+      print 'libsoup requies the path to "get"'
+      exit(1)
+    self._path = path
+
+  def run_test(self, url):
+    print url + ":",
+    self._process = subprocess.Popen([self._path, '-q', url],
+                                     stdin=subprocess.PIPE,
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.STDOUT)
+    self._process.wait()
+    self._consume_output()
+    self._process = None
+
+  def _consume_output(self):
+    print self._process.stdout.read().strip()
+
 class TestServer:
   def start(self):
     self._process = subprocess.Popen(['./run-test-server'],
@@ -146,7 +166,8 @@ def create_tool(tool, path):
     'curl': CURL,
     'firefox': Firefox,
     'safari': Safari,
-    'chromium': Chromium
+    'chromium': Chromium,
+    'libsoup': Libsoup,
   }
   if tool not in known_tools.keys():
     if tool:
