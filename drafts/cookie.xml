@@ -663,6 +663,8 @@
           a prefix of the request-path and at least one of the following
           conditions hold:
           <list style="symbols">
+            <t>The cookie-path and the request-path are identical.</t>
+
             <t>The last character of the cookie-path is "/".</t>
 
             <t>The first character of the request-path that is not
