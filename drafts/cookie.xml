@@ -661,7 +661,7 @@
 
           <t>A request-path path-matches a cookie-path if the cookie-path is
           a prefix of the request-path and at least one of the following
-          conditions hold:
+          conditions hold: [TODO: This isn't exactly what IE does.]
           <list style="symbols">
             <t>The last character of the cookie-path is "/".</t>
 
