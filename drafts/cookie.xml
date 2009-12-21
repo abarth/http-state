@@ -22,6 +22,11 @@
     <keyword>Internet-Draft</keyword>
     <abstract>
       <t>This document defines the HTTP Cookie and Set-Cookie headers.
+      These headers can be used by HTTP servers to store state on HTTP user
+      agents, letting the servers mantain a stateful session over the
+      mostly stateless HTTP protocol.  The cookie protocol has many
+      historical infelicities and should be avoided for new applications of
+      HTTP.
       <list>
         <t>NOTE: If you have suggestions for improving the draft, please send
         email to http-state@ietf.org.  Suggestions with test cases are
