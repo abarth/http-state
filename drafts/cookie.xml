@@ -736,7 +736,8 @@ mystery         = <anything except a delimiter>
           cookie. [TODO: Validate this list!] [TODO: There's some funny
           business around http-only here.]</t>
 
-          <t>Insert the newly created cookie into the cookie store.</t>
+          <t>Insert the newly created cookie into the cookie store unless the
+          cookie's name and value are both empty.</t>
         </list>
         </t>
 
@@ -830,9 +831,6 @@ mystery         = <anything except a delimiter>
           <t>Serialize the cookie-list into a cookie-string by processing each
           cookie in the cookie-list in order:
           <list style="numbers">
-            <t>If the cookie's name and value are both empty, skip the
-            remaining steps for this cookie.</t>
-
             <t>If the cookie's name is non-empty, output the cookie's
             name followed by the U+3D ("=") character.</t>
 
