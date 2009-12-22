@@ -322,63 +322,6 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           cookies with server-specific semantics.</t>
         </section>
       </section>
-      <section title="Controlling Caching">
-        <t>[TODO: Should we go into this much detail here?  This seems
-        redundant with the HTTP specs.]</t>
-
-        <t>An origin server must be cognizant of the effect of possible
-        caching of both the returned resource and the Set-Cookie header.
-        Caching "public" documents is desirable.  For example, if the origin
-        server wants to use a public document such as a "front door" page as
-        a sentinel to indicate the beginning of a session for which a
-        Set-Cookie response header must be generated, the page should be
-        stored in caches "pre-expired" so that the origin server will see
-        further requests.  "Private documents", for example those that
-        contain information strictly private to a session, should not be
-        cached in shared caches.</t>
-
-        <t>If the cookie is intended for use by a single user, the Set-Cookie
-        header should not be cached.  A Set-Cookie header that is intended to
-        be shared by multiple users may be cached.</t>
-
-        <t>The origin server should send the following additional HTTP/1.1
-        response headers, depending on circumstances:  [TODO: Is this good
-        advice?]
-        <list style="symbols">
-          <t>To suppress caching of the Set-Cookie header: Cache-control: no-
-          cache="set-cookie".</t>
-        </list>
-        </t>
-
-        <t>and one of the following:
-        <list style="symbols">
-          <t>To suppress caching of a private document in shared caches:
-          Cache-Control: private.</t>
-
-          <t>To allow caching of a document and require that it be validated
-          before returning it to the client: Cache-Control:
-          must-revalidate.</t>
-
-          <t>To allow caching of a document, but to require that proxy caches
-          (not user agent caches) validate it before returning it to the
-          client: Cache-Control: proxy-revalidate.</t>
-
-          <t>To allow caching of a document and request that it be validated
-          before returning it to the client (by "pre-expiring" it):
-          Cache-Control: max-age=0.  Not all caches will revalidate the
-          document in every case.</t>
-        </list>
-        </t>
-
-        <t>HTTP/1.1 servers must send Expires: old-date (where old-date is a
-        date long in the past) on responses containing Set-Cookie response
-        headers unless they know for certain (by out of band means) that
-        there are no downstream HTTP/1.0 proxies.  HTTP/1.1 servers may send
-        other Cache-Control directives that permit caching by HTTP/1.1
-        proxies in addition to the Expires: old-date directive; the
-        Cache-Control directive will override the Expires: old-date for
-        HTTP/1.1 proxies.</t>
-      </section>
     </section>
     <section title="User Agent Conformance">
       <t>Not all origin servers conform to the behavior specified in the
