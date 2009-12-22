@@ -707,47 +707,25 @@ mystery         = <anything except a delimiter>
           </list>
           Otherwise:
           <list style="empty">
-            <t>Set the cookie's host-only-flag to false.</t>
+            <t>Set the cookie's host-only-flag to true.</t>
 
             <t>Set the cookie's domain to the host of the Request-URI.</t>
           </list>
           </t>
 
-          xyzzy working in progress
+          <t>If the cookie-attribute-list contains an attribute with an
+          attribute-name of "Path", set the cookie's path to attribute-value
+          of the last attribute in the cookie-attribute-list with an
+          attribute-name of "Path". Otherwise, set cookie's path to the
+          default-path of the Request-URI.</t>
 
+          <t>If the cookie-attribute-list contains an attribute with an
+          attribute-name of "Secure", set the cookie's secure-only-flag to
+          true.  Otherwise, set cookie's secure-only-flag to false.</t>
 
-          <t>Set the cookie's .
-          Set the persistent-flag, the secure-only-flag, and the
-          http-only-flag to false. Set the host-only-flag to true.</t>
-          <list style="symbols">
-            <t>expiry-time = the latest representable date</t>
-            <t>domain = the host of the Request-URI</t>
-            <t>path = the default-path of the Request-URI</t>
-          </list>
-          </t>
-
-
-            <t hangText="domain">If the cookie-attributes contains at least
-            one Domain attribute, store the value of the last such
-            attribute in the domain field.  Store the value false in the
-            host-only field.  [TODO: Reject cookies for unrelated
-            domains.] [TODO: If the URL's host is an IP address, let
-            Domain to be an IP address if it matches the URL's host
-            exactly, but set the host-only flag. ]</t>
-
-            <t hangText="path">If the cookie-attributes contains at least
-            one Path attribute, store the value of the last such attribute
-            in the path field.</t>
-
-            <t hangText="secure-only">If the cookie-attributes contains at
-            least one Secure attribute, store the value true in the
-            secure-only field.</t>
-
-            <t hangText="http-only">If the cookie-attributes contains at
-            least one HttpOnly attribute, store the value true in the
-            http-only field.</t>
-          </list>
-          </t>
+          <t>If the cookie-attribute-list contains an attribute with an
+          attribute-name of "HttpOnly", set the cookie's http-only-flag to
+          true.  Otherwise, set cookie's http-only-flag to false.</t>
         </list>
         </t>
 
