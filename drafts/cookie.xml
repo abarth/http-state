@@ -869,10 +869,10 @@ mystery         = <anything except a delimiter>
     <section title="Security Considerations">
       <section title="Clear Text">
         <t>The information in the Set-Cookie and Cookie headers is
-        transmitted in the clear.  Three consequences are:
+        transmitted in the clear.
         <list style="numbers">
-          <t>Any sensitive information that is conveyed in in the headers is
-          exposed to an eavesdropper.</t>
+          <t>All sensitive information conveyed in these headers is exposed to
+          an eavesdropper.</t>
 
           <t>A malicious intermediary could alter the headers as they travel
           in either direction, with unpredictable results.</t>
@@ -882,11 +882,13 @@ mystery         = <anything except a delimiter>
         </list>
         </t>
 
-        <t>These facts imply that information of a personal and/or financial
-        nature should be sent over a secure channel.  For less sensitive
-        information, or when the content of the header is a database key, an
-        origin server should be vigilant to prevent a bad Cookie value from
-        causing failures.</t>
+        <t>Servers SHOULD encrypt and sign the contents of every cookie.
+        However, encrypting and signing cookies does not prevent an attacker
+        from transplanting a cookie from one user agent to another.</t>
+
+        <t>In addition to encrypting and signing the the contents of every
+        cookie, servers that require a higher level of security SHOULD use the
+        cookie protocol only over a secure channel.</t>
       </section>
       <section title="Weak Isolation">
         <t>[TODO: Weak isolation by port.]</t>
@@ -900,10 +902,6 @@ mystery         = <anything except a delimiter>
         <t>[TODO: Mention integrity issue where a HTTP can inject cookies
         into HTTPS.]</t>
       </section>
-    </section>
-    <section title="Other, Similar, Proposals">
-      <t>[TODO: Describe relation to the Netscape Cookie Spec, RFC 2109,
-      RFC 2629, and cookie-v2.]</t>
     </section>
   </middle>
   <back>
