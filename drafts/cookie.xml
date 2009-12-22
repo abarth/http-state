@@ -332,28 +332,28 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
 
           <t>If the header contains a U+3B (";") character:
           <list style="empty">
-            <t>the name-value-pair string is characters up to, but not
+            <t>The name-value-pair string is characters up to, but not
             including, the first U+3B (";"), and the unparsed-attributes are
             the remainder of the header (including the U+3B (";") in
             question).</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>the name-value-pair string is all the character contained in
+            <t>The name-value-pair string is all the character contained in
             the header, and the unparsed-attributes is the empty string.</t>
           </list>
           </t>
 
           <t>If the name-value-pair string contains a U+3D ("=") character:
           <list style="empty">
-            <t>the (possibly empty) name string is the characters up to, but
+            <t>The (possibly empty) name string is the characters up to, but
             not including, the first U+3D ("=") character, and the (possibly
             empty) value string is the characters after the first U+3D ("=")
             character.</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>the name string is empty, and the value string is the entire
+            <t>The name string is empty, and the value string is the entire
             name-value-pair string.</t>
           </list>
           </t>
@@ -378,26 +378,26 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           <t>If the remaining unparsed-attributes contains a U+3B (";")
           character:
           <list style="empty">
-            <t>consume the characters of the unparsed-attributes up to, but
+            <t>Consume the characters of the unparsed-attributes up to, but
             not including, the first U+3B (";") character.</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>consume the remainder of the unparsed-attributes.</t>
+            <t>Consume the remainder of the unparsed-attributes.</t>
           </list>
           Let the cookie-av string be the characters consumed in this
           step.</t>
 
           <t>If the cookie-av string contains a U+3D ("=") character:
           <list style="empty">
-            <t>the (possibly empty) attribute-name string is the characters up
+            <t>The (possibly empty) attribute-name string is the characters up
             to, but not including, the first U+3D ("=") character, and the
             (possibly empty) attribute-value string is the characters after
             the first U+3D ("=") character.</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>the attribute-name string is the entire cookie-av string, and
+            <t>The attribute-name string is the entire cookie-av string, and
             the attribute-value string is empty. (Note that this step differs
             from the analogous step when parsing the name-value-pair
             string.)</t>
@@ -434,13 +434,13 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           integer.</t>
 
           <t>If delta-seconds is less than or equal to zero (0), let
-          expiry-date be the current date and time. Otherwise, let the
-          expiry-date be the current date and time plus delta-seconds
+          expiry-time be the current date and time. Otherwise, let the
+          expiry-time be the current date and time plus delta-seconds
           seconds.</t>
 
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Expires (note the name conversion) and an
-          attribute-value of expiry-date.</t>
+          attribute-value of expiry-time.</t>
         </section>
         <section title="The Expires Attribute">
           <t>If the attribute-name case-insensitively matches the string
@@ -529,13 +529,12 @@ mystery         = <anything except a delimiter>
           day-of-month-value, the month-value, the year-value, the hour-value,
           the minute-value, and the second-value, respectively.</t>
 
-          <t>If the user agent received
-          the set-cookie-string from an HTTP response that contains a Date
-          header field:
+          <t>If the user agent received the set-cookie-string from an HTTP
+          response that contains a Date header field:
           <list style="empty">
-            <t>Let server-time be the data obtained by parsing the contents of
-            the last Date header field using the date parsing algorithm. [TODO:
-            Refactor this not to be recursive.]</t>
+            <t>Let server-time be the date obtained by parsing the contents of
+            the last Date header field using the date parsing algorithm.
+            [TODO: Refactor this not to be recursive.]</t>
 
             <t>Let time-delta be the number of seconds between the server-time
             and the relative-expiry-time.</t>
@@ -556,9 +555,9 @@ mystery         = <anything except a delimiter>
           <t>If the expiry-time is earlier than the first date the user agent
           can represent, the user agent MAY replace the expiry-time with the
           first representable date.</t>
-
-          <t>Append an attribute named Expires to the cookie-attribute-list
-          with a value equal to expiry-time.</t>          
+  
+          <t>Append an attribute to the cookie-attribute-list with an
+          attribute-name of Expires and an attribute-value of expiry-time.</t>
         </section>
         <section title="The Domain Attribute">
           <t>When the user agent receives a cookie attribute with a name
