@@ -425,10 +425,10 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           "Max-Age", the user agent MUST process the cookie-av as follows.</t>
 
           <t>If the first character of the attribute-value is not a DIGIT or a
-          "-" character, the user agent MUST ignore the cookie-av.</t>
+          "-" character, ignore the cookie-av.</t>
 
           <t>If the remainder of attribute-value contains a non-DIGIT
-          character, the user agent MUST ignore the cookie-av.</t>
+          character, ignore the cookie-av.</t>
 
           <t>Let delta-seconds be the attribute-value converted to an
           integer.</t>
@@ -443,72 +443,65 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           attribute-value of expiry-date.</t>
         </section>
         <section title="The Expires Attribute">
-          <t>Unfortunately, cookie dates are quite complex for historical
-          reasons.</t>
+          <t>If the attribute-name case-insensitively matches the string
+          "Expires", the user agent MUST process the cookie-av as follows.</t>
 
-          <t>When the user agent receives a cookie attribute with a name
-          string that case-insensitively matches the string "Expires", the
-          user agent MUST process the value string as follows.</t>
-
-          <t>If the attribute lacks a value or the value is the empty string,
-          abort these steps.</t>
-
-          <t>Using the grammar below, divide the value of the attribute into
-          date-tokens.
+          <t>Using the grammar below, divide the value of the attribute-value
+          into date-tokens.
           <figure>
             <artwork type="abnf">
               <![CDATA[
-      cookie-date     = date-token-list
-      date-token-list = date-token [ delimiter date-token-list ]
-      delimiter       = %x09 / %x20 / %x21 / %x22 / %x23 / %x24 /
-                        %x25 / %x26 / %x27 / %x28 / %x29 / %x2A /
-                        %x2B / %x2C / %x2D / %x2E / %x2F / %x3B /
-                        %x3C / %x3D / %x3E / %x3F / %x40 / %x5B /
-                        %x5C / %x5D / %x5E / %x5F / %x60 / %x7B /
-                        %x7C / %x7D / %x7E
-      date-token      = day-of-month / month / year / time / mystery
-      day-of-month    = 2DIGIT / DIGIT
-      month           = "jan" [ mystery ] / "feb" [ mystery ] /
-                        "mar" [ mystery ] / "apr" [ mystery ] /
-                        "may" [ mystery ] / "jun" [ mystery ] /
-                        "jul" [ mystery ] / "aug" [ mystery ] /
-                        "sep" [ mystery ] / "oct" [ mystery ] /
-                        "nov" [ mystery ] / "dec" [ mystery ]
-      year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
-      time            = 2DIGIT ":" 2DIGIT ":" 2DIGIT
-      mystery         = <anything except a delimiter>
+cookie-date     = date-token *( 1*delimiter date-token )
+delimiter       = %x09 / %x20 / %x21 / %x22 / %x23 / %x24 /
+                  %x25 / %x26 / %x27 / %x28 / %x29 / %x2A /
+                  %x2B / %x2C / %x2D / %x2E / %x2F / %x3B /
+                  %x3C / %x3D / %x3E / %x3F / %x40 / %x5B /
+                  %x5C / %x5D / %x5E / %x5F / %x60 / %x7B /
+                  %x7C / %x7D / %x7E
+date-token      = day-of-month / month / year / time / mystery
+day-of-month    = 2DIGIT / DIGIT
+month           = "jan" [ mystery ] / "feb" [ mystery ] /
+                  "mar" [ mystery ] / "apr" [ mystery ] /
+                  "may" [ mystery ] / "jun" [ mystery ] /
+                  "jul" [ mystery ] / "aug" [ mystery ] /
+                  "sep" [ mystery ] / "oct" [ mystery ] /
+                  "nov" [ mystery ] / "dec" [ mystery ]
+year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
+time            = 2DIGIT ":" 2DIGIT ":" 2DIGIT
+mystery         = <anything except a delimiter>
               ]]>
             </artwork>
           </figure>
           </t>
 
-          <t>Process each data-token sequentially in the order the
-          date-tokens appear in the attribute value:
+          <t>Process each date-token sequentially in the order the date-tokens
+          appear in attribute-value:
           <list style="numbers">
-            <t>If the found-day-of-month flag is not set and the token matches
-            the day-of-month production, set the found-day-of-month flag and set
-            the day-of-month-value to the number denoted by the token.  Skip
-            the remaining sub-steps and continue to the next token.</t>
+            <t>If the found-day-of-month flag is not set and the date-token
+            matches the day-of-month production, set the found-day-of-month
+            flag and set the day-of-month-value to the number denoted by the
+            date-token. Skip the remaining sub-steps and continue to the next
+            date-token.</t>
 
-            <t>If the found-month flag is not set and the token matches the
-            month production, set the found-month flag and set the month-value
-            to the month denoted by the token.  Skip the remaining sub-steps
-            and continue to the next token.</t>
+            <t>If the found-month flag is not set and the date-token matches
+            the month production, set the found-month flag and set the
+            month-value to the month denoted by the date-token. Skip the
+            remaining sub-steps and continue to the next date-token.</t>
 
-            <t>If the found-year flag is not set and the token matches the
-            year production, set the found-year flag and set the year-value
-            to the number denoted by the token.  Skip the remaining sub-steps
-            and continue to the next token.</t>
+            <t>If the found-year flag is not set and the date-token matches
+            the year production, set the found-year flag and set the
+            year-value to the number denoted by the date-token. Skip the
+            remaining sub-steps and continue to the next date-token.</t>
 
             <t>If the found-time flag is not set and the token matches the
             time production, set the found-time flag and set the hour-value,
             minute-value, and second-value to the numbers denoted by the
-            digits in the token, respectively.  Skip the remaining sub-steps
-            and continue to the next token.</t>
+            digits in the date-token, respectively. Skip the remaining
+            sub-steps and continue to the next date-token.</t>
           </list>
           </t>
 
-          <t>Abort these steps if
+          <t>Ignore the cookie-av if
           <list style="symbols">
             <t>at least one of the found-day-of-month, found-month,
             found-year, or found-time flags is not set,</t>
@@ -536,7 +529,7 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           day-of-month-value, the month-value, the year-value, the hour-value,
           the minute-value, and the second-value, respectively.</t>
 
-          <t>[TODO: Find a way to test this!]  If the user agent received
+          <t>If the user agent received
           the set-cookie-string from an HTTP response that contains a Date
           header field:
           <list style="empty">
