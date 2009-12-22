@@ -813,8 +813,7 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
-          <t>Sort the cookie-list in the following order [TODO: Consider
-          softening this requirement]:
+          <t>Sort the cookie-list in the following order:
           <list style="symbols">
             <t>Cookies with longer paths are listed before cookies
             with shorter paths.</t>
