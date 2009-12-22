@@ -75,23 +75,10 @@
       <t>The terms user agent, client, server, proxy, and origin server have
       the same meaning as in the HTTP/1.0 specification.</t>
 
-      <t>Fully-qualified host name (FQHN) means either the fully-qualified
-      domain name (FQDN) of a host (i.e., a completely specified domain name
-      ending in a top-level domain such as .com or .uk), or the numeric
-      Internet Protocol (IP) address of a host.  The fully qualified domain
-      name is preferred; use of numeric IP addresses is strongly
-      discouraged.  [TODO: What does "strongly discouraged" mean?]</t>
-
-      <t>The terms request-host and request-URI refer to the values the
-      client would send to the server as, respectively, the host (but not
-      port) and abs_path portions of the absoluteURI (http_URL) of the HTTP
-      request line.  Note that request-host must be a FQHN.  Hosts names can
-      be specified either as an IP address or a FQHN string.</t>
-
-      <t>Because it was used in Netscape's original implementation of state
-      management, we will use the term cookie to refer to the state
-      information that passes between an origin server and user agent, and
-      that gets stored by the user agent.</t>
+      <t>The terms request-host and request-URI refer to the values the user
+      agent would send to the server as, respectively, the host (but not port)
+      and abs_path portions of the absoluteURI (http_URL) of the HTTP request
+      line.</t>
     </section>
     <section title="Overview">
       <t>We outline here a way for an origin server to send state
@@ -105,31 +92,27 @@
       presence or absence of a persistent connection should have no effect
       on the use of cookie-derived sessions).</t>
 
-      <t>The user agent returns a Cookie request header (see below) to the
-      origin server if it chooses to continue a session.  The origin server
-      MAY ignore it or use it to determine the current state of the
-      session.  It MAY send the user agent a Set-Cookie response header
-      with the same or different information, or it MAY send no Set-Cookie
-      header at all.</t>
+      <t>The user agent returns a Cookie request header to the origin server
+      if it chooses to continue a session. The Cookie header contains a number
+      of cookies the user agent received in previous Set-Cookie headers. The
+      origin server MAY ignore the Cookie header or use the header to
+      determine the current state of the session. The origin server MAY send
+      the user agent a Set-Cookie response header with the same or different
+      information, or it MAY send no Set-Cookie header at all.</t>
 
       <t>Servers MAY return a Set-Cookie response headers with any
       response.  User agents should send Cookie request headers, subject to
       other rules detailed below, with every request.</t>
 
-      <t>An origin server MAY include multiple Set-Cookie headers in a
-      response.  Note that an intervening gateway MUST NOT fold multiple
-      Set-Cookie headers into a single header.</t>
+      <t>An origin server MAY include multiple Set-Cookie header fields in a
+      single response. Note that an intervening gateway MUST NOT fold multiple
+      Set-Cookie header fields into a single header field.</t>
 
       <section title="Examples">
         <t>[TODO: Put some examples here.</t>
       </section>
     </section>
-    <section title="Protocol Description">
-      <t>The cookie protocol consists of two HTTP headers: the Set-Cookie
-      header and the Cookie header.  The server sends the Set-Cookie header
-      to the user agent in an HTTP response, causing the user agent to
-      modify the Cookie header it returns to the server.</t>
-
+    <section title="A Well-Behaved Profile of the Cookie Protocol">
       <t>This section describes the syntax and semantics of a well-behaved
       profile of the protocol.  Servers SHOULD use the profile described in
       this section, both to maximize interoperability with existing user
@@ -323,7 +306,7 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
         </section>
       </section>
     </section>
-    <section title="User Agent Conformance">
+    <section title="The Full Cookie Protocol">
       <t>Not all origin servers conform to the behavior specified in the
       previous section.  To ensure interoperability, user agents MUST
       process cookies in a manner that is "black-box" indistinguishable from
