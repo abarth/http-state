@@ -258,16 +258,23 @@ httponly-av       = "HttpOnly"
             because they are within the "same origin".</t>
           </section>
           <section title="Secure">
-            <t>The user agent SHOULD protect the confidentiality of cookies
-            with the Secure attribute by not transmitting Secure cookies over
-            an "insecure" channel (where "insecure" is defined by the user
-            agent).</t>
+            <t>The Secure attribute limits the scope of the cookie to "secure"
+            channels (where "secure" is defined by the user agent). When a
+            cookie has the Secure attribute, the user agent will include the
+            cookie in an HTTP request only if the request is transmitted over
+            a secure channel (typically TLS [TODO: Cite TLS]).</t>
+
+            <t>Although seemingly useful for protecting cookies from active
+            network attackers, the Secure attribute protects only the cookie's
+            confidentiality. An active network attacker can overwrite Secure
+            cookies from an insecure channel, disrupting the integrity of the
+            cookies.</t>
           </section>
           <section title="HttpOnly">
-            <t>The user agent SHOULD protect confidentiality of cookies with
-            the HttpOnly attribute by not revealing their contents via
-            "non-HTTP" APIs.  (Note that this document does not define which
-            APIs are "non-HTTP".)</t>
+            <t>The HttpOnly attribute limits the scope of the cookie to HTTP
+            requests. In particular, the attribute instructs the user agent to
+            elide the cookie when providing access to its cookie store via
+            "non-HTTP" APIs (as defined by the user agent).</t>
           </section>
         </section>
       </section>
