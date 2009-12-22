@@ -196,21 +196,6 @@ httponly-av       = "HttpOnly"
           specifying cookie attributes.  User agents ignore unrecognized
           cookie attributes.</t>
 
-          <section title="Max-Age">
-            <t>[TODO: Consider removing Max-Age from the server conformance
-            section because it's not supported by IE.]
-            <list style="hanging">
-              <t hangText="Syntax">A sequence of ASCII numerals.</t>
-
-              <t hangText="Semantics">The Max-Age attribute indicates that
-              the cookie MUST NOT be returned to the server when its age is
-              greater than the specified number of seconds. If the server
-              does not supply an Expires or a Max-Age attribute, the
-              lifetime of the cookie is limited to the current session (as
-              defined by the user agent).</t>
-            </list>
-            </t>
-          </section>
           <section title="Expires">
             <t>
             <list style="hanging">
