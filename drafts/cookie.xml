@@ -560,6 +560,17 @@ mystery         = <anything except a delimiter>
           attribute-name of Expires and an attribute-value of expiry-time.</t>
         </section>
         <section title="The Domain Attribute">
+          <t>A request-host domain-matches a cookie-domain if the
+          cookie-domain is a suffix of the request-host and at least one of
+          the following conditions hold:
+          <list style="symbols">
+            <t>The cookie-domain and the request-host are identical.</t>
+
+            <t>The last character of the request-host that is not included in
+            the cookie-domain is a U+2E (".") character.</t>
+          </list>
+          </t>
+
           <t>If the attribute-name case-insensitively matches the string
           "Domain", the user agent MUST process the cookie-av as follows.</t>
 
@@ -578,9 +589,9 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
-          <t>If the cookie-domain does not domain-match the Request-URI,
-          ignore the cookie-av. [TODO: Add a test for this with multiple
-          Domain attributes.]</t>
+          <t>If the Request-URI's host does not domain-match the
+          cookie-domain, ignore the cookie-av. [TODO: Add a test for this with
+          multiple Domain attributes.]</t>
 
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Domain and an attribute-value of
