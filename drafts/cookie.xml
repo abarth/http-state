@@ -415,9 +415,9 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
         </list>
         </t>
 
-        <t>When the user agent finishes parsing the set-cookie-string
-        header, the user agent *receives a cookie* from the origin server
-        with name cookie-name, value cookie-value, and attributes
+        <t>When the user agent finishes parsing the set-cookie-string header,
+        the user agent *receives a cookie* from the Request-URI with name
+        cookie-name, value cookie-value, and attributes
         cookie-attribute-list.</t>
 
         <section title="The Max-Age Attribute">
@@ -656,90 +656,105 @@ mystery         = <anything except a delimiter>
         <t>When the user agent receives a cookie, the user agent SHOULD
         record the cookie in its cookie store as follows.</t>
 
-        <t>A user agent MAY ignore received cookies in their entirety if the
-        user agent is configured to block receiving cookie for a particular
-        response.  For example, the user agent might wish to block receiving
-        cookies from "third-party" responses.</t>
+        <t>A user agent MAY ignore a received cookie in its entirety if the
+        user agent is configured to block receiving cookies. For example, the
+        user agent might wish to block receiving cookies from "third-party"
+        responses.</t>
 
-        <t>The user agent stores the following fields about each cookie:
-        <list style="symbols">
-          <t>name (a sequence of bytes)</t>
-          <t>value (a sequence of bytes)</t>
-          <t>expiry (a date)</t>
-          <t>domain (a cookie-domain)</t>
-          <t>path (a sequence of bytes)</t>
-          <t>creation (a date)</t>
-          <t>last-access (a date)</t>
-          <t>persistent (a Boolean)</t>
-          <t>host-only (a Boolean)</t>
-          <t>secure-only (a Boolean)</t>
-          <t>http-only (a Boolean)</t>
-        </list>
-        </t>
+        <t>The user agent stores the following fields about each cookie: name,
+        value, expiry-time, domain, path, creation-time, last-access-time,
+        persistent-flag, host-only-flag, secure-only-flag, and
+        http-only-flag.</t>
 
-        <t>When the user agent receives a cookie, the user agent MUST follow
-        the following algorithm:
+        <t>When the user agent receives a cookie from a Request-URI with name
+        cookie-name, value cookie-value, and attributes cookie-attribute-list,
+        the user agent MUST process the cookie as follows.
         <list style="numbers">
-          <t>Create a new cookie based on the parsed Set-Cookie
-          header:
-          <list style="numbers">
-            <t>Create a new cookie with the following default field values:
-            <list style="symbols">
-              <t>name = the cookie-name</t>
-              <t>value = the cookie-value</t>
-              <t>expiry = the latest representable date</t>
-              <t>domain = the request-host</t>
-              <t>path = the cookie's default-path</t>
-              <t>last-access = the date and time the cookie was received</t>
-              <t>persistent = false</t>
-              <t>host-only = true</t>
-              <t>secure-only = false</t>
-              <t>http-only = false</t>
-            </list>
-            </t>
+          <t>Create a new cookie with name cookie-name, value cookie-value,
+          and last-access-time to the current date and time.</t>
 
-            <t>Update the default field values according to the
-            cookie-attributes:
-            <list style="hanging">
-              <t hangText="expiry">If the cookie-attributes contains at least
-              one valid Expires attribute, store the expiry-value of the last
-              such attribute in the expiry field. Store the value true in the
-              persistent field. [TODO: Test that this really works when mixing
-              Max-Age and Expires.]</t>
+          <t>If the cookie-attribute-list contains an attribute with an
+          attribute-name of "Expires":
+          <list style="empty">
+            <t>Set the cookie's persistent-flag to true.</t>
 
-              <t hangText="domain">If the cookie-attributes contains at least
-              one Domain attribute, store the value of the last such
-              attribute in the domain field.  Store the value false in the
-              host-only field.  [TODO: Reject cookies for unrelated
-              domains.] [TODO: If the URL's host is an IP address, let
-              Domain to be an IP address if it matches the URL's host
-              exactly, but set the host-only flag. ]</t>
+            <t>Set the cookie's expiry-time to attribute-value of the last
+            attribute in the cookie-attribute-list with an attribute-name of
+            "Expires". [TODO: Test that this really works when mixing
+            Max-Age and Expires.]</t>
+          </list>
+          Otherwise:
+          <list style="empty">
+            <t>Set the cookie's persistent-flag to false.</t>
 
-              <t hangText="path">If the cookie-attributes contains at least
-              one Path attribute, store the value of the last such attribute
-              in the path field.</t>
-
-              <t hangText="secure-only">If the cookie-attributes contains at
-              least one Secure attribute, store the value true in the
-              secure-only field.</t>
-
-              <t hangText="http-only">If the cookie-attributes contains at
-              least one HttpOnly attribute, store the value true in the
-              http-only field.</t>
-            </list>
-            </t>
+            <t>Set the cookie's expiry-time to the latest representable
+            date.</t>
           </list>
           </t>
 
-          <t>Remove from the cookie store all cookies that have the share
-          the same name, domain, path, and host-only fields as the newly
-          created cookie.  [TODO: Validate this list!]  [TODO: There's some
-          funny business around http-only here.]</t> 
+          <t>If the cookie-attribute-list contains an attribute with an
+          attribute-name of "Domain":
+          <list style="empty">
+            <t>Set the cookie's host-only-flag to false.</t>
 
-          <t>Insert the newly created cookie into the cookie store.</t>
+            <t>Set the cookie's domain to attribute-value of the last
+            attribute in the cookie-attribute-list with an attribute-name of
+            "Domain".</t>
+          </list>
+          Otherwise:
+          <list style="empty">
+            <t>Set the cookie's host-only-flag to false.</t>
+
+            <t>Set the cookie's domain to the host of the Request-URI.</t>
+          </list>
+          </t>
+
+          xyzzy working in progress
+
+
+          <t>Set the cookie's .
+          Set the persistent-flag, the secure-only-flag, and the
+          http-only-flag to false. Set the host-only-flag to true.</t>
+          <list style="symbols">
+            <t>expiry-time = the latest representable date</t>
+            <t>domain = the host of the Request-URI</t>
+            <t>path = the default-path of the Request-URI</t>
+          </list>
+          </t>
+
+
+            <t hangText="domain">If the cookie-attributes contains at least
+            one Domain attribute, store the value of the last such
+            attribute in the domain field.  Store the value false in the
+            host-only field.  [TODO: Reject cookies for unrelated
+            domains.] [TODO: If the URL's host is an IP address, let
+            Domain to be an IP address if it matches the URL's host
+            exactly, but set the host-only flag. ]</t>
+
+            <t hangText="path">If the cookie-attributes contains at least
+            one Path attribute, store the value of the last such attribute
+            in the path field.</t>
+
+            <t hangText="secure-only">If the cookie-attributes contains at
+            least one Secure attribute, store the value true in the
+            secure-only field.</t>
+
+            <t hangText="http-only">If the cookie-attributes contains at
+            least one HttpOnly attribute, store the value true in the
+            http-only field.</t>
+          </list>
+          </t>
         </list>
         </t>
 
+        <t>Remove from the cookie store all cookies that have the share
+        the same name, domain, path, and host-only fields as the newly
+        created cookie.  [TODO: Validate this list!]  [TODO: There's some
+        funny business around http-only here.]</t> 
+
+        <t>Insert the newly created cookie into the cookie store.</t>
+
+tttt
         <t>The user agent MUST evict a cookie from the cookie store if A
         cookie exists in the cookie store with an expiry date in the
         past.</t>
