@@ -564,7 +564,8 @@ mystery         = <anything except a delimiter>
           cookie-domain is a suffix of the request-host and at least one of
           the following conditions hold:
           <list style="symbols">
-            <t>The cookie-domain and the request-host are identical.</t>
+            <t>The cookie-domain and the request-host are identical [TODO:
+            Case sensitivity? Trailing "." characters?].</t>
 
             <t>The last character of the request-host that is not included in
             the cookie-domain is a U+2E (".") character and request-host is a
@@ -590,6 +591,8 @@ mystery         = <anything except a delimiter>
             <t>Let cookie-domain be the entire attribute-value.</t>
           </list>
           </t>
+
+          <t>[TODO: Convert to lower case? Strip trailing "." characters?]</t>
 
           <t>[TODO: Test ".127.0.0.1" and "127.0.0.1"]
 
@@ -674,8 +677,9 @@ mystery         = <anything except a delimiter>
         cookie-name, value cookie-value, and attributes cookie-attribute-list,
         the user agent MUST process the cookie as follows:
         <list style="numbers">
-          <t>Create a new cookie with name cookie-name, value cookie-value,
-          and last-access-time to the current date and time.</t>
+          <t>Create a new cookie with name cookie-name, value cookie-value.
+          Set the creation-time and the last-access-time to the current date
+          and time.</t>
 
           <t>If the cookie-attribute-list contains an attribute with an
           attribute-name of "Expires":
@@ -769,34 +773,31 @@ mystery         = <anything except a delimiter>
         persistent-flag set to false.</t>
       </section>
       <section title="The Cookie Header">
-        <t>When the user agent generates an HTTP request for a particular
-        URI, the user agent SHOULD attach exactly one HTTP header named
-        Cookie if the cookie-string (defined below) for that URI is
-        non-empty.</t>
+        <t>When the user agent generates an HTTP request, the user agent
+        SHOULD attach exactly one HTTP header named Cookie if the
+        cookie-string (defined below) for the Request-URI is non-empty.</t>
 
         <t>A user agent MAY elide the Cookie header in its entirety if the
-        user agent is configured to block sending cookie for a particular
-        request.  For example, the user agent might wish to block sending
-        cookies during "third-party" requests.</t>
+        user agent is configured to block sending cookies. For example, the
+        user agent might wish to block sending cookies during "third-party"
+        requests.</t>
 
         <t>The user agent MUST use the following algorithm to compute the
-        cookie-string from a cookie store and a URI:
+        cookie-string from a cookie store and a Request-URI:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
           that meet the following requirements:
           <list style="symbols">
-            <t>The cookie's domain field must domain-match the URI's
-            host. [TODO: Spec me]</t>
+            <t>If the cookie's host-only-flag is true, the Request-URI's host
+            and the cookie's domain are identical [TODO: Case? Trailing "."?].
+            Otherwise, the Request-URI's host domain-matches cookie's
+            domain.</t>
 
-            <t>The cookie's path field must path-match the URI's path.</t>
+            <t>The Request-URI's path patch-matches cookie's path.</t>
 
-            <t>If the cookie's host-only flag is set, the cookie's domain
-            field must denote exactly the same FQDN as the URI's host.
-            [TODO: Internet Explorer does not implement this requirement but
-            most other major implementations do.]</t>
-
-            <t>If the cookie's secure-only field is true, then 
-            the URI's scheme must denote a "secure" protocol.
+            <t>If the cookie's secure-only field is true, then the
+            Request-URI's scheme must denote a "secure" protocol (as defined
+            by the user agent).
             <list style="empty">
               <t>NOTE: The notion of an "secure" protocol is not defined by
               this document.  Typically, user agents consider a protocol
@@ -808,42 +809,38 @@ mystery         = <anything except a delimiter>
 
             <t>If the cookie's http-only field is true, then include the
             cookie unless the cookie-string is begin generated for a
-            "non-HTTP" API.  (Note that this document does not define which
-            APIs are "non-HTTP".)</t>
+            "non-HTTP" API (as defined by the user agent).</t>
           </list>
-          NOTE: The Cookie header will not contain any expired cookies
-          because cookies past their expiry date are removed from the cookie
-          store immediately.</t>
+          </t>
 
           <t>Sort the cookie-list in the following order [TODO: Consider
           softening this requirement]:
           <list style="symbols">
-            <t>Cookies with longer path fields are listed before cookies
-            with shorter path field.</t>
+            <t>Cookies with longer paths are listed before cookies
+            with shorter paths.</t>
 
             <t>Among cookies that have equal length path fields, cookies
-            with earlier creation dates are listed before cookies with later
-            creation dates.</t>
+            with earlier creation-times are listed before cookies with later
+            creation-times.</t>
           </list>
           </t>
 
-          <t>Update the last-access field of each cookie in the cookie-list
-          to the current date.</t>
+          <t>Update the last-access-time of each cookie in the cookie-list
+          to the current date and time.</t>
 
           <t>Serialize the cookie-list into a cookie-string by processing each
           cookie in the cookie-list in order:
           <list style="numbers">
-            <t>If the cookie's name and value fields are both empty, skip the
-            remaining steps for this cookie and continue to the next cookie,
-            if any.</t>
+            <t>If the cookie's name and value are both empty, skip the
+            remaining steps for this cookie.</t>
 
-            <t>If the cookie's name field is non-empty, output the cookie's
-            name field followed by the character U+3D ("=").</t>
+            <t>If the cookie's name is non-empty, output the cookie's
+            name followed by the U+3D ("=") character.</t>
 
-            <t>Output the cookie's value field.</t>
+            <t>Output the cookie's value.</t>
 
             <t>If there is an unprocessed cookie in the cookie-list, output
-            the characters U+3B and U+20 ("; ")</t>
+            the characters U+3B and U+20 ("; ").</t>
           </list>
           </t>
         </list>
