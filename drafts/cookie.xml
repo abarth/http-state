@@ -231,11 +231,11 @@ httponly-av       = "HttpOnly"
             <t>The Path attribute limits the scope of the cookie to a set of
             paths. When a cookie has a Path attribute, the user agent will
             include the cookie in an HTTP request only if the path portion of
-            the request's Request-URI matches (or is a subdirectory of) the
-            cookie's Path attribute, where the U+2F ("/") character is
-            interpreted as a directory separator. If the server omits the Path
-            attribute, the user agent will use the directory of the
-            Request-URI's path component as the default value.</t>
+            the Request-URI matches (or is a subdirectory of) the cookie's
+            Path attribute, where the U+2F ("/") character is interpreted as a
+            directory separator. If the server omits the Path attribute, the
+            user agent will use the directory of the Request-URI's path
+            component as the default value.</t>
 
             <t>Although seemingly useful for isolating cookies between
             different paths within a given domain, the Path attribute cannot
