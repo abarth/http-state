@@ -149,42 +149,42 @@
           attribute-value pairs.  Servers SHOULD NOT send Set-Cookie headers
           that fail to conform to the following grammar:</t>
 
-          <t>[TODO: Consider replacing this grammar with the one from
-          2009-11-07-Yui-Naruse.txt.]</t>
-
           <figure>
             <artwork type="abnf">
               <![CDATA[
-  set-cookie-header = "Set-Cookie:" name-value-pairs
-  name-value-pairs  = name-value-pair *(";" name-value-pair)
-  name-value-pair   = name ["=" value]        ; optional value
-  name              = token
-  value             = *CHAR
-  token             = <token, as defined in Section 2.2 of RFC 2616>
+set-cookie-header = "Set-Cookie:" OWS a-cookie OWS
+a-cookie          = cookie-pair *( ";" cookie-av)
+cookie-pair       = cookie-name "=" cookie-value
+cookie-name       = token
+cookie-value      = token
+token             = <token, as defined in Section 2.2 of RFC 2616>
+
+cookie-av         = expires-av / domain-av / path-av / secure-av / httponly-av
+expires-av        = "Expires" "=" cookie-date
+cookie-date       = <rfc1123-date, as defined in Section 3.3.1 of RFC 2616>
+                  ; Note that the full protocol admits many more data formats.
+domain-av         = "Domain" "=" token
+path-av           = "Path" "=" path-value
+path-value        = <abs_path, as defined in RFC 2616>
+secure-av         = "Secure"
+httponly-av       = "HttpOnly"
               ]]>
             </artwork>
           </figure>
 
-          <t>Attributes names are case-insensitive.  White space is
-          permitted between tokens.  Servers SHOULD NOT include two attributes
-          with the same name.</t>
-          
-          <t>The precise grammar for attributes varies by attribute.  For
-          example, some attributes have numerical values, whereas other use
-          dates.  Although the above syntax description shows value as
-          optional, some attributes require values.</t>
+          <t>Servers SHOULD NOT include two attributes with the same name.</t>
 
           <t>The cookie-value is opaque to the user agent and MAY be
           anything the origin server chooses to send, possibly in a
           server-selected printable ASCII encoding.  "Opaque" implies that
           the content is of interest and relevance only to the origin
-          server.  The content may, in fact, be readable by anyone who
+          server.  The content is, in fact, be readable by anyone who
           examines the Set-Cookie header.</t>
 
           <t>NOTE: The syntax above allows whitespace between the attribute
           and the U+3D ("=") character.  Servers wishing to interoperate
-          with some legacy user agents might wish to elide this extra white
-          space to maximize compatibility.</t>
+          with some legacy user agents might wish to elide this
+          whitespace.</t>
         </section>
         <section title="Semantics">
           <t>When the user agent receives a Set-Cookie header, the user
