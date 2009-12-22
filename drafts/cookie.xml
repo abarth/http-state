@@ -560,27 +560,31 @@ mystery         = <anything except a delimiter>
           attribute-name of Expires and an attribute-value of expiry-time.</t>
         </section>
         <section title="The Domain Attribute">
-          <t>When the user agent receives a cookie attribute with a name
-          string that case-insensitively matches the string "Domain", the user
-          agent MUST process the value string as follows:
-          <list style="symbols">
-            <t>If the value string is empty, then ignore the attribute.
-            [TODO: Add a test for this with multiple Domain attributes.]</t>
+          <t>If the attribute-name case-insensitively matches the string
+          "Domain", the user agent MUST process the cookie-av as follows.</t>
 
-            <t>If the first character of the value string is ".", then append
-            an attribute named Domain to the cookie-attribute-list with a
-            value equal to value string excluding the leading "." character.</t>
+          <t>If the attribute-value is empty, then ignore the cookie-av.
+          [TODO: Add a test for this with multiple Domain attributes.]</t>
 
-            <t>If the first character of the value string is not ".", then append
-            an attribute named Domain to the cookie-attribute-list with a
-            value equal to value string and mark the attribute as host-only.</t>
-
-            <t>[TODO: Deal with domains that have an insufficient number of
-            fields.]</t>
-
-            <t>Otherwise, ignore the attribute.</t>
+          <t>If the first character of the attribute-value string is U+2E
+          ("."):
+          <list style="empty">
+            <t>Let cookie-domain be the attribute-value with the leading U+2E
+            (".") character.</t>
+          </list>
+          Otherwise:
+          <list style="empty">
+            <t>Let cookie-domain be the entire attribute-value.</t>
           </list>
           </t>
+
+          <t>If the cookie-domain does not domain-match the Request-URI,
+          ignore the cookie-av. [TODO: Add a test for this with multiple
+          Domain attributes.]</t>
+
+          <t>Append an attribute to the cookie-attribute-list with an
+          attribute-name of Domain and an attribute-value of
+          cookie-domain.</t>
         </section>
         <section title="The Path Attribute">
           <t>The user agent MUST use the following algorithm to compute the
