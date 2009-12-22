@@ -244,7 +244,6 @@ httponly-av       = "HttpOnly"
             character is interpreted as a directory separator).  The default
             value for the Path attribute is the directory of the Request-URI
             when the cookie was received.</t>
-          </t>
           </section>
           <section title="Secure">
             <t>The user agent SHOULD protect the confidentiality of cookies
