@@ -157,12 +157,12 @@ a-cookie          = cookie-pair *( ";" cookie-av)
 cookie-pair       = cookie-name "=" cookie-value
 cookie-name       = token
 cookie-value      = token
-token             = <token, as defined in Section 2.2 of RFC 2616>
+token             = <token, as defined in RFC 2616>
 
-cookie-av         = expires-av / domain-av / path-av / secure-av / httponly-av
+cookie-av         = expires-av / domain-av / path-av /
+                    secure-av / httponly-av
 expires-av        = "Expires" "=" cookie-date
-cookie-date       = <rfc1123-date, as defined in Section 3.3.1 of RFC 2616>
-                  ; Note that the full protocol admits many more data formats.
+cookie-date       = <rfc1123-date, as defined in RFC 2616>
 domain-av         = "Domain" "=" domain-value
 domain-value      = token
 path-av           = "Path" "=" path-value
