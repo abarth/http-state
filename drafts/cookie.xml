@@ -163,7 +163,8 @@ cookie-av         = expires-av / domain-av / path-av / secure-av / httponly-av
 expires-av        = "Expires" "=" cookie-date
 cookie-date       = <rfc1123-date, as defined in Section 3.3.1 of RFC 2616>
                   ; Note that the full protocol admits many more data formats.
-domain-av         = "Domain" "=" token
+domain-av         = "Domain" "=" domain-value
+domain-value      = token
 path-av           = "Path" "=" path-value
 path-value        = <abs_path, as defined in RFC 2616>
 secure-av         = "Secure"
@@ -194,10 +195,17 @@ httponly-av       = "HttpOnly"
           cross-references.].</t>
 
           <t>When the user agent receives a Set-Cookie header, the user agent
-          stores the cookie in its cookie store. When the user agent
+          stores the cookie in its cookie store.When the user agent
           subsequently makes an HTTP request, the user agent consults its
           cookie store and includes the applicable, non-expired cookies in the
           Cookie header.</t>
+
+          <t>If the cookie store already contains a cookie with the same
+          cookie-name, domain-value, and path-value, the existing cookie is
+          evicted from the cookie store and replaced with the new value.
+          Notice that servers can delete cookies by setting their values to
+          the empty string or by including an Expires attribute with a value
+          in the past.</t>
 
           <t>By default, cookies are returned only to the origin server and
           expire at a the end of the current session (as defined by the user
