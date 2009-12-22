@@ -418,31 +418,29 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
         <t>When the user agent finishes parsing the set-cookie-string
         header, the user agent *receives a cookie* from the origin server
         with name cookie-name, value cookie-value, and attributes
-        cookie-av-list.</t>
+        cookie-attribute-list.</t>
 
         <section title="The Max-Age Attribute">
-          <t>When the user agent receives a cookie attribute with a name
-          string that case-insensitively matches the string "Max-Age", the
-          user agent MUST process the value string as follows.</t>
+          <t>If the attribute-name case-insensitively matches the string
+          "Max-Age", the user agent MUST process the cookie-av as follows.</t>
 
-          <t>If the first character of the value string is not a DIGIT or a
-          "-" character, the user agent MUST ignore the attribute.</t>
+          <t>If the first character of the attribute-value is not a DIGIT or a
+          "-" character, the user agent MUST ignore the cookie-av.</t>
 
-          <t>If the remainder of value string contains a non-DIGIT
-          character, the user agent MUST ignore the attribute.</t>
+          <t>If the remainder of attribute-value contains a non-DIGIT
+          character, the user agent MUST ignore the cookie-av.</t>
 
-          <t>Let delta-seconds be the contents of the value string converted
-          to an integer.</t>
+          <t>Let delta-seconds be the attribute-value converted to an
+          integer.</t>
 
-          <t>If delta-seconds is less than or equal to 0, then append an
-          attribute named Expires (note the name conversion) to the
-          cookie-attribute-list with a value equal to the current date and
-          time.</t>
+          <t>If delta-seconds is less than or equal to zero (0), let
+          expiry-date be the current date and time. Otherwise, let the
+          expiry-date be the current date and time plus delta-seconds
+          seconds.</t>
 
-          <t>If delta-seconds is strictly greater than 0, then append an
-          attribute named Expires (note the name conversion) to the
-          cookie-attribute-list with a value equal to the current date and
-          time plus delta-seconds seconds.</t>
+          <t>Append an attribute to the cookie-attribute-list with an
+          attribute-name of Expires (note the name conversion) and an
+          attribute-value of expiry-date.</t>
         </section>
         <section title="The Expires Attribute">
           <t>Unfortunately, cookie dates are quite complex for historical
