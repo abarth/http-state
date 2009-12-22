@@ -567,7 +567,9 @@ mystery         = <anything except a delimiter>
             <t>The cookie-domain and the request-host are identical.</t>
 
             <t>The last character of the request-host that is not included in
-            the cookie-domain is a U+2E (".") character.</t>
+            the cookie-domain is a U+2E (".") character and request-host is a
+            host name (i.e., not an IP address). [TODO: Is this the right way
+            to spec this???]</t>
           </list>
           </t>
 
@@ -588,6 +590,8 @@ mystery         = <anything except a delimiter>
             <t>Let cookie-domain be the entire attribute-value.</t>
           </list>
           </t>
+
+          <t>[TODO: Test ".127.0.0.1" and "127.0.0.1"]
 
           <t>If the Request-URI's host does not domain-match the
           cookie-domain, ignore the cookie-av. [TODO: Add a test for this with
