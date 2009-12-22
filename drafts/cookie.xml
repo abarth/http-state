@@ -283,27 +283,35 @@ httponly-av       = "HttpOnly"
           <t>The user agent returns stored cookies to the origin server in
           the Cookie header.  If the server conforms to the requirements in
           this section, the requirements in the next section will cause the
-          user agent to return a Cookie header that shares a common syntax
-          (but not a common semantics) with the Set-Cookie header.</t>
+          user agent to return a Cookie header that conforms to the following
+          grammar.</t>
 
           <figure>
             <artwork type="abnf">
-  cookie-header     = "Cookie:" name-value-pairs
-  name-value-pairs  = name-value-pair *(";" name-value-pair)
-  name-value-pair   = name "=" value
-  name              = token
-  value             = *CHAR
+              <![CDATA[
+cookie-header = "Set-Cookie:" OWS cookie-pair *( ";" cookie-pair) OWS
+cookie-pair   = cookie-name "=" cookie-value
+cookie-name   = token
+cookie-value  = token
+token         = <token, as defined in Section 2.2 of RFC 2616>
+              ]]>
             </artwork>
           </figure>
         </section>
         <section title="Semantics">
-          <t>Each name-value-pair represents a cookie stored by the user
-          agent.  The cookie name is returned in as the name and the cookie
-          value is returned as the value.</t>
+          <t>Each cookie-pair represents a cookie stored by the user
+          agent. The cookie-name and the cookie-value are returned verbatim
+          from the corresponding parts of the Set-Cookie header.</t>
 
-          <t>The meaning of the cookies in the Cookie header is not defined
-          by this document.  Servers are expected to imbue these cookies
-          with server-specific semantics.</t>
+          <t>Notice that the cookie attributes are not returned. In
+          particular, the server cannot determine from the Cookie header alone
+          when a cookie will expire, for which domains the cookie is valid,
+          for which paths the cookie is valid, or whether the cookie is marked
+          Secure or HttpOnly.</t>
+
+          <t>The semantics of individual cookies in the Cookie header is not
+          defined by this document. Servers are expected to imbue these
+          cookies with server-specific semantics.</t>
         </section>
       </section>
       <section title="Controlling Caching">
