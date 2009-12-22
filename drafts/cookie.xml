@@ -186,28 +186,55 @@ httponly-av       = "HttpOnly"
           with some legacy user agents might wish to elide this
           whitespace.</t>
         </section>
-        <section title="Semantics">
-          <t>When the user agent receives a Set-Cookie header, the user
-          agent stores the cookie in its cookie store.  When the user agent
-          makes another HTTP request to the origin server, the user agent
-          returns the cookie in the Cookie header.</t>
+        <section title="Semantics (Non-Normative)">
+          <t>This section describes a simplified semantics of the Set-Cookie
+          header. These semantics are detailed enough to be useful for
+          understanding the most common uses of the cookie protocol. The full
+          semantics are described in Section [TODO: Learn how to do
+          cross-references.].</t>
 
-          <t>The server can override the default handling of cookies by
-          specifying cookie attributes.  User agents ignore unrecognized
-          cookie attributes.</t>
+          <t>When the user agent receives a Set-Cookie header, the user agent
+          stores the cookie in its cookie store. When the user agent
+          subsequently makes an HTTP request, the user agent consults its
+          cookie store and includes the applicable, non-expired cookies in the
+          Cookie header.</t>
+
+          <t>By default, cookies are returned only to the origin server and
+          expire at a the end of the current session (as defined by the user
+          agent). The server can override the default handling of cookies by
+          specifying various cookie attributes. User agents ignore
+          unrecognized cookie attributes.</t>
 
           <section title="Expires">
-            <t>The value of the Expires attribute represents the maximum
-            lifetime of the cookie, represented as the point in time at which
-            the cookie expires. If the server does not supply an Expires or a
-            Max-Age attribute, the lifetime of the cookie is limited to the
-            current session (as defined by the user agent).</t>
+            <t>The Expires attribute represent the maximum lifetime of the
+            cookie, represented as the date and time at which the cookie
+            expires. The user agent is not required to persist the cookie
+            until the specified date has passed. In fact, user agents often
+            evict cookies from the cookie store due to memory pressure or
+            privacy concerns.</t>
           </section>
           <section title="Domain">
-            <t>The Domain attribute specifies the domain for which the cookie
-            is valid.  The leading dot isn't required.  If there is no Domain
-            attribute, the default is to return the cookie only to the origin
-            server.  [TODO: You can only set cookies for related domains.]</t>
+            <t>The Domain attribute specifies the hosts for which the cookie
+            is applicable. For example, if the domain attribute contains the
+            value ".example.com", the use agent will include the cookie in the
+            Cookie header when making HTTPS requests to example.com,
+            www.example.com, and www.corp.example.com. (Note that the leading
+            U+2E (".") is meaningless and not required.) If the server omits
+            the Domain attribute, the user agent will return the cookie only
+            to the origin server</t>
+
+            <t>The user agent will reject cookies less the Domain attribute
+            specifies a scope for the cookie that would include the origin
+            server. For example, the user agent will accept a Domain attribute
+            of ".example.com" or of ".foo.example.com" from a response from
+            foo.example.com, but the user agent will not accept a Domain
+            attribute of ".bar.example.com" or ".baz.foo.example.com".</t>
+
+            <t>NOTE: For security reasons, some user agents are configured to
+            reject Domain attributes that do not correspond to a "registry
+            controlled" domain (or a subdomain of a registry controlled
+            domain). For example, some user agents will reject Domain
+            attributes of ".com".</t>
           </section>
           <section title="Path">
             <t>The Path attribute specifies the scope of the cookie within a
