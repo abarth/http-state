@@ -307,12 +307,18 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
       </section>
     </section>
     <section title="The Full Cookie Protocol">
-      <t>Not all origin servers conform to the behavior specified in the
-      previous section.  To ensure interoperability, user agents MUST
-      process cookies in a manner that is "black-box" indistinguishable from
-      the requirements in this section.</t>
+      <t>For historical reasons, the full cookie protocol contains a number of
+      exotic quirks. This section is intended to specify the cookie protocol
+      in enough precision to enable a user agent that implement the protocol
+      precisely as specified to interoperate with existing servers.</t>
 
-      <section title="Parsing the Set-Cookie Header">
+      <t>Although some parts of the cookie protocol is specified
+      algorithmically, user agents are free to implement the cookie protocol
+      in any manner as long as their resultant behavior is "black-box"
+      indistinguishable from a user agent that implements the protocol as
+      described.</t>
+
+      <section title="The Set-Cookie Header">
         <t>When a user agent receives an Set-Cookie header in an HTTP
         response, the user agent *receives a set-cookie-string*
         consisting of the value of the header.</t>
@@ -320,9 +326,6 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
         <t>A user agent MUST use the following algorithm to parse
         set-cookie-strings:
         <list style="numbers">
-          <t>[TODO: Deal with "," characters.  My current thinking is that
-          we don't actually have to do anything special for them.]</t>
-
           <t>If the set-cookie-string is empty or consists entirely of U+20
           (SPACE) characters, the user agent MAY ignore the entirely.
           [TODO: What about tabs?]</t>
@@ -330,15 +333,14 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           <t>If the header contains a U+3B (";") character:
           <list style="empty">
             <t>the name-value-pair string is characters up to, but not
-            including, the first U+3B (";"), and the
-            unparsed-attributes are the remainder of the header
-            (including the U+3B (";") in question).</t>
+            including, the first U+3B (";"), and the unparsed-attributes are
+            the remainder of the header (including the U+3B (";") in
+            question).</t>
           </list>
           Otherwise:
           <list style="empty">
             <t>the name-value-pair string is all the character contained in
-            the header, and the unparsed-attributes is the empty
-            string.</t>
+            the header, and the unparsed-attributes is the empty string.</t>
           </list>
           </t>
 
@@ -352,13 +354,12 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           Otherwise:
           <list style="empty">
             <t>the name string is empty, and the value string is the entire
-            name-value-pair string. [TODO: This is not supported by every user
-            agent.]</t>
+            name-value-pair string.</t>
           </list>
           </t>
 
-          <t>Remove any leading or trailing space from the name
-          string and the value string.</t>
+          <t>Remove any leading or trailing U+20 (SPACE) characters from the
+          name string and the value string. [TODO: What about tabs?]</t>
 
           <t>The cookie-name is the name string, and the cookie-value is the
           value string.</t>
@@ -368,8 +369,8 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
         <t>The user agent MUST use the following algorithm to parse the
         unparsed-attributes:
         <list style="numbers">
-          <t>If the unparsed-attributes string is empty, skip the rest of these
-          steps.</t>
+          <t>If the unparsed-attributes string is empty, skip the rest of
+          these steps.</t>
 
           <t>Consume the first character of the unparsed-attributes (which
           will be a U+3B (";") character).</t>
@@ -377,66 +378,47 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           <t>If the remaining unparsed-attributes contains a U+3B (";")
           character:
           <list style="empty">
-            <t>Consume the characters of the unparsed-attributes up to, but
+            <t>consume the characters of the unparsed-attributes up to, but
             not including, the first U+3B (";") character.</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>Consume the remainder of the unparsed-attributes.</t>
+            <t>consume the remainder of the unparsed-attributes.</t>
           </list>
-          The characters consumed in this step comprise the
-          attribute-value-pair string.</t>
+          Let the cookie-av string be the characters consumed in this
+          step.</t>
 
-          <t>If the attribute-value-pair string contains a U+3D ("=")
-          character:
+          <t>If the cookie-av string contains a U+3D ("=") character:
           <list style="empty">
-            <t>the (possibly empty) name string is the characters up to, but
-            not including, the first U+3D ("=") character, and the (possibly
-            empty) value string is the characters after the first U+3D ("=")
-            character .</t>
+            <t>the (possibly empty) attribute-name string is the characters up
+            to, but not including, the first U+3D ("=") character, and the
+            (possibly empty) attribute-value string is the characters after
+            the first U+3D ("=") character.</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>the name string is the entire attribute-value-pair string,
-            and the value string is empty.  (Note that this step differs
+            <t>the attribute-name string is the entire cookie-av string, and
+            the attribute-value string is empty. (Note that this step differs
             from the analogous step when parsing the name-value-pair
             string.)</t>
           </list>
           </t>
 
-          <t>Remove any leading or trailing space from the name string and
-          the value string.  [TODO: Should this be LWS?  What about vertical
-          tabs, etc.]</t>
+          <t>Remove any leading or trailing U+20 (SPACE) characters from the
+          attribute-name string and the attribute-value string. [TODO: What
+          about tabs? Vertical tabs?]</t>
 
-          <t>If the name is a ASCII case-insensitive match for an entry in
-          the following table, process the value string as instructed.
-          <figure>
-            <artwork>
-              <![CDATA[
-       Attribute  |  Instruction
-      ------------+---------------------
-       Max-Age    |  See Section [TODO]
-       Expires    |  See Section [TODO] 
-       Domain     |  See Section [TODO]
-       Path       |  See Section [TODO]
-       Secure     |  See Section [TODO]
-       HttpOnly   |  See Section [TODO]
-              ]]>
-            </artwork>
-          </figure>
-          </t>
+          <t>Process the attribute-name and attribute-value according to the
+          requirements in the following subsections.</t>
 
           <t>Return to Step 1.</t>
         </list>
         </t>
 
-        <t>[TODO: Can parsing a cookie ever fail?  Doesn't look like
-        it!  Well, unless you count "Set-Cookie: " as a fail...]</t>
-
         <t>When the user agent finishes parsing the set-cookie-string
         header, the user agent *receives a cookie* from the origin server
         with name cookie-name, value cookie-value, and attributes
-        cookie-attribute-list.</t>
+        cookie-av-list.</t>
 
         <section title="The Max-Age Attribute">
           <t>When the user agent receives a cookie attribute with a name
