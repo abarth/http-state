@@ -590,18 +590,16 @@ mystery         = <anything except a delimiter>
           <t>The user agent MUST use the following algorithm to compute the
           default-path of a cookie:
           <list style="numbers">
-            <t>Let uri-path be the path portion of the URI from which the
-            user agent received the cookie.  [TODO: Define this more
-            precisely.]</t>
+            <t>Let uri-path be the path portion of the Request-URI.</t>
 
-            <t>If the first character of the uri-path is not a "/"
-            character, output "/" and skip the remaining steps.</t>
+            <t>If the first character of the uri-path is not a U+2F ("/")
+            character, output U+2F ("/") and skip the remaining steps.</t>
 
-            <t>If the uri-path contains only a single "/" character, output
-            "/" and skip the remaining steps.</t>
+            <t>If the uri-path contains only a single U+2F ("/") character,
+            output U+2F ("/") and skip the remaining steps.</t>
 
-            <t>Output the characters of the uri-path from the first
-            character up to, and but not including, the right-most "/".</t>
+            <t>Output the characters of the uri-path from the first character
+            up to, and but not including, the right-most U+2F ("/").</t>
           </list>
           </t>
 
@@ -611,10 +609,10 @@ mystery         = <anything except a delimiter>
           <list style="symbols">
             <t>The cookie-path and the request-path are identical.</t>
 
-            <t>The last character of the cookie-path is "/".</t>
+            <t>The last character of the cookie-path is U+2F ("/").</t>
 
-            <t>The first character of the request-path that is not
-            included in the cookie-path is a "/" character.</t>
+            <t>The first character of the request-path that is not included in
+            the cookie-path is a U+2F ("/") character.</t>
           </list>
           </t>
 
