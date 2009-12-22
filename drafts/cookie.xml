@@ -594,7 +594,7 @@ mystery         = <anything except a delimiter>
 
           <t>[TODO: Convert to lower case? Strip trailing "." characters?]</t>
 
-          <t>[TODO: Test ".127.0.0.1" and "127.0.0.1"]
+          <t>[TODO: Test ".127.0.0.1" and "127.0.0.1"]</t>
 
           <t>If the Request-URI's host does not domain-match the
           cookie-domain, ignore the cookie-av. [TODO: Add a test for this with
