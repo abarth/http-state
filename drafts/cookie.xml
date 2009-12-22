@@ -627,38 +627,29 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
-          <t>When the user agent receives a cookie attribute with a name
-          string that case-insensitively matches the string "Path", the user
-          agent MUST process the value string as follows:
-          <list style="symbols">
-            <t>If the value string is empty, then append an attribute named
-            Path to the cookie-attribute-list with a value equal to
-            default-path of the cookie.  [TODO: Is this right if there are
-            more than one path attribute?]</t>
+          <t>If the attribute-name case-insensitively matches the string
+          "Path", the user agent MUST process the cookie-av as follows.</t>
 
-            <t>If the value string is non-empty and the first character is
-            "/", then append an attribute named Path to the
-            cookie-attribute-list with a value equal to value string.</t>
+          <t>If attribute-value is empty or the first character is not U+2F
+          ("/"), then ignore the cookie-av. [TODO: We need more tests for
+          this, including with " characters.]</t>
 
-            <t>Otherwise, ignore the attribute.</t>
-          </list>
-          </t>
+          <t>Let cookie-path be the attribute-value.</t>
 
-          <t>[TODO: Test \ ? ; # $ % etc]</t> 
+          <t>Append an attribute to the cookie-attribute-list with an
+          attribute-name of Path and an attribute-value of cookie-path.</t>
         </section>
         <section title="The Secure Attribute">
-          <t>When the user agent receives a cookie attribute with a name
-          string that case-insensitively matches the string "Secure", the
-          user agent MUST append an attribute named Secure to the
-          cookie-attribute-list with an empty value regardless of the value
-          string.</t>
+          <t>If the attribute-name case-insensitively matches the string
+          "Secure", the user agent MUST append an attribute to the
+          cookie-attribute-list with an attribute-name of Secure and an empty
+          attribute-value.</t>
         </section>
         <section title="The HttpOnly Attribute">
-          <t>When the user agent receives a cookie attribute with a name
-          string that case-insensitively matches the string "HttpOnly", the
-          user agent MUST append an attribute named HttpOnly to the
-          cookie-attribute-list with an empty value regardless of the value
-          string.</t>
+          <t>If the attribute-name case-insensitively matches the string
+          "HttpOnly", the user agent MUST append an attribute to the
+          cookie-attribute-list with an attribute-name of Secure and an empty
+          attribute-value.</t>
         </section>
       </section>
       <section title="Storage Model">
