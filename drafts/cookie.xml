@@ -672,7 +672,7 @@ mystery         = <anything except a delimiter>
 
         <t>When the user agent receives a cookie from a Request-URI with name
         cookie-name, value cookie-value, and attributes cookie-attribute-list,
-        the user agent MUST process the cookie as follows.
+        the user agent MUST process the cookie as follows:
         <list style="numbers">
           <t>Create a new cookie with name cookie-name, value cookie-value,
           and last-access-time to the current date and time.</t>
@@ -726,31 +726,29 @@ mystery         = <anything except a delimiter>
           <t>If the cookie-attribute-list contains an attribute with an
           attribute-name of "HttpOnly", set the cookie's http-only-flag to
           true.  Otherwise, set cookie's http-only-flag to false.</t>
+
+          <t>Remove from the cookie store all cookies that have the share the
+          same name, domain, path, and host-only fields as the newly created
+          cookie. [TODO: Validate this list!] [TODO: There's some funny
+          business around http-only here.]</t>
+
+          <t>Insert the newly created cookie into the cookie store.</t>
         </list>
         </t>
 
-        <t>Remove from the cookie store all cookies that have the share
-        the same name, domain, path, and host-only fields as the newly
-        created cookie.  [TODO: Validate this list!]  [TODO: There's some
-        funny business around http-only here.]</t> 
-
-        <t>Insert the newly created cookie into the cookie store.</t>
-
-tttt
-        <t>The user agent MUST evict a cookie from the cookie store if A
+        <t>The user agent MUST evict a cookie from the cookie store if a
         cookie exists in the cookie store with an expiry date in the
         past.</t>
 
         <t>The user agent MAY evict a cookie from the cookie store if the
         number of cookies sharing a domain field exceeds some predetermined
-        upper bound (such as 50 cookies).  [TODO: Explain where 50 comes
-        from.]</t>
+        upper bound (such as 50 cookies).</t>
 
-        <t>The user agent MAY evict cookies from the cookie store if the
-        cookie store exceeds some maximum storage bound (such as 3000
-        cookies).  [TODO: Explain where 3000 comes from.]</t>
+        <t>The user agent MAY evict a cookie from the cookie store if the
+        cookie store exceeds some predetermined upper bound (such as 3000
+        cookies).</t>
 
-        <t>When the user agent evicts cookies from the cookie store, the
+        <t>When the user agent evicts a cookie from the cookie store, the
         user agent MUST evict cookies in the following priority order:
         <list style="numbers">
           <t>Cookies with an expiry date in the past.</t>
@@ -766,16 +764,9 @@ tttt
         MUST evict the cookie with the least recent last-access date
         first.</t>
 
-        <t>When "the current session is over", the user agent MUST remove from
-        the cookie store all cookies with the persistent field set to
-        false.
-        <list>
-          <t>NOTE: This document does not define when "the current session
-          is over."  Many user agents remove non-persistent cookies when
-          they exit.  However, other user agent expire non-persistent
-          cookies using other heuristics.</t>
-        </list> 
-        </t>
+        <t>When "the current session is over" (as defined by the user agent),
+        the user agent MUST remove from the cookie store all cookies with the
+        persistent-flag set to false.</t>
       </section>
       <section title="The Cookie Header">
         <t>When the user agent generates an HTTP request for a particular
