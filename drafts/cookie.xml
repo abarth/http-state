@@ -237,13 +237,25 @@ httponly-av       = "HttpOnly"
             attributes of ".com".</t>
           </section>
           <section title="Path">
-            <t>The Path attribute specifies the scope of the cookie within a
-            given FQDN.  The user agent will include a cookie in an HTTP
-            request only if the Request-URI's path matches, or is a
-            subdirectory of, the cookie's Path attribute (where the "/"
-            character is interpreted as a directory separator).  The default
-            value for the Path attribute is the directory of the Request-URI
-            when the cookie was received.</t>
+            <t>The Path attribute limits the scope of the cookie to a set of
+            paths. When a cookie has a Path attribute, the user agent will
+            include the cookie in an HTTP request only if the path portion of
+            the request's Request-URI matches (or is a subdirectory of) the
+            cookie's Path attribute, where the U+2F ("/") character is
+            interpreted as a directory separator. If the server omits the Path
+            attribute, the user agent will use the directory of the
+            Request-URI's path component as the default value.</t>
+
+            <t>Although seemingly useful for isolating cookies between
+            different paths within a given domain, the Path attribute cannot
+            be relied upon for security for two reasons: First, user agents do
+            not prevent one path from overwriting the cookies for another
+            path. For example, a response to a request for /foo/bar.html can
+            include a Set-Cookie header with a Path attribute of "/baz".
+            Second, the "same-origin" policy implemented by many user agents
+            does not isolate different paths within an origin. For example,
+            /foo/bar.html can read cookies with a Path attribute of "/baz"
+            because they are within the "same origin".</t>
           </section>
           <section title="Secure">
             <t>The user agent SHOULD protect the confidentiality of cookies
