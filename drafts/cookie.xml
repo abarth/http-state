@@ -175,8 +175,8 @@ httponly-av       = "HttpOnly"
           <t>This section describes a simplified semantics of the Set-Cookie
           header. These semantics are detailed enough to be useful for
           understanding the most common uses of the cookie protocol. The full
-          semantics are described in Section [TODO: Learn how to do
-          cross-references.].</t>
+          semantics are described in <xref target="cookie-protocol"
+          />.</t>
 
           <t>When the user agent receives a Set-Cookie header, the user agent
           stores the cookie in its cookie store.When the user agent
@@ -307,7 +307,7 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
         </section>
       </section>
     </section>
-    <section title="The Full Cookie Protocol">
+    <section anchor="cookie-protocol" title="The Cookie Protocol">
       <t>For historical reasons, the full cookie protocol contains a number of
       exotic quirks. This section is intended to specify the cookie protocol
       in enough precision to enable a user agent that implement the protocol
