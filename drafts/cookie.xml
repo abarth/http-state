@@ -417,17 +417,21 @@ mystery         = <anything except a delimiter>
           </t>
         </section>
         <section title="Domains">
-          <t>A request-host *domain-matches* a cookie-domain if the
-          cookie-domain is a suffix of the request-host and at least one of
-          the following conditions hold:
-          <list style="symbols">
-            <t>The cookie-domain and the request-host are identical [TODO:
-            Case sensitivity? Trailing "." characters?].</t>
+          <t>A *canonicalized* host-name is the host-name (1) converted to
+          lower case and (2) with the the last character removed if that
+          character is a U+2E (".") character.</t>
 
-            <t>The last character of the request-host that is not included in
-            the cookie-domain is a U+2E (".") character and request-host is a
-            host name (i.e., not an IP address). [TODO: Is this the right way
-            to spec this???]</t>
+          <t>A request-host *domain-matches* a cookie-domain if the
+          cookie-domain is a suffix of the canonicalized request-host and at
+          least one of the following conditions hold:
+          <list style="symbols">
+            <t>The cookie-domain and the canonicalized request-host are
+            identical.</t>
+
+            <t>The last character of the canonicalized request-host that is
+            not included in the cookie-domain is a U+2E (".") character and
+            request-host is a host name (i.e., not an IP address). [TODO: Is
+            this the right way to spec this???]</t>
           </list>
           </t>
         </section>
