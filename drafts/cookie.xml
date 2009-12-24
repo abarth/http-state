@@ -656,12 +656,18 @@ mystery         = <anything except a delimiter>
           <t>If the attribute-name case-insensitively matches the string
           "Path", the user agent MUST process the cookie-av as follows.</t>
 
-          <t>If attribute-value is empty or the first character is not U+2F
-          ("/"), then ignore the cookie-av. [TODO: We need more tests for
-          this, including with " characters and with multiple Path
-          attributes.]</t>
-
-          <t>Let cookie-path be the attribute-value.</t>
+          <t>If the attribute-value is empty or if the first character of the
+          attribute-value is not U+2F ("/"):
+          <list style="empty">
+            <t>Let cookie-path be the default-path. [TODO: We need more tests
+            for this, including with " characters and with multiple Path
+            attributes.]</t>
+          </list>
+          Otherwise:
+          <list style="empty">
+            <t>Let cookie-path be the attribute-value.</t>
+          </list>
+          </t>
 
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Path and an attribute-value of cookie-path.</t>
