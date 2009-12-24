@@ -113,7 +113,7 @@
         <t>[TODO: Put some examples here.</t>
       </section>
     </section>
-    <section title="A Well-Behaved Profile of the Cookie Protocol">
+    <section title="A Well-Behaved Profile">
       <t>This section describes the syntax and semantics of a well-behaved
       profile of the protocol.  Servers SHOULD use the profile described in
       this section, both to maximize interoperability with existing user
