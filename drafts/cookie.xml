@@ -646,18 +646,11 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
-          <t>Let the canonicalized-cookie-domain be the canonicalized
-          cookie-domain.</t>
-
           <t>[TODO: Test ".127.0.0.1" and "127.0.0.1"]</t>
-
-          <t>If the Request-URI's host does not domain-match the
-          canonicalized-cookie-domain, ignore the cookie-av. [TODO: Add a test
-          for this with multiple Domain attributes.]</t>
 
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Domain and an attribute-value of
-          canonicalized-cookie-domain.</t>
+          canonicalized cookie-domain.</t>
         </section>
         <section title="The Path Attribute">
           <t>If the attribute-name case-insensitively matches the string
@@ -729,11 +722,17 @@ mystery         = <anything except a delimiter>
           <t>If the cookie-attribute-list contains an attribute with an
           attribute-name of "Domain":
           <list style="empty">
-            <t>Set the cookie's host-only-flag to false.</t>
-
-            <t>Set the cookie's domain to attribute-value of the last
+            <t>Let the domain-attribute be the attribute-value of the last
             attribute in the cookie-attribute-list with an attribute-name of
             "Domain".</t>
+
+            <t>If the Request-URI's host does not domain-match the
+            domain-attribute, ignore the cookie entirely and abort these
+            steps.</t>
+
+            <t>Set the cookie's host-only-flag to false.</t>
+
+            <t>Set the cookie's domain to the domain-attribute.</t>
           </list>
           Otherwise:
           <list style="empty">
