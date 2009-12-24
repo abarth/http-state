@@ -1039,12 +1039,5 @@ mystery         = <anything except a delimiter>
       <t>This document borrows heavily from RFC 2109.  [TODO: Figure out the
       proper way to credit the authors of RFC 2109.]</t>
     </section>
-    <section title="Tabled Items">
-      <t>Tabled items:
-      <list style="symbols">
-        <t>Public suffix.</t>
-      </list>
-      </t>
-    </section>
   </back>
 </rfc>
