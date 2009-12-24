@@ -319,6 +319,105 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
       indistinguishable from a user agent that implements the protocol as
       described.</t>
 
+      <section title="Algorithms">
+        <t>The cookie protocol uses a number of self-contained algorithms,
+        which are described in this section.</t>
+
+        <section title="Dates">
+          <t>The user agent MUST use the following algorithm to *parse a
+          cookie-date*:
+          <list style="numbers">
+            <t>Using the grammar below, divide the cookie-date into
+            date-tokens.
+            <figure>
+              <artwork type="abnf">
+                <![CDATA[
+cookie-date     = date-token *( 1*delimiter date-token )
+delimiter       = %x09 / %x20 / %x21 / %x22 / %x23 / %x24 /
+                  %x25 / %x26 / %x27 / %x28 / %x29 / %x2A /
+                  %x2B / %x2C / %x2D / %x2E / %x2F / %x3B /
+                  %x3C / %x3D / %x3E / %x3F / %x40 / %x5B /
+                  %x5C / %x5D / %x5E / %x5F / %x60 / %x7B /
+                  %x7C / %x7D / %x7E
+date-token      = day-of-month / month / year / time / mystery
+day-of-month    = 2DIGIT / DIGIT
+month           = "jan" [ mystery ] / "feb" [ mystery ] /
+                  "mar" [ mystery ] / "apr" [ mystery ] /
+                  "may" [ mystery ] / "jun" [ mystery ] /
+                  "jul" [ mystery ] / "aug" [ mystery ] /
+                  "sep" [ mystery ] / "oct" [ mystery ] /
+                  "nov" [ mystery ] / "dec" [ mystery ]
+year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
+time            = 2DIGIT ":" 2DIGIT ":" 2DIGIT
+mystery         = <anything except a delimiter>
+                ]]>
+              </artwork>
+            </figure>
+            </t>
+
+            <t>Process each date-token sequentially in the order the
+            date-tokens appear in the cookie-date:
+            <list style="numbers">
+              <t>If the found-day-of-month flag is not set and the date-token
+              matches the day-of-month production, set the found-day-of-month
+              flag and set the day-of-month-value to the number denoted by the
+              date-token. Skip the remaining sub-steps and continue to the
+              next date-token.</t>
+
+              <t>If the found-month flag is not set and the date-token matches
+              the month production, set the found-month flag and set the
+              month-value to the month denoted by the date-token. Skip the
+              remaining sub-steps and continue to the next date-token.</t>
+
+              <t>If the found-year flag is not set and the date-token matches
+              the year production, set the found-year flag and set the
+              year-value to the number denoted by the date-token. Skip the
+              remaining sub-steps and continue to the next date-token.</t>
+
+              <t>If the found-time flag is not set and the token matches the
+              time production, set the found-time flag and set the hour-value,
+              minute-value, and second-value to the numbers denoted by the
+              digits in the date-token, respectively. Skip the remaining
+              sub-steps and continue to the next date-token.</t>
+            </list>
+            </t>
+
+            <t>Abort these steps and *fail to parse* if
+            <list style="symbols">
+              <t>at least one of the found-day-of-month, found-month,
+              found-year, or found-time flags is not set,</t>
+
+              <t>the day-of-month-value is less than 1 or greater than 31,</t>
+
+              <t>the year-value is less than 1601 or greater than 30827,</t>
+
+              <t>the hour-value is greater than 23,</t>
+
+              <t>the minute-value is greater than 59, or</t>
+
+              <t>the second-value is greater than 59.</t>
+            </list>
+            </t>
+
+            <t>If the year-value is greater than 68 and less than 100,
+            increment the year-value by 1900.</t>
+
+            <t>If the year-value is greater than or equal to 0 and less than
+            69, increment the year-value by 2000.</t>
+
+            <t>Let the parsed-cookie-date be the date whose day-of-month,
+            month, year, hour, minute, and second (in GMT) are the
+            day-of-month-value, the month-value, the year-value, the
+            hour-value, the minute-value, and the second-value,
+            respectively.</t>
+
+            <t>Return the parsed-cookie-date as the result of this
+            algorithm.</t>
+          </list>
+          </t>
+        </section>
+      </section>
+
       <section title="The Set-Cookie Header">
         <t>When a user agent receives an Set-Cookie header in an HTTP
         response, the user agent *receives a set-cookie-string*
@@ -445,105 +544,28 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           <t>If the attribute-name case-insensitively matches the string
           "Expires", the user agent MUST process the cookie-av as follows.</t>
 
-          <t>Using the grammar below, divide the value of the attribute-value
-          into date-tokens.
-          <figure>
-            <artwork type="abnf">
-              <![CDATA[
-cookie-date     = date-token *( 1*delimiter date-token )
-delimiter       = %x09 / %x20 / %x21 / %x22 / %x23 / %x24 /
-                  %x25 / %x26 / %x27 / %x28 / %x29 / %x2A /
-                  %x2B / %x2C / %x2D / %x2E / %x2F / %x3B /
-                  %x3C / %x3D / %x3E / %x3F / %x40 / %x5B /
-                  %x5C / %x5D / %x5E / %x5F / %x60 / %x7B /
-                  %x7C / %x7D / %x7E
-date-token      = day-of-month / month / year / time / mystery
-day-of-month    = 2DIGIT / DIGIT
-month           = "jan" [ mystery ] / "feb" [ mystery ] /
-                  "mar" [ mystery ] / "apr" [ mystery ] /
-                  "may" [ mystery ] / "jun" [ mystery ] /
-                  "jul" [ mystery ] / "aug" [ mystery ] /
-                  "sep" [ mystery ] / "oct" [ mystery ] /
-                  "nov" [ mystery ] / "dec" [ mystery ]
-year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
-time            = 2DIGIT ":" 2DIGIT ":" 2DIGIT
-mystery         = <anything except a delimiter>
-              ]]>
-            </artwork>
-          </figure>
-          </t>
+          <t>Let the parsed-cookie-date be the result of parsing the
+          attribute-value as cookie-date.</t>
 
-          <t>Process each date-token sequentially in the order the date-tokens
-          appear in attribute-value:
-          <list style="numbers">
-            <t>If the found-day-of-month flag is not set and the date-token
-            matches the day-of-month production, set the found-day-of-month
-            flag and set the day-of-month-value to the number denoted by the
-            date-token. Skip the remaining sub-steps and continue to the next
-            date-token.</t>
-
-            <t>If the found-month flag is not set and the date-token matches
-            the month production, set the found-month flag and set the
-            month-value to the month denoted by the date-token. Skip the
-            remaining sub-steps and continue to the next date-token.</t>
-
-            <t>If the found-year flag is not set and the date-token matches
-            the year production, set the found-year flag and set the
-            year-value to the number denoted by the date-token. Skip the
-            remaining sub-steps and continue to the next date-token.</t>
-
-            <t>If the found-time flag is not set and the token matches the
-            time production, set the found-time flag and set the hour-value,
-            minute-value, and second-value to the numbers denoted by the
-            digits in the date-token, respectively. Skip the remaining
-            sub-steps and continue to the next date-token.</t>
-          </list>
-          </t>
-
-          <t>Ignore the cookie-av if
-          <list style="symbols">
-            <t>at least one of the found-day-of-month, found-month,
-            found-year, or found-time flags is not set,</t>
-
-            <t>the day-of-month-value is less than 1 or greater than 31,</t>
-
-            <t>the year-value is less than 1601 or greater than 30827,</t>
-
-            <t>the hour-value is greater than 23,</t>
-
-            <t>the minute-value is greater than 59, or</t>
-
-            <t>the second-value is greater than 59.</t>
-          </list>
-          </t>
-
-          <t>If the year-value is greater than 68 and less than 100, increment
-          the year-value by 1900.</t>
-
-          <t>If the year-value is greater than or equal to 0 and less than
-          69, increment the year-value by 2000.</t>
-
-          <t>Let the relative-expiry-time be the date whose day-of-month,
-          month, year, hour, minute, and second (in GMT) are the
-          day-of-month-value, the month-value, the year-value, the hour-value,
-          the minute-value, and the second-value, respectively.</t>
+          <t>If the attribute-value failed to parse as a cookie date, ignore
+          the cookie-av.</t>
 
           <t>If the user agent received the set-cookie-string from an HTTP
-          response that contains a Date header field:
+          response that contains a Date header field and the contents of the
+          last Date header field successfully parse as a cookie-date:
           <list style="empty">
-            <t>Let server-time be the date obtained by parsing the contents of
-            the last Date header field using the date parsing algorithm.
-            [TODO: Refactor this not to be recursive.]</t>
+            <t>Let server-date be the date obtained by parsing the contents of
+            the last Date header field as a cookie-date.</t>
 
-            <t>Let time-delta be the number of seconds between the server-time
-            and the relative-expiry-time.</t>
+            <t>Let time-delta be the number of seconds between the
+            server-date and the parsed-cookie-date.</t>
 
             <t>Let the expiry-time be the current date and time plus
             delta-seconds seconds.</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>Let the expiry-time be the relative-expiry-time.</t>
+            <t>Let the expiry-time be the parsed-cookie-date.</t>
           </list>
           </t>
 
