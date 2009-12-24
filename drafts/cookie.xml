@@ -417,9 +417,8 @@ mystery         = <anything except a delimiter>
           </t>
         </section>
         <section title="Domains">
-          <t>A *canonicalized* host-name is the host-name (1) converted to
-          lower case and (2) with the the last character removed if that
-          character is a U+2E (".") character.</t>
+          <t>A *canonicalized* host-name is the host-name converted to
+          lower case.</t>
 
           <t>A request-host *domain-matches* a cookie-domain if the
           cookie-domain is a suffix of the canonicalized request-host and at
@@ -647,17 +646,18 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
-          <t>[TODO: Convert to lower case? Strip trailing "." characters?]</t>
+          <t>Let the canonicalized-cookie-domain be the canonicalized
+          cookie-domain.</t>
 
           <t>[TODO: Test ".127.0.0.1" and "127.0.0.1"]</t>
 
           <t>If the Request-URI's host does not domain-match the
-          cookie-domain, ignore the cookie-av. [TODO: Add a test for this with
-          multiple Domain attributes.]</t>
+          canonicalized-cookie-domain, ignore the cookie-av. [TODO: Add a test
+          for this with multiple Domain attributes.]</t>
 
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Domain and an attribute-value of
-          cookie-domain.</t>
+          canonicalized-cookie-domain.</t>
         </section>
         <section title="The Path Attribute">
           <t>If the attribute-name case-insensitively matches the string
