@@ -360,7 +360,7 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
 
           <t>Remove any leading or trailing WSP characters from the name
           string and the value string.</t>
-
+          
           <t>The cookie-name is the name string, and the cookie-value is the
           value string.</t>
         </list>
@@ -405,8 +405,7 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           </t>
 
           <t>Remove any leading or trailing WSP characters from the
-          attribute-name string and the attribute-value string. [TODO: Test
-          tabs and vertical tabs!]</t>
+          attribute-name string and the attribute-value string.</t>
 
           <t>Process the attribute-name and attribute-value according to the
           requirements in the following subsections.</t>
