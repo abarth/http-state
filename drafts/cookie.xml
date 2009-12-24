@@ -358,8 +358,8 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           </list>
           </t>
 
-          <t>Remove any leading or trailing WSP characters from the
-          name string and the value string. [TODO: Add test for tabs!]</t>
+          <t>Remove any leading or trailing WSP characters from the name
+          string and the value string.</t>
 
           <t>The cookie-name is the name string, and the cookie-value is the
           value string.</t>
