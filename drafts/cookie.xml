@@ -632,7 +632,8 @@ mystery         = <anything except a delimiter>
           "Domain", the user agent MUST process the cookie-av as follows.</t>
 
           <t>If the attribute-value is empty, then ignore the cookie-av.
-          [TODO: Add a test for this with multiple Domain attributes.]</t>
+          [TODO: Add a test for this with multiple Domain attributes. Covered
+          by domain0041--domain0043. Need to sort out what's going on.]</t>
 
           <t>If the first character of the attribute-value string is U+2E
           ("."):
