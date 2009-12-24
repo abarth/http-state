@@ -764,7 +764,7 @@ mystery         = <anything except a delimiter>
           true.  Otherwise, set cookie's http-only-flag to false.</t>
 
           <t>Remove from the cookie store all cookies that have the share the
-          same name, domain, path, and host-only fields as the newly created
+          same name, domain, path, and host-only-flag as the newly created
           cookie. [TODO: Validate this list!] [TODO: There's some funny
           business around http-only here.]</t>
 
