@@ -67,9 +67,9 @@
         <t>The following core rules are included by reference, as defined in
         <xref target="RFC5234"/>, Appendix B.1: ALPHA (letters), CR (carriage
         return), CRLF (CR LF), CTL (controls), DIGIT (decimal 0-9), DQUOTE
-        (double quote), HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed), OCTET
-        (any 8-bit sequence of data), SP (space), VCHAR (any visible [USASCII]
-        character), and WSP (whitespace).</t>
+        (double quote), HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed),
+        OCTET (any 8-bit sequence of data), SP (space), HTAB (horizontal tab),
+        VCHAR (any visible [USASCII] character), and WSP (whitespace).</t>
       </section>
     </section>
     <section title="Terminology">
@@ -327,9 +327,8 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
         <t>A user agent MUST use the following algorithm to parse
         set-cookie-strings:
         <list style="numbers">
-          <t>If the set-cookie-string is empty or consists entirely of U+20
-          (SPACE) characters, the user agent MAY ignore the entirely.
-          [TODO: What about tabs?]</t>
+          <t>If the set-cookie-string is empty or consists entirely of WSP
+          characters, the user agent MAY ignore the entirely.</t>
 
           <t>If the header contains a U+3B (";") character:
           <list style="empty">
@@ -359,8 +358,8 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           </list>
           </t>
 
-          <t>Remove any leading or trailing U+20 (SPACE) characters from the
-          name string and the value string. [TODO: What about tabs?]</t>
+          <t>Remove any leading or trailing WSP characters from the
+          name string and the value string. [TODO: Add test for tabs!]</t>
 
           <t>The cookie-name is the name string, and the cookie-value is the
           value string.</t>
@@ -405,9 +404,9 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           </list>
           </t>
 
-          <t>Remove any leading or trailing U+20 (SPACE) characters from the
-          attribute-name string and the attribute-value string. [TODO: What
-          about tabs? Vertical tabs?]</t>
+          <t>Remove any leading or trailing WSP characters from the
+          attribute-name string and the attribute-value string. [TODO: Test
+          tabs and vertical tabs!]</t>
 
           <t>Process the attribute-name and attribute-value according to the
           requirements in the following subsections.</t>
