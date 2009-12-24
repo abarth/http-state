@@ -821,10 +821,17 @@ mystery         = <anything except a delimiter>
           <t>Let cookie-list be the set of cookies from the cookie store
           that meet the following requirements:
           <list style="symbols">
-            <t>If the cookie's host-only-flag is true, the Request-URI's host
-            and the cookie's domain are identical [TODO: Case? Trailing "."?].
-            Otherwise, the Request-URI's host domain-matches cookie's
-            domain.</t>
+            <t>Let request-host be the Request-URI's host. Either:
+            <list style="empty">
+              <t>The cookie's host-only-flag is true and the canonicalized
+               request-host is identical to the cookie's domain.</t>
+            </list>
+            Or:
+            <list style="empty">
+              <t>The cookie's host-only-flag is false and the request-host
+              domain-matches cookie's domain.</t>
+            </list>
+            </t>
 
             <t>The Request-URI's path patch-matches cookie's path.</t>
 
