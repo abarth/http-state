@@ -889,7 +889,7 @@ mystery         = <anything except a delimiter>
       SHOULD provide each of the following minimum capabilities:
       <list style="symbols">
         <t>At least 4096 bytes per cookie (as measured by the sum of the
-        length of the cookie's name and value). [TODO: Validate]</t>
+        length of the cookie's name, value, and attributes).</t>
 
         <t>At least 50 cookies per domain.</t>
 
