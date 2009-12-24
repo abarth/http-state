@@ -254,7 +254,7 @@ httponly-av       = "HttpOnly"
             channels (where "secure" is defined by the user agent). When a
             cookie has the Secure attribute, the user agent will include the
             cookie in an HTTP request only if the request is transmitted over
-            a secure channel (typically TLS [TODO: Cite TLS]).</t>
+            a secure channel (typically TLS <xref target="RFC5234"/>).</t>
 
             <t>Although seemingly useful for protecting cookies from active
             network attackers, the Secure attribute protects only the cookie's
@@ -965,7 +965,8 @@ mystery         = <anything except a delimiter>
             <organization>Microsoft Corporation</organization>
             <address><email>paulle@microsoft.com</email></address>
           </author>
-          <author initials="T." surname="Berners-Lee" fullname="T. Berners-Lee">
+          <author initials="T." surname="Berners-Lee"
+                  fullname="T. Berners-Lee">
             <organization>W3C</organization>
             <address><email>timbl@w3.org</email></address>
           </author>
@@ -973,11 +974,13 @@ mystery         = <anything except a delimiter>
         </front>
         <seriesInfo name="RFC" value="2616"/>
       </reference>
-
       <reference anchor="RFC5234">
         <front>
-          <title abbrev="ABNF for Syntax Specifications">Augmented BNF for Syntax Specifications: ABNF</title>
-          <author initials="D." surname="Crocker" fullname="Dave Crocker" role="editor">
+          <title abbrev="ABNF for Syntax Specifications">
+            Augmented BNF for Syntax Specifications: ABNF
+          </title>
+          <author initials="D." surname="Crocker"
+                  fullname="Dave Crocker" role="editor">
             <organization>Brandenburg InternetWorking</organization>
             <address>
               <email>dcrocker@bbiw.net</email>
@@ -994,9 +997,23 @@ mystery         = <anything except a delimiter>
         <seriesInfo name="STD" value="68"/>
         <seriesInfo name="RFC" value="5234"/>
       </reference>
+      <reference anchor='RFC5246'> 
+        <front> 
+          <title>
+            The Transport Layer Security (TLS) Protocol Version 1.2
+          </title> 
+          <author initials='T.' surname='Dierks' fullname='T. Dierks'> 
+            <organization />
+          </author> 
+          <author initials='E.' surname='Rescorla' fullname='E. Rescorla'> 
+            <organization />
+          </author> 
+          <date year='2008' month='August' />
+        </front>
+        <seriesInfo name='RFC' value='5246' />
+      </reference>
     </references>
-  
-  
+
     <section title="Acknowledgements">
       <t>This document borrows heavily from RFC 2109.  [TODO: Figure out the
       proper way to credit the authors of RFC 2109.]</t>
