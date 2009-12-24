@@ -631,9 +631,8 @@ mystery         = <anything except a delimiter>
           <t>If the attribute-name case-insensitively matches the string
           "Domain", the user agent MUST process the cookie-av as follows.</t>
 
-          <t>If the attribute-value is empty, then ignore the cookie-av.
-          [TODO: Add a test for this with multiple Domain attributes. Covered
-          by domain0041--domain0043. Need to sort out what's going on.]</t>
+          <t>If the attribute-value is empty, the behavior is undefined.
+          However, user agent SHOULD ignore the cookie-av entirely.</t>
 
           <t>If the first character of the attribute-value string is U+2E
           ("."):
