@@ -416,8 +416,52 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
         </section>
-      </section>
+        <section title="Domains">
+          <t>A request-host *domain-matches* a cookie-domain if the
+          cookie-domain is a suffix of the request-host and at least one of
+          the following conditions hold:
+          <list style="symbols">
+            <t>The cookie-domain and the request-host are identical [TODO:
+            Case sensitivity? Trailing "." characters?].</t>
 
+            <t>The last character of the request-host that is not included in
+            the cookie-domain is a U+2E (".") character and request-host is a
+            host name (i.e., not an IP address). [TODO: Is this the right way
+            to spec this???]</t>
+          </list>
+          </t>
+        </section>
+        <section title="Paths">
+          <t>The user agent MUST use the following algorithm to compute the
+          *default-path* of a cookie:
+          <list style="numbers">
+            <t>Let uri-path be the path portion of the Request-URI.</t>
+
+            <t>If the first character of the uri-path is not a U+2F ("/")
+            character, output U+2F ("/") and skip the remaining steps.</t>
+
+            <t>If the uri-path contains only a single U+2F ("/") character,
+            output U+2F ("/") and skip the remaining steps.</t>
+
+            <t>Output the characters of the uri-path from the first character
+            up to, and but not including, the right-most U+2F ("/").</t>
+          </list>
+          </t>
+
+          <t>A request-path *path-matches* a cookie-path if the cookie-path is
+          a prefix of the request-path and at least one of the following
+          conditions hold: [TODO: This isn't exactly what IE does.]
+          <list style="symbols">
+            <t>The cookie-path and the request-path are identical.</t>
+
+            <t>The last character of the cookie-path is U+2F ("/").</t>
+
+            <t>The first character of the request-path that is not included in
+            the cookie-path is a U+2F ("/") character.</t>
+          </list>
+          </t>
+        </section>
+      </section>
       <section title="The Set-Cookie Header">
         <t>When a user agent receives an Set-Cookie header in an HTTP
         response, the user agent *receives a set-cookie-string*
@@ -581,20 +625,6 @@ mystery         = <anything except a delimiter>
           attribute-name of Expires and an attribute-value of expiry-time.</t>
         </section>
         <section title="The Domain Attribute">
-          <t>A request-host domain-matches a cookie-domain if the
-          cookie-domain is a suffix of the request-host and at least one of
-          the following conditions hold:
-          <list style="symbols">
-            <t>The cookie-domain and the request-host are identical [TODO:
-            Case sensitivity? Trailing "." characters?].</t>
-
-            <t>The last character of the request-host that is not included in
-            the cookie-domain is a U+2E (".") character and request-host is a
-            host name (i.e., not an IP address). [TODO: Is this the right way
-            to spec this???]</t>
-          </list>
-          </t>
-
           <t>If the attribute-name case-insensitively matches the string
           "Domain", the user agent MUST process the cookie-av as follows.</t>
 
@@ -626,35 +656,6 @@ mystery         = <anything except a delimiter>
           cookie-domain.</t>
         </section>
         <section title="The Path Attribute">
-          <t>The user agent MUST use the following algorithm to compute the
-          default-path of a cookie:
-          <list style="numbers">
-            <t>Let uri-path be the path portion of the Request-URI.</t>
-
-            <t>If the first character of the uri-path is not a U+2F ("/")
-            character, output U+2F ("/") and skip the remaining steps.</t>
-
-            <t>If the uri-path contains only a single U+2F ("/") character,
-            output U+2F ("/") and skip the remaining steps.</t>
-
-            <t>Output the characters of the uri-path from the first character
-            up to, and but not including, the right-most U+2F ("/").</t>
-          </list>
-          </t>
-
-          <t>A request-path path-matches a cookie-path if the cookie-path is
-          a prefix of the request-path and at least one of the following
-          conditions hold: [TODO: This isn't exactly what IE does.]
-          <list style="symbols">
-            <t>The cookie-path and the request-path are identical.</t>
-
-            <t>The last character of the cookie-path is U+2F ("/").</t>
-
-            <t>The first character of the request-path that is not included in
-            the cookie-path is a U+2F ("/") character.</t>
-          </list>
-          </t>
-
           <t>If the attribute-name case-insensitively matches the string
           "Path", the user agent MUST process the cookie-av as follows.</t>
 
