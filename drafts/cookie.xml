@@ -658,7 +658,8 @@ mystery         = <anything except a delimiter>
 
           <t>If attribute-value is empty or the first character is not U+2F
           ("/"), then ignore the cookie-av. [TODO: We need more tests for
-          this, including with " characters.]</t>
+          this, including with " characters and with multiple Path
+          attributes.]</t>
 
           <t>Let cookie-path be the attribute-value.</t>
 
