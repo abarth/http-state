@@ -281,7 +281,7 @@ httponly-av       = "HttpOnly"
           <figure>
             <artwork type="abnf">
               <![CDATA[
-cookie-header = "Set-Cookie:" OWS cookie-pair *( ";" cookie-pair) OWS
+cookie-header = "Cookie:" OWS cookie-pair *( ";" cookie-pair) OWS
 cookie-pair   = cookie-name "=" cookie-value
 cookie-name   = token
 cookie-value  = token
