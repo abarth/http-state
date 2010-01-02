@@ -136,8 +136,8 @@
           <figure>
             <artwork type="abnf">
               <![CDATA[
-set-cookie-header = "Set-Cookie:" OWS a-cookie OWS
-a-cookie          = cookie-pair *( ";" cookie-av)
+set-cookie-header = "Set-Cookie:" OWS set-cookie-string OWS
+set-cookie-string = cookie-pair *( ";" cookie-av)
 cookie-pair       = cookie-name "=" cookie-value
 cookie-name       = token
 cookie-value      = token
@@ -281,7 +281,8 @@ httponly-av       = "HttpOnly"
           <figure>
             <artwork type="abnf">
               <![CDATA[
-cookie-header = "Cookie:" OWS cookie-pair *( ";" cookie-pair) OWS
+cookie-header = "Cookie:" OWS cookie-string OWS
+cookie-string = cookie-pair *( ";" cookie-pair) 
 cookie-pair   = cookie-name "=" cookie-value
 cookie-name   = token
 cookie-value  = token
@@ -781,8 +782,8 @@ mystery         = <anything except a delimiter>
         </list>
         </t>
 
-        <t>The user agent MUST evict a cookie from the cookie store if a
-        cookie exists in the cookie store with an expiry date in the
+        <t>The user agent MUST evict a cookie from the cookie store if, at any
+        time, a cookie exists in the cookie store with an expiry date in the
         past.</t>
 
         <t>The user agent MAY evict a cookie from the cookie store if the
@@ -798,10 +799,10 @@ mystery         = <anything except a delimiter>
         <list style="numbers">
           <t>Cookies with an expiry date in the past.</t>
 
-          <t>Cookies that share a domain field more than a predetermined
+          <t>Cookies that share a domain field with more than a predetermined
           number of other cookies.</t>
 
-          <t>All other cookies.</t>
+          <t>All cookies.</t>
         </list>
         </t>
 
@@ -827,7 +828,7 @@ mystery         = <anything except a delimiter>
         cookie-string from a cookie store and a Request-URI:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
-          that meet the following requirements:
+          that meet all of the following requirements:
           <list style="symbols">
             <t>Let request-host be the Request-URI's host. Either:
             <list style="empty">
@@ -855,9 +856,9 @@ mystery         = <anything except a delimiter>
             </list>
             </t>
 
-            <t>If the cookie's http-only field is true, then include the
+            <t>If the cookie's http-only field is true, then exclude the
             cookie unless the cookie-string is begin generated for a
-            "non-HTTP" API (as defined by the user agent).</t>
+            "HTTP" API (as defined by the user agent).</t>
           </list>
           </t>
 
