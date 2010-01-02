@@ -167,7 +167,7 @@ httponly-av       = "HttpOnly"
           examines the Set-Cookie header.</t>
 
           <t>NOTE: The syntax above allows whitespace between the attribute
-          and the U+3D ("=") character.  Servers wishing to interoperate
+          and the U+003D ("=") character.  Servers wishing to interoperate
           with some legacy user agents might wish to elide this
           whitespace.</t>
         </section>
@@ -211,7 +211,7 @@ httponly-av       = "HttpOnly"
             value ".example.com", the use agent will include the cookie in the
             Cookie header when making HTTPS requests to example.com,
             www.example.com, and www.corp.example.com. (Note that the leading
-            U+2E (".") is meaningless and not required.) If the server omits
+            U+002E (".") is meaningless and not required.) If the server omits
             the Domain attribute, the user agent will return the cookie only
             to the origin server</t>
 
@@ -233,7 +233,7 @@ httponly-av       = "HttpOnly"
             paths. When a cookie has a Path attribute, the user agent will
             include the cookie in an HTTP request only if the path portion of
             the Request-URI matches (or is a subdirectory of) the cookie's
-            Path attribute, where the U+2F ("/") character is interpreted as a
+            Path attribute, where the U+002F ("/") character is interpreted as a
             directory separator. If the server omits the Path attribute, the
             user agent will use the directory of the Request-URI's path
             component as the default value.</t>
@@ -310,18 +310,18 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
     <section anchor="cookie-protocol" title="The Cookie Protocol">
       <t>For historical reasons, the full cookie protocol contains a number of
       exotic quirks. This section is intended to specify the cookie protocol
-      in enough precision to enable a user agent that implement the protocol
+      in enough detail to enable a user agent that implements the protocol
       precisely as specified to interoperate with existing servers.</t>
 
-      <t>Although some parts of the cookie protocol is specified
+      <t>Although some parts of the cookie protocol are specified
       algorithmically, user agents are free to implement the cookie protocol
       in any manner as long as their resultant behavior is "black-box"
       indistinguishable from a user agent that implements the protocol as
       described.</t>
 
       <section title="Algorithms">
-        <t>The cookie protocol uses a number of self-contained algorithms,
-        which are described in this section.</t>
+        <t>This section defines a number of algorithms used by the cookie
+        protocol.</t>
 
         <section title="Dates">
           <t>The user agent MUST use the following algorithm to *parse a
@@ -420,17 +420,17 @@ mystery         = <anything except a delimiter>
           <t>A *canonicalized* host-name is the host-name converted to
           lower case.</t>
 
-          <t>A request-host *domain-matches* a cookie-domain if the
-          cookie-domain is a suffix of the canonicalized request-host and at
-          least one of the following conditions hold:
+          <t>A request-host *domain-matches* a cookie-domain if at least one
+          of the following conditions hold:
           <list style="symbols">
             <t>The cookie-domain and the canonicalized request-host are
             identical.</t>
 
-            <t>The last character of the canonicalized request-host that is
-            not included in the cookie-domain is a U+2E (".") character and
-            request-host is a host name (i.e., not an IP address). [TODO: Is
-            this the right way to spec this???]</t>
+            <t>The cookie-domain is a suffix of the canonicalized
+            request-host, the last character of the canonicalized
+            request-host that is not included in the cookie-domain is a U+002E
+            (".") character, and request-host is a host name (i.e., not an
+            IP address). [TODO: Is this the right way to spec this???]</t>
           </list>
           </t>
         </section>
@@ -440,27 +440,29 @@ mystery         = <anything except a delimiter>
           <list style="numbers">
             <t>Let uri-path be the path portion of the Request-URI.</t>
 
-            <t>If the first character of the uri-path is not a U+2F ("/")
-            character, output U+2F ("/") and skip the remaining steps.</t>
+            <t>If the first character of the uri-path is not a U+002F ("/")
+            character, output U+002F ("/") and skip the remaining steps.</t>
 
-            <t>If the uri-path contains only a single U+2F ("/") character,
-            output U+2F ("/") and skip the remaining steps.</t>
+            <t>If the uri-path contains only a single U+002F ("/") character,
+            output U+002F ("/") and skip the remaining steps.</t>
 
             <t>Output the characters of the uri-path from the first character
-            up to, and but not including, the right-most U+2F ("/").</t>
+            up to, and but not including, the right-most U+002F ("/").</t>
           </list>
           </t>
 
-          <t>A request-path *path-matches* a cookie-path if the cookie-path is
-          a prefix of the request-path and at least one of the following
-          conditions hold: [TODO: This isn't exactly what IE does.]
+          <t>A request-path *path-matches* a cookie-path if at least one of
+          the following conditions hold: [TODO: This isn't exactly what IE
+          or Firefox does.]
           <list style="symbols">
             <t>The cookie-path and the request-path are identical.</t>
 
-            <t>The last character of the cookie-path is U+2F ("/").</t>
+            <t>The cookie-path is a prefix of the request-path and the last
+            character of the cookie-path is U+002F ("/").</t>
 
-            <t>The first character of the request-path that is not included in
-            the cookie-path is a U+2F ("/") character.</t>
+            <t>The cookie-path is a prefix of the request-path and the first
+            character of the request-path that is not included in the
+            cookie-path is a U+002F ("/") character.</t>
           </list>
           </t>
         </section>
@@ -474,33 +476,35 @@ mystery         = <anything except a delimiter>
         set-cookie-strings:
         <list style="numbers">
           <t>If the set-cookie-string is empty or consists entirely of WSP
-          characters, the user agent MAY ignore the entirely.</t>
+          characters, the user agent MAY ignore the set-cookie-string
+          entirely.</t>
 
-          <t>If the header contains a U+3B (";") character:
+          <t>If the set-cookie-string contains a U+003B (";") character:
           <list style="empty">
-            <t>The name-value-pair string is characters up to, but not
-            including, the first U+3B (";"), and the unparsed-attributes are
-            the remainder of the header (including the U+3B (";") in
-            question).</t>
+            <t>The name-value-pair string consists of the characters up to,
+            but not including, the first U+003B (";"), and the
+            unparsed-attributes consist of the remainder of the
+            set-cookie-string (including the U+003B (";") in question).</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>The name-value-pair string is all the character contained in
-            the header, and the unparsed-attributes is the empty string.</t>
+            <t>The name-value-pair string consists of all the character
+            contained in the set-cookie-string, and the unparsed-attributes
+            is the empty string.</t>
           </list>
           </t>
 
-          <t>If the name-value-pair string contains a U+3D ("=") character:
+          <t>If the name-value-pair string contains a U+003D ("=") character:
           <list style="empty">
-            <t>The (possibly empty) name string is the characters up to, but
-            not including, the first U+3D ("=") character, and the (possibly
-            empty) value string is the characters after the first U+3D ("=")
-            character.</t>
+            <t>The (possibly empty) name string consists of the characters
+            up to, but not including, the first U+003D ("=") character, and
+            the (possibly empty) value string consists of the characters
+            after the first U+003D ("=") character.</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>The name string is empty, and the value string is the entire
-            name-value-pair string.</t>
+            <t>The name string is empty, and the value string consists of
+            the entire name-value-pair string.</t>
           </list>
           </t>
 
@@ -519,13 +523,13 @@ mystery         = <anything except a delimiter>
           these steps.</t>
 
           <t>Consume the first character of the unparsed-attributes (which
-          will be a U+3B (";") character).</t>
+          will be a U+003B (";") character).</t>
 
-          <t>If the remaining unparsed-attributes contains a U+3B (";")
+          <t>If the remaining unparsed-attributes contains a U+003B (";")
           character:
           <list style="empty">
             <t>Consume the characters of the unparsed-attributes up to, but
-            not including, the first U+3B (";") character.</t>
+            not including, the first U+003B (";") character.</t>
           </list>
           Otherwise:
           <list style="empty">
@@ -534,19 +538,20 @@ mystery         = <anything except a delimiter>
           Let the cookie-av string be the characters consumed in this
           step.</t>
 
-          <t>If the cookie-av string contains a U+3D ("=") character:
+          <t>If the cookie-av string contains a U+003D ("=") character:
           <list style="empty">
-            <t>The (possibly empty) attribute-name string is the characters up
-            to, but not including, the first U+3D ("=") character, and the
-            (possibly empty) attribute-value string is the characters after
-            the first U+3D ("=") character.</t>
+            <t>The (possibly empty) attribute-name string consists of the
+            characters up to, but not including, the first U+003D ("=")
+            character, and the (possibly empty) attribute-value string
+            consists of the characters after the first U+003D ("=")
+            character.</t>
           </list>
           Otherwise:
           <list style="empty">
-            <t>The attribute-name string is the entire cookie-av string, and
-            the attribute-value string is empty. (Note that this step differs
-            from the analogous step when parsing the name-value-pair
-            string.)</t>
+            <t>The attribute-name string consists of the entire cookie-av
+            string, and the attribute-value string is empty. (Note that this
+            step differs from the analogous step when parsing the
+            name-value-pair string.)</t>
           </list>
           </t>
 
@@ -560,7 +565,7 @@ mystery         = <anything except a delimiter>
         </list>
         </t>
 
-        <t>When the user agent finishes parsing the set-cookie-string header,
+        <t>When the user agent finishes parsing the set-cookie-string,
         the user agent *receives a cookie* from the Request-URI with name
         cookie-name, value cookie-value, and attributes
         cookie-attribute-list.</t>
@@ -604,8 +609,9 @@ mystery         = <anything except a delimiter>
             <t>Let server-date be the date obtained by parsing the contents of
             the last Date header field as a cookie-date.</t>
 
-            <t>Let time-delta be the number of seconds between the
-            server-date and the parsed-cookie-date.</t>
+            <t>Let delta-seconds be the number of seconds between the
+            server-date and the parsed-cookie-date (i.e., parsed-cookie-date
+            - server-date).</t>
 
             <t>Let the expiry-time be the current date and time plus
             delta-seconds seconds.</t>
@@ -634,11 +640,11 @@ mystery         = <anything except a delimiter>
           <t>If the attribute-value is empty, the behavior is undefined.
           However, user agent SHOULD ignore the cookie-av entirely.</t>
 
-          <t>If the first character of the attribute-value string is U+2E
+          <t>If the first character of the attribute-value string is U+002E
           ("."):
           <list style="empty">
             <t>Let cookie-domain be the attribute-value without the leading
-            U+2E (".") character.</t>
+            U+002E (".") character.</t>
           </list>
           Otherwise:
           <list style="empty">
@@ -646,18 +652,20 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
+          <t>Convert the cookie-domain to lower case.</t>
+
           <t>[TODO: Test ".127.0.0.1" and "127.0.0.1"]</t>
 
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Domain and an attribute-value of
-          canonicalized cookie-domain.</t>
+          cookie-domain.</t>
         </section>
         <section title="The Path Attribute">
           <t>If the attribute-name case-insensitively matches the string
           "Path", the user agent MUST process the cookie-av as follows.</t>
 
           <t>If the attribute-value is empty or if the first character of the
-          attribute-value is not U+2F ("/"):
+          attribute-value is not U+002F ("/"):
           <list style="empty">
             <t>Let cookie-path be the default-path. [TODO: We need more tests
             for this, including with " characters and with multiple Path
@@ -763,7 +771,7 @@ mystery         = <anything except a delimiter>
           attribute-name of "HttpOnly", set the cookie's http-only-flag to
           true.  Otherwise, set cookie's http-only-flag to false.</t>
 
-          <t>Remove from the cookie store all cookies that have the share the
+          <t>Remove from the cookie store all cookies that share the
           same name, domain, path, and host-only-flag as the newly created
           cookie. [TODO: Validate this list!] [TODO: There's some funny
           business around http-only here.]</t>
@@ -871,12 +879,12 @@ mystery         = <anything except a delimiter>
           cookie in the cookie-list in order:
           <list style="numbers">
             <t>If the cookie's name is non-empty, output the cookie's
-            name followed by the U+3D ("=") character.</t>
+            name followed by the U+003D ("=") character.</t>
 
             <t>Output the cookie's value.</t>
 
             <t>If there is an unprocessed cookie in the cookie-list, output
-            the characters U+3B and U+20 ("; ").</t>
+            the characters U+003B and U+0020 ("; ").</t>
           </list>
           </t>
         </list>
