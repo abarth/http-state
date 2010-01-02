@@ -637,8 +637,8 @@ mystery         = <anything except a delimiter>
           <t>If the first character of the attribute-value string is U+2E
           ("."):
           <list style="empty">
-            <t>Let cookie-domain be the attribute-value with the leading U+2E
-            (".") character.</t>
+            <t>Let cookie-domain be the attribute-value without the leading
+            U+2E (".") character.</t>
           </list>
           Otherwise:
           <list style="empty">
