@@ -128,10 +128,10 @@
 
         <section title="Syntax">
           <t>Informally, the Set-Cookie response header comprises the token
-          Set-Cookie:, followed by a cookie.  Each cookie begins with a
-          name-value-pair, followed by zero or more semi-colon-separated
-          attribute-value pairs.  Servers SHOULD NOT send Set-Cookie headers
-          that fail to conform to the following grammar:</t>
+          Set-Cookie:, followed by a cookie. Each cookie begins with a
+          name-value-pair, followed by zero or more attribute-value pairs.
+          Servers SHOULD NOT send Set-Cookie headers that fail to conform to
+          the following grammar:</t>
 
           <figure>
             <artwork type="abnf">
@@ -163,7 +163,7 @@ httponly-av       = "HttpOnly"
           anything the origin server chooses to send, possibly in a
           server-selected printable ASCII encoding.  "Opaque" implies that
           the content is of interest and relevance only to the origin
-          server.  The content is, in fact, be readable by anyone who
+          server.  The content is, in fact, readable by anyone who
           examines the Set-Cookie header.</t>
 
           <t>NOTE: The syntax above allows whitespace between the attribute
@@ -179,7 +179,7 @@ httponly-av       = "HttpOnly"
           />.</t>
 
           <t>When the user agent receives a Set-Cookie header, the user agent
-          stores the cookie in its cookie store.When the user agent
+          stores the cookie in its cookie store.  When the user agent
           subsequently makes an HTTP request, the user agent consults its
           cookie store and includes the applicable, non-expired cookies in the
           Cookie header.</t>
@@ -191,36 +191,36 @@ httponly-av       = "HttpOnly"
           the empty string or by including an Expires attribute with a value
           in the past.</t>
 
-          <t>By default, cookies are returned only to the origin server and
-          expire at a the end of the current session (as defined by the user
-          agent). The server can override the default handling of cookies by
-          specifying various cookie attributes. User agents ignore
+          <t>Unless the cookie's attributes indicate otherwise, the cookie is
+          returned only to the origin server, and it expires at the end of the
+          current session (as defined by the user agent). User agents ignore
           unrecognized cookie attributes.</t>
 
           <section title="Expires">
-            <t>The Expires attribute represent the maximum lifetime of the
+            <t>The Expires attribute indicates the maximum lifetime of the
             cookie, represented as the date and time at which the cookie
-            expires. The user agent is not required to persist the cookie
+            expires. The user agent is not required to retain the cookie
             until the specified date has passed. In fact, user agents often
             evict cookies from the cookie store due to memory pressure or
             privacy concerns.</t>
           </section>
           <section title="Domain">
-            <t>The Domain attribute specifies the hosts for which the cookie
-            is applicable. For example, if the domain attribute contains the
-            value ".example.com", the use agent will include the cookie in the
-            Cookie header when making HTTPS requests to example.com,
-            www.example.com, and www.corp.example.com. (Note that the leading
-            U+002E (".") is meaningless and not required.) If the server omits
-            the Domain attribute, the user agent will return the cookie only
-            to the origin server</t>
+            <t>The Domain attribute specifies those hosts for which the cookie
+            will be sent. For example, if the domain attribute contains the
+            value ".example.com", the user agent will include the cookie in
+            the Cookie header when making HTTP requests to example.com,
+            www.example.com, and www.corp.example.com. (Note that a leading
+            U+2E ("."), if present, is ignored.) If the server omits the
+            Domain attribute, the user agent will return the cookie only to
+            the origin server</t>
 
-            <t>The user agent will reject cookies less the Domain attribute
-            specifies a scope for the cookie that would include the origin
-            server. For example, the user agent will accept a Domain attribute
-            of ".example.com" or of ".foo.example.com" from a response from
-            foo.example.com, but the user agent will not accept a Domain
-            attribute of ".bar.example.com" or ".baz.foo.example.com".</t>
+            <t>The user agent will reject cookies (refuse to store them in the
+            cookie store) unless the Domain attribute specifies a scope for
+            the cookie that would include the origin server. For example, the
+            user agent will accept a Domain attribute of ".example.com" or of
+            ".foo.example.com" from foo.example.com, but the user agent will
+            not accept a Domain attribute of ".bar.example.com" or of
+            ".baz.foo.example.com".</t>
 
             <t>NOTE: For security reasons, some user agents are configured to
             reject Domain attributes that do not correspond to a "registry
@@ -242,10 +242,11 @@ httponly-av       = "HttpOnly"
             different paths within a given domain, the Path attribute cannot
             be relied upon for security for two reasons: First, user agents do
             not prevent one path from overwriting the cookies for another
-            path. For example, a response to a request for /foo/bar.html can
-            include a Set-Cookie header with a Path attribute of "/baz".
-            Second, the "same-origin" policy implemented by many user agents
-            does not isolate different paths within an origin. For example,
+            path. For example, if a response to a request for /foo/bar.html
+            attempts to set a cookie with a Path attribute of "/baz" the user
+            agent will store that cookie in the cookie store. Second, the
+            "same-origin" policy implemented by many user agents does not
+            isolate different paths within an origin. For example,
             /foo/bar.html can read cookies with a Path attribute of "/baz"
             because they are within the "same origin".</t>
           </section>
@@ -299,8 +300,8 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
           <t>Notice that the cookie attributes are not returned. In
           particular, the server cannot determine from the Cookie header alone
           when a cookie will expire, for which domains the cookie is valid,
-          for which paths the cookie is valid, or whether the cookie is marked
-          Secure or HttpOnly.</t>
+          for which paths the cookie is valid, or whether the cookie was set
+          with the Secure or HttpOnly attributes.</t>
 
           <t>The semantics of individual cookies in the Cookie header is not
           defined by this document. Servers are expected to imbue these
