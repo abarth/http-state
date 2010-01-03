@@ -777,8 +777,13 @@ mystery         = <anything except a delimiter>
           cookie. [TODO: Validate this list!] [TODO: There's some funny
           business around http-only here.]</t>
 
-          <t>Insert the newly created cookie into the cookie store unless the
-          cookie's name and value are both empty.</t>
+          <t>If the cookie's name and value are both empty, abort these
+          steps.</t>
+
+          <t>If the cookie's expiry-time is not in the future, abort these
+          steps.</t>
+
+          <t>Insert the newly created cookie into the cookie store.</t>
         </list>
         </t>
 
