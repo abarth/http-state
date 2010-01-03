@@ -448,7 +448,7 @@ mystery         = <anything except a delimiter>
             output U+002F ("/") and skip the remaining steps.</t>
 
             <t>Output the characters of the uri-path from the first character
-            up to, and but not including, the right-most U+002F ("/").</t>
+            up to, but not including, the right-most U+002F ("/").</t>
           </list>
           </t>
 
