@@ -470,7 +470,7 @@ mystery         = <anything except a delimiter>
         </section>
       </section>
       <section title="The Set-Cookie Header">
-        <t>When a user agent receives an Set-Cookie header in an HTTP
+        <t>When a user agent receives a Set-Cookie header in an HTTP
         response, the user agent *receives a set-cookie-string*
         consisting of the value of the header.</t>
 
