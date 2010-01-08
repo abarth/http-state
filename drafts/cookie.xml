@@ -38,16 +38,17 @@
   </front>
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>This document defines the HTTP Cookie and Set-Cookie header.  Using
-      the Set-Cookie header, an HTTP server can store name/value pairs
-      (called cookies) at the user agent.  When the user agent makes
-      subsequent requests to the server, the user agent will return the
-      name/value pairs in the Cookie header.</t>
+      <t>This document defines the HTTP Cookie and Set-Cookie header. Using
+      the Set-Cookie header, an HTTP server can store name/value pairs and
+      associated metadata (called cookies) at the user agent. When the user
+      agent makes subsequent requests to the server, the user agent uses the
+      metadata to determine whether to return the name/value pairs in the
+      Cookie header.</t>
 
       <t>Although simple on its surface, the cookie protocol has a number of
       complexities.  For example, the server indicates a scope for each
       cookie when sending them to the user agent.  The scope indicates the
-      maximum amount of time the user agent should persist the cookie, to
+      maximum amount of time the user agent should retain the cookie, to
       which servers the user agent should return the cookie, and for which
       protocols the cookie is applicable.</t>
 
@@ -74,24 +75,24 @@
     </section>
     <section title="Terminology">
       <t>The terms user agent, client, server, proxy, and origin server have
-      the same meaning as in the HTTP/1.0 specification.</t>
+      the same meaning as in the HTTP/1.1 specification.</t>
 
       <t>The terms request-host and request-URI refer to the values the user
       agent would send to the server as, respectively, the host (but not port)
-      and abs_path portions of the absoluteURI (http_URL) of the HTTP request
-      line.</t>
+      and abs_path portions of the absoluteURI (http_URL) of the HTTP
+      Request-Line.</t>
     </section>
     <section title="Overview">
       <t>We outline here a way for an origin server to send state
-      information to the user agent, and for the user agent to return the
+      information to a user agent, and for the user agent to return the
       state information to the origin server.</t>
 
-      <t>The origin server initiates a session, if it so desires, by
-      including a Set-Cookie header in an HTTP response.  (Note that
-      "session" here does not refer to a persistent network connection but
-      to a logical session created from HTTP requests and responses.  The
-      presence or absence of a persistent connection should have no effect
-      on the use of cookie-derived sessions).</t>
+      <t>To initiate a session, the origin server includes a Set-Cookie header
+      in an HTTP response. (Note that "session" here does not refer to a
+      persistent network connection but to a logical session created from HTTP
+      requests and responses. The presence or absence of a persistent
+      connection should have no effect on the use of cookie-derived
+      sessions).</t>
 
       <t>The user agent returns a Cookie request header to the origin server
       if it chooses to continue a session. The Cookie header contains a number
@@ -101,9 +102,9 @@
       the user agent a Set-Cookie response header with the same or different
       information, or it MAY send no Set-Cookie header at all.</t>
 
-      <t>Servers MAY return a Set-Cookie response headers with any
-      response.  User agents should send Cookie request headers, subject to
-      other rules detailed below, with every request.</t>
+      <t>Servers MAY return a Set-Cookie response header with any response.
+      User agents SHOULD send a Cookie request header, subject to other rules
+      detailed below, with every request.</t>
 
       <t>An origin server MAY include multiple Set-Cookie header fields in a
       single response. Note that an intervening gateway MUST NOT fold multiple
@@ -939,18 +940,18 @@ mystery         = <anything except a delimiter>
         and signing cookies does not prevent an attacker from transplanting a
         cookie from one user agent to another.</t>
 
-        <t>In addition to encrypting and signing the the contents of every
+        <t>In addition to encrypting and signing the contents of every
         cookie, servers that require a higher level of security SHOULD use the
         cookie protocol only over a secure channel.</t>
       </section>
       <section title="Weak Confidentiality">
-        <t>Cookies do provide isolation by port. If a cookie is readable by a
-        service running on one port, the cookie is also readable by a service
-        running on another port of the same server. If a cookie is writable by
-        a service on one port, the cookie is also writable by a service
-        running on another port of the same server. For this reason, servers
-        SHOULD NOT both run mutually distrusting services on different ports
-        of the same machine and use cookies to store security-sensitive
+        <t>Cookies do not provide isolation by port. If a cookie is readable
+        by a service running on one port, the cookie is also readable by a
+        service running on another port of the same server. If a cookie is
+        writable by a service on one port, the cookie is also writable by a
+        service running on another port of the same server. For this reason,
+        servers SHOULD NOT both run mutually distrusting services on different
+        ports of the same machine and use cookies to store security-sensitive
         information.</t>
 
         <t>Cookies do not provide isolation by scheme. Although most commonly
@@ -962,8 +963,8 @@ mystery         = <anything except a delimiter>
         HTML's document.cookie API.</t>
       </section>
       <section title="Weak Integrity">
-        <t>Cookies do not integrity guarantees for sibling domains (and their
-        subdomains). For example, consider foo.example.com and
+        <t>Cookies do not provide integrity guarantees for sibling domains
+        (and their subdomains). For example, consider foo.example.com and
         bar.example.com. The foo.example.com server can set a cookie with a
         Domain attribute of ".example.com", and the user agent will include
         that cookie in HTTP requests to bar.example.com. In the worst case,
@@ -980,8 +981,8 @@ mystery         = <anything except a delimiter>
         against example.com even if example.com uses HTTPS exclusively.</t>
 
         <t>Servers can partially mitigate these attacks by encrypting and
-        signing their cookies. However, using cryptography does not fully
-        ameliorate the issue because an attacker can replay a cookie he or she
+        signing their cookies. However, using cryptography does not mitigate
+        the issue completely because an attacker can replay a cookie he or she
         received from the authentic example.com server in the user's session,
         with unpredictable results.</t>
       </section>
