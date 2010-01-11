@@ -854,7 +854,7 @@ mystery         = <anything except a delimiter>
             Request-URI's scheme must denote a "secure" protocol (as defined
             by the user agent).
             <list style="empty">
-              <t>NOTE: The notion of an "secure" protocol is not defined by
+              <t>NOTE: The notion of a "secure" protocol is not defined by
               this document.  Typically, user agents consider a protocol
               secure if the protocol makes use of transport-layer security,
               such as TLS.  For example, most user agents consider "https"
