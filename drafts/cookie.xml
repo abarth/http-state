@@ -863,7 +863,7 @@ mystery         = <anything except a delimiter>
             </t>
 
             <t>If the cookie's http-only field is true, then exclude the
-            cookie unless the cookie-string is begin generated for a
+            cookie unless the cookie-string is being generated for an
             "HTTP" API (as defined by the user agent).</t>
           </list>
           </t>
