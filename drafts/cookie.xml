@@ -206,13 +206,13 @@ httponly-av       = "HttpOnly"
           </section>
           <section title="Domain">
             <t>The Domain attribute specifies those hosts for which the cookie
-            will be sent. For example, if the domain attribute contains the
+            will be sent. For example, if the Domain attribute contains the
             value ".example.com", the user agent will include the cookie in
             the Cookie header when making HTTP requests to example.com,
             www.example.com, and www.corp.example.com. (Note that a leading
-            U+2E ("."), if present, is ignored.) If the server omits the
+            U+002E ("."), if present, is ignored.) If the server omits the
             Domain attribute, the user agent will return the cookie only to
-            the origin server</t>
+            the origin server.</t>
 
             <t>The user agent will reject cookies (refuse to store them in the
             cookie store) unless the Domain attribute specifies a scope for
@@ -277,7 +277,7 @@ httponly-av       = "HttpOnly"
           the Cookie header.  If the server conforms to the requirements in
           this section, the requirements in the next section will cause the
           user agent to return a Cookie header that conforms to the following
-          grammar.</t>
+          grammar:</t>
 
           <figure>
             <artwork type="abnf">
@@ -490,7 +490,7 @@ mystery         = <anything except a delimiter>
           </list>
           Otherwise:
           <list style="empty">
-            <t>The name-value-pair string consists of all the character
+            <t>The name-value-pair string consists of all the characters
             contained in the set-cookie-string, and the unparsed-attributes
             is the empty string.</t>
           </list>
