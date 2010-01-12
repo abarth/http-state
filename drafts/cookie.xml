@@ -315,11 +315,11 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
       in enough detail to enable a user agent that implements the protocol
       precisely as specified to interoperate with existing servers.</t>
 
-      <t>Although some parts of the cookie protocol are specified
-      algorithmically, user agents are free to implement the cookie protocol
-      in any manner as long as their resultant behavior is "black-box"
-      indistinguishable from a user agent that implements the protocol as
-      described.</t>
+      <t>Conformance requirements phrased as algorithms or specific steps
+      may be implemented in any manner, so long as the end result is
+      equivalent. (In particular, the algorithms defined in this
+      specification are intended to be easy to follow, and not intended to
+      be performant.)</t>
 
       <section title="Algorithms">
         <t>This section defines a number of algorithms used by the cookie
