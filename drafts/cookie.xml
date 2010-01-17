@@ -138,7 +138,7 @@
             <artwork type="abnf">
               <![CDATA[
 set-cookie-header = "Set-Cookie:" OWS set-cookie-string OWS
-set-cookie-string = cookie-pair *( ";" cookie-av)
+set-cookie-string = cookie-pair *( ";" cookie-av )
 cookie-pair       = cookie-name "=" cookie-value
 cookie-name       = token
 cookie-value      = token
@@ -283,7 +283,7 @@ httponly-av       = "HttpOnly"
             <artwork type="abnf">
               <![CDATA[
 cookie-header = "Cookie:" OWS cookie-string OWS
-cookie-string = cookie-pair *( ";" cookie-pair) 
+cookie-string = cookie-pair *( ";" cookie-pair ) 
 cookie-pair   = cookie-name "=" cookie-value
 cookie-name   = token
 cookie-value  = token
@@ -334,7 +334,8 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
             <figure>
               <artwork type="abnf">
                 <![CDATA[
-cookie-date     = date-token *( 1*delimiter date-token )
+cookie-date     = *delimiter date-token-list *delimiter
+date-token-list = date-token *( 1*delimiter date-token )
 delimiter       = %x09 / %x20 / %x21 / %x22 / %x23 / %x24 /
                   %x25 / %x26 / %x27 / %x28 / %x29 / %x2A /
                   %x2B / %x2C / %x2D / %x2E / %x2F / %x3B /
