@@ -748,6 +748,22 @@ mystery         = <anything except a delimiter>
             domain-attribute, ignore the cookie entirely and abort these
             steps.</t>
 
+            <t>If the user agent is configured to use a "public suffix" list
+            and the domain-attribute is a public suffix, ignore the cookie
+            entirely and abort these steps.
+            <list style="empty">
+              <t>NOTE: A "public suffix" is a domain that is controlled by a
+              public registry, such as "com", "co.uk", and "pvt.k12.wy.us".
+              This step is essential for preventing attacker.com from
+              disrupting the integrity of example.com by setting a cookie with
+              a Domain attribute of "com". Unfortunately, the set of public
+              suffixes (also known as "registry controlled domains") changes
+              over time. If feasible, user agents SHOULD use an up-to-date
+              public suffix list, such as the one maintained by the Mozilla
+              project at http://publicsuffix.org/.</t>
+            </list>
+            </t>
+
             <t>Set the cookie's host-only-flag to false.</t>
 
             <t>Set the cookie's domain to the domain-attribute.</t>
