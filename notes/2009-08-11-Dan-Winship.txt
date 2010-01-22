@@ -1,0 +1,106 @@
+Message-ID: <4A81F304.8000305@gmail.com>
+Date: Tue, 11 Aug 2009 18:39:00 -0400
+From: Dan Winship <dan.winship@gmail.com>
+To: Adam Barth <ietf@adambarth.com>
+CC: http-state <http-state@ietf.org>
+Subject: cookie dates [was Re: Status update]
+
+On 08/09/2009 08:23 PM, Adam Barth wrote:
+> 1) Expand the test harness to be able to run more implementations
+> automatically.  This is extremely valuable because ensures we
+> understand the compatibility impact of our decisions.
+
+>   c) Are there other implementations we should be testing?  Is there a
+> command line utility that uses libsoup?
+
+I could write one easily enough (and in fact, once we have a good set of
+tests, I'll probably add them to the libsoup regression tests). But
+there is no "compatibility impact" to understand wrt libsoup's behavior;
+wherever it doesn't behave like the majority of other browsers, it's
+just a bug and I'm going to change it. So I don't think there's really
+any reason for the spec's test suite to be testing it.
+
+> 2) Cookie date examples.  I imagine specifying the cooke-date syntax
+> and semantics will be challenging.  If you or anyone you know has a
+> corpus of cookie dates we can use, please let me know.
+
+OK, from the 2973 expires tokens in the cookies I'd collected a few
+years ago (from a not at all representative sample of web sites). Counts
+represent number of Set-Cookie headers, not number of unique cookies or
+sites or whatever.
+
+ 1987  "Mon, 10-Dec-2007 17:02:24 GMT"
+       Revised Netscape spec format
+
+  533  "Wed, 09 Dec 2009 16:27:23 GMT"
+       rfc1123-date
+
+  239  "Thursday, 01-Jan-1970 00:00:00 GMT"
+       4-digit-year version of Netscape spec example (see below).
+       Seems to only come from sites using PHP, but it's not PHP
+       itself; maybe some framework?
+
+   89  "Mon Dec 10 16:32:30 2007 GMT"
+       The not-quite-asctime format used by Amazon. (Still not fixed!)
+
+   62  "Wednesday, 01-Jan-10 00:00:00 GMT"
+       The syntax used by the example text in the Netscape spec,
+       although the actual grammar uses abbreviated weekday names
+
+   31  "Mon, 10-Dec-07 20:35:03 GMT"
+       Original Netscape spec
+
+   12  "Wed, 1 Jan 2020 00:00:00 GMT"
+       If this had "01 Jan" it would be an rfc1123-date. This *is* a
+       legitimate rfc822 date, though not an rfc2822 date because "GMT"
+       is deprecated in favor of "+0000" there.
+
+    8  "Saturday, 8-Dec-2012 21:24:09 GMT"
+       Would match the "weird php" syntax above if it was "08-Dec"
+
+    3  "Thu, 31 Dec 23:55:55 2037 GMT"
+       God only knows what they were thinking. This came from a
+       hit-tracker site, and it's possible that it's just totally
+       broken and no one parses it "correctly"
+
+    2  "Sun,  9 Dec 2012 13:42:05 GMT"
+       Another kind of rfc822 / nearly-rfc1123 date, using superfluous
+       whitespace.
+
+    2  "Wed Dec 12 2007 08:44:07 GMT-0500 (EST)"
+       Another kind of "lets throw components together at random". The
+       site that this cookie came has apparently been fixed since then.
+       (It uses the Netscape spec format now.)
+
+    2  "Mon, 01-Jan-2011 00: 00:00 GMT"
+       Note whitespace inside the time component. Also, the cookie came
+       with a domain= attribute that didn't match the domain it was
+       being sent from (at all). Nice job all around.
+
+    1  "Sun, 1-Jan-1995 00:00:00 GMT"
+    1  "Wednesday, 01-Jan-10 0:0:00 GMT"
+    1  "Thu, 10 Dec 2009 13:57:2 GMT"
+       Because fixed-width fields are for sissies.
+
+
+So, you can match 96.6% of those with a parser that basically does
+rfc1123-date, except:
+
+    - it accepts long or short day names
+    - it allows the day-of-month to be "1*2DIGIT" or "SPC DIGIT"
+    - it allows " " or "-" around month name
+    - it accepts 2 or 4 digit years (which is extra tricky for cookies
+      since there are legitimate reasons for sending both distant-past
+      and distant-future dates... we need to test how clients interpret
+      these).
+
+You can get another 3% by accepting asctime-date, and being lenient if
+they have " GMT" at the end. Given that HTTP clients are required to
+accept asctime-dates in the Date header anyway, this isn't that harsh.
+And also, it's Amazon, so you have no choice.
+
+So that gets you to 99.6% of the cookies I saw, and that's probably good
+enough for the grammar, though we could note that there are
+even-more-broken dates out there.
+
+-- Dan
