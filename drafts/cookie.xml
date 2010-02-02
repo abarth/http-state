@@ -226,7 +226,15 @@ httponly-av       = "HttpOnly"
             www.example.com, and www.corp.example.com. (Note that a leading
             U+002E ("."), if present, is ignored.) If the server omits the
             Domain attribute, the user agent will return the cookie only to
-            the origin server.</t>
+            the origin server.
+            <list>
+              <t>WARNING: Some legacy user agents treat an absent Domain
+              attribute as if the Domain attribute were present and contained
+              the current host name. For example, if example.com returns a
+              Set-Cookie header without a Domain attribute, these user agents
+              will send the cookie to www.example.com.</t>
+            </list>
+            </t>
 
             <t>The user agent will reject cookies (refuse to store them in the
             cookie store) unless the Domain attribute specifies a scope for
