@@ -765,26 +765,44 @@ mystery         = <anything except a delimiter>
             <t>Let the domain-attribute be the attribute-value of the last
             attribute in the cookie-attribute-list with an attribute-name of
             "Domain".</t>
+          </list>
+          Otherwise:
+          <list style="empty">
+            <t>Let the domain-attribute be the empty string.</t>
+          </list>
+          </t>
 
+          <t>If the user agent is configured to use a "public suffix" list
+          and the domain-attribute is a public suffix:
+          <list style="empty">
+            <t>If the domain-attribute is identical to the canonicalized
+            Request-URI's host:
+            <list style="empty">
+              <t>Let the domain-attribute be the empty string.</t>
+            </list>
+            Otherwise:
+            <list style="empty">
+              <t>Ignore the cookie entirely and abort these steps</t>
+            </list>
+            </t>
+
+            <t>NOTE: A "public suffix" is a domain that is controlled by a
+            public registry, such as "com", "co.uk", and "pvt.k12.wy.us".
+            This step is essential for preventing attacker.com from
+            disrupting the integrity of example.com by setting a cookie with
+            a Domain attribute of "com". Unfortunately, the set of public
+            suffixes (also known as "registry controlled domains") changes
+            over time. If feasible, user agents SHOULD use an up-to-date
+            public suffix list, such as the one maintained by the Mozilla
+            project at http://publicsuffix.org/.</t>
+          </list>
+          </t>
+
+          <t>If the domain-attribute is non-empty:
+          <list style="empty">
             <t>If the Request-URI's host does not domain-match the
             domain-attribute, ignore the cookie entirely and abort these
             steps.</t>
-
-            <t>If the user agent is configured to use a "public suffix" list
-            and the domain-attribute is a public suffix, ignore the cookie
-            entirely and abort these steps.
-            <list style="empty">
-              <t>NOTE: A "public suffix" is a domain that is controlled by a
-              public registry, such as "com", "co.uk", and "pvt.k12.wy.us".
-              This step is essential for preventing attacker.com from
-              disrupting the integrity of example.com by setting a cookie with
-              a Domain attribute of "com". Unfortunately, the set of public
-              suffixes (also known as "registry controlled domains") changes
-              over time. If feasible, user agents SHOULD use an up-to-date
-              public suffix list, such as the one maintained by the Mozilla
-              project at http://publicsuffix.org/.</t>
-            </list>
-            </t>
 
             <t>Set the cookie's host-only-flag to false.</t>
 
