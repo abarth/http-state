@@ -1,0 +1,26 @@
+Message-ID: <4B696EEB.1050803@gmx.de>
+Date: Wed, 03 Feb 2010 13:41:15 +0100
+From: Julian Reschke <julian.reschke@gmx.de>
+To: Adam Barth <ietf@adambarth.com>
+CC: http-state@ietf.org
+Subject: Re: [http-state] non-ASCII cookie values (was Re: Closing Ticket 3: Public Suffixes)
+
+Julian Reschke wrote:
+> ...
+> On the other hand, why require something that's known not be in use (if 
+> that is the case)?
+> 
+> If you allow non-ASCII characters (or actually require support), you'll 
+> also have to figure out how existing server and client based APIs are to 
+> deal with them (so what encoding is it?).
+> ...
+
+I just did a quick test with an ISO-8859-1 encoded cookie value, 
+client-side javascript and "alert(document.cookie)":
+
+- IE and Firefox appear to treat the cookie as ISO-8859-1
+- Safari appears to ignore the cookie
+- Chrome and Opera appear to try to decode as UTF-8 (and returns a 
+REPLACEMENT CHAR in place of the umlaut I tried)
+
+Best regards, Julian
