@@ -1,0 +1,27 @@
+#
+# $Id: Makefile.in 101 2007-11-20 11:24:00Z stefan.eissing $
+#
+
+OBJS=	parser.o scanner.o main.o @LIBOBJS@
+HEADERS= config.h common.h
+
+CFLAGS=	@CFLAGS@ @DEFS@ -DYYDEBUG
+YACC=	@YACC@ -d -v
+CC=	@CC@
+
+bap:	${OBJS}
+	${CC} -o $@ ${DEBUG} ${OBJS} -ll
+
+scanner.c:	scanner.l ${HEADERS}
+parser.c:	parser.y ${HEADERS}
+
+main.c:
+
+main.o: ${HEADERS}
+
+clean:
+	rm -f bap scanner.c parser.c $(OBJS)
+	@make -C tests clean
+
+test: bap
+	@make -C tests test
