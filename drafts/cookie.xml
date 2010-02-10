@@ -146,7 +146,7 @@
           the following grammar:</t>
 
           <figure>
-            <artwork type="abnf">
+            <artwork type="abnf2616">
               <![CDATA[
 set-cookie-header = "Set-Cookie:" OWS set-cookie-string OWS
 set-cookie-string = cookie-pair *( ";" cookie-av )
@@ -157,8 +157,8 @@ token             = <token, as defined in RFC 2616>
 
 cookie-av         = expires-av / domain-av / path-av /
                     secure-av / httponly-av
-expires-av        = "Expires" "=" cookie-date
-cookie-date       = <rfc1123-date, as defined in RFC 2616>
+expires-av        = "Expires" "=" sane-cookie-date
+sane-cookie-date  = <rfc1123-date, as defined in RFC 2616>
 domain-av         = "Domain" "=" domain-value
 domain-value      = token
 path-av           = "Path" "=" path-value
@@ -302,14 +302,10 @@ httponly-av       = "HttpOnly"
           grammar:</t>
 
           <figure>
-            <artwork type="abnf">
+            <artwork type="abnf2616">
               <![CDATA[
 cookie-header = "Cookie:" OWS cookie-string OWS
 cookie-string = cookie-pair *( ";" cookie-pair ) 
-cookie-pair   = cookie-name "=" cookie-value
-cookie-name   = token
-cookie-value  = token
-token         = <token, as defined in Section 2.2 of RFC 2616>
               ]]>
             </artwork>
           </figure>
@@ -354,7 +350,7 @@ token         = <token, as defined in Section 2.2 of RFC 2616>
             <t>Using the grammar below, divide the cookie-date into
             date-tokens.
             <figure>
-              <artwork type="abnf">
+              <artwork type="abnf2616">
                 <![CDATA[
 cookie-date     = *delimiter date-token-list *delimiter
 date-token-list = date-token *( 1*delimiter date-token )
