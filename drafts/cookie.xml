@@ -989,6 +989,31 @@ mystery         = <anything except a delimiter>
       </section>
     </section>
     <section title="Security Considerations">
+      <section title="Ambient Authority">
+        <t>If a server uses cookies to authenticate users, a server might
+        suffer security vulnerabilities because user agents occasionally issue
+        HTTP requests on behalf of remote parties (e.g., because of HTTP
+        redirects or HTML forms). When issuing those requests, user agent
+        attach cookies even if the entity does not know the contents of the
+        cookies, possibly letting the remote entity impersonate the user to a
+        unwary server.</t>
+
+        <t>Although this security concern goes by a number of names (e.g.,
+        cross-site scripting, cross-site request forgery), the issue stems
+        from cookies being a form of ambient authority. Cookies encourage
+        server operators to separate designation (in the form of URLs) from
+        authorization (in the form of cookies). Disentangling designation and
+        authorization can cause the server to become a confused deputy and
+        undertake undesirable actions.</t>
+
+        <t>Instead of using cookies for authorization, server operators might
+        wish to consider entangling designation and authorization by treating
+        URLs as object-capabilities. Instead of storing secrets in cookies,
+        this approach stores secrets in URLs, requiring the remote entity to
+        supply the secret itself. ALthough this approach is not a panacea,
+        judicious use of these principles can lead to more robust
+        security.</t>
+      </section>
       <section title="Clear Text">
         <t>The information in the Set-Cookie and Cookie headers is
         transmitted in the clear.
