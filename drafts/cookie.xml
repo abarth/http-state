@@ -1009,17 +1009,19 @@ mystery         = <anything except a delimiter>
         suffer security vulnerabilities because user agents occasionally issue
         HTTP requests on behalf of remote parties (e.g., because of HTTP
         redirects or HTML forms). When issuing those requests, user agent
-        attach cookies even if the entity does not know the contents of the
-        cookies, possibly letting the remote entity impersonate the user to a
-        unwary server.</t>
+        attaches cookies even if the entity does not know the contents of the
+        cookies, possibly letting the remote entity exercise authority at an
+        unwary server. User agents can mitigate this issue to some degree by
+        providing APIs for suppressing the Cookie header on outgoing
+        requests.</t>
 
         <t>Although this security concern goes by a number of names (e.g.,
         cross-site scripting and cross-site request forgery), the issue stems
         from cookies being a form of ambient authority. Cookies encourage
         server operators to separate designation (in the form of URLs) from
         authorization (in the form of cookies). Disentangling designation and
-        authorization can cause the server to become a confused deputy and
-        undertake undesirable actions.</t>
+        authorization can cause the server and its clients to become confused
+        deputies and undertake undesirable actions.</t>
 
         <t>Instead of using cookies for authorization, server operators might
         wish to consider entangling designation and authorization by treating
