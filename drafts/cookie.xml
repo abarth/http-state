@@ -989,6 +989,16 @@ mystery         = <anything except a delimiter>
       </section>
     </section>
     <section title="Security Considerations">
+      <section title="General Recommendations">
+        <t>The cookie protocol is NOT RECOMMENDED for new applications.</t>
+
+        <t>For applications that do use the cookie protocol, servers SHOULD
+        NOT rely upon cookies for security.</t>
+
+        <t>For servers that do use cookies for security, servers SHOULD use a
+        redundant form of authentication, such as HTTP authentication or TLS
+        client certificates.</t>
+      </section>
       <section title="Ambient Authority">
         <t>If a server uses cookies to authenticate users, a server might
         suffer security vulnerabilities because user agents occasionally issue
