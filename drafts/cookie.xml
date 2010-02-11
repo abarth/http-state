@@ -83,7 +83,7 @@
         OCTET (any 8-bit sequence of data), SP (space), HTAB (horizontal tab),
         VCHAR (any visible [USASCII] character), and WSP (whitespace).</t>
       </section>
-      <section title="Terminology">
+      <section anchor="terminology" title="Terminology">
         <t>The terms user agent, client, server, proxy, and origin server have
         the same meaning as in the HTTP/1.1 specification.</t>
 
@@ -93,7 +93,7 @@
         Request-Line.</t>
       </section>
     </section>
-    <section title="Overview">
+    <section anchor="overview" title="Overview">
       <t>We outline here a way for an origin server to send state
       information to a user agent, and for the user agent to return the
       state information to the origin server.</t>
@@ -125,7 +125,7 @@
         <t>[TODO: Put some examples here.</t>
       </section>
     </section>
-    <section title="A Well-Behaved Profile">
+    <section anchor="sane-profile" title="A Well-Behaved Profile">
       <t>This section describes the syntax and semantics of a well-behaved
       profile of the protocol.  Servers SHOULD use the profile described in
       this section, both to maximize interoperability with existing user
@@ -134,11 +134,11 @@
       agents, however, MUST implement the full protocol to ensure
       interoperability with servers making use of the full protocol.</t>
  
-      <section title="Set-Cookie">
+      <section anchor="sane-set-cookie" title="Set-Cookie">
         <t>The Set-Cookie header is used to send cookies from the server to
         the user agent.</t>
 
-        <section title="Syntax">
+        <section anchor="sane-set-cookie-syntax" title="Syntax">
           <t>Informally, the Set-Cookie response header comprises the token
           Set-Cookie:, followed by a cookie. Each cookie begins with a
           name-value-pair, followed by zero or more attribute-value pairs.
@@ -186,7 +186,8 @@ httponly-av       = "HttpOnly"
           with some legacy user agents might wish to elide this
           whitespace.</t>
         </section>
-        <section title="Semantics (Non-Normative)">
+        <section anchor="sane-set-cookie-semantics"
+                 title="Semantics (Non-Normative)">
           <t>This section describes a simplified semantics of the Set-Cookie
           header. These semantics are detailed enough to be useful for
           understanding the most common uses of the cookie protocol. The full
@@ -210,7 +211,7 @@ httponly-av       = "HttpOnly"
           current session (as defined by the user agent). User agents ignore
           unrecognized cookie attributes.</t>
 
-          <section title="Expires">
+          <section anchor="sane-expires" title="Expires">
             <t>The Expires attribute indicates the maximum lifetime of the
             cookie, represented as the date and time at which the cookie
             expires. The user agent is not required to retain the cookie
@@ -218,7 +219,7 @@ httponly-av       = "HttpOnly"
             evict cookies from the cookie store due to memory pressure or
             privacy concerns.</t>
           </section>
-          <section title="Domain">
+          <section anchor="sane-domain" title="Domain">
             <t>The Domain attribute specifies those hosts for which the cookie
             will be sent. For example, if the Domain attribute contains the
             value ".example.com", the user agent will include the cookie in
@@ -250,7 +251,7 @@ httponly-av       = "HttpOnly"
             domain). For example, some user agents will reject Domain
             attributes of ".com".</t>
           </section>
-          <section title="Path">
+          <section anchor="sane-path" title="Path">
             <t>The Path attribute limits the scope of the cookie to a set of
             paths. When a cookie has a Path attribute, the user agent will
             include the cookie in an HTTP request only if the path portion of
@@ -272,7 +273,7 @@ httponly-av       = "HttpOnly"
             /foo/bar.html can read cookies with a Path attribute of "/baz"
             because they are within the "same origin".</t>
           </section>
-          <section title="Secure">
+          <section anchor="sane-secure" title="Secure">
             <t>The Secure attribute limits the scope of the cookie to "secure"
             channels (where "secure" is defined by the user agent). When a
             cookie has the Secure attribute, the user agent will include the
@@ -285,7 +286,7 @@ httponly-av       = "HttpOnly"
             cookies from an insecure channel, disrupting the integrity of the
             cookies.</t>
           </section>
-          <section title="HttpOnly">
+          <section anchor="sane-httponly" title="HttpOnly">
             <t>The HttpOnly attribute limits the scope of the cookie to HTTP
             requests. In particular, the attribute instructs the user agent to
             elide the cookie when providing access to its cookie store via
@@ -293,8 +294,8 @@ httponly-av       = "HttpOnly"
           </section>
         </section>
       </section>
-      <section title="Cookie">
-        <section title="Syntax">
+      <section anchor="sane-cookie" title="Cookie">
+        <section anchor="sane-cookie-syntax" title="Syntax">
           <t>The user agent returns stored cookies to the origin server in
           the Cookie header.  If the server conforms to the requirements in
           this section, the requirements in the next section will cause the
@@ -310,7 +311,7 @@ cookie-string = cookie-pair *( ";" cookie-pair )
             </artwork>
           </figure>
         </section>
-        <section title="Semantics">
+        <section anchor="sane-cookie-semantics" title="Semantics">
           <t>Each cookie-pair represents a cookie stored by the user
           agent. The cookie-name and the cookie-value are returned verbatim
           from the corresponding parts of the Set-Cookie header.</t>
@@ -339,11 +340,11 @@ cookie-string = cookie-pair *( ";" cookie-pair )
       specification are intended to be easy to follow, and not intended to
       be performant.)</t>
 
-      <section title="Algorithms">
+      <section anchor="algorithms" title="Algorithms">
         <t>This section defines a number of algorithms used by the cookie
         protocol.</t>
 
-        <section title="Dates">
+        <section anchor="cookie-date" title="Dates">
           <t>The user agent MUST use the following algorithm to *parse a
           cookie-date*:
           <list style="numbers">
@@ -437,7 +438,7 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
         </section>
-        <section title="Domains">
+        <section anchor="cookie-domain" title="Domains">
           <t>A *canonicalized* host-name is the host-name converted to
           lower case.</t>
 
@@ -455,7 +456,7 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
         </section>
-        <section title="Paths">
+        <section anchor="cookie-path" title="Paths">
           <t>The user agent MUST use the following algorithm to compute the
           *default-path* of a cookie:
           <list style="numbers">
@@ -488,7 +489,7 @@ mystery         = <anything except a delimiter>
           </t>
         </section>
       </section>
-      <section title="The Set-Cookie Header">
+      <section anchor="set-cookie" title="The Set-Cookie Header">
         <t>When a user agent receives a Set-Cookie header in an HTTP
         response, the user agent *receives a set-cookie-string*
         consisting of the value of the header.</t>
@@ -591,7 +592,7 @@ mystery         = <anything except a delimiter>
         cookie-name, value cookie-value, and attributes
         cookie-attribute-list.</t>
 
-        <section title="The Max-Age Attribute">
+        <section anchor="max-age-attribute" title="The Max-Age Attribute">
           <t>If the attribute-name case-insensitively matches the string
           "Max-Age", the user agent MUST process the cookie-av as follows.</t>
 
@@ -613,7 +614,7 @@ mystery         = <anything except a delimiter>
           attribute-name of Expires (note the name conversion) and an
           attribute-value of expiry-time.</t>
         </section>
-        <section title="The Expires Attribute">
+        <section anchor="expires-attribute" title="The Expires Attribute">
           <t>If the attribute-name case-insensitively matches the string
           "Expires", the user agent MUST process the cookie-av as follows.</t>
 
@@ -654,7 +655,7 @@ mystery         = <anything except a delimiter>
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Expires and an attribute-value of expiry-time.</t>
         </section>
-        <section title="The Domain Attribute">
+        <section anchor="domain-attribute" title="The Domain Attribute">
           <t>If the attribute-name case-insensitively matches the string
           "Domain", the user agent MUST process the cookie-av as follows.</t>
 
@@ -681,7 +682,7 @@ mystery         = <anything except a delimiter>
           attribute-name of Domain and an attribute-value of
           cookie-domain.</t>
         </section>
-        <section title="The Path Attribute">
+        <section anchor="path-attribute" title="The Path Attribute">
           <t>If the attribute-name case-insensitively matches the string
           "Path", the user agent MUST process the cookie-av as follows.</t>
 
@@ -701,20 +702,20 @@ mystery         = <anything except a delimiter>
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Path and an attribute-value of cookie-path.</t>
         </section>
-        <section title="The Secure Attribute">
+        <section anchor="secure-attribute" title="The Secure Attribute">
           <t>If the attribute-name case-insensitively matches the string
           "Secure", the user agent MUST append an attribute to the
           cookie-attribute-list with an attribute-name of Secure and an empty
           attribute-value.</t>
         </section>
-        <section title="The HttpOnly Attribute">
+        <section anchor="httponly-attribute" title="The HttpOnly Attribute">
           <t>If the attribute-name case-insensitively matches the string
           "HttpOnly", the user agent MUST append an attribute to the
           cookie-attribute-list with an attribute-name of Secure and an empty
           attribute-value.</t>
         </section>
       </section>
-      <section title="Storage Model">
+      <section anchor="storage-model" title="Storage Model">
         <t>When the user agent receives a cookie, the user agent SHOULD
         record the cookie in its cookie store as follows.</t>
 
@@ -873,7 +874,7 @@ mystery         = <anything except a delimiter>
         the user agent MUST remove from the cookie store all cookies with the
         persistent-flag set to false.</t>
       </section>
-      <section title="The Cookie Header">
+      <section anchor="cookie" title="The Cookie Header">
         <t>When the user agent generates an HTTP request, the user agent
         SHOULD attach exactly one HTTP header named Cookie if the
         cookie-string (defined below) for the Request-URI is non-empty.</t>
@@ -951,8 +952,9 @@ mystery         = <anything except a delimiter>
         </t>
       </section>
     </section>
-    <section title="Implementation Considerations">
-      <section title="Limits">
+    <section anchor="implementation-considerations"
+             title="Implementation Considerations">
+      <section anchor="implementation-limits" title="Limits">
         <t>Practical user agent implementations have limits on the number
         and size of cookies that they can store.  General-use user agents
         SHOULD provide each of the following minimum capabilities:
@@ -974,7 +976,8 @@ mystery         = <anything except a delimiter>
         one or more cookies in the Cookie header because the user agent might
         evict any cookie at any time on orders from the user.</t>
       </section>
-      <section title="Application Programmer Interfaces">
+      <section anchor="implementation-apis"
+               title="Application Programmer Interfaces">
         <t>One reason the cookie protocol uses such an esoteric syntax is
         because many platforms (both in servers and user agents) provide
         string-based application programmer interfaces (APIs), requiring
@@ -988,8 +991,10 @@ mystery         = <anything except a delimiter>
         object instead of a serialized date string.</t>
       </section>
     </section>
-    <section title="Security Considerations">
-      <section title="General Recommendations">
+    <section anchor="security-considerations"
+             title="Security Considerations">
+      <section anchor="general-recommendations"
+               title="General Recommendations">
         <t>The cookie protocol is NOT RECOMMENDED for new applications.</t>
 
         <t>For applications that do use the cookie protocol, servers SHOULD
@@ -999,7 +1004,7 @@ mystery         = <anything except a delimiter>
         redundant form of authentication, such as HTTP authentication or TLS
         client certificates.</t>
       </section>
-      <section title="Ambient Authority">
+      <section anchor="ambient-authority" title="Ambient Authority">
         <t>If a server uses cookies to authenticate users, a server might
         suffer security vulnerabilities because user agents occasionally issue
         HTTP requests on behalf of remote parties (e.g., because of HTTP
@@ -1024,7 +1029,7 @@ mystery         = <anything except a delimiter>
         judicious use of these principles can lead to more robust
         security.</t>
       </section>
-      <section title="Clear Text">
+      <section anchor="clear-text" title="Clear Text">
         <t>The information in the Set-Cookie and Cookie headers is
         transmitted in the clear.
         <list style="numbers">
@@ -1047,7 +1052,7 @@ mystery         = <anything except a delimiter>
         cookie, servers that require a higher level of security SHOULD use the
         cookie protocol only over a secure channel.</t>
       </section>
-      <section title="Weak Confidentiality">
+      <section anchor="weak-confidentiality" title="Weak Confidentiality">
         <t>Cookies do not provide isolation by port. If a cookie is readable
         by a service running on one port, the cookie is also readable by a
         service running on another port of the same server. If a cookie is
@@ -1065,7 +1070,7 @@ mystery         = <anything except a delimiter>
         apparent via non-HTTP APIs that permit access to cookies, such as
         HTML's document.cookie API.</t>
       </section>
-      <section title="Weak Integrity">
+      <section anchor="weak-integrity" title="Weak Integrity">
         <t>Cookies do not provide integrity guarantees for sibling domains
         (and their subdomains). For example, consider foo.example.com and
         bar.example.com. The foo.example.com server can set a cookie with a
