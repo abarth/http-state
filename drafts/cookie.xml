@@ -999,7 +999,7 @@ mystery         = <anything except a delimiter>
         unwary server.</t>
 
         <t>Although this security concern goes by a number of names (e.g.,
-        cross-site scripting, cross-site request forgery), the issue stems
+        cross-site scripting and cross-site request forgery), the issue stems
         from cookies being a form of ambient authority. Cookies encourage
         server operators to separate designation (in the form of URLs) from
         authorization (in the form of cookies). Disentangling designation and
