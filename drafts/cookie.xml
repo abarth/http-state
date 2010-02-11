@@ -1094,6 +1094,12 @@ mystery         = <anything except a delimiter>
         received from the authentic example.com server in the user's session,
         with unpredictable results.</t>
       </section>
+      <section anchor="reliance-on-dns" title="Reliance on DNS">
+        <t>The cookie protocol relies upon the Domain Name System (DNS) for
+        security. If the DNS is partially or fully compromised, the cookie
+        protocol might fail to provide the security properties required by
+        applications.</t>
+      </section>
     </section>
   </middle>
   <back>
