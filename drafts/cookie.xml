@@ -1005,15 +1005,14 @@ mystery         = <anything except a delimiter>
         client certificates.</t>
       </section>
       <section anchor="ambient-authority" title="Ambient Authority">
-        <t>If a server uses cookies to authenticate users, a server might
-        suffer security vulnerabilities because user agents occasionally issue
-        HTTP requests on behalf of remote parties (e.g., because of HTTP
-        redirects or HTML forms). When issuing those requests, user agent
-        attaches cookies even if the entity does not know the contents of the
-        cookies, possibly letting the remote entity exercise authority at an
-        unwary server. User agents can mitigate this issue to some degree by
-        providing APIs for suppressing the Cookie header on outgoing
-        requests.</t>
+        <t>A server that uses cookies to authenticate users can suffer
+        security vulnerabilities because some user agents let remote parties
+        issue HTTP requests from the user agent (e.g., via HTTP redirects and
+        HTML forms). When issuing those requests, user agent attaches cookies
+        even if the entity does not know the contents of the cookies, possibly
+        letting the remote entity exercise authority at an unwary server. User
+        agents can mitigate this issue to some degree by providing APIs for
+        suppressing the Cookie header on outgoing requests.</t>
 
         <t>Although this security concern goes by a number of names (e.g.,
         cross-site scripting and cross-site request forgery), the issue stems
@@ -1032,8 +1031,8 @@ mystery         = <anything except a delimiter>
         security.</t>
       </section>
       <section anchor="clear-text" title="Clear Text">
-        <t>The information in the Set-Cookie and Cookie headers is
-        transmitted in the clear.
+        <t>Unless sent over a secure channel (such as TLS), the information in
+        the Set-Cookie and Cookie headers is transmitted in the clear.
         <list style="numbers">
           <t>All sensitive information conveyed in these headers is exposed to
           an eavesdropper.</t>
@@ -1046,9 +1045,11 @@ mystery         = <anything except a delimiter>
         </list>
         </t>
 
-        <t>Servers SHOULD encrypt and sign their cookies. However, encrypting
-        and signing cookies does not prevent an attacker from transplanting a
-        cookie from one user agent to another.</t>
+        <t>Servers SHOULD encrypt and sign their cookies when transmitting
+        them to the user agent (even when sending the cookies over a secure
+        channel). However, encrypting and signing cookies does not prevent an
+        attacker from transplanting a cookie from one user agent to
+        another.</t>
 
         <t>In addition to encrypting and signing the contents of every
         cookie, servers that require a higher level of security SHOULD use the
@@ -1061,7 +1062,7 @@ mystery         = <anything except a delimiter>
         writable by a service on one port, the cookie is also writable by a
         service running on another port of the same server. For this reason,
         servers SHOULD NOT both run mutually distrusting services on different
-        ports of the same machine and use cookies to store security-sensitive
+        ports of the same host and use cookies to store security-sensitive
         information.</t>
 
         <t>Cookies do not provide isolation by scheme. Although most commonly
