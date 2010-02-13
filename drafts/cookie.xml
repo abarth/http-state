@@ -1026,7 +1026,7 @@ mystery         = <anything except a delimiter>
         wish to consider entangling designation and authorization by treating
         URLs as object-capabilities. Instead of storing secrets in cookies,
         this approach stores secrets in URLs, requiring the remote entity to
-        supply the secret itself. ALthough this approach is not a panacea,
+        supply the secret itself. Although this approach is not a panacea,
         judicious use of these principles can lead to more robust
         security.</t>
       </section>
