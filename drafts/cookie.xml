@@ -1097,10 +1097,10 @@ mystery         = <anything except a delimiter>
         against example.com even if example.com uses HTTPS exclusively.</t>
 
         <t>Servers can partially mitigate these attacks by encrypting and
-        signing their cookies. However, using cryptography does not mitigate
-        the issue completely because an attacker can replay a cookie he or she
-        received from the authentic example.com server in the user's session,
-        with unpredictable results.</t>
+        signing the contents of their cookies. However, using cryptography
+        does not mitigate the issue completely because an attacker can replay
+        a cookie he or she received from the authentic example.com server in
+        the user's session, with unpredictable results.</t>
       </section>
       <section anchor="reliance-on-dns" title="Reliance on DNS">
         <t>The cookie protocol relies upon the Domain Name System (DNS) for
