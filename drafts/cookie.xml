@@ -1066,18 +1066,19 @@ mystery         = <anything except a delimiter>
 
         <t>Cookies do not provide isolation by scheme. Although most commonly
         used with the http and https schemes, the cookies for a given host
-        might also available to other schemes, such as ftp and gopher. This
-        lack of isolation is most easily seen when a user agent retrieves a
-        URI with a gopher scheme via HTTP, but the lack of isolation by scheme
-        is also apparent via non-HTTP APIs that permit access to cookies, such
-        as HTML's document.cookie API.</t>
+        might also available to other schemes, such as ftp and gopher.
+        Although this lack of isolation by scheme is most apparent in via
+        non-HTTP APIs that permit access to cookies (e.g., HTML's
+        document.cookie API), the lack of isolation by scheme is actually
+        present in the cookie protocol itself (e.g., consider retrieving a URI
+        with the gopher scheme via HTTP).</t>
 
         <t>Cookies do not always provide isolation by path. Although the
         network-level protocol does not send cookie stored for one path to
         another, some user agents expose cookies via non-HTTP APIs, such as
-        HTML's document.cookie. Because some of these user agents (e.g., web
-        browsers) do not isolate resources received from different paths, a
-        resource retrieved from one path might be able to access cookies
+        HTML's document.cookie API. Because some of these user agents (e.g.,
+        web browsers) do not isolate resources received from different paths,
+        a resource retrieved from one path might be able to access cookies
         stored for another path.</t>
       </section>
       <section anchor="weak-integrity" title="Weak Integrity">
