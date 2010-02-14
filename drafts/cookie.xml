@@ -999,10 +999,6 @@ mystery         = <anything except a delimiter>
 
         <t>For applications that do use the cookie protocol, servers SHOULD
         NOT rely upon cookies for security.</t>
-
-        <t>For servers that do use cookies for security, servers SHOULD use a
-        redundant form of authentication, such as HTTP authentication or TLS
-        client certificates.</t>
       </section>
       <section anchor="ambient-authority" title="Ambient Authority">
         <t>A server that uses cookies to authenticate users can suffer
