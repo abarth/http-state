@@ -1049,8 +1049,10 @@ mystery         = <anything except a delimiter>
         <t>In addition to encrypting and signing the contents of every
         cookie, servers that require a higher level of security SHOULD use the
         cookie protocol only over a secure channel. When using the cookie
-        protocol over a secure channel, servers SHOULD include the Secure
-        attribute in every cookie.</t>
+        protocol over a secure channel, servers SHOULD set the Secure
+        attribute in every cookie. If a server does not set the Secure
+        attribute, the protection provided by the secure channel will be
+        largely moot.</t>
       </section>
       <section anchor="weak-confidentiality" title="Weak Confidentiality">
         <t>Cookies do not provide isolation by port. If a cookie is readable
