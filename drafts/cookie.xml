@@ -1071,6 +1071,14 @@ mystery         = <anything except a delimiter>
         gopher scheme via HTTP, but the lack of isolation by scheme is also
         apparent via non-HTTP APIs that permit access to cookies, such as
         HTML's document.cookie API.</t>
+
+        <t>Cookies do not always provide isolation by path. Although the
+        network-level protocol does not send cookie stored for one path to
+        another, some user agents expose cookies via non-HTTP APIs, such as
+        HTML's document.cookie. Because some of these user agents (e.g., web
+        browsers) do not isolate resources received from different paths, a
+        resource retrieved from one path might be able to access cookies
+        stored for another path.</t>
       </section>
       <section anchor="weak-integrity" title="Weak Integrity">
         <t>Cookies do not provide integrity guarantees for sibling domains
