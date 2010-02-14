@@ -1011,12 +1011,12 @@ mystery         = <anything except a delimiter>
         suppressing the Cookie header on outgoing requests.</t>
 
         <t>Although this security concern goes by a number of names (e.g.,
-        cross-site scripting and cross-site request forgery), the issue stems
-        from cookies being a form of ambient authority. Cookies encourage
-        server operators to separate designation (in the form of URLs) from
-        authorization (in the form of cookies). Disentangling designation and
-        authorization can cause the server and its clients to become confused
-        deputies and undertake undesirable actions.</t>
+        cross-site request forgery), the issue stems from cookies being a form
+        of ambient authority. Cookies encourage server operators to separate
+        designation (in the form of URLs) from authorization (in the form of
+        cookies). Disentangling designation and authorization can cause the
+        server and its clients to become confused deputies and undertake
+        undesirable actions.</t>
 
         <t>Instead of using cookies for authorization, server operators might
         wish to consider entangling designation and authorization by treating
