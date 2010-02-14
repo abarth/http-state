@@ -1072,13 +1072,23 @@ mystery         = <anything except a delimiter>
         <t>Cookies do not provide integrity guarantees for sibling domains
         (and their subdomains). For example, consider foo.example.com and
         bar.example.com. The foo.example.com server can set a cookie with a
-        Domain attribute of ".example.com", and the user agent will include
-        that cookie in HTTP requests to bar.example.com. In the worst case,
-        bar.example.com will be unable to distinguish this cookie from a
+        Domain attribute of ".example.com" (possibly overwriting an existing
+        ".example.com" cookie set by bar.example.com), and the user agent will
+        include that cookie in HTTP requests to bar.example.com. In the worst
+        case, bar.example.com will be unable to distinguish this cookie from a
         cookie it set itself. The foo.example.com server might be able to
         leverage this ability to mount an attack against bar.example.com.</t>
 
-        <t>Similarly, an active network attacker can inject cookies into the
+        <t>Even though the cookie protocol supports the Path attribute, the
+        Path attribute does not provide any integrity protection because the
+        user agent with accept an arbitrary Path attribute in a Set-Cookie
+        header. For example, an HTTP response to a request for
+        http://example.com/foo/bar can set a cookie with a Path attribute of
+        "/qux". Consequently, servers SHOULD NOT both run mutually distrusting
+        services on different paths of the same host and use cookies store
+        security sensitive information.</t>
+
+        <t>An active network attacker can also inject cookies into the
         Cookie header sent to https://example.com/ by impersonating a response
         from http://example.com/ and injecting a Set-Cookie header. The HTTPS
         server at example.com will be unable to distinguish these cookies from
