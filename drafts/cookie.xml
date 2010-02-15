@@ -1006,9 +1006,7 @@ mystery         = <anything except a delimiter>
         issue HTTP requests from the user agent (e.g., via HTTP redirects and
         HTML forms). When issuing those requests, user agent attaches cookies
         even if the entity does not know the contents of the cookies, possibly
-        letting the remote entity exercise authority at an unwary server. User
-        agents can mitigate this issue to some degree by providing APIs for
-        suppressing the Cookie header on outgoing requests.</t>
+        letting the remote entity exercise authority at an unwary server.</t>
 
         <t>Although this security concern goes by a number of names (e.g.,
         cross-site request forgery), the issue stems from cookies being a form
