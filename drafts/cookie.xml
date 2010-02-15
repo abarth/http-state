@@ -325,6 +325,12 @@ cookie-string = cookie-pair *( ";" cookie-pair )
           <t>The semantics of individual cookies in the Cookie header is not
           defined by this document. Servers are expected to imbue these
           cookies with server-specific semantics.</t>
+
+          <t>Although cookies are serialized linearly in the Cookie header,
+          servers SHOULD NOT rely upon the serialization order. In particular,
+          if the Cookie header contains two cookies with the same name,
+          servers SHOULD NOT rely upon the order in which these cookies appear
+          in the header.</t>
         </section>
       </section>
     </section>
