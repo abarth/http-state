@@ -20,7 +20,6 @@
     </author>
     <date month="February" year="2010"/>
     <workgroup>httpstate</workgroup>
-    <keyword>Internet-Draft</keyword>
     <abstract>
       <t>This document defines the HTTP Cookie and Set-Cookie headers.
       These headers can be used by HTTP servers to store state on HTTP user
@@ -85,7 +84,8 @@
       </section>
       <section anchor="terminology" title="Terminology">
         <t>The terms user agent, client, server, proxy, and origin server have
-        the same meaning as in the HTTP/1.1 specification.</t>
+        the same meaning as in the HTTP/1.1 specification (<xref
+        target="RFC2616"/>).</t>
 
         <t>The terms request-host and request-URI refer to the values the user
         agent would send to the server as, respectively, the host (but not
@@ -146,7 +146,7 @@
           the following grammar:</t>
 
           <figure>
-            <artwork type="abnf2616">
+            <artwork type="abnf">
               <![CDATA[
 set-cookie-header = "Set-Cookie:" OWS set-cookie-string OWS
 set-cookie-string = cookie-pair *( ";" cookie-av )
@@ -278,7 +278,7 @@ httponly-av       = "HttpOnly"
             channels (where "secure" is defined by the user agent). When a
             cookie has the Secure attribute, the user agent will include the
             cookie in an HTTP request only if the request is transmitted over
-            a secure channel (typically TLS <xref target="RFC5234"/>).</t>
+            a secure channel (typically TLS <xref target="RFC5246"/>).</t>
 
             <t>Although seemingly useful for protecting cookies from active
             network attackers, the Secure attribute protects only the cookie's
@@ -303,7 +303,7 @@ httponly-av       = "HttpOnly"
           grammar:</t>
 
           <figure>
-            <artwork type="abnf2616">
+            <artwork type="abnf">
               <![CDATA[
 cookie-header = "Cookie:" OWS cookie-string OWS
 cookie-string = cookie-pair *( ";" cookie-pair ) 
@@ -351,7 +351,7 @@ cookie-string = cookie-pair *( ";" cookie-pair )
             <t>Using the grammar below, divide the cookie-date into
             date-tokens.
             <figure>
-              <artwork type="abnf2616">
+              <artwork type="abnf">
                 <![CDATA[
 cookie-date     = *delimiter date-token-list *delimiter
 date-token-list = date-token *( 1*delimiter date-token )
@@ -1247,10 +1247,27 @@ mystery         = <anything except a delimiter>
         <seriesInfo name='RFC' value='5246' />
       </reference>
     </references>
+    <references title="Informative References">
+      <reference anchor='RFC2109'>
+        <front>
+          <title>HTTP State Management Mechanism</title>
+          <author initials='D.M.' surname='Kristol' fullname='David M. Kristol'>
+            <organization>Bell Laboratories, Lucent Technologies</organization>
+            <address><email>dmk@bell-labs.com</email></address>
+          </author>
+          <author initials='L.' surname='Montulli' fullname='Lou Montulli'>
+            <organization>Netscape Communications Corp.</organization>
+            <address><email>montulli@netscape.com</email></address>
+          </author>
+          <date year='1997' month='February' />
+        </front>
+        <seriesInfo name='RFC' value='2109' />
+      </reference>
+    </references>
 
     <section title="Acknowledgements">
-      <t>This document borrows heavily from RFC 2109.  [TODO: Figure out the
-      proper way to credit the authors of RFC 2109.]</t>
+      <t>This document borrows heavily from RFC 2109 <xref target="RFC2109"/>.
+      [TODO: Figure out the proper way to credit the authors of RFC 2109.]</t>
     </section>
   </back>
 </rfc>
