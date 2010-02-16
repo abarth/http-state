@@ -1076,7 +1076,7 @@ mystery         = <anything except a delimiter>
 
         <t>Using session identifiers is not without risk. For example, the
         server SHOULD take care to avoid "session fixation" vulnerabilities. A
-        session fixation vulnerability proceeds in three steps. First, the
+        session fixation attack proceeds in three steps. First, the
         attacker transplants a session identifier from his or her user agent
         to the victim's user agent. Second, the victim uses that session
         identifier to interact with the server, possibly imbuing the session
