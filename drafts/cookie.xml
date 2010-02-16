@@ -1058,6 +1058,32 @@ mystery         = <anything except a delimiter>
         attribute, the protection provided by the secure channel will be
         largely moot.</t>
       </section>
+      <section anchor="session-identifiers" title="Session Identifiers">
+        <t>Instead of storing session information directly in a cookie (where
+        it might be exposed to or replayed by an attacker), servers commonly
+        store a nonce (or "session identifier") in a cookie. When the server
+        receives an HTTP request with a nonce, the server can look up state
+        information associated with the cookie using the nonce as a key.</t>
+
+        <t>Using session identifier cookies limits the damage an attacker can
+        cause if the attacker learns the contents of a cookie because the
+        nonce is useful only for interacting with the server (unlike non-nonce
+        cookie content, which might itself be sensitive). Furthermore, using a
+        single nonce prevents an attacker from "splicing" together cookie
+        content from two interactions with the server, which could cause the
+        server to behave unexpectedly.</t>
+
+        <t>Using session identifiers is not without risk. For example, the
+        server must take care to avoid "session fixation" vulnerabilities. A
+        session fixation vulnerability proceeds in three steps. First, the
+        attacker transplants a session identifier from his or her user agent
+        to the victim's user agent. Second, the victim uses that session
+        identifier to interact with the server, possibly imbuing the session
+        identifier with the user's credentials or confidential information.
+        Third, the attacker uses the session identifier to interact with
+        server directly, possibly obtaining the user's authority or
+        confidential information.
+      </section>
       <section anchor="weak-confidentiality" title="Weak Confidentiality">
         <t>Cookies do not provide isolation by port. If a cookie is readable
         by a service running on one port, the cookie is also readable by a
