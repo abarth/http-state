@@ -1082,7 +1082,7 @@ mystery         = <anything except a delimiter>
         identifier with the user's credentials or confidential information.
         Third, the attacker uses the session identifier to interact with
         server directly, possibly obtaining the user's authority or
-        confidential information.
+        confidential information.</t>
       </section>
       <section anchor="weak-confidentiality" title="Weak Confidentiality">
         <t>Cookies do not provide isolation by port. If a cookie is readable
