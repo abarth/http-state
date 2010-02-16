@@ -1048,7 +1048,8 @@ mystery         = <anything except a delimiter>
         transmitting them to the user agent (even when sending the cookies
         over a secure channel). However, encrypting and signing cookie
         contents does not prevent an attacker from transplanting a cookie from
-        one user agent to another.</t>
+        one user agent to another or from replying the cookie at a later
+        time.</t>
 
         <t>In addition to encrypting and signing the contents of every
         cookie, servers that require a higher level of security SHOULD use the
