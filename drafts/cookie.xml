@@ -1015,12 +1015,14 @@ mystery         = <anything except a delimiter>
         letting the remote entity exercise authority at an unwary server.</t>
 
         <t>Although this security concern goes by a number of names (e.g.,
-        cross-site request forgery), the issue stems from cookies being a form
-        of ambient authority. Cookies encourage server operators to separate
-        designation (in the form of URLs) from authorization (in the form of
-        cookies). Disentangling designation and authorization can cause the
-        server and its clients to become confused deputies and undertake
-        undesirable actions.</t>
+        cross-site request forgery, confused deputy), the issue stems from
+        cookies being a form of ambient authority. Cookies encourage server
+        operators to separate designation (in the form of URLs) from
+        authorization (in the form of cookies). Consequently, the user agent
+        might supply the authorization for a resource designated by the
+        attacker, possibly causing the server or its clients to undertake
+        actions designated by the attacker as though they were authorized by
+        the user.</t>
 
         <t>Instead of using cookies for authorization, server operators might
         wish to consider entangling designation and authorization by treating
