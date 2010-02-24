@@ -1092,7 +1092,8 @@ mystery         = <anything except a delimiter>
              title="Security Considerations">
       <section anchor="general-recommendations"
                title="General Recommendations">
-        <t>The cookie protocol is NOT RECOMMENDED for new applications.</t>
+        <t>The cookie protocol is NOT RECOMMENDED for use in new protocols
+        that operate over HTTP</t>
 
         <t>For applications that do use the cookie protocol, servers SHOULD
         NOT rely upon cookies for security.</t>
