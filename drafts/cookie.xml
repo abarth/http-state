@@ -25,8 +25,7 @@
       These headers can be used by HTTP servers to store state on HTTP user
       agents, letting the servers maintain a stateful session over the
       mostly stateless HTTP protocol.  The cookie protocol has many
-      historical infelicities and should be avoided for new applications of
-      HTTP.
+      historical infelicities that degrade its security and privacy.
       <list>
         <t>NOTE: If you have suggestions for improving the draft, please send
         email to http-state@ietf.org.  Suggestions with test cases are
@@ -1092,9 +1091,6 @@ mystery         = <anything except a delimiter>
              title="Security Considerations">
       <section anchor="general-recommendations"
                title="General Recommendations">
-        <t>The cookie protocol is NOT RECOMMENDED for use in new protocols
-        that operate over HTTP</t>
-
         <t>For applications that do use the cookie protocol, servers SHOULD
         NOT rely upon cookies for security.</t>
       </section>
