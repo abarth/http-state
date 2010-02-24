@@ -1089,11 +1089,6 @@ mystery         = <anything except a delimiter>
     </section>
     <section anchor="security-considerations"
              title="Security Considerations">
-      <section anchor="general-recommendations"
-               title="General Recommendations">
-        <t>For applications that use the cookie protocol, servers SHOULD
-        NOT rely upon cookies for security.</t>
-      </section>
       <section anchor="ambient-authority" title="Ambient Authority">
         <t>A server that uses cookies to authenticate users can suffer
         security vulnerabilities because some user agents let remote parties
