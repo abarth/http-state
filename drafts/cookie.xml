@@ -1218,7 +1218,7 @@ mystery         = <anything except a delimiter>
 
         <t>Even though the cookie protocol supports the Path attribute, the
         Path attribute does not provide any integrity protection because the
-        user agent with accept an arbitrary Path attribute in a Set-Cookie
+        user agent will accept an arbitrary Path attribute in a Set-Cookie
         header. For example, an HTTP response to a request for
         http://example.com/foo/bar can set a cookie with a Path attribute of
         "/qux". Consequently, servers SHOULD NOT both run mutually distrusting
