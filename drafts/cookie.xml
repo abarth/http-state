@@ -1000,7 +1000,7 @@ mystery         = <anything except a delimiter>
 
             <t>The Request-URI's path patch-matches cookie's path.</t>
 
-            <t>If the cookie's secure-only field is true, then the
+            <t>If the cookie's secure-only-flag is true, then the
             Request-URI's scheme must denote a "secure" protocol (as defined
             by the user agent).
             <list style="empty">
@@ -1012,7 +1012,7 @@ mystery         = <anything except a delimiter>
             </list>
             </t>
 
-            <t>If the cookie's http-only field is true, then exclude the
+            <t>If the cookie's http-only-flag is true, then exclude the
             cookie unless the cookie-string is being generated for an
             "HTTP" API (as defined by the user agent).</t>
           </list>
