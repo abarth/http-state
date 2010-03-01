@@ -707,8 +707,7 @@ mystery         = <anything except a delimiter>
           seconds.</t>
 
           <t>Append an attribute to the cookie-attribute-list with an
-          attribute-name of Expires (note the name conversion) and an
-          attribute-value of expiry-time.</t>
+          attribute-name of Max-Age and an attribute-value of expiry-time.</t>
         </section>
         <section anchor="expires-attribute" title="The Expires Attribute">
           <t>If the attribute-name case-insensitively matches the string
@@ -830,14 +829,23 @@ mystery         = <anything except a delimiter>
           and time.</t>
 
           <t>If the cookie-attribute-list contains an attribute with an
-          attribute-name of "Expires":
+          attribute-name of "Max-Age":
           <list style="empty">
             <t>Set the cookie's persistent-flag to true.</t>
 
             <t>Set the cookie's expiry-time to attribute-value of the last
             attribute in the cookie-attribute-list with an attribute-name of
-            "Expires". [TODO: Test that this really works when mixing
-            Max-Age and Expires.]</t>
+            "Max-Age".</t>
+          </list>
+          Otherwise, if the cookie-attribute-list contains an attribute with an
+          attribute-name of "Expires" (and does not contain an attribute with
+          an attribute-name of "Max-Age"):
+          <list style="empty">
+            <t>Set the cookie's persistent-flag to true.</t>
+
+            <t>Set the cookie's expiry-time to attribute-value of the last
+            attribute in the cookie-attribute-list with an attribute-name of
+            "Expires".</t>
           </list>
           Otherwise:
           <list style="empty">
