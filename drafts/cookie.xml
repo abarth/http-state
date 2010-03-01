@@ -772,8 +772,6 @@ mystery         = <anything except a delimiter>
 
           <t>Convert the cookie-domain to lower case.</t>
 
-          <t>[TODO: Test ".127.0.0.1" and "127.0.0.1"]</t>
-
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Domain and an attribute-value of
           cookie-domain.</t>
@@ -785,9 +783,7 @@ mystery         = <anything except a delimiter>
           <t>If the attribute-value is empty or if the first character of the
           attribute-value is not U+002F ("/"):
           <list style="empty">
-            <t>Let cookie-path be the default-path. [TODO: We need more tests
-            for this, including with " characters and with multiple Path
-            attributes.]</t>
+            <t>Let cookie-path be the default-path.</t>
           </list>
           Otherwise:
           <list style="empty">
