@@ -544,11 +544,18 @@ mystery         = <anything except a delimiter>
             <t>The cookie-domain and the canonicalized request-host are
             identical.</t>
 
-            <t>The cookie-domain is a suffix of the canonicalized
-            request-host, the last character of the canonicalized
-            request-host that is not included in the cookie-domain is a U+002E
-            (".") character, and request-host is a host name (i.e., not an
-            IP address). [TODO: Is this the right way to spec this???]</t>
+            <t>All of the following conditions hold:
+            <list style="symbols">
+              <t>The cookie-domain is a suffix of the canonicalized
+              request-host.</t>
+
+              <t>The last character of the canonicalized request-host that is
+              not included in the cookie-domain is a U+002E (".")
+              character.</t>
+
+              <t>The request-host is a host name (i.e., not an IP address).</t>
+            </list>
+            </t>
           </list>
           </t>
         </section>
