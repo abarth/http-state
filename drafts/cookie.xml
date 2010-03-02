@@ -577,8 +577,7 @@ mystery         = <anything except a delimiter>
           </t>
 
           <t>A request-path *path-matches* a cookie-path if at least one of
-          the following conditions hold: [TODO: This isn't exactly what IE
-          or Firefox does.]
+          the following conditions hold:
           <list style="symbols">
             <t>The cookie-path and the request-path are identical.</t>
 
