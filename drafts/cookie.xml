@@ -933,16 +933,34 @@ mystery         = <anything except a delimiter>
           attribute-name of "HttpOnly", set the cookie's http-only-flag to
           true.  Otherwise, set cookie's http-only-flag to false.</t>
 
-          <t>Remove from the cookie store all cookies that share the
-          same name, domain, path, and host-only-flag as the newly created
-          cookie. [TODO: Validate this list!] [TODO: There's some funny
-          business around http-only here.]</t>
-
           <t>If the cookie's name and value are both empty, abort these
-          steps.</t>
+          steps and ignore the cookie entirely.</t>
 
           <t>If the cookie's expiry-time is not in the future, abort these
-          steps.</t>
+          steps and ignore the cookie entirely.</t>
+
+          <t>If the cookie was received from a non-HTTP context and the
+          cookie's http-only-flag is set, abort these steps and ignore the
+          cookie entirely. 
+
+          <t>If the cookie store contains a cookie with the same name, domain,
+          and path as the newly created cookie:
+          <list>
+            <t>Let old-cookie be the existing cookie with the same name,
+            domain, and path as the newly created cookie.  (Notice that this
+            algorithm maintains the invariant that there is at most one such
+            cookie.)</t>
+
+            <t>If the newly created cookie was received from an non-HTTP
+            context and the old-cookie's host-only-flag is set, abort these
+            steps and ignore the newly created cookie entirely.</t>
+
+            <t>Update the creation-time of the newly created cookie to match
+            the creation-time of the old-cookie.</t>
+
+            <t>Remove the old-cookie from the cookie store.</t>
+          </list>
+          </t>
 
           <t>Insert the newly created cookie into the cookie store.</t>
         </list>
