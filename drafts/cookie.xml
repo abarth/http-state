@@ -941,7 +941,7 @@ mystery         = <anything except a delimiter>
 
           <t>If the cookie was received from a non-HTTP context and the
           cookie's http-only-flag is set, abort these steps and ignore the
-          cookie entirely. 
+          cookie entirely.</t>
 
           <t>If the cookie store contains a cookie with the same name, domain,
           and path as the newly created cookie:
