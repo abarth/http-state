@@ -1131,7 +1131,7 @@ mystery         = <anything except a delimiter>
         prevent a network attacker from altering a victim's cookies because the
         cookie protocol does not provide integrity.  In addition, by default,
         the cookie protocol does not provide confidentiality from network
-        attackers.</t>
+        attackers, even when used over HTTPS.</t>
       </section>
       <section anchor="ambient-authority" title="Ambient Authority">
         <t>A server that uses cookies to authenticate users can suffer
