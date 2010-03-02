@@ -1117,6 +1117,22 @@ mystery         = <anything except a delimiter>
     </section>
     <section anchor="security-considerations"
              title="Security Considerations">
+      <section anchor="section-overview" title="Overview">
+        <t>The cookie protocol has a number of security and privacy
+        pitfalls.</t>
+
+        <t>In particular, cookies encourage developers to rely on ambient
+        authority for authentication, often creating vulnerabilities such as
+        cross-site request forgery.  When storing session identifiers in
+        cookies, developers often create session fixation
+        vulnerabilities.</t>
+
+        <t>Transport-layer encryption, such as HTTPS, is insufficient to
+        prevent a network attacker from altering a victim's cookies because
+        the cookie protocol does not provide integrity.  By default, cookies
+        are transmitted in the clear, where their confidentiality can be
+        compromised by a network attacker.</t>
+      </section>
       <section anchor="ambient-authority" title="Ambient Authority">
         <t>A server that uses cookies to authenticate users can suffer
         security vulnerabilities because some user agents let remote parties
