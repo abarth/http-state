@@ -1128,10 +1128,10 @@ mystery         = <anything except a delimiter>
         vulnerabilities.</t>
 
         <t>Transport-layer encryption, such as HTTPS, is insufficient to
-        prevent a network attacker from altering a victim's cookies because
-        the cookie protocol does not provide integrity.  By default, cookies
-        are transmitted in the clear, where their confidentiality can be
-        compromised by a network attacker.</t>
+        prevent a network attacker from altering a victim's cookies because the
+        cookie protocol does not provide integrity.  In addition, by default,
+        the cookie protocol does not provide confidentiality from network
+        attackers.</t>
       </section>
       <section anchor="ambient-authority" title="Ambient Authority">
         <t>A server that uses cookies to authenticate users can suffer
