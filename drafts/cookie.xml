@@ -1131,11 +1131,13 @@ mystery         = <anything except a delimiter>
         cookies, developers often create session fixation
         vulnerabilities.</t>
 
-        <t>Transport-layer encryption, such as HTTPS, is insufficient to
-        prevent a network attacker from altering a victim's cookies because the
-        cookie protocol does not provide integrity.  In addition, by default,
-        the cookie protocol does not provide confidentiality from network
-        attackers, even when used over HTTPS.</t>
+        <t>Transport-layer encryption, such as that employed in HTTPS, is
+        insufficient to prevent a network attacker from obtaining or altering a
+        victim's cookies because the cookie protocol itself has various
+        vulnerabilities (see "Weak Confidentiality" and "Weak Integrity",
+        below). In addition, by default, the cookie protocol does not provide
+        confidentiality or integrity from network attackers, even when used in
+        conjunction with HTTPS.</t>
       </section>
       <section anchor="ambient-authority" title="Ambient Authority">
         <t>A server that uses cookies to authenticate users can suffer
