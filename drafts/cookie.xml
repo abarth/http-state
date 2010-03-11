@@ -173,7 +173,7 @@ Cookie: SID=31d4d96e407aad42
           <artwork>
             <![CDATA[
 == Server -> User Agent ==
-Set-Cookie: SID=31d4d96e407aad42; Path=/; Secure, HttpOnly
+Set-Cookie: SID=31d4d96e407aad42; Path=/; Secure; HttpOnly
 Set-Cookie: lang=en-US; Path=/; Domain=.example.com
 
 == User Agent -> Server ==
@@ -265,6 +265,9 @@ httponly-av       = "HttpOnly"
           </figure>
 
           <t>Servers SHOULD NOT include two attributes with the same name.</t>
+
+          <t>Servers SHOULD NOT include two Set-Cookie header fields in the
+          same response with the same cookie-name.</t>
 
           <t>The cookie-value is opaque to the user agent and MAY be
           anything the origin server chooses to send. "Opaque" implies that
