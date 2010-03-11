@@ -120,6 +120,11 @@
       single response. Note that an intervening gateway MUST NOT fold multiple
       Set-Cookie header fields into a single header field.</t>
 
+      <t>If a server sends multiple responses containing Set-Cookie headers
+      concurrently to the user agent (e.g., when communicating with the user
+      agent over multiple sockets), these responses create a "race condition"
+      that can lead to unpredictable behavior.</t>
+
       <section title="Examples">
         <t>Using the cookie protocol, a server can send the user agent a short
         string in an HTTP response that the user agent will return in future
