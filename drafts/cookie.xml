@@ -279,6 +279,11 @@ httponly-av       = "HttpOnly"
           store non-ASCII data in a cookie-value SHOULD encode that data using
           a printable ASCII encoding, such as base64.</t>
 
+          <t>To maximize compatibility with user agents, servers SHOULD use
+          sane-cookie-dates before 2036 due to 32-bit "time_t" rollover.
+          Hopefully the industry will resolve this issue in some way as 2036
+          approaches.</t>
+
           <t>NOTE: The syntax above allows whitespace between the attribute
           and the U+003D ("=") character.  Servers wishing to interoperate
           with some legacy user agents might wish to elide this
