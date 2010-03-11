@@ -352,7 +352,7 @@ httponly-av       = "HttpOnly"
             reject Domain attributes that do not correspond to a "registry
             controlled" domain (or a subdomain of a registry controlled
             domain). For example, some user agents will reject Domain
-            attributes of ".com".</t>
+            attributes of ".com" or ".co.uk".</t>
           </section>
           <section anchor="sane-path" title="Path">
             <t>The Path attribute limits the scope of the cookie to a set of
