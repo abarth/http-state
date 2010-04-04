@@ -549,7 +549,7 @@ mystery         = <anything except a delimiter>
         </section>
         <section anchor="cookie-domain" title="Domains">
           <t>A *canonicalized* host-name is the host-name converted to
-          lower case.</t>
+          lower case and expressed in punycode <xref target="RFC3492"/>.</t>
 
           <t>A request-host *domain-matches* a cookie-domain if at least one
           of the following conditions hold:
@@ -1393,6 +1393,33 @@ mystery         = <anything except a delimiter>
         </front>
         <seriesInfo name="RFC" value="2616"/>
       </reference>
+      <reference anchor='RFC3492'> 
+        <front> 
+          <title>Punycode: A Bootstring encoding of Unicode for
+          Internationalized Domain Names in Applications (IDNA)</title>
+        <author initials='A.' surname='Costello' fullname='A. Costello'> 
+          <organization />
+        </author> 
+        <date year='2003' month='March' /> 
+        <abstract> 
+          <t>Punycode is a simple and efficient transfer encoding syntax
+          designed for use with Internationalized Domain Names in Applications
+          (IDNA). It uniquely and reversibly transforms a Unicode string into
+          an ASCII string. ASCII characters in the Unicode string are
+          represented literally, and non-ASCII characters are represented by
+          ASCII characters that are allowed in host name labels (letters,
+          digits, and hyphens). This document defines a general algorithm
+          called Bootstring that allows a string of basic code points to
+          uniquely represent any string of code points drawn from a larger
+          set. Punycode is an instance of Bootstring that uses particular
+          parameter values specified by this document, appropriate for
+          IDNA.</t>
+        </abstract>
+      </front> 
+      <seriesInfo name='RFC' value='3492' /> 
+      <format type='TXT' octets='67439'
+              target='ftp://ftp.isi.edu/in-notes/rfc3492.txt' /> 
+      </reference> 
       <reference anchor='RFC3629'>
         <front>
           <title>UTF-8, a transformation format of ISO 10646</title>
