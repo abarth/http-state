@@ -80,6 +80,13 @@
         (double quote), HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed),
         OCTET (any 8-bit sequence of data), SP (space), HTAB (horizontal tab),
         VCHAR (any visible [USASCII] character), and WSP (whitespace).</t>
+
+        <t>The OWS (optional whitespace) rule is used where zero or more
+        linear whitespace characters may appear. OWS SHOULD either not be
+        produced or be produced as a single SP character. Multiple OWS
+        characters that occur within field-content SHOULD be replaced with a
+        single SP before interpreting the field value or forwarding the
+        message downstream.</t>
       </section>
       <section anchor="terminology" title="Terminology">
         <t>The terms user agent, client, server, proxy, and origin server have
