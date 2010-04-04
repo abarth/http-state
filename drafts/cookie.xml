@@ -288,7 +288,7 @@ httponly-av       = "HttpOnly"
 
           <t>NOTE: The syntax above allows whitespace between the attribute
           and the U+003D ("=") character.  Servers wishing to interoperate
-          with some legacy user agents might wish to elide this
+          with some legacy user agents might wish to omit this
           whitespace.</t>
         </section>
         <section anchor="sane-set-cookie-semantics"
@@ -412,7 +412,7 @@ httponly-av       = "HttpOnly"
           <section anchor="sane-httponly" title="HttpOnly">
             <t>The HttpOnly attribute limits the scope of the cookie to HTTP
             requests. In particular, the attribute instructs the user agent to
-            elide the cookie when providing access to its cookie store via
+            omit the cookie when providing access to its cookie store via
             "non-HTTP" APIs (as defined by the user agent).</t>
           </section>
         </section>
@@ -1036,7 +1036,7 @@ mystery         = <anything except a delimiter>
         SHOULD attach exactly one HTTP header named Cookie if the
         cookie-string (defined below) for the Request-URI is non-empty.</t>
 
-        <t>A user agent MAY elide the Cookie header in its entirety if the
+        <t>A user agent MAY omit the Cookie header in its entirety if the
         user agent is configured to block sending cookies. For example, the
         user agent might wish to block sending cookies during "third-party"
         requests.</t>
