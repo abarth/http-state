@@ -658,23 +658,20 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
-          <t>If the name-value-pair string contains a U+003D ("=") character:
-          <list style="empty">
-            <t>The (possibly empty) name string consists of the characters
-            up to, but not including, the first U+003D ("=") character, and
-            the (possibly empty) value string consists of the characters
-            after the first U+003D ("=") character.</t>
-          </list>
-          Otherwise:
-          <list style="empty">
-            <t>The name string is empty, and the value string consists of
-            the entire name-value-pair string.</t>
-          </list>
-          </t>
+          <t>If the name-value-pair string lacks a U+003D ("=") character,
+          ignore the set-cookie-string entirely.</t>
+
+          <t>If the first character of the name-value-pair string is U+003D
+          ("="), ignore the set-cookie-string entirely.</t>
+
+          <t>The (necessarily non-empty) name string consists of the
+          characters up to, but not including, the first U+003D ("=")
+          character, and the (possibly empty) value string consists of the
+          characters after the first U+003D ("=") character.</t>
 
           <t>Remove any leading or trailing WSP characters from the name
           string and the value string.</t>
-          
+
           <t>The cookie-name is the name string, and the cookie-value is the
           value string.</t>
         </list>
@@ -1103,10 +1100,8 @@ mystery         = <anything except a delimiter>
           <t>Serialize the cookie-list into a cookie-string by processing each
           cookie in the cookie-list in order:
           <list style="numbers">
-            <t>If the cookie's name is non-empty, output the cookie's
-            name followed by the U+003D ("=") character.</t>
-
-            <t>Output the cookie's value.</t>
+            <t>Output the cookie's name, the U+003D ("=") character, and the
+            cookie's value.</t>
 
             <t>If there is an unprocessed cookie in the cookie-list, output
             the characters U+003B and U+0020 ("; ").</t>
