@@ -250,10 +250,11 @@ cookie-name       = token
 cookie-value      = token
 token             = <token, as defined in RFC 2616>
 
-cookie-av         = expires-av / domain-av / path-av /
-                    secure-av / httponly-av
+cookie-av         = expires-av / max-age-av / domain-av /
+                    path-av / secure-av / httponly-av
 expires-av        = "Expires" "=" sane-cookie-date
 sane-cookie-date  = <rfc1123-date, as defined in RFC 2616>
+max-age-av        = "Max-Age" "=" 1*DIGIT
 domain-av         = "Domain" "=" domain-value
 domain-value      = token
 path-av           = "Path" "=" path-value
@@ -321,6 +322,24 @@ httponly-av       = "HttpOnly"
             until the specified date has passed. In fact, user agents often
             evict cookies from the cookie store due to memory pressure or
             privacy concerns.</t>
+          </section>
+          <section anchor="sane-max-age" title="Max-Age">
+            <t>The Max-Age attribute indicates the maximum lifetime of the
+            cookie, represented as the number of seconds until the cookie
+            expires. The user agent is not required to retain the cookie until
+            the specified date has passed. In fact, user agents often evict
+            cookies from the cookie store due to memory pressure or privacy
+            concerns.
+            <list>
+              <t>WARNING: Not all user agents support the Max-Age attribute.
+              User agents that do not support the Max-Age attribute will
+              retain the cookie for the current session only.</t>
+            </list>
+            </t>
+
+            <t>If a cookie has both the Max-Age and the Expires attribute, the
+            Max-Age attribute has precedence and controls the expiration date
+            of the cookie.</t>
           </section>
           <section anchor="sane-domain" title="Domain">
             <t>The Domain attribute specifies those hosts for which the cookie
