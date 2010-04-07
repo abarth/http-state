@@ -1157,61 +1157,58 @@ mystery         = <anything except a delimiter>
     <section anchor="privacy-considerations"
              title="Privacy Considerations">
         <t>The cookie protocol is often criticized for letting servers track
-        users. For example, a number of "web analytics" companies store
-        cookies the user agent to recognize when the same user returns to a
-        web site or visits another web site. Although cookies are not the only
-        mechanism servers can use to track users across HTTP requests, cookies
-        facilitate tracking because they are persistent across user agent
-        sessions and can be shared between servers.</t>
+        users. For example, a number of "web analytics" companies use cookies
+        to recognize when a user returns to a web site or visits another web
+        site. Although cookies are not the only mechanism servers can use to
+        track users across HTTP requests, cookies facilitate tracking because
+        they are persistent across user agent sessions and can be shared
+        between host names.</t>
 
         <section anchor="third-party-cookies" title="Third-Party Cookies">
           <t>Particularly worrisome are so-called "third-party" cookies. In
           rendering an HTML document, a user agent often requests resources
           from other servers (such as advertising networks). These third-party
           servers can use the cookie protocol to track the user even if the
-          user never visits the server directly. Some user agent block</t>
+          user never visits the server directly.</t>
 
-          <t>Some user agents restrict how third party cookies can be used.
-          For example, some user agents refuse to sent the Cookie header in
+          <t>Some user agents restrict how third-party cookies behave. For
+          example, some user agents refuse to send the Cookie header in
           third-party requests. Other user agents refuse to process the
-          Set-Cookie header in responses to third-party requests.</t>
-
-          <t>Among user agents, there is a wide variety of third-party cookie
-          policies. This document grants user agents wide latitude to
-          experiment with third-party cookie policies that balance the privacy
-          and compatibility needs of their users. However, this document does
-          not endorse any particular third-party cookie policy.</t>
+          Set-Cookie header in responses to third-party requests. Among user
+          agents, there is a wide variety of third-party cookie policies. This
+          document grants user agents wide latitude to experiment with
+          third-party cookie policies that balance the privacy and
+          compatibility needs of their users. However, this document does not
+          endorse any particular third-party cookie policy.</t>
 
           <t>Third-party cookie blocking policies are often ineffective at
           achieving their privacy goals if servers attempt to work around
-          their restrictions to track users. In particular, two web sites that
-          wish to collaborate to track a user can often do so without using
-          cookies at all.</t>
+          their restrictions to track users. In particular, two collaborating
+          servers can often track users without using cookies at all.</t>
         </section>
         <section anchor="user-controls" title="User Controls">
           <t>User agents SHOULD provide users with a mechanism for managing
           the cookies stored in the cookie store. For example, a user agent
-          might let users delete all cookies from a specified time period or
-          all the cookies related to a particular domain. Many user agent
-          include a user interface element that lets users examine the cookies
-          stored in the cookie store.</t>
+          might let users delete all cookies received during a specified time
+          period or all the cookies related to a particular domain. In
+          addition, many user agent include a user interface element that lets
+          users examine the cookies stored in the cookie store.</t>
 
           <t>User agents SHOULD provide users with a mechanism for disabling
-          cookies entirely. When cookies are disabled, the user agent SHOULD
-          NOT include a Cookie header in outbound HTTP requests and the user
-          agent SHOULD NOT process Set-Cookie headers in inbound HTTP
-          responses.</t>
+          cookies. When cookies are disabled, the user agent MUST NOT include
+          a Cookie header in outbound HTTP requests and the user agent MUST
+          NOT process Set-Cookie headers in inbound HTTP responses.</t>
 
           <t>Some user agents provide users the option of preventing
           persistent storage of cookies across sessions. When configured
-          thusly, these user agents treat all cookies as if the
+          thusly, user agents MUST treat all received cookies as if the
           persistent-flag were set to false.</t>
 
           <t>Some user agents provide users with the ability to approve
           individual writes to the cookie store. In many common usage
           scenarios, these controls generate a large number of prompts.
-          However, some number of privacy-conscious users find these controls
-          useful nonetheless.</t>
+          However, some privacy-conscious users find these controls useful
+          nonetheless.</t>
         </section>
     </section>
     <section anchor="security-considerations"
