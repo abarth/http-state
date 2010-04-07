@@ -55,37 +55,61 @@
     "test": "1-Jan-2003 00:00:00 GMT",
     "expected": "Wed, 01 Jan 2003 00:00:00 GMT"
   }, {
-    "test":
-    "expected":
+    "test": "Wed,18-Apr-07 22:50:12 GMT",
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
+  }, {
+    "test": "WillyWonka  , 18-Apr-07 22:50:12 GMT",
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
+  }, {
+    "test": "WillyWonka  , 18-Apr-07 22:50:12",
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
+  }, {
+    "test": "WillyWonka  ,  18-apr-07   22:50:12",
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
+  }, {
+    "test": "Mon, 18-Apr-1977 22:50:13 GMT",
+    "expected": "Mon, 18 Apr 1977 22:50:13 GMT"
+  }, {
+    "test": "Mon, 18-Apr-77 22:50:13 GMT",
+    "expected": "Mon, 18 Apr 1977 22:50:13 GMT"
+  }, {
+    "test": "\"Sat, 15-Apr-17\\\"21:01:22\\\"GMT\"",
+    "expected": "Sat, 15 Apr 2017 21:01:22 GMT"
+  }, {
+    "test": "Partyday, 18- April-07 22:50:12",
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
+  }, {
+    "test": "Partyday, 18 - Apri-07 22:50:12",
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
+  }, {
+    "test": "Wednes, 1-Januar-2003 00:00:00 GMT",
+    "expected": "Wed, 01 Jan 2003 00:00:00 GMT"
+  }, {
+    "test": "Sat, 15-Apr-17 21:01:22",
+    "expected": "Sat, 15 Apr 2017 21:01:22 GMT"
+  }, {
+    "test": "Sat, 15-Apr-17 21:01:22 GMT-2",
+    "expected": "Sat, 15 Apr 2017 21:01:22 GMT"
+  }, {
+    "test": "Sat, 15-Apr-17 21:01:22 GMT BLAH",
+    "expected": "Sat, 15 Apr 2017 21:01:22 GMT"
+  }, {
+    "test": "Sat, 15-Apr-17 21:01:22 GMT-0400",
+    "expected": "Sat, 15 Apr 2017 21:01:22 GMT"
+  }, {
+    "test": "Sat, 15-Apr-17 21:01:22 GMT-0400 (EDT)",
+    "expected": "Sat, 15 Apr 2017 21:01:22 GMT"
+  }, {
+    "test": "Sat, 15-Apr-17 21:01:22 DST",
+    "expected": "Sat, 15 Apr 2017 21:01:22 GMT"
+  }, {
+    "test": "Sat, 15-Apr-17 21:01:22 -0400",
+    "expected": "Sat, 15 Apr 2017 21:01:22 GMT"
   }, {
     "test":
     "expected":
   }, {
 
-
-    { "Wed,18-Apr-07 22:50:12 GMT",            true, 1176936612 },
-    { "WillyWonka  , 18-Apr-07 22:50:12 GMT",  true, 1176936612 },
-    { "WillyWonka  , 18-Apr-07 22:50:12",      true, 1176936612 },
-    { "WillyWonka  ,  18-apr-07   22:50:12",   true, 1176936612 },
-    { "Mon, 18-Apr-1977 22:50:13 GMT",         true, 230251813 },
-    { "Mon, 18-Apr-77 22:50:13 GMT",           true, 230251813 },
-    // If the cookie came in with the expiration quoted (which in terms of
-    // the RFC you shouldn't do), we will get string quoted.  Bug 1261605.
-    { "\"Sat, 15-Apr-17\\\"21:01:22\\\"GMT\"", true, 1492290082 },
-    // Test with full month names and partial names.
-    { "Partyday, 18- April-07 22:50:12",       true, 1176936612 },
-    { "Partyday, 18 - Apri-07 22:50:12",       true, 1176936612 },
-    { "Wednes, 1-Januar-2003 00:00:00 GMT",    true, 1041379200 },
-    // Test that we always take GMT even with other time zones or bogus
-    // values.  The RFC says everything should be GMT, and in the worst case
-    // we are 24 hours off because of zone issues.
-    { "Sat, 15-Apr-17 21:01:22",               true, 1492290082 },
-    { "Sat, 15-Apr-17 21:01:22 GMT-2",         true, 1492290082 },
-    { "Sat, 15-Apr-17 21:01:22 GMT BLAH",      true, 1492290082 },
-    { "Sat, 15-Apr-17 21:01:22 GMT-0400",      true, 1492290082 },
-    { "Sat, 15-Apr-17 21:01:22 GMT-0400 (EDT)",true, 1492290082 },
-    { "Sat, 15-Apr-17 21:01:22 DST",           true, 1492290082 },
-    { "Sat, 15-Apr-17 21:01:22 -0400",         true, 1492290082 },
     { "Sat, 15-Apr-17 21:01:22 (hello there)", true, 1492290082 },
     // Test that if we encounter multiple : fields, that we take the first
     // that correctly parses.
