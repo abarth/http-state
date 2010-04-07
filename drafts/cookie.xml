@@ -1154,6 +1154,44 @@ mystery         = <anything except a delimiter>
         object instead of a serialized date string.</t>
       </section>
     </section>
+    <section anchor="privacy-considerations"
+             title="Privacy Considerations">
+        <t>The cookie protocol is often criticized for letting servers track
+        users. For example, a number of "web analytics" companies store
+        cookies the user agent to recognize when the same user returns to a
+        web site or visits another web site. Although cookies are not the only
+        mechanism servers can use to track users across HTTP requests, cookies
+        facilitate tracking because they are persistent across user agent
+        sessions and can be shared between servers.</t>
+
+        <section anchor="third-party-cookies" title="Third-Party Cookies">
+          <t>Particularly worrisome are so-called "third-party" cookies. In
+          rendering an HTML document, a user agent often requests resources
+          from other servers (such as advertising networks). These third-party
+          servers can use the cookie protocol to track the user even if the
+          user never visits the server directly. Some user agent block</t>
+
+          <t>Some user agents restrict how third party cookies can be used.
+          For example, some user agents refuse to sent the Cookie header in
+          third-party requests. Other user agents refuse to process the
+          Set-Cookie header in responses to third-party requests.</t>
+
+          <t>Among user agents, there is a wide variety of third-party cookie
+          policies. This document grants user agents wide latitude to
+          experiment with third-party cookie policies that balance the privacy
+          and compatibility needs of their users. However, this document does
+          not endorse any particular third-party cookie policy.</t>
+
+          <t>Third-party cookie blocking policies are often ineffective at
+          achieving their privacy goals if servers attempt to work around
+          their restrictions to track users. In particular, two web sites that
+          wish to collaborate to track a user can often do so without using
+          cookies at all.</t>
+        </section>
+        <section anchor="user-controls" title="User Controls">
+          <t></t>
+        </section>
+    </section>
     <section anchor="security-considerations"
              title="Security Considerations">
       <section anchor="section-overview" title="Overview">
