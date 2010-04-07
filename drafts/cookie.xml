@@ -1189,7 +1189,29 @@ mystery         = <anything except a delimiter>
           cookies at all.</t>
         </section>
         <section anchor="user-controls" title="User Controls">
-          <t></t>
+          <t>User agents SHOULD provide users with a mechanism for managing
+          the cookies stored in the cookie store. For example, a user agent
+          might let users delete all cookies from a specified time period or
+          all the cookies related to a particular domain. Many user agent
+          include a user interface element that lets users examine the cookies
+          stored in the cookie store.</t>
+
+          <t>User agents SHOULD provide users with a mechanism for disabling
+          cookies entirely. When cookies are disabled, the user agent SHOULD
+          NOT include a Cookie header in outbound HTTP requests and the user
+          agent SHOULD NOT process Set-Cookie headers in inbound HTTP
+          responses.</t>
+
+          <t>Some user agents provide users the option of preventing
+          persistent storage of cookies across sessions. When configured
+          thusly, these user agents treat all cookies as if the
+          persistent-flag were set to false.</t>
+
+          <t>Some user agents provide users with the ability to approve
+          individual writes to the cookie store. In many common usage
+          scenarios, these controls generate a large number of prompts.
+          However, some number of privacy-conscious users find these controls
+          useful nonetheless.</t>
         </section>
     </section>
     <section anchor="security-considerations"
