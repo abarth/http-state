@@ -506,7 +506,8 @@ month           = "jan" [ mystery ] / "feb" [ mystery ] /
                   "sep" [ mystery ] / "oct" [ mystery ] /
                   "nov" [ mystery ] / "dec" [ mystery ]
 year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
-time            = 2DIGIT ":" 2DIGIT ":" 2DIGIT
+time            = time-field ":" time-field ":" time-field
+time-field      = 2DIGIT / DIGIT
 mystery         = <anything except a delimiter>
                 ]]>
               </artwork>
