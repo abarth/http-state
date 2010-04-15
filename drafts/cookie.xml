@@ -1084,7 +1084,8 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
-          <t>Sort the cookie-list in the following order:
+          <t>The user agent SHOULD sort the cookie-list in the following
+          order:
           <list style="symbols">
             <t>Cookies with longer paths are listed before cookies
             with shorter paths.</t>
@@ -1092,6 +1093,13 @@ mystery         = <anything except a delimiter>
             <t>Among cookies that have equal length path fields, cookies
             with earlier creation-times are listed before cookies with later
             creation-times.</t>
+          </list>
+          <list style="empty">
+            <t>NOTE: Not all user agents sort the cookie-list in this order,
+            but this order reflects common practice when this document was
+            written. The specific ordering might not be optimal in every
+            metric, but using the consensus ordering is a relatively low cost
+            way to improve interoperability between user agents.</t>
           </list>
           </t>
 
