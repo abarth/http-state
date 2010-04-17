@@ -1597,9 +1597,10 @@ mystery         = <anything except a delimiter>
       invaluable advice on navigating the IETF process.  We would also like to
       thank Thomas Broyer, Tyler Close, Bil Corry, corvid, Roy T. Fielding,
       Blake Frantz, Eran Hammer-Lahav, Jeff Hodges, Achim Hoffmann, Georg
-      Koppen, Dean McNamee, Mark Miller, Yngve N. Pettersen, Julian Reschke,
-      Mark Seaborn, Maciej Stachowiak, Daniel Stenberg, David Wagner, Dan
-      Winship, and Dan Witte for their valuable feedback on this document.</t>
+      Koppen, Dean McNamee, Mark Miller, Mark Pauley, Yngve N. Pettersen,
+      Julian Reschke, Mark Seaborn, Maciej Stachowiak, Daniel Stenberg, David
+      Wagner, Dan Winship, and Dan Witte for their valuable feedback on this
+      document.</t>
     </section>
   </back>
 </rfc>
