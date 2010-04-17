@@ -26,13 +26,13 @@
       agents, letting the servers maintain a stateful session over the
       mostly stateless HTTP protocol.  The cookie protocol has many
       historical infelicities that degrade its security and privacy.
-      <list>
-        <t>NOTE: If you have suggestions for improving the draft, please send
-        email to http-state@ietf.org.  Suggestions with test cases are
-        especially appreciated.</t>
-      </list>
       </t>
     </abstract>
+    <note title="Editorial Note (To be removed by RFC Editor)">
+      <t>If you have suggestions for improving the draft, please send email to
+      http-state@ietf.org.  Suggestions with test cases are especially
+      appreciated.  https://tools.ietf.org/wg/httpstate/</t>
+    </note>
   </front>
   <middle>
     <section anchor="intro" title="Introduction">
