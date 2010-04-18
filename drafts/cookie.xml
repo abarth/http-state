@@ -965,9 +965,6 @@ mystery         = <anything except a delimiter>
           <t>If the cookie's name and value are both empty, abort these
           steps and ignore the cookie entirely.</t>
 
-          <t>If the cookie's expiry-time is not in the future, abort these
-          steps and ignore the cookie entirely.</t>
-
           <t>If the cookie was received from a non-HTTP context and the
           cookie's http-only-flag is set, abort these steps and ignore the
           cookie entirely.</t>
