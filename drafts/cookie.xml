@@ -317,7 +317,7 @@ httponly-av       = "HttpOnly"
           current session (as defined by the user agent). User agents ignore
           unrecognized cookie attributes.</t>
 
-          <section anchor="sane-expires" title="Expires">
+          <section anchor="sane-expires" title="The Expires Attribute">
             <t>The Expires attribute indicates the maximum lifetime of the
             cookie, represented as the date and time at which the cookie
             expires. The user agent is not required to retain the cookie
@@ -325,7 +325,7 @@ httponly-av       = "HttpOnly"
             evict cookies from the cookie store due to memory pressure or
             privacy concerns.</t>
           </section>
-          <section anchor="sane-max-age" title="Max-Age">
+          <section anchor="sane-max-age" title="The Max-Age Attribute">
             <t>The Max-Age attribute indicates the maximum lifetime of the
             cookie, represented as the number of seconds until the cookie
             expires. The user agent is not required to retain the cookie until
@@ -343,10 +343,10 @@ httponly-av       = "HttpOnly"
             Max-Age attribute has precedence and controls the expiration date
             of the cookie.</t>
           </section>
-          <section anchor="sane-domain" title="Domain">
+          <section anchor="sane-domain" title="The Domain Attribute">
             <t>The Domain attribute specifies those hosts to which the cookie
             will be sent. For example, if the Domain attribute contains the
-            value ".example.com", the user agent will include the cookie in
+            value "example.com", the user agent will include the cookie in
             the Cookie header when making HTTP requests to example.com,
             www.example.com, and www.corp.example.com. (Note that a leading
             U+002E ("."), if present, is ignored.) If the server omits the
@@ -364,18 +364,17 @@ httponly-av       = "HttpOnly"
             <t>The user agent will reject cookies (refuse to store them in the
             cookie store) unless the Domain attribute specifies a scope for
             the cookie that would include the origin server. For example, the
-            user agent will accept a Domain attribute of ".example.com" or of
-            ".foo.example.com" from foo.example.com, but the user agent will
-            not accept a Domain attribute of ".bar.example.com" or of
-            ".baz.foo.example.com".</t>
+            user agent will accept a Domain attribute of "example.com" or of
+            "foo.example.com" from foo.example.com, but the user agent will
+            not accept a Domain attribute of "bar.example.com" or of
+            "baz.foo.example.com".</t>
 
             <t>NOTE: For security reasons, some user agents are configured to
-            reject Domain attributes that do not correspond to a "registry
-            controlled" domain (or a subdomain of a registry controlled
-            domain). For example, some user agents will reject Domain
-            attributes of ".com" or ".co.uk".</t>
+            reject Domain attributes that correspond to "public suffixes." For
+            example, some user agents will reject Domain attributes of "com"
+            or "co.uk".</t>
           </section>
-          <section anchor="sane-path" title="Path">
+          <section anchor="sane-path" title="The Path Attribute">
             <t>The Path attribute limits the scope of the cookie to a set of
             paths. When a cookie has a Path attribute, the user agent will
             include the cookie in an HTTP request only if the path portion of
@@ -402,7 +401,7 @@ httponly-av       = "HttpOnly"
             </list>
             </t>
           </section>
-          <section anchor="sane-secure" title="Secure">
+          <section anchor="sane-secure" title="The Secure Attribute">
             <t>The Secure attribute limits the scope of the cookie to "secure"
             channels (where "secure" is defined by the user agent). When a
             cookie has the Secure attribute, the user agent will include the
@@ -414,7 +413,7 @@ httponly-av       = "HttpOnly"
             confidentiality. An active network attacker can overwrite Secure
             cookies from an insecure channel, disrupting its integrity.</t>
           </section>
-          <section anchor="sane-httponly" title="HttpOnly">
+          <section anchor="sane-httponly" title="The HttpOnly Attribute">
             <t>The HttpOnly attribute limits the scope of the cookie to HTTP
             requests. In particular, the attribute instructs the user agent to
             omit the cookie when providing access to its cookie store via
@@ -781,8 +780,8 @@ mystery         = <anything except a delimiter>
           integer.</t>
 
           <t>If delta-seconds is less than or equal to zero (0), let
-          expiry-time be the current date and time. Otherwise, let the
-          expiry-time be the current date and time plus delta-seconds
+          expiry-time be the earliest representable date and time. Otherwise,
+          let the expiry-time be the current date and time plus delta-seconds
           seconds.</t>
 
           <t>Append an attribute to the cookie-attribute-list with an
@@ -845,23 +844,20 @@ mystery         = <anything except a delimiter>
         </section>
       </section>
       <section anchor="storage-model" title="Storage Model">
-        <t>When the user agent receives a cookie, the user agent SHOULD
-        record the cookie in its cookie store as follows.</t>
-
-        <t>A user agent MAY ignore a received cookie in its entirety if the
-        user agent is configured to block receiving cookies. For example, the
-        user agent might wish to block receiving cookies from "third-party"
-        responses.</t>
-
         <t>The user agent stores the following fields about each cookie: name,
         value, expiry-time, domain, path, creation-time, last-access-time,
         persistent-flag, host-only-flag, secure-only-flag, and
         http-only-flag.</t>
 
-        <t>When the user agent receives a cookie from a Request-URI with name
-        cookie-name, value cookie-value, and attributes cookie-attribute-list,
-        the user agent MUST process the cookie as follows:
+        <t>When the user agent *receives a cookie* from a Request-URI with
+        name cookie-name, value cookie-value, and attributes
+        cookie-attribute-list, the user agent MUST process the cookie as
+        follows:
         <list style="numbers">
+          <t>A user agent MAY ignore a received cookie in its entirety. For
+          example, the user agent might wish to block receiving cookies from
+          "third-party" responses.</t>
+
           <t>Create a new cookie with name cookie-name, value cookie-value.
           Set the creation-time and the last-access-time to the current date
           and time.</t>
@@ -1346,8 +1342,8 @@ mystery         = <anything except a delimiter>
         <t>Cookies do not provide integrity guarantees for sibling domains
         (and their subdomains). For example, consider foo.example.com and
         bar.example.com. The foo.example.com server can set a cookie with a
-        Domain attribute of ".example.com" (possibly overwriting an existing
-        ".example.com" cookie set by bar.example.com), and the user agent will
+        Domain attribute of "example.com" (possibly overwriting an existing
+        "example.com" cookie set by bar.example.com), and the user agent will
         include that cookie in HTTP requests to bar.example.com. In the worst
         case, bar.example.com will be unable to distinguish this cookie from a
         cookie it set itself. The foo.example.com server might be able to
