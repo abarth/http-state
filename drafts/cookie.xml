@@ -1574,15 +1574,15 @@ mystery         = <anything except a delimiter>
 
     <section title="Acknowledgements">
       <t>This document borrows heavily from RFC 2109 <xref target="RFC2109"/>.
-      We are indebted to David M. Kristol and Lou Montulli for their efforts to
-      specify the cookie protocol.  David M. Kristol, in particular, provided
-      invaluable advice on navigating the IETF process.  We would also like to
-      thank Thomas Broyer, Tyler Close, Bil Corry, corvid, Roy T. Fielding,
-      Blake Frantz, Eran Hammer-Lahav, Jeff Hodges, Achim Hoffmann, Georg
-      Koppen, Dean McNamee, Mark Miller, Mark Pauley, Yngve N. Pettersen,
-      Julian Reschke, Mark Seaborn, Maciej Stachowiak, Daniel Stenberg, David
-      Wagner, Dan Winship, and Dan Witte for their valuable feedback on this
-      document.</t>
+      We are indebted to David M. Kristol and Lou Montulli for their efforts
+      to specify the cookie protocol. David M. Kristol, in particular,
+      provided invaluable advice on navigating the IETF process. We would also
+      like to thank Thomas Broyer, Tyler Close, Bil Corry, corvid, Lisa
+      Dusseault, Roy T. Fielding, Blake Frantz, Eran Hammer-Lahav, Jeff
+      Hodges, Achim Hoffmann, Georg Koppen, Dean McNamee, Mark Miller, Mark
+      Pauley, Yngve N. Pettersen, Julian Reschke, Mark Seaborn, Maciej
+      Stachowiak, Daniel Stenberg, David Wagner, Dan Winship, and Dan Witte
+      for their valuable feedback on this document.</t>
     </section>
   </back>
 </rfc>
