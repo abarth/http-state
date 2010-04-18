@@ -412,8 +412,7 @@ httponly-av       = "HttpOnly"
             <t>Although seemingly useful for protecting cookies from active
             network attackers, the Secure attribute protects only the cookie's
             confidentiality. An active network attacker can overwrite Secure
-            cookies from an insecure channel, disrupting the integrity of the
-            cookies.</t>
+            cookies from an insecure channel, disrupting its integrity.</t>
           </section>
           <section anchor="sane-httponly" title="HttpOnly">
             <t>The HttpOnly attribute limits the scope of the cookie to HTTP
@@ -441,9 +440,9 @@ cookie-string = cookie-pair *( ";" cookie-pair )
           </figure>
         </section>
         <section anchor="sane-cookie-semantics" title="Semantics">
-          <t>Each cookie-pair represents a cookie stored by the user
-          agent. The cookie-name and the cookie-value are returned verbatim
-          from the corresponding parts of the Set-Cookie header.</t>
+          <t>Each cookie-pair represents a cookie stored by the user agent.
+          The cookie-name and the cookie-value are returned from the
+          corresponding parts of the Set-Cookie header.</t>
 
           <t>Notice that the cookie attributes are not returned. In
           particular, the server cannot determine from the Cookie header alone
@@ -453,7 +452,7 @@ cookie-string = cookie-pair *( ";" cookie-pair )
 
           <t>The semantics of individual cookies in the Cookie header is not
           defined by this document. Servers are expected to imbue these
-          cookies with server-specific semantics.</t>
+          cookies with application-specific semantics.</t>
 
           <t>Although cookies are serialized linearly in the Cookie header,
           servers SHOULD NOT rely upon the serialization order. In particular,
@@ -466,18 +465,17 @@ cookie-string = cookie-pair *( ";" cookie-pair )
     <section anchor="cookie-protocol" title="User Agent Requirements">
       <t>For historical reasons, the full cookie protocol contains a number of
       exotic quirks. This section is intended to specify the cookie protocol
-      in enough detail to enable a user agent that implements the protocol
-      precisely as specified to interoperate with existing servers.</t>
+      in sufficient detail to allow a user agent implementing these
+      requirements precisely to interoperate with existing servers.</t>
 
-      <t>Conformance requirements phrased as algorithms or specific steps
-      may be implemented in any manner, so long as the end result is
-      equivalent. (In particular, the algorithms defined in this
-      specification are intended to be easy to follow, and not intended to
-      be performant.)</t>
+      <t>Conformance requirements phrased as algorithms or specific steps MAY
+      be implemented in any manner, so long as the end result is equivalent.
+      In particular, the algorithms defined in this specification are intended
+      to be easy to understand and are not intended to be performant.</t>
 
       <section anchor="algorithms" title="Algorithms">
-        <t>This section defines a number of algorithms used by the cookie
-        protocol.</t>
+        <t>This section defines a number of algorithms used by user agents to
+        process the Cookie and Set-Cookie headers.</t>
 
         <section anchor="cookie-date" title="Dates">
           <t>The user agent MUST use the following algorithm to *parse a
@@ -640,8 +638,7 @@ mystery         = <anything except a delimiter>
         set-cookie-strings:
         <list style="numbers">
           <t>If the set-cookie-string is empty or consists entirely of WSP
-          characters, the user agent MAY ignore the set-cookie-string
-          entirely.</t>
+          characters, ignore the set-cookie-string entirely.</t>
 
           <t>If the set-cookie-string contains a U+003B (";") character:
           <list style="empty">
@@ -710,9 +707,7 @@ mystery         = <anything except a delimiter>
           Otherwise:
           <list style="empty">
             <t>The attribute-name string consists of the entire cookie-av
-            string, and the attribute-value string is empty. (Note that this
-            step differs from the analogous step when parsing the
-            name-value-pair string.)</t>
+            string, and the attribute-value string is empty.</t>
           </list>
           </t>
 
@@ -731,27 +726,6 @@ mystery         = <anything except a delimiter>
         cookie-name, value cookie-value, and attributes
         cookie-attribute-list.</t>
 
-        <section anchor="max-age-attribute" title="The Max-Age Attribute">
-          <t>If the attribute-name case-insensitively matches the string
-          "Max-Age", the user agent MUST process the cookie-av as follows.</t>
-
-          <t>If the first character of the attribute-value is not a DIGIT or a
-          "-" character, ignore the cookie-av.</t>
-
-          <t>If the remainder of attribute-value contains a non-DIGIT
-          character, ignore the cookie-av.</t>
-
-          <t>Let delta-seconds be the attribute-value converted to an
-          integer.</t>
-
-          <t>If delta-seconds is less than or equal to zero (0), let
-          expiry-time be the current date and time. Otherwise, let the
-          expiry-time be the current date and time plus delta-seconds
-          seconds.</t>
-
-          <t>Append an attribute to the cookie-attribute-list with an
-          attribute-name of Max-Age and an attribute-value of expiry-time.</t>
-        </section>
         <section anchor="expires-attribute" title="The Expires Attribute">
           <t>If the attribute-name case-insensitively matches the string
           "Expires", the user agent MUST process the cookie-av as follows.</t>
@@ -792,6 +766,27 @@ mystery         = <anything except a delimiter>
   
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Expires and an attribute-value of expiry-time.</t>
+        </section>
+        <section anchor="max-age-attribute" title="The Max-Age Attribute">
+          <t>If the attribute-name case-insensitively matches the string
+          "Max-Age", the user agent MUST process the cookie-av as follows.</t>
+
+          <t>If the first character of the attribute-value is not a DIGIT or a
+          "-" character, ignore the cookie-av.</t>
+
+          <t>If the remainder of attribute-value contains a non-DIGIT
+          character, ignore the cookie-av.</t>
+
+          <t>Let delta-seconds be the attribute-value converted to an
+          integer.</t>
+
+          <t>If delta-seconds is less than or equal to zero (0), let
+          expiry-time be the current date and time. Otherwise, let the
+          expiry-time be the current date and time plus delta-seconds
+          seconds.</t>
+
+          <t>Append an attribute to the cookie-attribute-list with an
+          attribute-name of Max-Age and an attribute-value of expiry-time.</t>
         </section>
         <section anchor="domain-attribute" title="The Domain Attribute">
           <t>If the attribute-name case-insensitively matches the string
