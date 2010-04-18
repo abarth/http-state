@@ -22,7 +22,7 @@
     <workgroup>httpstate</workgroup>
     <abstract>
       <t>This document defines the HTTP Cookie and Set-Cookie headers. These
-      headers can be used by HTTP servers to store state (called cookies) on
+      headers can be used by HTTP servers to store state (called cookies) at
       HTTP user agents, letting the servers maintain a stateful session over
       the mostly stateless HTTP protocol. Although cookies have many
       historical infelicities that degrade their security and privacy, the
@@ -163,12 +163,12 @@ Cookie: SID=31d4d96e407aad42
           </artwork>
         </figure>
 
-        <t>The server can store multiple cookies in the user agent. For
+        <t>The server can store multiple cookies at the user agent. For
         example, the server can store a session identifier as well as the
-        user's preferred language by returning two Set-Cookie response
-        headers. Notice that the server uses the Secure and HttpOnly
-        attributes to provide additional security protections for the
-        more-sensitive session identifier.</t>
+        user's preferred language by returning two Set-Cookie header fields.
+        Notice that the server uses the Secure and HttpOnly attributes to
+        provide additional security protections for the more-sensitive session
+        identifier.</t>
 
         <figure>
           <artwork>
@@ -185,7 +185,7 @@ Cookie: SID=31d4d96e407aad42; lang=en-US
 
         <t>If the server wishes the user agent to persist the cookie over
         multiple sessions, the server can specify a expiration date in the
-        Expires attribute. Note that the user agent might might delete the
+        Expires attribute. Note that the user agent might delete the
         cookie before the expiration date if the user agent's cookie store
         exceeds its quota or if the user manually deletes the server's
         cookie.</t>
@@ -287,10 +287,9 @@ httponly-av       = "HttpOnly"
           interoperate with these user agents might wish to use dates before
           2038.</t>
 
-          <t>NOTE: The syntax above allows whitespace between the attribute
-          and the U+003D ("=") character.  Servers wishing to interoperate
-          with some legacy user agents might wish to omit this
-          whitespace.</t>
+          <t>NOTE: The syntax above allows whitespace around the U+003D ("=")
+          characters. Servers wishing to interoperate with some legacy user
+          agents might wish to omit this whitespace.</t>
         </section>
         <section anchor="sane-set-cookie-semantics"
                  title="Semantics (Non-Normative)">
@@ -301,16 +300,17 @@ httponly-av       = "HttpOnly"
           />.</t>
 
           <t>When the user agent receives a Set-Cookie header, the user agent
-          stores the cookie in its cookie store.  When the user agent
-          subsequently makes an HTTP request, the user agent consults its
-          cookie store and includes the applicable, non-expired cookies in the
-          Cookie header.</t>
+          stores the cookie in its cookie store. Subsequently, when the user
+          agent makes an HTTP request, the user agent consults its cookie
+          store and includes the applicable, non-expired cookies in the Cookie
+          header.</t>
 
-          <t>If the cookie store already contains a cookie with the same
-          cookie-name, domain-value, and path-value, the existing cookie is
-          evicted from the cookie store and replaced with the new value.
-          Notice that servers can delete cookies by including an Expires
-          attribute with a value in the past.</t>
+          <t>If the user agent receives a new cookie with the same
+          cookie-name, domain-value, and path-value as a cookie that already
+          exists in its cookie store, the existing cookie is evicted from the
+          cookie store and replaced with the new cookie. Notice that servers
+          can delete cookies by sending the user agent a new cookie with an
+          Expires attribute with a value in the past.</t>
 
           <t>Unless the cookie's attributes indicate otherwise, the cookie is
           returned only to the origin server, and it expires at the end of the
@@ -344,7 +344,7 @@ httponly-av       = "HttpOnly"
             of the cookie.</t>
           </section>
           <section anchor="sane-domain" title="Domain">
-            <t>The Domain attribute specifies those hosts for which the cookie
+            <t>The Domain attribute specifies those hosts to which the cookie
             will be sent. For example, if the Domain attribute contains the
             value ".example.com", the user agent will include the cookie in
             the Cookie header when making HTTP requests to example.com,
@@ -357,7 +357,7 @@ httponly-av       = "HttpOnly"
               attribute as if the Domain attribute were present and contained
               the current host name. For example, if example.com returns a
               Set-Cookie header without a Domain attribute, these user agents
-              will send the cookie to www.example.com.</t>
+              will erroneously send the cookie to www.example.com.</t>
             </list>
             </t>
 
@@ -380,22 +380,27 @@ httponly-av       = "HttpOnly"
             paths. When a cookie has a Path attribute, the user agent will
             include the cookie in an HTTP request only if the path portion of
             the Request-URI matches (or is a subdirectory of) the cookie's
-            Path attribute, where the U+002F ("/") character is interpreted as a
-            directory separator. If the server omits the Path attribute, the
+            Path attribute, where the U+002F ("/") character is interpreted as
+            a directory separator. If the server omits the Path attribute, the
             user agent will use the directory of the Request-URI's path
             component as the default value.</t>
 
             <t>Although seemingly useful for isolating cookies between
             different paths within a given domain, the Path attribute cannot
-            be relied upon for security for two reasons: First, user agents do
-            not prevent one path from overwriting the cookies for another
-            path. For example, if a response to a request for /foo/bar.html
-            attempts to set a cookie with a Path attribute of "/baz" the user
-            agent will store that cookie in the cookie store. Second, the
-            "same-origin" policy implemented by many user agents does not
-            isolate different paths within an origin. For example,
-            /foo/bar.html can read cookies with a Path attribute of "/baz"
-            because they are within the "same origin".</t>
+            be relied upon for security for two reasons:
+            <list style="numbers">
+              <t>User agents do not prevent one path from overwriting the
+              cookies for another path. For example, if a response to a
+              request for /foo/bar.html attempts to set a cookie with a Path
+              attribute of "/baz" the user agent will store that cookie in the
+              cookie store.</t>
+
+              <t>The "same-origin" policy implemented by many user agents does
+              not isolate different paths within an origin. For example,
+              /foo/bar.html can read cookies with a Path attribute of "/baz"
+              because they are within the "same origin".</t>
+            </list>
+            </t>
           </section>
           <section anchor="sane-secure" title="Secure">
             <t>The Secure attribute limits the scope of the cookie to "secure"
