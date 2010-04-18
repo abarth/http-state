@@ -871,9 +871,9 @@ mystery         = <anything except a delimiter>
             attribute in the cookie-attribute-list with an attribute-name of
             "Max-Age".</t>
           </list>
-          Otherwise, if the cookie-attribute-list contains an attribute with an
-          attribute-name of "Expires" (and does not contain an attribute with
-          an attribute-name of "Max-Age"):
+          Otherwise, if the cookie-attribute-list contains an attribute with
+          an attribute-name of "Expires" (and does not contain an attribute
+          with an attribute-name of "Max-Age"):
           <list style="empty">
             <t>Set the cookie's persistent-flag to true.</t>
 
@@ -943,7 +943,8 @@ mystery         = <anything except a delimiter>
           <list style="empty">
             <t>Set the cookie's host-only-flag to true.</t>
 
-            <t>Set the cookie's domain to the host of the Request-URI.</t>
+            <t>Set the cookie's domain to the canonicalized host of the
+            Request-URI.</t>
           </list>
           </t>
 
