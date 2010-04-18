@@ -1081,14 +1081,11 @@ mystery         = <anything except a delimiter>
             with earlier creation-times are listed before cookies with later
             creation-times.</t>
           </list>
-          <list style="empty">
-            <t>NOTE: Not all user agents sort the cookie-list in this order,
-            but this order reflects common practice when this document was
-            written. The specific ordering might not be optimal in every
-            metric, but using the consensus ordering is a relatively low cost
-            way to improve interoperability between user agents.</t>
-          </list>
-          </t>
+          NOTE: Not all user agents sort the cookie-list in this order, but
+          this order reflects common practice when this document was written.
+          The specific ordering might not be optimal in every metric, but
+          using the consensus ordering is a relatively low cost way to improve
+          interoperability between user agents.</t>
 
           <t>Update the last-access-time of each cookie in the cookie-list
           to the current date and time.</t>
@@ -1104,7 +1101,7 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
         </list>
-        Note: Despite its name, the cookie-string is actually a sequence of
+        NOTE: Despite its name, the cookie-string is actually a sequence of
         octets, not a sequence of characters. To convert the cookie-string
         into a sequence of characters (e.g., for presentation to the user),
         the user agent SHOULD use the UTF-8 character encoding
@@ -1137,45 +1134,45 @@ mystery         = <anything except a delimiter>
       </section>
       <section anchor="implementation-apis"
                title="Application Programmer Interfaces">
-        <t>One reason the cookie protocol uses such an esoteric syntax is
+        <t>One reason the cookie protocol uses such esoteric syntax is
         because many platforms (both in servers and user agents) provide
-        string-based application programmer interfaces (APIs), requiring
-        application-layer programmers to generate and parse the syntax used by
-        the cookie protocol.</t>
+        a string-based application programmer interface (API) to cookies,
+        requiring application-layer programmers to generate and parse the
+        syntax used by the Cookie and Set-Cookie headers.</t>
 
-        <t>Instead of providing string-based APIs to the cookie protocols,
-        implementations would be well-served by providing more semantic APIs.
-        It is beyond the scope of this document to recommend specific API
-        designs, but there are clear benefits to accepting a abstract "Date"
-        object instead of a serialized date string.</t>
+        <t>Instead of providing string-based APIs to cookies, platforms would
+        be well-served by providing more semantic APIs. It is beyond the scope
+        of this document to recommend specific API designs, but there are
+        clear benefits to accepting a abstract "Date" object instead of a
+        serialized date string.</t>
       </section>
     </section>
     <section anchor="privacy-considerations"
              title="Privacy Considerations">
-        <t>The cookie protocol is often criticized for letting servers track
+        <t>Cookies are often criticized for letting servers track
         users. For example, a number of "web analytics" companies use cookies
         to recognize when a user returns to a web site or visits another web
         site. Although cookies are not the only mechanism servers can use to
         track users across HTTP requests, cookies facilitate tracking because
         they are persistent across user agent sessions and can be shared
-        between host names.</t>
+        between domains.</t>
 
         <section anchor="third-party-cookies" title="Third-Party Cookies">
           <t>Particularly worrisome are so-called "third-party" cookies. In
           rendering an HTML document, a user agent often requests resources
           from other servers (such as advertising networks). These third-party
-          servers can use the cookie protocol to track the user even if the
+          servers can use cookies to track the user even if the
           user never visits the server directly.</t>
 
           <t>Some user agents restrict how third-party cookies behave. For
           example, some user agents refuse to send the Cookie header in
           third-party requests. Other user agents refuse to process the
-          Set-Cookie header in responses to third-party requests. Among user
-          agents, there is a wide variety of third-party cookie policies. This
-          document grants user agents wide latitude to experiment with
-          third-party cookie policies that balance the privacy and
-          compatibility needs of their users. However, this document does not
-          endorse any particular third-party cookie policy.</t>
+          Set-Cookie header in responses to third-party requests. User agents
+          vary widely in their third-party cookie policies. This document
+          grants user agents wide latitude to experiment with third-party
+          cookie policies that balance the privacy and compatibility needs of
+          their users. However, this document does not endorse any particular
+          third-party cookie policy.</t>
 
           <t>Third-party cookie blocking policies are often ineffective at
           achieving their privacy goals if servers attempt to work around
@@ -1188,7 +1185,7 @@ mystery         = <anything except a delimiter>
           might let users delete all cookies received during a specified time
           period or all the cookies related to a particular domain. In
           addition, many user agent include a user interface element that lets
-          users examine the cookies stored in the cookie store.</t>
+          users examine the cookies stored in their cookie store.</t>
 
           <t>User agents SHOULD provide users with a mechanism for disabling
           cookies. When cookies are disabled, the user agent MUST NOT include
@@ -1214,26 +1211,27 @@ mystery         = <anything except a delimiter>
         pitfalls.</t>
 
         <t>In particular, cookies encourage developers to rely on ambient
-        authority for authentication, often creating vulnerabilities such as
-        cross-site request forgery.  When storing session identifiers in
-        cookies, developers often create session fixation
+        authority for authentication, often becoming vulnerable to attacks
+        such as cross-site request forgery. Also, when storing session
+        identifiers in cookies, developers often create session fixation
         vulnerabilities.</t>
 
         <t>Transport-layer encryption, such as that employed in HTTPS, is
-        insufficient to prevent a network attacker from obtaining or altering a
-        victim's cookies because the cookie protocol itself has various
+        insufficient to prevent a network attacker from obtaining or altering
+        a victim's cookies because the cookie protocol itself has various
         vulnerabilities (see "Weak Confidentiality" and "Weak Integrity",
-        below). In addition, by default, the cookie protocol does not provide
+        below). In addition, by default, cookies do not provide
         confidentiality or integrity from network attackers, even when used in
         conjunction with HTTPS.</t>
       </section>
       <section anchor="ambient-authority" title="Ambient Authority">
         <t>A server that uses cookies to authenticate users can suffer
         security vulnerabilities because some user agents let remote parties
-        issue HTTP requests from the user agent (e.g., via HTTP redirects and
-        HTML forms). When issuing those requests, user agent attaches cookies
-        even if the entity does not know the contents of the cookies, possibly
-        letting the remote entity exercise authority at an unwary server.</t>
+        issue HTTP requests from the user agent (e.g., via HTTP redirects or
+        HTML forms). When issuing those requests, user agents attach cookies
+        even if the remote party does not know the contents of the cookies,
+        potentially letting the remote party exercise authority at an unwary
+        server.</t>
 
         <t>Although this security concern goes by a number of names (e.g.,
         cross-site request forgery, confused deputy), the issue stems from
