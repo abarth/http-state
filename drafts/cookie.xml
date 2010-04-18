@@ -21,22 +21,22 @@
     <date month="April" year="2010"/>
     <workgroup>httpstate</workgroup>
     <abstract>
-      <t>This document defines the HTTP Cookie and Set-Cookie headers.
-      These headers can be used by HTTP servers to store state on HTTP user
-      agents, letting the servers maintain a stateful session over the
-      mostly stateless HTTP protocol.  The cookie protocol has many
-      historical infelicities that degrade its security and privacy.
-      </t>
+      <t>This document defines the HTTP Cookie and Set-Cookie headers. These
+      headers can be used by HTTP servers to store state (called cookies) on
+      HTTP user agents, letting the servers maintain a stateful session over
+      the mostly stateless HTTP protocol. Although cookies have many
+      historical infelicities that degrade their security and privacy, the
+      Cookie and Set-Cookie headers are widely used on the Internet.</t>
     </abstract>
     <note title="Editorial Note (To be removed by RFC Editor)">
-      <t>If you have suggestions for improving the draft, please send email to
-      http-state@ietf.org.  Suggestions with test cases are especially
-      appreciated.  https://tools.ietf.org/wg/httpstate/</t>
+      <t>If you have suggestions for improving this document, please send
+      email to http-state@ietf.org. Suggestions with test cases are especially
+      appreciated. https://tools.ietf.org/wg/httpstate/</t>
     </note>
   </front>
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>This document defines the HTTP Cookie and Set-Cookie header. Using
+      <t>This document defines the HTTP Cookie and Set-Cookie headers. Using
       the Set-Cookie header, an HTTP server can store name/value pairs and
       associated metadata (called cookies) at the user agent. When the user
       agent makes subsequent requests to the server, the user agent uses the
@@ -101,22 +101,16 @@
     </section>
     <section anchor="overview" title="Overview">
       <t>We outline here a way for an origin server to send state
-      information to a user agent, and for the user agent to return the
+      information to a user agent and for the user agent to return the
       state information to the origin server.</t>
 
-      <t>To initiate a session, the origin server includes a Set-Cookie header
-      in an HTTP response. (Note that "session" here does not refer to a
-      persistent network connection but to a logical session created from HTTP
-      requests and responses. The presence or absence of a persistent
-      connection should have no effect on the use of cookie-derived
-      sessions).</t>
-
-      <t>The user agent returns a Cookie request header to the origin server
-      if it chooses to continue a session. The Cookie header contains a number
+      <t>To store state, the origin server includes a Set-Cookie header in an
+      HTTP response. In subsequent requests, the user agent returns a Cookie
+      request header to the origin server. The Cookie header contains a number
       of cookies the user agent received in previous Set-Cookie headers. The
-      origin server MAY ignore the Cookie header or use the header to
-      determine the current state of the session. The origin server MAY send
-      the user agent a Set-Cookie response header with the same or different
+      origin server is free to ignore the Cookie header or use its contents
+      for an application-defined purpose. The origin server MAY send the user
+      agent a Set-Cookie response header with the same or different
       information, or it MAY send no Set-Cookie header at all.</t>
 
       <t>Servers MAY return a Set-Cookie response header with any response.
@@ -227,7 +221,7 @@ Set-Cookie: lang=; Expires=Sun, 06 Nov 1994 08:49:37 GMT
         </figure>
       </section>
     </section>
-    <section anchor="sane-profile" title="A Well-Behaved Profile">
+    <section anchor="sane-profile" title="Server Requirements">
       <t>This section describes the syntax and semantics of a well-behaved
       profile of the protocol.  Servers SHOULD use the profile described in
       this section, both to maximize interoperability with existing user
@@ -464,7 +458,7 @@ cookie-string = cookie-pair *( ";" cookie-pair )
         </section>
       </section>
     </section>
-    <section anchor="cookie-protocol" title="The Cookie Protocol">
+    <section anchor="cookie-protocol" title="User Agent Requirements">
       <t>For historical reasons, the full cookie protocol contains a number of
       exotic quirks. This section is intended to specify the cookie protocol
       in enough detail to enable a user agent that implements the protocol
