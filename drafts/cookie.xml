@@ -1558,8 +1558,10 @@ mystery         = <anything except a delimiter>
       <reference anchor='RFC2109'>
         <front>
           <title>HTTP State Management Mechanism</title>
-          <author initials='D.M.' surname='Kristol' fullname='David M. Kristol'>
-            <organization>Bell Laboratories, Lucent Technologies</organization>
+          <author initials='D.M.' surname='Kristol'
+                  fullname='David M. Kristol'>
+            <organization>Bell Laboratories, Lucent
+            Technologies</organization>
             <address><email>dmk@bell-labs.com</email></address>
           </author>
           <author initials='L.' surname='Montulli' fullname='Lou Montulli'>
