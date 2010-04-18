@@ -1252,7 +1252,7 @@ mystery         = <anything except a delimiter>
       </section>
       <section anchor="clear-text" title="Clear Text">
         <t>Unless sent over a secure channel (such as TLS), the information in
-        the Set-Cookie and Cookie headers is transmitted in the clear.
+        the Cookie and Set-Cookie headers is transmitted in the clear.
         <list style="numbers">
           <t>All sensitive information conveyed in these headers is exposed to
           an eavesdropper.</t>
@@ -1276,7 +1276,7 @@ mystery         = <anything except a delimiter>
         cookie, servers that require a higher level of security SHOULD use the
         cookie protocol only over a secure channel. When using the cookie
         protocol over a secure channel, servers SHOULD set the Secure
-        attribute in every cookie. If a server does not set the Secure
+        attribute for every cookie. If a server does not set the Secure
         attribute, the protection provided by the secure channel will be
         largely moot.</t>
       </section>
@@ -1318,12 +1318,12 @@ mystery         = <anything except a delimiter>
 
         <t>Cookies do not provide isolation by scheme. Although most commonly
         used with the http and https schemes, the cookies for a given host
-        might also available to other schemes, such as ftp and gopher.
+        might also be available to other schemes, such as ftp and gopher.
         Although this lack of isolation by scheme is most apparent in via
         non-HTTP APIs that permit access to cookies (e.g., HTML's
         document.cookie API), the lack of isolation by scheme is actually
-        present in the cookie protocol itself (e.g., consider retrieving a URI
-        with the gopher scheme via HTTP).</t>
+        present in requirements for processing cookies themselves (e.g.,
+        consider retrieving a URI with the gopher scheme via HTTP).</t>
 
         <t>Cookies do not always provide isolation by path. Although the
         network-level protocol does not send cookie stored for one path to
@@ -1351,7 +1351,7 @@ mystery         = <anything except a delimiter>
         http://example.com/foo/bar can set a cookie with a Path attribute of
         "/qux". Consequently, servers SHOULD NOT both run mutually distrusting
         services on different paths of the same host and use cookies store
-        security sensitive information.</t>
+        security-sensitive information.</t>
 
         <t>An active network attacker can also inject cookies into the
         Cookie header sent to https://example.com/ by impersonating a response
