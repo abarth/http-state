@@ -965,7 +965,7 @@ mystery         = <anything except a delimiter>
           <t>If the cookie's name and value are both empty, abort these
           steps and ignore the cookie entirely.</t>
 
-          <t>If the cookie was received from a non-HTTP context and the
+          <t>If the cookie was received from a non-HTTP API and the
           cookie's http-only-flag is set, abort these steps and ignore the
           cookie entirely.</t>
 
@@ -978,7 +978,7 @@ mystery         = <anything except a delimiter>
             cookie.)</t>
 
             <t>If the newly created cookie was received from an non-HTTP
-            context and the old-cookie's host-only-flag is set, abort these
+            API and the old-cookie's host-only-flag is set, abort these
             steps and ignore the newly created cookie entirely.</t>
 
             <t>Update the creation-time of the newly created cookie to match
@@ -1029,10 +1029,9 @@ mystery         = <anything except a delimiter>
         SHOULD attach exactly one HTTP header named Cookie if the
         cookie-string (defined below) for the Request-URI is non-empty.</t>
 
-        <t>A user agent MAY omit the Cookie header in its entirety if the
-        user agent is configured to block sending cookies. For example, the
-        user agent might wish to block sending cookies during "third-party"
-        requests.</t>
+        <t>A user agent MAY omit the Cookie header in its entirety. For
+        example, the user agent might wish to block sending cookies during
+        "third-party" requests.</t>
 
         <t>The user agent MUST use the following algorithm to compute the
         cookie-string from a cookie store and a Request-URI:
