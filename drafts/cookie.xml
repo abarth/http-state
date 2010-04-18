@@ -43,21 +43,20 @@
       metadata to determine whether to return the name/value pairs in the
       Cookie header.</t>
 
-      <t>Although simple on its surface, the cookie protocol has a number of
-      complexities.  For example, the server indicates a scope for each
-      cookie when sending them to the user agent.  The scope indicates the
-      maximum amount of time the user agent should retain the cookie, to
-      which servers the user agent should return the cookie, and for which
-      protocols the cookie is applicable.</t>
+      <t>Although simple on its surface, cookies have a number of
+      complexities. For example, the server indicates a scope for each cookie
+      when sending them to the user agent. The scope indicates the maximum
+      amount of time the user agent should retain the cookie, to which servers
+      the user agent should return the cookie, and for which protocols the
+      cookie is applicable.</t>
 
-      <t>For historical reasons, the cookie protocol contains a number of
-      security and privacy infelicities.  For example, a server can indicate
-      that a given cookie is intended for "secure" connections, but the
-      Secure attribute provides only confidentiality (not integrity) from
-      active network attackers.  Similarly, cookies for a given host are
-      shared across all the ports on that host, even though the usual
-      "same-origin policy" used by web browsers isolates content retrieved
-      from different ports.</t>
+      <t>For historical reasons, cookies contain a number of security and
+      privacy infelicities. For example, a server can indicate that a given
+      cookie is intended for "secure" connections, but the Secure attribute
+      provides only confidentiality (not integrity) from active network
+      attackers. Similarly, cookies for a given host are shared across all the
+      ports on that host, even though the usual "same-origin policy" used by
+      web browsers isolates content retrieved from different ports.</t>
     </section>
     <section anchor="general-nonsense" title="General Nonsense">
       <section anchor="conformance-criteria" title="Conformance Criteria">
@@ -127,10 +126,10 @@
       that can lead to unpredictable behavior.</t>
 
       <section title="Examples">
-        <t>Using the cookie protocol, a server can send the user agent a short
-        string in an HTTP response that the user agent will return in future
-        HTTP requests. For example, the server can send the user agent a
-        "session identifier" named SID with the value 31d4d96e407aad42. The
+        <t>Using the Set-Cookie header, a server can send the user agent a
+        short string in an HTTP response that the user agent will return in
+        future HTTP requests. For example, the server can send the user agent
+        a "session identifier" named SID with the value 31d4d96e407aad42. The
         user agent then returns the session identifier in subsequent
         requests.</t>
 
@@ -223,12 +222,13 @@ Set-Cookie: lang=; Expires=Sun, 06 Nov 1994 08:49:37 GMT
     </section>
     <section anchor="sane-profile" title="Server Requirements">
       <t>This section describes the syntax and semantics of a well-behaved
-      profile of the protocol.  Servers SHOULD use the profile described in
-      this section, both to maximize interoperability with existing user
-      agents and because a future version of the cookie protocol could remove
-      support for some of the most esoteric aspects of the protocol.  User
-      agents, however, MUST implement the full protocol to ensure
-      interoperability with servers making use of the full protocol.</t>
+      profile of the Cookie and Set-Cookie headers. Servers SHOULD use the
+      profile described in this section, both to maximize interoperability
+      with existing user agents and because a future version of the Cookie or
+      Set-Cookie headers could remove support for some of the most esoteric
+      semantics. User agents, however, MUST implement the full semantics to
+      ensure interoperability with servers making use of the full
+      semantics.</t>
  
       <section anchor="sane-set-cookie" title="Set-Cookie">
         <t>The Set-Cookie header is used to send cookies from the server to
@@ -295,9 +295,8 @@ httponly-av       = "HttpOnly"
                  title="Semantics (Non-Normative)">
           <t>This section describes a simplified semantics of the Set-Cookie
           header. These semantics are detailed enough to be useful for
-          understanding the most common uses of the cookie protocol. The full
-          semantics are described in <xref target="cookie-protocol"
-          />.</t>
+          understanding the most common uses of cookies. The full semantics
+          are described in <xref target="cookie-protocol" />.</t>
 
           <t>When the user agent receives a Set-Cookie header, the user agent
           stores the cookie in its cookie store. Subsequently, when the user
@@ -462,10 +461,11 @@ cookie-string = cookie-pair *( ";" cookie-pair )
       </section>
     </section>
     <section anchor="cookie-protocol" title="User Agent Requirements">
-      <t>For historical reasons, the full cookie protocol contains a number of
-      exotic quirks. This section is intended to specify the cookie protocol
-      in sufficient detail to allow a user agent implementing these
-      requirements precisely to interoperate with existing servers.</t>
+      <t>For historical reasons, the full semantics of cookies contains a
+      number of exotic quirks. This section is intended to specify the Cookie
+      and Set-Cookie headers in sufficient detail to allow a user agent
+      implementing these requirements precisely to interoperate with existing
+      servers.</t>
 
       <t>Conformance requirements phrased as algorithms or specific steps MAY
       be implemented in any manner, so long as the end result is equivalent.
@@ -1134,11 +1134,11 @@ mystery         = <anything except a delimiter>
       </section>
       <section anchor="implementation-apis"
                title="Application Programmer Interfaces">
-        <t>One reason the cookie protocol uses such esoteric syntax is
-        because many platforms (both in servers and user agents) provide
-        a string-based application programmer interface (API) to cookies,
-        requiring application-layer programmers to generate and parse the
-        syntax used by the Cookie and Set-Cookie headers.</t>
+        <t>One reason the Cookie and Set-Cookie headers uses such esoteric
+        syntax is because many platforms (both in servers and user agents)
+        provide a string-based application programmer interface (API) to
+        cookies, requiring application-layer programmers to generate and parse
+        the syntax used by the Cookie and Set-Cookie headers.</t>
 
         <t>Instead of providing string-based APIs to cookies, platforms would
         be well-served by providing more semantic APIs. It is beyond the scope
@@ -1207,8 +1207,7 @@ mystery         = <anything except a delimiter>
     <section anchor="security-considerations"
              title="Security Considerations">
       <section anchor="section-overview" title="Overview">
-        <t>The cookie protocol has a number of security and privacy
-        pitfalls.</t>
+        <t>Cookies have a number of security and privacy pitfalls.</t>
 
         <t>In particular, cookies encourage developers to rely on ambient
         authority for authentication, often becoming vulnerable to attacks
@@ -1274,11 +1273,10 @@ mystery         = <anything except a delimiter>
 
         <t>In addition to encrypting and signing the contents of every
         cookie, servers that require a higher level of security SHOULD use the
-        cookie protocol only over a secure channel. When using the cookie
-        protocol over a secure channel, servers SHOULD set the Secure
-        attribute for every cookie. If a server does not set the Secure
-        attribute, the protection provided by the secure channel will be
-        largely moot.</t>
+        Cookie and Set-Cookie headers only over a secure channel. When using
+        cookies over a secure channel, servers SHOULD set the Secure attribute
+        for every cookie. If a server does not set the Secure attribute, the
+        protection provided by the secure channel will be largely moot.</t>
       </section>
       <section anchor="session-identifiers" title="Session Identifiers">
         <t>Instead of storing session information directly in a cookie (where
@@ -1344,7 +1342,7 @@ mystery         = <anything except a delimiter>
         cookie it set itself. The foo.example.com server might be able to
         leverage this ability to mount an attack against bar.example.com.</t>
 
-        <t>Even though the cookie protocol supports the Path attribute, the
+        <t>Even though the Set-Cookie header supports the Path attribute, the
         Path attribute does not provide any integrity protection because the
         user agent will accept an arbitrary Path attribute in a Set-Cookie
         header. For example, an HTTP response to a request for
@@ -1374,10 +1372,9 @@ mystery         = <anything except a delimiter>
         cookies.</t>
       </section>
       <section anchor="reliance-on-dns" title="Reliance on DNS">
-        <t>The cookie protocol relies upon the Domain Name System (DNS) for
-        security. If the DNS is partially or fully compromised, the cookie
-        protocol might fail to provide the security properties required by
-        applications.</t>
+        <t>Cookies rely upon the Domain Name System (DNS) for security. If the
+        DNS is partially or fully compromised, the cookie protocol might fail
+        to provide the security properties required by applications.</t>
       </section>
     </section>
   </middle>
