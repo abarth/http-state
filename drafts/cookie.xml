@@ -259,7 +259,7 @@ max-age-av        = "Max-Age" "=" 1*DIGIT
 domain-av         = "Domain" "=" domain-value
 domain-value      = token
 path-av           = "Path" "=" path-value
-path-value        = <abs_path, as defined in RFC 2616>
+path-value        = <abs_path, as defined in RFC 2616, except without ";">
 secure-av         = "Secure"
 httponly-av       = "HttpOnly"
               ]]>
