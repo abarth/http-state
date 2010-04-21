@@ -235,11 +235,11 @@ Cookie: SID=31d4d96e407aad42
         the user agent.</t>
 
         <section anchor="sane-set-cookie-syntax" title="Syntax">
-          <t>Informally, the Set-Cookie response header comprises the token
-          Set-Cookie:, followed by a cookie. Each cookie begins with a
-          name-value-pair, followed by zero or more attribute-value pairs.
-          Servers SHOULD NOT send Set-Cookie headers that fail to conform to
-          the following grammar:</t>
+          <t>Informally, the Set-Cookie response header contains the header
+          name "Set-Cookie" followed by a ":" and a cookie.  Each cookie
+          begins with a name-value pair, followed by zero or more
+          attribute-value pairs.  Servers SHOULD NOT send Set-Cookie headers
+          that fail to conform to the following grammar:</t>
 
           <figure>
             <artwork type="abnf">
