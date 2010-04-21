@@ -297,7 +297,7 @@ httponly-av       = "HttpOnly"
           <t>This section describes a simplified semantics of the Set-Cookie
           header. These semantics are detailed enough to be useful for
           understanding the most common uses of cookies. The full semantics
-          are described in <xref target="cookie-protocol" />.</t>
+          are described in <xref target="ua-requirements" />.</t>
 
           <t>When the user agent receives a Set-Cookie header, the user agent
           stores the cookie in its cookie store. Subsequently, when the user
@@ -417,9 +417,9 @@ httponly-av       = "HttpOnly"
         <section anchor="sane-cookie-syntax" title="Syntax">
           <t>The user agent returns stored cookies to the origin server in
           the Cookie header.  If the server conforms to the requirements in
-          this section, the requirements in the next section will cause the
-          user agent to return a Cookie header that conforms to the following
-          grammar:</t>
+          <xref target="sane-set-cookie" />, the requirements in the
+          <xref target="ua-requirements" /> will cause the user agent to return
+          a Cookie header that conforms to the following grammar:</t>
 
           <figure>
             <artwork type="abnf">
@@ -453,7 +453,7 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
         </section>
       </section>
     </section>
-    <section anchor="cookie-protocol" title="User Agent Requirements">
+    <section anchor="ua-requirements" title="User Agent Requirements">
       <t>For historical reasons, the full semantics of cookies contains a
       number of exotic quirks. This section is intended to specify the Cookie
       and Set-Cookie headers in sufficient detail to allow a user agent
