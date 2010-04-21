@@ -334,8 +334,8 @@ httponly-av       = "HttpOnly"
             concerns.
             <list>
               <t>WARNING: Not all user agents support the Max-Age attribute.
-              User agents that do not support the Max-Age attribute will
-              retain the cookie for the current session only.</t>
+              User agents that do not support the Max-Age attribute will ignore
+              the attribute.</t>
             </list>
             </t>
 
