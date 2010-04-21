@@ -154,7 +154,7 @@ Cookie: SID=31d4d96e407aad42
           <artwork>
             <![CDATA[
 == Server -> User Agent ==
-Set-Cookie: SID=31d4d96e407aad42; Path=/; Domain=.example.com
+Set-Cookie: SID=31d4d96e407aad42; Path=/; Domain=example.com
 
 == User Agent -> Server ==
 Cookie: SID=31d4d96e407aad42
@@ -174,7 +174,7 @@ Cookie: SID=31d4d96e407aad42
             <![CDATA[
 == Server -> User Agent ==
 Set-Cookie: SID=31d4d96e407aad42; Path=/; Secure; HttpOnly
-Set-Cookie: lang=en-US; Path=/; Domain=.example.com
+Set-Cookie: lang=en-US; Path=/; Domain=example.com
 
 == User Agent -> Server ==
 Cookie: SID=31d4d96e407aad42; lang=en-US
@@ -257,9 +257,9 @@ expires-av        = "Expires=" sane-cookie-date
 sane-cookie-date  = <rfc1123-date, as defined in RFC 2616>
 max-age-av        = "Max-Age=" 1*DIGIT
 domain-av         = "Domain=" domain-value
-domain-value      = token
+domain-value      = <subdomain, as defined in RFC 1034>
 path-av           = "Path=" path-value
-path-value        = <abs_path, as defined in RFC 2616, except without ";">
+path-value        = <abs_path, as defined in RFC 2616, excluding ";">
 secure-av         = "Secure"
 httponly-av       = "HttpOnly"
               ]]>
@@ -349,9 +349,10 @@ httponly-av       = "HttpOnly"
             value "example.com", the user agent will include the cookie in
             the Cookie header when making HTTP requests to example.com,
             www.example.com, and www.corp.example.com. (Note that a leading
-            U+002E ("."), if present, is ignored.) If the server omits the
-            Domain attribute, the user agent will return the cookie only to
-            the origin server.
+            U+002E ("."), if present, is ignored even though that character is
+            not permitted by the subdomain production in <xref target="RFC1034"
+            />.) If the server omits the Domain attribute, the user agent will
+            return the cookie only to the origin server.
             <list>
               <t>WARNING: Some legacy user agents treat an absent Domain
               attribute as if the Domain attribute were present and contained
@@ -1381,6 +1382,19 @@ mystery         = <anything except a delimiter>
   </middle>
   <back>
     <references title="Normative References">
+      <reference anchor="RFC1034"> 
+        <front> 
+          <title abbrev="Domain Concepts and Facilities">Domain names - concepts
+            and facilities</title> 
+          <author initials="P." surname="Mockapetris" fullname="P. Mockapetris"> 
+            <organization>Information Sciences Institute (ISI)</organization>
+          </author> 
+          <date year="1987" day="1" month="November" />
+        </front> 
+        <seriesInfo name="STD" value="13" /> 
+        <seriesInfo name="RFC" value="1034" /> 
+        <format type="TXT" octets="129180" target="http://www.rfc-editor.org/rfc/rfc1034.txt" /> 
+      </reference> 
       <reference anchor="RFC2119">
         <front>
           <title abbrev="RFC Key Words">
@@ -1464,14 +1478,14 @@ mystery         = <anything except a delimiter>
         </front>
         <seriesInfo name="RFC" value="2616"/>
       </reference>
-      <reference anchor='RFC3492'> 
+      <reference anchor="RFC3492"> 
         <front> 
           <title>Punycode: A Bootstring encoding of Unicode for
           Internationalized Domain Names in Applications (IDNA)</title>
-        <author initials='A.' surname='Costello' fullname='A. Costello'> 
+        <author initials="A." surname="Costello" fullname="A. Costello"> 
           <organization />
         </author> 
-        <date year='2003' month='March' /> 
+        <date year="2003" month="March" /> 
         <abstract> 
           <t>Punycode is a simple and efficient transfer encoding syntax
           designed for use with Internationalized Domain Names in Applications
@@ -1487,17 +1501,17 @@ mystery         = <anything except a delimiter>
           IDNA.</t>
         </abstract>
       </front> 
-      <seriesInfo name='RFC' value='3492' /> 
-      <format type='TXT' octets='67439'
-              target='ftp://ftp.isi.edu/in-notes/rfc3492.txt' /> 
+      <seriesInfo name="RFC" value="3492" /> 
+      <format type="TXT" octets="67439"
+              target="ftp://ftp.isi.edu/in-notes/rfc3492.txt" /> 
       </reference> 
-      <reference anchor='RFC3629'>
+      <reference anchor="RFC3629">
         <front>
           <title>UTF-8, a transformation format of ISO 10646</title>
-          <author initials='F.' surname='Yergeau' fullname='F. Yergeau'>
+          <author initials="F." surname="Yergeau" fullname="F. Yergeau">
             <organization />
           </author>
-          <date year='2003' month='November' />
+          <date year="2003" month="November" />
           <abstract>
             <t>ISO/IEC 10646-1 defines a large character set called the
             Universal Character Set (UCS) which encompasses most of the
@@ -1511,10 +1525,10 @@ mystery         = <anything except a delimiter>
             obsoletes and replaces RFC 2279.</t>
           </abstract>
         </front>
-        <seriesInfo name='STD' value='63' />
-        <seriesInfo name='RFC' value='3629' />
-        <format type='TXT' octets='33856'
-                target='ftp://ftp.rfc-editor.org/in-notes/rfc3629.txt' />
+        <seriesInfo name="STD" value="63" />
+        <seriesInfo name="RFC" value="3629" />
+        <format type="TXT" octets="33856"
+                target="ftp://ftp.rfc-editor.org/in-notes/rfc3629.txt" />
       </reference>
       <reference anchor="RFC5234">
         <front>
@@ -1539,54 +1553,54 @@ mystery         = <anything except a delimiter>
         <seriesInfo name="STD" value="68"/>
         <seriesInfo name="RFC" value="5234"/>
       </reference>
-      <reference anchor='RFC5246'> 
+      <reference anchor="RFC5246"> 
         <front> 
           <title>
             The Transport Layer Security (TLS) Protocol Version 1.2
           </title> 
-          <author initials='T.' surname='Dierks' fullname='T. Dierks'> 
+          <author initials="T." surname="Dierks" fullname="T. Dierks"> 
             <organization />
           </author> 
-          <author initials='E.' surname='Rescorla' fullname='E. Rescorla'> 
+          <author initials="E." surname="Rescorla" fullname="E. Rescorla"> 
             <organization />
           </author> 
-          <date year='2008' month='August' />
+          <date year="2008" month="August" />
         </front>
-        <seriesInfo name='RFC' value='5246' />
+        <seriesInfo name="RFC" value="5246" />
       </reference>
     </references>
     <references title="Informative References">
-      <reference anchor='RFC2109'>
+      <reference anchor="RFC2109">
         <front>
           <title>HTTP State Management Mechanism</title>
-          <author initials='D.M.' surname='Kristol'
-                  fullname='David M. Kristol'>
+          <author initials="D.M." surname="Kristol"
+                  fullname="David M. Kristol">
             <organization>Bell Laboratories, Lucent
             Technologies</organization>
             <address><email>dmk@bell-labs.com</email></address>
           </author>
-          <author initials='L.' surname='Montulli' fullname='Lou Montulli'>
+          <author initials="L." surname="Montulli" fullname="Lou Montulli">
             <organization>Netscape Communications Corp.</organization>
             <address><email>montulli@netscape.com</email></address>
           </author>
-          <date year='1997' month='February' />
+          <date year="1997" month="February" />
         </front>
-        <seriesInfo name='RFC' value='2109' />
+        <seriesInfo name="RFC" value="2109" />
       </reference>
-      <reference anchor='RFC2965'>
+      <reference anchor="RFC2965">
         <front>
           <title>HTTP State Management Mechanism</title>
-          <author initials='D. M.' surname='Kristol' fullname='David M. Kristol'>
+          <author initials="D. M." surname="Kristol" fullname="David M. Kristol">
             <organization>Bell Laboratories, Lucent
             Technologies</organization>
             <address><email>dmk@bell-labs.com</email></address>
           </author>
-          <author initials='L.' surname='Montulli' fullname='Lou Montulli'>
+          <author initials="L." surname="Montulli" fullname="Lou Montulli">
             <organization>Epinions.com, Inc.</organization>
             <address><email>lou@montulli.org</email></address></author>
-          <date year='2000' month='October' />
+          <date year="2000" month="October" />
          </front>
-          <seriesInfo name='RFC' value='2965' />
+          <seriesInfo name="RFC" value="2965" />
       </reference>
     </references>
     <section title="Acknowledgements">
