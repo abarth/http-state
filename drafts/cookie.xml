@@ -279,7 +279,7 @@ httponly-av       = "HttpOnly"
 
           <t>To maximize compatibility with user agents, servers that wish to
           store non-ASCII data in a cookie-value SHOULD encode that data using
-          a printable ASCII encoding, such as base64.</t>
+          a printable ASCII encoding.</t>
 
           <t>If a server sends multiple responses containing Set-Cookie headers
           concurrently to the user agent (e.g., when communicating with the
