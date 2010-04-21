@@ -409,7 +409,7 @@ httponly-av       = "HttpOnly"
             <t>The HttpOnly attribute limits the scope of the cookie to HTTP
             requests. In particular, the attribute instructs the user agent to
             omit the cookie when providing access to its cookie store via
-            "non-HTTP" APIs (as defined by the user agent).</t>
+            "non-HTTP" APIs (such as HTML's document.cookie API).</t>
           </section>
         </section>
       </section>
