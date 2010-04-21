@@ -341,7 +341,9 @@ httponly-av       = "HttpOnly"
 
             <t>If a cookie has both the Max-Age and the Expires attribute, the
             Max-Age attribute has precedence and controls the expiration date
-            of the cookie.</t>
+            of the cookie.  If a cookie has neither the Max-Age nor the Expires
+            attribute, the user agent will retain the cookie until "the current
+            session is over" (as defined by the user agent).</t>
           </section>
           <section anchor="sane-domain" title="The Domain Attribute">
             <t>The Domain attribute specifies those hosts to which the cookie
