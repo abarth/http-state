@@ -390,7 +390,7 @@ httponly-av       = "HttpOnly"
 
             <t>Although seemingly useful for isolating cookies between
             different paths within a given domain, the Path attribute cannot
-            be relied upon for security (see Section <xref
+            be relied upon for security (see <xref
             target="security-considerations" />).</t>
           </section>
           <section anchor="sane-secure" title="The Secure Attribute">
