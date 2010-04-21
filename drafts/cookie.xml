@@ -196,7 +196,7 @@ Cookie: SID=31d4d96e407aad42; lang=en-US
 Set-Cookie: lang=en-US; Expires=Wed, 09 Jun 2021 10:18:14 GMT
 
 == User Agent -> Server ==
-Cookie: lang=en-US
+Cookie: SID=31d4d96e407aad42; lang=en-US
             ]]>
           </artwork>
         </figure>
@@ -214,7 +214,7 @@ Cookie: lang=en-US
 Set-Cookie: lang=; Expires=Sun, 06 Nov 1994 08:49:37 GMT
 
 == User Agent -> Server ==
-(No Cookie header)
+Cookie: SID=31d4d96e407aad42
             ]]>
           </artwork>
         </figure>
