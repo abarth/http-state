@@ -447,9 +447,9 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
 
           <t>Although cookies are serialized linearly in the Cookie header,
           servers SHOULD NOT rely upon the serialization order. In particular,
-          if the Cookie header contains two cookies with the same name,
-          servers SHOULD NOT rely upon the order in which these cookies appear
-          in the header.</t>
+          if the Cookie header contains two cookies with the same name (e.g.,
+          with different Path or Domain attributes), servers SHOULD NOT rely
+          upon the order in which these cookies appear in the header.</t>
         </section>
       </section>
     </section>
