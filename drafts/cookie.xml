@@ -360,7 +360,7 @@ httponly-av       = "HttpOnly"
               attribute as if the Domain attribute were present and contained
               the current host name. For example, if example.com returns a
               Set-Cookie header without a Domain attribute, these user agents
-              will erroneously send the cookie to www.example.com.</t>
+              will erroneously send the cookie to www.example.com as well.</t>
             </list>
             </t>
 
@@ -378,14 +378,15 @@ httponly-av       = "HttpOnly"
             or "co.uk".</t>
           </section>
           <section anchor="sane-path" title="The Path Attribute">
-            <t>The Path attribute limits the scope of the cookie to a set of
-            paths. When a cookie has a Path attribute, the user agent will
-            include the cookie in an HTTP request only if the path portion of
-            the Request-URI matches (or is a subdirectory of) the cookie's
-            Path attribute, where the U+002F ("/") character is interpreted as
-            a directory separator. If the server omits the Path attribute, the
-            user agent will use the directory of the Request-URI's path
-            component as the default value.</t>
+            <t>The scope of each cookie is limited to a set of paths,
+            controlled by the Path attribute.  If the server omits the Path
+            attribute, the user agent will use the directory of the
+            Request-URI's path component as the default value.</t>
+            
+            <t>The user agent will include the cookie in an HTTP request only
+            if the path portion of the Request-URI matches (or is a
+            subdirectory of) the cookie's Path attribute, where the U+002F
+            ("/") character is interpreted as a directory separator.</t>
 
             <t>Although seemingly useful for isolating cookies between
             different paths within a given domain, the Path attribute cannot
