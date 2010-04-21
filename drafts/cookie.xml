@@ -253,12 +253,12 @@ token             = <token, as defined in RFC 2616>
 
 cookie-av         = expires-av / max-age-av / domain-av /
                     path-av / secure-av / httponly-av
-expires-av        = "Expires" "=" sane-cookie-date
+expires-av        = "Expires=" sane-cookie-date
 sane-cookie-date  = <rfc1123-date, as defined in RFC 2616>
-max-age-av        = "Max-Age" "=" 1*DIGIT
-domain-av         = "Domain" "=" domain-value
+max-age-av        = "Max-Age=" 1*DIGIT
+domain-av         = "Domain=" domain-value
 domain-value      = token
-path-av           = "Path" "=" path-value
+path-av           = "Path=" path-value
 path-value        = <abs_path, as defined in RFC 2616, except without ";">
 secure-av         = "Secure"
 httponly-av       = "HttpOnly"
@@ -286,15 +286,11 @@ httponly-av       = "HttpOnly"
           user agent over multiple sockets), these responses create a "race
           condition" that can lead to unpredictable behavior.</t>
 
-          <t>NOTE: Some user agents represent dates using 32-bit integers.
-          Some of these user agents might contain bugs that cause them process
-          dates after the year 2038 incorrectly. Servers wishing to
+          <t>NOTE: Some user agents represent dates using 32-bit UNIX time_t
+          values.  Some of these user agents might contain bugs that cause them
+          process dates after the year 2038 incorrectly. Servers wishing to
           interoperate with these user agents might wish to use dates before
           2038.</t>
-
-          <t>NOTE: The syntax above allows whitespace around the U+003D ("=")
-          characters. Servers wishing to interoperate with some legacy user
-          agents might wish to omit this whitespace.</t>
         </section>
         <section anchor="sane-set-cookie-semantics"
                  title="Semantics (Non-Normative)">
