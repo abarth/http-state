@@ -89,7 +89,7 @@
         VCHAR (any visible [USASCII] character), and WSP (whitespace).</t>
 
         <t>The OWS (optional whitespace) rule is used where zero or more
-        linear whitespace characters may appear. OWS SHOULD either not be
+        linear whitespace characters MAY appear. OWS SHOULD either not be
         produced or be produced as a single SP character. Multiple OWS
         characters that occur within field-content SHOULD be replaced with a
         single SP before interpreting the field value or forwarding the
