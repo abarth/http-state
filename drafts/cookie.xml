@@ -46,9 +46,9 @@
       <t>Although simple on its surface, cookies have a number of
       complexities. For example, the server indicates a scope for each cookie
       when sending them to the user agent. The scope indicates the maximum
-      amount of time the user agent should retain the cookie, to which servers
-      the user agent should return the cookie, and for which protocols the
-      cookie is applicable.</t>
+      amount of time the user agent should return the cookie, the servers to
+      which the user agent should return the cookie, and the protocols for
+      which the cookie is applicable.</t>
 
       <t>For historical reasons, cookies contain a number of security and
       privacy infelicities. For example, a server can indicate that a given
