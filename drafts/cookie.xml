@@ -390,27 +390,15 @@ httponly-av       = "HttpOnly"
 
             <t>Although seemingly useful for isolating cookies between
             different paths within a given domain, the Path attribute cannot
-            be relied upon for security for two reasons:
-            <list style="numbers">
-              <t>User agents do not prevent one path from overwriting the
-              cookies for another path. For example, if a response to a
-              request for /foo/bar.html attempts to set a cookie with a Path
-              attribute of "/baz" the user agent will store that cookie in the
-              cookie store.</t>
-
-              <t>The "same-origin" policy implemented by many user agents does
-              not isolate different paths within an origin. For example,
-              /foo/bar.html can read cookies with a Path attribute of "/baz"
-              because they are within the "same origin".</t>
-            </list>
-            </t>
+            be relied upon for security (see Section <xref
+            target="security-considerations" />).</t>
           </section>
           <section anchor="sane-secure" title="The Secure Attribute">
             <t>The Secure attribute limits the scope of the cookie to "secure"
             channels (where "secure" is defined by the user agent). When a
             cookie has the Secure attribute, the user agent will include the
             cookie in an HTTP request only if the request is transmitted over
-            a secure channel (typically TLS <xref target="RFC5246"/>).</t>
+            a secure channel (typically TLS <xref target="RFC5246" />).</t>
 
             <t>Although seemingly useful for protecting cookies from active
             network attackers, the Secure attribute protects only the cookie's
