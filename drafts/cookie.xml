@@ -57,6 +57,14 @@
       attackers. Similarly, cookies for a given host are shared across all the
       ports on that host, even though the usual "same-origin policy" used by
       web browsers isolates content retrieved from different ports.</t>
+
+      <t>Prior to this document, there were at least three descriptions of
+      cookies: the so-called "Netscape cookie speciciation," RFC 2109 <xref
+      target="RFC2109"/>, and RFC 2965 <xref target="RFC2965"/>.  However, none
+      of these documents describe how the Cookie and Set-Cookie headers are
+      actually used on the Internet.  By contrast, this document attempts to
+      specify the syntax and semantics of these headers as they are actually
+      used on the Internet.</t>
     </section>
     <section anchor="general-nonsense" title="General Nonsense">
       <section anchor="conformance-criteria" title="Conformance Criteria">
@@ -1572,8 +1580,22 @@ mystery         = <anything except a delimiter>
         </front>
         <seriesInfo name='RFC' value='2109' />
       </reference>
+      <reference anchor='RFC2965'>
+        <front>
+          <title>HTTP State Management Mechanism</title>
+          <author initials='D. M.' surname='Kristol' fullname='David M. Kristol'>
+            <organization>Bell Laboratories, Lucent
+            Technologies</organization>
+            <address><email>dmk@bell-labs.com</email></address>
+          </author>
+          <author initials='L.' surname='Montulli' fullname='Lou Montulli'>
+            <organization>Epinions.com, Inc.</organization>
+            <address><email>lou@montulli.org</email></address></author>
+          <date year='2000' month='October' />
+         </front>
+          <seriesInfo name='RFC' value='2965' />
+      </reference>
     </references>
-
     <section title="Acknowledgements">
       <t>This document borrows heavily from RFC 2109 <xref target="RFC2109"/>.
       We are indebted to David M. Kristol and Lou Montulli for their efforts
