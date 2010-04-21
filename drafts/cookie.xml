@@ -120,13 +120,10 @@
       agent a Set-Cookie response header with the same or different
       information, or it MAY send no Set-Cookie header at all.</t>
 
-      <t>Servers MAY return a Set-Cookie response header with any response.
-      User agents SHOULD send a Cookie request header, subject to other rules
-      detailed below, with every request.</t>
-
-      <t>An origin server MAY include multiple Set-Cookie header fields in a
-      single response. Note that an intervening gateway MUST NOT fold multiple
-      Set-Cookie header fields into a single header field.</t>
+      <t>Servers MAY return a Set-Cookie response header with any response.  An
+      origin server MAY include multiple Set-Cookie header fields in a single
+      response.  Gateways that wish to be transparent to cookies MUST NOT fold
+      multiple Set-Cookie header fields into a single header field.</t>
 
       <t>If a server sends multiple responses containing Set-Cookie headers
       concurrently to the user agent (e.g., when communicating with the user
