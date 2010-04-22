@@ -259,7 +259,7 @@ Cookie: SID=31d4d96e407aad42
           <figure>
             <artwork type="abnf">
               <![CDATA[
-set-cookie-header = "Set-Cookie:" OWS set-cookie-string OWS
+set-cookie-header = "Set-Cookie:" SP set-cookie-string
 set-cookie-string = cookie-pair *( ";" SP cookie-av )
 cookie-pair       = cookie-name "=" cookie-value
 cookie-name       = token
@@ -442,7 +442,7 @@ extension-av      = <any CHAR except CTLs or ";">
             <artwork type="abnf">
               <![CDATA[
 cookie-header = "Cookie:" OWS cookie-string OWS
-cookie-string = cookie-pair *( ";" SP cookie-pair ) 
+cookie-string = cookie-pair *( ";" SP cookie-pair )
               ]]>
             </artwork>
           </figure>
