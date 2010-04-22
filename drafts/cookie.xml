@@ -581,8 +581,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </section>
         <section anchor="cookie-domain" title="Domains">
           <t>A canonicalized host-name is the host-name converted to lower
-          case and converted to ASCII by the punycode algorithm <xref
-          target="RFC3492"/>.</t>
+          case and converted to ASCII according to the IDNA
+          specification <xref target="RFC3490"/>.</t>
 
           <t>A host-name domain-matches a cookie-domain if at least one of the
           following conditions hold:
@@ -1390,6 +1390,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
   </middle>
   <back>
     <references title="Normative References">
+      <!-- http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXXX.xml -->
       <reference anchor="RFC1034"> 
         <front> 
           <title abbrev="Domain Concepts and Facilities">Domain names - concepts
@@ -1486,6 +1487,38 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </front>
         <seriesInfo name="RFC" value="2616"/>
       </reference>
+      <reference anchor='RFC3490'> 
+        <front> 
+          <title>Internationalizing Domain Names in Applications (IDNA)</title> 
+            <author initials='P.' surname='Faltstrom' fullname='P. Faltstrom'>
+              <organization />
+            </author> 
+            <author initials='P.' surname='Hoffman' fullname='P. Hoffman'> 
+              <organization />
+            </author> 
+            <author initials='A.' surname='Costello' fullname='A. Costello'> 
+              <organization />
+            </author> 
+            <date year='2003' month='March' /> 
+            <abstract> 
+              <t>Until now, there has been no standard method for domain names
+              to use characters outside the ASCII repertoire.  This document
+              defines internationalized domain names (IDNs) and a mechanism
+              called Internationalizing Domain Names in Applications (IDNA) for
+              handling them in a standard fashion.  IDNs use characters drawn
+              from a large repertoire (Unicode), but IDNA allows the non-ASCII
+              characters to be represented using only the ASCII characters
+              already allowed in so-called host names today.  This
+              backward-compatible representation is required in existing
+              protocols like DNS, so that IDNs can be introduced with no
+              changes to the existing infrastructure.  IDNA is only meant for
+              processing domain names, not free text. [STANDARDS TRACK]</t>
+            </abstract>
+          </front> 
+          <seriesInfo name='RFC' value='3490' /> 
+        <format type='TXT' octets='51943' target='http://www.rfc-editor.org/rfc/rfc3490.txt' /> 
+      </reference> 
+      <!--
       <reference anchor="RFC3492"> 
         <front> 
           <title>Punycode: A Bootstring encoding of Unicode for
@@ -1513,6 +1546,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
       <format type="TXT" octets="67439"
               target="ftp://ftp.isi.edu/in-notes/rfc3492.txt" /> 
       </reference> 
+      -->
       <reference anchor="RFC3629">
         <front>
           <title>UTF-8, a transformation format of ISO 10646</title>
