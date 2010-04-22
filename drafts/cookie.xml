@@ -509,7 +509,7 @@ year            = 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
 time            = time-field ":" time-field ":" time-field
 time-field      = 2DIGIT / DIGIT
 mystery         = <CTL, except HTAB> / <octets 128-255> /
-                  %x3A / ALPHA / DIGIT
+                  ALPHA / DIGIT / ":"
                   ; anything except a delimiter
                 ]]>
               </artwork>
