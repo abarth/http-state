@@ -77,7 +77,7 @@
         these steps") are to be interpreted with the meaning of the key word
         ("MUST", "SHOULD", "MAY", etc) used in introducing the algorithm.</t>
 
-        <t>Conformance requirements phrased as algorithms or specific steps MAY
+        <t>Conformance requirements phrased as algorithms or specific steps can
         be implemented in any manner, so long as the end result is equivalent.
         In particular, the algorithms defined in this specification are
         intended to be easy to understand and are not intended to be
