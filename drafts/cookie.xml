@@ -969,7 +969,7 @@ mystery         = <anything except a delimiter>
             cookie.)</t>
 
             <t>If the newly created cookie was received from an non-HTTP
-            API and the old-cookie's host-only-flag is set, abort these
+            API and the old-cookie's http-only-flag is set, abort these
             steps and ignore the newly created cookie entirely.</t>
 
             <t>Update the creation-time of the newly created cookie to match
