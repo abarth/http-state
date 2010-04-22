@@ -483,7 +483,7 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
 
         <section anchor="cookie-date" title="Dates">
           <t>The user agent MUST use an algorithm equivalent to the following
-          parse a cookie-date:
+          algorithm parse a cookie-date:
           <list style="numbers">
             <t>Using the grammar below, divide the cookie-date into
             date-tokens.
@@ -604,7 +604,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </section>
         <section anchor="cookie-path" title="Paths">
           <t>The user agent MUST use an algorithm equivalent to the following
-          to compute the default-path of a cookie:
+          algorithm to compute the default-path of a cookie:
           <list style="numbers">
             <t>Let uri-path be the path portion of the request-uri.  That is,
             if the request-uri contains just a path (and optional query
@@ -645,8 +645,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         response, the user agent receives a set-cookie-string
         consisting of the value of the header.</t>
 
-        <t>A user agent MUST use an algorithm equivalent to the following to
-        parse set-cookie-strings:
+        <t>A user agent MUST use an algorithm equivalent to the following
+        algorithm to parse set-cookie-strings:
         <list style="numbers">
           <t>If the set-cookie-string contains a U+003B (";") character:
           <list style="empty">
@@ -682,8 +682,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </list>
         </t>
 
-        <t>The user agent MUST use an algorithm equivalent to the following to
-        parse the unparsed-attributes:
+        <t>The user agent MUST use an algorithm equivalent to the following
+        algorithm to parse the unparsed-attributes:
         <list style="numbers">
           <t>If the unparsed-attributes string is empty, skip the rest of
           these steps.</t>
@@ -1040,8 +1040,9 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         example, the user agent might wish to block sending cookies during
         "third-party" requests.</t>
 
-        <t>The user agent MUST use an algorithm equivalent to the following to
-        compute the cookie-string from a cookie store and a request-uri:
+        <t>The user agent MUST use an algorithm equivalent to the following
+        algorithm to compute the cookie-string from a cookie store and a
+        request-uri:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
           that meet all of the following requirements:
