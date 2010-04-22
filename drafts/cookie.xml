@@ -1199,8 +1199,8 @@ mystery         = <anything except a delimiter>
     <section anchor="security-considerations"
              title="Security Considerations">
       <section anchor="section-overview" title="Overview">
-        <t>Cookies have a number of security and privacy pitfalls.  This
-        section overviews a few of the more salient issues.</t>
+        <t>Cookies have a number of security pitfalls.  This section overviews
+        a few of the more salient issues.</t>
 
         <t>In particular, cookies encourage developers to rely on ambient
         authority for authentication, often becoming vulnerable to attacks
@@ -1317,7 +1317,7 @@ mystery         = <anything except a delimiter>
         consider retrieving a URI with the gopher scheme via HTTP).</t>
 
         <t>Cookies do not always provide isolation by path. Although the
-        network-level protocol does not send cookie stored for one path to
+        network-level protocol does not send cookies stored for one path to
         another, some user agents expose cookies via non-HTTP APIs, such as
         HTML's document.cookie API. Because some of these user agents (e.g.,
         web browsers) do not isolate resources received from different paths,
@@ -1359,7 +1359,7 @@ mystery         = <anything except a delimiter>
         the user's session, with unpredictable results.</t>
 
         <t>Finally, an attacker might be able to force the user agent to
-        delete cookies by storing large number of cookies. Once the user agent
+        delete cookies by storing a large number of cookies. Once the user agent
         reaches its storage limit, the user agent will be forced to evict some
         cookies. Servers SHOULD NOT rely upon user agents retaining
         cookies.</t>
