@@ -597,8 +597,9 @@ mystery         = <anything except a delimiter>
             absoluteURI, the uri-path is the abs_path component of that
             URI.</t>
 
-            <t>If the first character of the uri-path is not a U+002F ("/")
-            character, output U+002F ("/") and skip the remaining steps.</t>
+            <t>If the uri-path is empty or if first character of the uri-path
+            is not a U+002F ("/") character, output U+002F ("/") and skip the
+            remaining steps.</t>
 
             <t>If the uri-path contains only a single U+002F ("/") character,
             output U+002F ("/") and skip the remaining steps.</t>
