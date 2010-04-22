@@ -100,10 +100,9 @@
         the same meaning as in the HTTP/1.1 specification (<xref
         target="RFC2616"/>).</t>
 
-        <t>The terms request-host and request-URI refer to the values the user
+        <t>The terms request-host and request-uri refer to the values the user
         agent would send to the server as, respectively, the host (but not
-        port) and abs_path portions of the absoluteURI (http_URL) of the HTTP
-        Request-Line.</t>
+        port) and the absoluteURI (http_URL) of the HTTP Request-Line.</t>
       </section>
     </section>
     <section anchor="overview" title="Overview">
@@ -381,10 +380,10 @@ httponly-av       = "HttpOnly"
             <t>The scope of each cookie is limited to a set of paths,
             controlled by the Path attribute.  If the server omits the Path
             attribute, the user agent will use the directory of the
-            Request-URI's path component as the default value.</t>
+            request-uri's path component as the default value.</t>
             
             <t>The user agent will include the cookie in an HTTP request only
-            if the path portion of the Request-URI matches (or is a
+            if the path portion of the request-uri matches (or is a
             subdirectory of) the cookie's Path attribute, where the U+002F
             ("/") character is interpreted as a directory separator.</t>
 
@@ -569,22 +568,19 @@ mystery         = <anything except a delimiter>
           case and converted to ASCII by the punycode algorithm <xref
           target="RFC3492"/>.</t>
 
-          <t>A request-host *domain-matches* a cookie-domain if at least one
-          of the following conditions hold:
+          <t>A host-name *domain-matches* a cookie-domain if at least one of the
+          following conditions hold:
           <list style="symbols">
-            <t>The cookie-domain and the canonicalized request-host are
-            identical.</t>
+            <t>The cookie-domain and the host-name are identical.</t>
 
             <t>All of the following conditions hold:
             <list style="symbols">
-              <t>The cookie-domain is a suffix of the canonicalized
-              request-host.</t>
+              <t>The cookie-domain is a suffix of the host-name.</t>
 
-              <t>The last character of the canonicalized request-host that is
-              not included in the cookie-domain is a U+002E (".")
-              character.</t>
+              <t>The last character of the host-name that is not included in
+              the cookie-domain is a U+002E (".") character.</t>
 
-              <t>The request-host is a host name (i.e., not an IP address).</t>
+              <t>The host-name is a host name (i.e., not an IP address).</t>
             </list>
             </t>
           </list>
@@ -594,7 +590,7 @@ mystery         = <anything except a delimiter>
           <t>The user agent MUST use the following algorithm to compute the
           *default-path* of a cookie:
           <list style="numbers">
-            <t>Let uri-path be the path portion of the Request-URI.</t>
+            <t>Let uri-path be the path portion of the request-uri.</t>
 
             <t>If the first character of the uri-path is not a U+002F ("/")
             character, output U+002F ("/") and skip the remaining steps.</t>
@@ -715,7 +711,7 @@ mystery         = <anything except a delimiter>
         </t>
 
         <t>When the user agent finishes parsing the set-cookie-string,
-        the user agent *receives a cookie* from the Request-URI with name
+        the user agent *receives a cookie* from the request-uri with name
         cookie-name, value cookie-value, and attributes
         cookie-attribute-list.</t>
 
@@ -843,7 +839,7 @@ mystery         = <anything except a delimiter>
         persistent-flag, host-only-flag, secure-only-flag, and
         http-only-flag.</t>
 
-        <t>When the user agent *receives a cookie* from a Request-URI with
+        <t>When the user agent *receives a cookie* from a request-uri with
         name cookie-name, value cookie-value, and attributes
         cookie-attribute-list, the user agent MUST process the cookie as
         follows:
@@ -901,7 +897,7 @@ mystery         = <anything except a delimiter>
           and the domain-attribute is a public suffix:
           <list style="empty">
             <t>If the domain-attribute is identical to the canonicalized
-            Request-URI's host:
+            request-host:
             <list style="empty">
               <t>Let the domain-attribute be the empty string.</t>
             </list>
@@ -925,7 +921,7 @@ mystery         = <anything except a delimiter>
 
           <t>If the domain-attribute is non-empty:
           <list style="empty">
-            <t>If the Request-URI's host does not domain-match the
+            <t>If the cannonicalized request-host does not domain-match the
             domain-attribute, ignore the cookie entirely and abort these
             steps.</t>
 
@@ -937,8 +933,7 @@ mystery         = <anything except a delimiter>
           <list style="empty">
             <t>Set the cookie's host-only-flag to true.</t>
 
-            <t>Set the cookie's domain to the canonicalized host of the
-            Request-URI.</t>
+            <t>Set the cookie's domain to the canonicalized request-host.</t>
           </list>
           </t>
 
@@ -946,7 +941,7 @@ mystery         = <anything except a delimiter>
           attribute-name of "Path", set the cookie's path to attribute-value
           of the last attribute in the cookie-attribute-list with an
           attribute-name of "Path". Otherwise, set cookie's path to the
-          default-path of the Request-URI.</t>
+          default-path of the request-uri.</t>
 
           <t>If the cookie-attribute-list contains an attribute with an
           attribute-name of "Secure", set the cookie's secure-only-flag to
@@ -1021,34 +1016,34 @@ mystery         = <anything except a delimiter>
       <section anchor="cookie" title="The Cookie Header">
         <t>When the user agent generates an HTTP request, the user agent
         SHOULD attach exactly one HTTP header named Cookie if the
-        cookie-string (defined below) for the Request-URI is non-empty.</t>
+        cookie-string (defined below) for the request-uri is non-empty.</t>
 
         <t>A user agent MAY omit the Cookie header in its entirety. For
         example, the user agent might wish to block sending cookies during
         "third-party" requests.</t>
 
         <t>The user agent MUST use the following algorithm to compute the
-        cookie-string from a cookie store and a Request-URI:
+        cookie-string from a cookie store and a request-uri:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
           that meet all of the following requirements:
           <list style="symbols">
-            <t>Let request-host be the Request-URI's host. Either:
+            <t>Either:
             <list style="empty">
               <t>The cookie's host-only-flag is true and the canonicalized
-               request-host is identical to the cookie's domain.</t>
+              request-host is identical to the cookie's domain.</t>
             </list>
             Or:
             <list style="empty">
-              <t>The cookie's host-only-flag is false and the request-host
-              domain-matches cookie's domain.</t>
+              <t>The cookie's host-only-flag is false and the canonicalized
+              request-host domain-matches cookie's domain.</t>
             </list>
             </t>
 
-            <t>The Request-URI's path patch-matches cookie's path.</t>
+            <t>The request-uri's path patch-matches cookie's path.</t>
 
             <t>If the cookie's secure-only-flag is true, then the
-            Request-URI's scheme must denote a "secure" protocol (as defined
+            request-uri's scheme must denote a "secure" protocol (as defined
             by the user agent).
             <list style="empty">
               <t>NOTE: The notion of a "secure" protocol is not defined by
