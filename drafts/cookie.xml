@@ -59,7 +59,7 @@
       web browsers isolates content retrieved from different ports.</t>
 
       <t>Prior to this document, there were at least three descriptions of
-      cookies: the so-called "Netscape cookie speciciation," RFC 2109 <xref
+      cookies: the so-called "Netscape cookie specification," RFC 2109 <xref
       target="RFC2109"/>, and RFC 2965 <xref target="RFC2965"/>.  However, none
       of these documents describe how the Cookie and Set-Cookie headers are
       actually used on the Internet.  By contrast, this document attempts to
