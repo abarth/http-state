@@ -898,8 +898,8 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
-          <t>If the user agent is configured to use a "public suffix" list
-          and the domain-attribute is a public suffix:
+          <t>If the user agent is configured to reject "public suffixes" and
+          the domain-attribute is a public suffix:
           <list style="empty">
             <t>If the domain-attribute is identical to the canonicalized
             request-host:
