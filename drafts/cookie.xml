@@ -1073,10 +1073,9 @@ mystery         = <anything except a delimiter>
             creation-times.</t>
           </list>
           NOTE: Not all user agents sort the cookie-list in this order, but
-          this order reflects common practice when this document was written.
-          The specific ordering might not be optimal in every metric, but
-          using the consensus ordering is a relatively low cost way to improve
-          interoperability between user agents.</t>
+          this order reflects common practice when this document was written,
+          and, historically, there have been servers that (erroneously)
+          depended on this order.</t>
 
           <t>Update the last-access-time of each cookie in the cookie-list
           to the current date and time.</t>
