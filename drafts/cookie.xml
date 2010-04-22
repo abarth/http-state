@@ -849,7 +849,8 @@ mystery         = <anything except a delimiter>
         <list style="numbers">
           <t>A user agent MAY ignore a received cookie in its entirety. For
           example, the user agent might wish to block receiving cookies from
-          "third-party" responses.</t>
+          "third-party" responses or the user agent might not wish to store
+          cookie that exceed some size.</t>
 
           <t>Create a new cookie with name cookie-name, value cookie-value.
           Set the creation-time and the last-access-time to the current date
