@@ -481,8 +481,8 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
         process the Cookie and Set-Cookie headers.</t>
 
         <section anchor="cookie-date" title="Dates">
-          <t>The user agent MUST use the following algorithm to *parse a
-          cookie-date*:
+          <t>The user agent MUST use the following algorithm to parse a
+          cookie-date:
           <list style="numbers">
             <t>Using the grammar below, divide the cookie-date into
             date-tokens.
@@ -547,7 +547,7 @@ mystery         = <anything except a delimiter>
             <t>If the year-value is greater than or equal to 0 and less than
             69, increment the year-value by 2000.</t>
 
-            <t>Abort these steps and *fail to parse* if
+            <t>Abort these steps and fail to parse if
             <list style="symbols">
               <t>at least one of the found-day-of-month, found-month,
               found-year, or found-time flags is not set,</t>
@@ -576,11 +576,11 @@ mystery         = <anything except a delimiter>
           </t>
         </section>
         <section anchor="cookie-domain" title="Domains">
-          <t>A *canonicalized* host-name is the host-name converted to lower
+          <t>A canonicalized host-name is the host-name converted to lower
           case and converted to ASCII by the punycode algorithm <xref
           target="RFC3492"/>.</t>
 
-          <t>A host-name *domain-matches* a cookie-domain if at least one of the
+          <t>A host-name domain-matches a cookie-domain if at least one of the
           following conditions hold:
           <list style="symbols">
             <t>The cookie-domain and the host-name are identical.</t>
@@ -600,7 +600,7 @@ mystery         = <anything except a delimiter>
         </section>
         <section anchor="cookie-path" title="Paths">
           <t>The user agent MUST use the following algorithm to compute the
-          *default-path* of a cookie:
+          default-path of a cookie:
           <list style="numbers">
             <t>Let uri-path be the path portion of the request-uri.  That is,
             if the request-uri contains just a path (and optional query
@@ -621,7 +621,7 @@ mystery         = <anything except a delimiter>
           </list>
           </t>
 
-          <t>A request-path *path-matches* a cookie-path if at least one of
+          <t>A request-path path-matches a cookie-path if at least one of
           the following conditions hold:
           <list style="symbols">
             <t>The cookie-path and the request-path are identical.</t>
@@ -638,7 +638,7 @@ mystery         = <anything except a delimiter>
       </section>
       <section anchor="set-cookie" title="The Set-Cookie Header">
         <t>When a user agent receives a Set-Cookie header in an HTTP
-        response, the user agent *receives a set-cookie-string*
+        response, the user agent receives a set-cookie-string
         consisting of the value of the header.</t>
 
         <t>A user agent MUST use the following algorithm to parse
@@ -727,7 +727,7 @@ mystery         = <anything except a delimiter>
         </t>
 
         <t>When the user agent finishes parsing the set-cookie-string,
-        the user agent *receives a cookie* from the request-uri with name
+        the user agent receives a cookie from the request-uri with name
         cookie-name, value cookie-value, and attributes
         cookie-attribute-list.</t>
 
@@ -855,7 +855,7 @@ mystery         = <anything except a delimiter>
         persistent-flag, host-only-flag, secure-only-flag, and
         http-only-flag.</t>
 
-        <t>When the user agent *receives a cookie* from a request-uri with
+        <t>When the user agent receives a cookie from a request-uri with
         name cookie-name, value cookie-value, and attributes
         cookie-attribute-list, the user agent MUST process the cookie as
         follows:
@@ -1036,8 +1036,8 @@ mystery         = <anything except a delimiter>
         example, the user agent might wish to block sending cookies during
         "third-party" requests.</t>
 
-        <t>The user agent MUST use the following algorithm to *compute the
-        cookie-string* from a cookie store and a request-uri:
+        <t>The user agent MUST use the following algorithm to compute the
+        cookie-string from a cookie store and a request-uri:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
           that meet all of the following requirements:
