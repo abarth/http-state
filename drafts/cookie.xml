@@ -1115,10 +1115,10 @@ mystery         = <anything except a delimiter>
         </t>
 
         <t>Servers SHOULD use as few and as small cookies as possible to avoid
-        reaching these implementation limits and to avoid network latency due
-        to the Cookie header being included in every request.</t>
+        reaching these implementation limits and to minimize network bandwidth
+        due to the Cookie header being included in every request.</t>
 
-        <t>Servers should gracefully degrade if the user agent fails to return
+        <t>Servers SHOULD gracefully degrade if the user agent fails to return
         one or more cookies in the Cookie header because the user agent might
         evict any cookie at any time on orders from the user.</t>
       </section>
@@ -1128,7 +1128,9 @@ mystery         = <anything except a delimiter>
         syntax is because many platforms (both in servers and user agents)
         provide a string-based application programmer interface (API) to
         cookies, requiring application-layer programmers to generate and parse
-        the syntax used by the Cookie and Set-Cookie headers.</t>
+        the syntax used by the Cookie and Set-Cookie headers, which many
+        programmers have done incorrectly, resulting in interoperability
+        problems.</t>
 
         <t>Instead of providing string-based APIs to cookies, platforms would
         be well-served by providing more semantic APIs. It is beyond the scope
@@ -1197,7 +1199,8 @@ mystery         = <anything except a delimiter>
     <section anchor="security-considerations"
              title="Security Considerations">
       <section anchor="section-overview" title="Overview">
-        <t>Cookies have a number of security and privacy pitfalls.</t>
+        <t>Cookies have a number of security and privacy pitfalls.  This
+        section overviews a few of the more salient issues.</t>
 
         <t>In particular, cookies encourage developers to rely on ambient
         authority for authentication, often becoming vulnerable to attacks
