@@ -672,7 +672,7 @@ mystery         = <anything except a delimiter>
           <t>If the unparsed-attributes string is empty, skip the rest of
           these steps.</t>
 
-          <t>Consume the first character of the unparsed-attributes (which
+          <t>Discard the first character of the unparsed-attributes (which
           will be a U+003B (";") character).</t>
 
           <t>If the remaining unparsed-attributes contains a U+003B (";")
