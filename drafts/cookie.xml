@@ -508,7 +508,9 @@ month           = "jan" [ mystery ] / "feb" [ mystery ] /
 year            = 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
 time            = time-field ":" time-field ":" time-field
 time-field      = 2DIGIT / DIGIT
-mystery         = <anything except a delimiter>
+mystery         = <CTL, except HTAB> / <octets 128-255> /
+                  %x3A / ALPHA / DIGIT
+                  ; anything except a delimiter
                 ]]>
               </artwork>
             </figure>
