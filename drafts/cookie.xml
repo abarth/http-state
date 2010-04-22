@@ -1024,8 +1024,8 @@ mystery         = <anything except a delimiter>
         example, the user agent might wish to block sending cookies during
         "third-party" requests.</t>
 
-        <t>The user agent MUST use the following algorithm to compute the
-        cookie-string from a cookie store and a request-uri:
+        <t>The user agent MUST use the following algorithm to *compute the
+        cookie-string* from a cookie store and a request-uri:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
           that meet all of the following requirements:
