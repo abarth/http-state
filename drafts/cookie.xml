@@ -530,6 +530,12 @@ mystery         = <anything except a delimiter>
             </list>
             </t>
 
+            <t>If the year-value is greater than 68 and less than 100,
+            increment the year-value by 1900.</t>
+
+            <t>If the year-value is greater than or equal to 0 and less than
+            69, increment the year-value by 2000.</t>
+
             <t>Abort these steps and *fail to parse* if
             <list style="symbols">
               <t>at least one of the found-day-of-month, found-month,
@@ -546,12 +552,6 @@ mystery         = <anything except a delimiter>
               <t>the second-value is greater than 59.</t>
             </list>
             </t>
-
-            <t>If the year-value is greater than 68 and less than 100,
-            increment the year-value by 1900.</t>
-
-            <t>If the year-value is greater than or equal to 0 and less than
-            69, increment the year-value by 2000.</t>
 
             <t>Let the parsed-cookie-date be the date whose day-of-month,
             month, year, hour, minute, and second (in GMT) are the
