@@ -76,6 +76,12 @@
         as "strip any leading space characters" or "return false and abort
         these steps") are to be interpreted with the meaning of the key word
         ("MUST", "SHOULD", "MAY", etc) used in introducing the algorithm.</t>
+
+        <t>Conformance requirements phrased as algorithms or specific steps MAY
+        be implemented in any manner, so long as the end result is equivalent.
+        In particular, the algorithms defined in this specification are
+        intended to be easy to understand and are not intended to be
+        performant.</t>
       </section>
       <section anchor="syntax-notation" title="Syntax Notation">
         <t>This specification uses the Augmented Backus-Naur Form (ABNF)
@@ -471,18 +477,13 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
       implementing these requirements precisely to interoperate with existing
       servers.</t>
 
-      <t>Conformance requirements phrased as algorithms or specific steps MAY
-      be implemented in any manner, so long as the end result is equivalent.
-      In particular, the algorithms defined in this specification are intended
-      to be easy to understand and are not intended to be performant.</t>
-
       <section anchor="algorithms" title="Algorithms">
         <t>This section defines a number of algorithms used by user agents to
         process the Cookie and Set-Cookie headers.</t>
 
         <section anchor="cookie-date" title="Dates">
-          <t>The user agent MUST use the following algorithm to parse a
-          cookie-date:
+          <t>The user agent MUST use an algorithm equivalent to the following
+          parse a cookie-date:
           <list style="numbers">
             <t>Using the grammar below, divide the cookie-date into
             date-tokens.
@@ -602,8 +603,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           </t>
         </section>
         <section anchor="cookie-path" title="Paths">
-          <t>The user agent MUST use the following algorithm to compute the
-          default-path of a cookie:
+          <t>The user agent MUST use an algorithm equivalent to the following
+          to compute the default-path of a cookie:
           <list style="numbers">
             <t>Let uri-path be the path portion of the request-uri.  That is,
             if the request-uri contains just a path (and optional query
@@ -644,8 +645,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         response, the user agent receives a set-cookie-string
         consisting of the value of the header.</t>
 
-        <t>A user agent MUST use the following algorithm to parse
-        set-cookie-strings:
+        <t>A user agent MUST use an algorithm equivalent to the following to
+        parse set-cookie-strings:
         <list style="numbers">
           <t>If the set-cookie-string contains a U+003B (";") character:
           <list style="empty">
@@ -681,8 +682,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </list>
         </t>
 
-        <t>The user agent MUST use the following algorithm to parse the
-        unparsed-attributes:
+        <t>The user agent MUST use an algorithm equivalent to the following to
+        parse the unparsed-attributes:
         <list style="numbers">
           <t>If the unparsed-attributes string is empty, skip the rest of
           these steps.</t>
@@ -1039,8 +1040,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         example, the user agent might wish to block sending cookies during
         "third-party" requests.</t>
 
-        <t>The user agent MUST use the following algorithm to compute the
-        cookie-string from a cookie store and a request-uri:
+        <t>The user agent MUST use an algorithm equivalent to the following to
+        compute the cookie-string from a cookie store and a request-uri:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
           that meet all of the following requirements:
