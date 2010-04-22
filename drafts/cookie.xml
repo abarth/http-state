@@ -1092,10 +1092,10 @@ mystery         = <anything except a delimiter>
           </t>
         </list>
         NOTE: Despite its name, the cookie-string is actually a sequence of
-        octets, not a sequence of characters. To convert the cookie-string
-        into a sequence of characters (e.g., for presentation to the user),
-        the user agent SHOULD use the UTF-8 character encoding
-        <xref target="RFC3629" />.</t>
+        octets, not a sequence of characters. To convert the cookie-string (or
+        components thereof) into a sequence of characters (e.g., for
+        presentation to the user), the user agent SHOULD use the UTF-8
+        character encoding <xref target="RFC3629" />.</t>
       </section>
     </section>
     <section anchor="implementation-considerations"
