@@ -508,9 +508,10 @@ month           = "jan" [ mystery ] / "feb" [ mystery ] /
 year            = 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
 time            = time-field ":" time-field ":" time-field
 time-field      = 2DIGIT / DIGIT
-mystery         = <CTL, except HTAB> / <octets 128-255> /
-                  ALPHA / DIGIT / ":"
-                  ; anything except a delimiter
+CTLwoHTAB       = %x00-08 / %x0A-1F / %x7F
+                  ; CTL except HTAB
+mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
+                  ; any OCTET except a delimiter
                 ]]>
               </artwork>
             </figure>
