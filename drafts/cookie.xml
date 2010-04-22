@@ -590,7 +590,12 @@ mystery         = <anything except a delimiter>
           <t>The user agent MUST use the following algorithm to compute the
           *default-path* of a cookie:
           <list style="numbers">
-            <t>Let uri-path be the path portion of the request-uri.</t>
+            <t>Let uri-path be the path portion of the request-uri.  That is,
+            if the request-uri contains just a path (and optional query
+            string), then the uri-path is that path (without the U+003F ("?")
+            character or query string), and if the request-uri contains a full
+            absoluteURI, the uri-path is the abs_path component of that
+            URI.</t>
 
             <t>If the first character of the uri-path is not a U+002F ("/")
             character, output U+002F ("/") and skip the remaining steps.</t>
