@@ -565,8 +565,9 @@ mystery         = <anything except a delimiter>
           </t>
         </section>
         <section anchor="cookie-domain" title="Domains">
-          <t>A *canonicalized* host-name is the host-name converted to
-          lower case and expressed in punycode <xref target="RFC3492"/>.</t>
+          <t>A *canonicalized* host-name is the host-name converted to lower
+          case and converted to ASCII by the punycode algorithm <xref
+          target="RFC3492"/>.</t>
 
           <t>A request-host *domain-matches* a cookie-domain if at least one
           of the following conditions hold:
