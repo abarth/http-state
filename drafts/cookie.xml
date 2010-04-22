@@ -84,9 +84,10 @@
         <t>The following core rules are included by reference, as defined in
         <xref target="RFC5234"/>, Appendix B.1: ALPHA (letters), CR (carriage
         return), CRLF (CR LF), CTL (controls), DIGIT (decimal 0-9), DQUOTE
-        (double quote), HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed),
-        OCTET (any 8-bit sequence of data), SP (space), HTAB (horizontal tab),
-        VCHAR (any visible [USASCII] character), and WSP (whitespace).</t>
+        (double quote), HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed), OCTET
+        (any 8-bit sequence of data), SP (space), HTAB (horizontal tab), CHAR
+        (any US-ASCII character), VCHAR (any visible US-ASCII character), and
+        WSP (whitespace).</t>
 
         <t>The OWS (optional whitespace) rule is used where zero or more
         linear whitespace characters MAY appear:
@@ -260,16 +261,18 @@ cookie-value      = token
 token             = <token, as defined in RFC 2616>
 
 cookie-av         = expires-av / max-age-av / domain-av /
-                    path-av / secure-av / httponly-av
+                    path-av / secure-av / httponly-av /
+                    extension-av
 expires-av        = "Expires=" sane-cookie-date
 sane-cookie-date  = <rfc1123-date, as defined in RFC 2616>
 max-age-av        = "Max-Age=" 1*DIGIT
 domain-av         = "Domain=" domain-value
 domain-value      = <subdomain, as defined in RFC 1034>
 path-av           = "Path=" path-value
-path-value        = <abs_path, as defined in RFC 2616, excluding ";">
+path-value        = <abs_path, except those containing ";">
 secure-av         = "Secure"
 httponly-av       = "HttpOnly"
+extension-av      = <any CHAR except CTLs or ";">
               ]]>
             </artwork>
           </figure>
