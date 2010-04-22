@@ -707,7 +707,8 @@ mystery         = <anything except a delimiter>
           attribute-name string and the attribute-value string.</t>
 
           <t>Process the attribute-name and attribute-value according to the
-          requirements in the following subsections.</t>
+          requirements in the following subsections.  (Notice that attributes
+          with unrecognizeed attribute-names are ignored.)</t>
 
           <t>Return to Step 1.</t>
         </list>
