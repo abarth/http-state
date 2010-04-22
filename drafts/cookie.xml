@@ -494,7 +494,7 @@ month           = "jan" [ mystery ] / "feb" [ mystery ] /
                   "jul" [ mystery ] / "aug" [ mystery ] /
                   "sep" [ mystery ] / "oct" [ mystery ] /
                   "nov" [ mystery ] / "dec" [ mystery ]
-year            = 5DIGIT / 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
+year            = 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
 time            = time-field ":" time-field ":" time-field
 time-field      = 2DIGIT / DIGIT
 mystery         = <anything except a delimiter>
@@ -537,7 +537,7 @@ mystery         = <anything except a delimiter>
 
               <t>the day-of-month-value is less than 1 or greater than 31,</t>
 
-              <t>the year-value is less than 1601 or greater than 30827,</t>
+              <t>the year-value is less than 1601,</t>
 
               <t>the hour-value is greater than 23,</t>
 
