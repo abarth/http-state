@@ -632,9 +632,6 @@ mystery         = <anything except a delimiter>
         <t>A user agent MUST use the following algorithm to parse
         set-cookie-strings:
         <list style="numbers">
-          <t>If the set-cookie-string is empty or consists entirely of WSP
-          characters, ignore the set-cookie-string entirely.</t>
-
           <t>If the set-cookie-string contains a U+003B (";") character:
           <list style="empty">
             <t>The name-value-pair string consists of the characters up to,
@@ -653,16 +650,16 @@ mystery         = <anything except a delimiter>
           <t>If the name-value-pair string lacks a U+003D ("=") character,
           ignore the set-cookie-string entirely.</t>
 
-          <t>If the first character of the name-value-pair string is U+003D
-          ("="), ignore the set-cookie-string entirely.</t>
-
-          <t>The (necessarily non-empty) name string consists of the
-          characters up to, but not including, the first U+003D ("=")
-          character, and the (possibly empty) value string consists of the
-          characters after the first U+003D ("=") character.</t>
+          <t>The (possibly empty) name string consists of the characters up to,
+          but not including, the first U+003D ("=") character, and the
+          (possibly empty) value string consists of the characters after the
+          first U+003D ("=") character.</t>
 
           <t>Remove any leading or trailing WSP characters from the name
           string and the value string.</t>
+
+          <t>If the name string is empty, ignore the set-cookie-string
+          entirely.</t>
 
           <t>The cookie-name is the name string, and the cookie-value is the
           value string.</t>
