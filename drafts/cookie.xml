@@ -89,11 +89,20 @@
         VCHAR (any visible [USASCII] character), and WSP (whitespace).</t>
 
         <t>The OWS (optional whitespace) rule is used where zero or more
-        linear whitespace characters MAY appear. OWS SHOULD either not be
-        produced or be produced as a single SP character. Multiple OWS
-        characters that occur within field-content SHOULD be replaced with a
-        single SP before interpreting the field value or forwarding the
-        message downstream.</t>
+        linear whitespace characters MAY appear:
+        <figure>
+          <artwork type="abnf">
+            <![CDATA[
+OWS            = *( [ obs-fold ] WSP )
+                 ; "optional" whitespace
+obs-fold       = CRLF
+            ]]>
+          </artwork>
+        </figure>
+        OWS SHOULD either not be produced or be produced as a single SP
+        character. Multiple OWS characters that occur within field-content
+        SHOULD be replaced with a single SP before interpreting the field value
+        or forwarding the message downstream.</t>
       </section>
       <section anchor="terminology" title="Terminology">
         <t>The terms user agent, client, server, proxy, and origin server have
