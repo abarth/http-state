@@ -999,20 +999,20 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </list>
         </t>
 
-        <t>The user agent MUST evict a cookie from the cookie store if, at any
+        <t>The user agent MUST evict cookies from the cookie store if, at any
         time, a cookie exists in the cookie store with an expiry date in the
         past.</t>
 
-        <t>The user agent MAY evict a cookie from the cookie store if the
-        number of cookies sharing a domain field exceeds some predetermined
-        upper bound (such as 50 cookies).</t>
+        <t>The user agent MAY evict cookies from the cookie store if, at any
+        time, the number of cookies sharing a domain field exceeds some
+        predetermined upper bound (such as 50 cookies).</t>
 
-        <t>The user agent MAY evict a cookie from the cookie store if the
-        cookie store exceeds some predetermined upper bound (such as 3000
-        cookies).</t>
+        <t>The user agent MAY evict cookies from the cookie store if, at any
+        time, the cookie store exceeds some predetermined upper bound (such as
+        3000 cookies).</t>
 
-        <t>When the user agent evicts a cookie from the cookie store, the
-        user agent MUST evict cookies in the following priority order:
+        <t>When the user agent evicts cookies from the cookie store, the user
+        agent MUST evict cookies in the following priority order:
         <list style="numbers">
           <t>Cookies with an expiry date in the past.</t>
 
