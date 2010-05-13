@@ -414,8 +414,8 @@ extension-av      = <any CHAR except CTLs or ";">
             <t>The Secure attribute limits the scope of the cookie to "secure"
             channels (where "secure" is defined by the user agent). When a
             cookie has the Secure attribute, the user agent will include the
-            cookie in an HTTP request only if the request is transmitted over a
-            secure channel (typically HTTP over SSL, HTTP over TLS <xref
+            cookie in an HTTP request only if the request is transmitted over
+            a secure channel (typically HTTP over SSL, HTTP over TLS <xref
             target="RFC2818" />, and TLS <xref target="RFC5246" /> itself).</t>
 
             <t>Although seemingly useful for protecting cookies from active
@@ -1674,9 +1674,9 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
       like to thank Thomas Broyer, Tyler Close, Bil Corry, corvid, Lisa
       Dusseault, Roy T. Fielding, Blake Frantz, Eran Hammer-Lahav, Jeff
       Hodges, Achim Hoffmann, Georg Koppen, Dean McNamee, Mark Miller, Mark
-      Pauley, Yngve N. Pettersen, Julian Reschke, Mark Seaborn, Maciej
-      Stachowiak, Daniel Stenberg, David Wagner, Dan Winship, and Dan Witte
-      for their valuable feedback on this document.</t>
+      Pauley, Yngve N. Pettersen, Julian Reschke, Peter Saint-Andre, Mark
+      Seaborn, Maciej Stachowiak, Daniel Stenberg, David Wagner, Dan Winship,
+      and Dan Witte for their valuable feedback on this document.</t>
     </section>
   </back>
 </rfc>
