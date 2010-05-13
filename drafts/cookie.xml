@@ -66,10 +66,10 @@
       specify the syntax and semantics of these headers as they are actually
       used on the Internet.</t>
     </section>
-    <section anchor="general-nonsense" title="General Nonsense">
+    <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
-        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD
-        NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in document are to be
+        <t>The key wocds "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD
+        NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
         interpreted as described in <xref target="RFC2119"/>.</t>
 
         <t>Requirements phrased in the imperative as part of algorithms (such
@@ -198,7 +198,7 @@ Cookie: SID=31d4d96e407aad42; lang=en-US
         </figure>
 
         <t>If the server wishes the user agent to persist the cookie over
-        multiple sessions, the server can specify a expiration date in the
+        multiple sessions, the server can specify an expiration date in the
         Expires attribute. Note that the user agent might delete the
         cookie before the expiration date if the user agent's cookie store
         exceeds its quota or if the user manually deletes the server's
@@ -414,8 +414,9 @@ extension-av      = <any CHAR except CTLs or ";">
             <t>The Secure attribute limits the scope of the cookie to "secure"
             channels (where "secure" is defined by the user agent). When a
             cookie has the Secure attribute, the user agent will include the
-            cookie in an HTTP request only if the request is transmitted over
-            a secure channel (typically TLS <xref target="RFC5246" />).</t>
+            cookie in an HTTP request only if the request is transmitted over a
+            secure channel (typically HTTP over SSL, HTTP over TLS <xref
+            target="RFC2818" />, and TLS <xref target="RFC5246" /> itself).</t>
 
             <t>Although seemingly useful for protecting cookies from active
             network attackers, the Secure attribute protects only the cookie's
@@ -1646,6 +1647,24 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
          </front>
           <seriesInfo name="RFC" value="2965" />
       </reference>
+      <reference anchor="RFC2818"> 
+        <front> 
+          <title>HTTP Over TLS</title> 
+          <author initials="E." surname="Rescorla" fullname="E. Rescorla"> 
+            <organization />
+          </author> 
+          <date year="2000" month="May" /> 
+          <abstract> 
+            <t>This memo describes how to use Transport Layer Security (TLS) to
+            secure Hypertext Transfer Protocol (HTTP) connections over the
+            Internet.  This memo provides information for the Internet
+            community.</t>
+          </abstract>
+        </front> 
+        <seriesInfo name="RFC" value="2818" /> 
+        <format type="TXT" octets="15170"
+                target="http://www.rfc-editor.org/rfc/rfc2818.txt" /> 
+      </reference> 
     </references>
     <section title="Acknowledgements">
       <t>This document borrows heavily from RFC 2109 <xref target="RFC2109"/>.
