@@ -868,7 +868,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           <t>A user agent MAY ignore a received cookie in its entirety. For
           example, the user agent might wish to block receiving cookies from
           "third-party" responses or the user agent might not wish to store
-          cookie that exceed some size.</t>
+          cookies that exceed some size.</t>
 
           <t>Create a new cookie with name cookie-name, value cookie-value.
           Set the creation-time and the last-access-time to the current date
@@ -1010,7 +1010,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         cookie store if the number of cookies sharing a domain field exceeds
         some predetermined upper bound (such as 50 cookies).</t>
 
-        <t>At any time, the user agent MAY "remove excess cookies" form the
+        <t>At any time, the user agent MAY "remove excess cookies" from the
         cookie store if the cookie store exceeds some predetermined upper bound
         (such as 3000 cookies).</t>
 
@@ -1027,7 +1027,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </t>
 
         <t>If two cookies have the same removal priority, the user agent
-        MUST evict the cookie with the least recent last-access date
+        MUST evict the cookie with the oldest last-access date
         first.</t>
 
         <t>When "the current session is over" (as defined by the user agent),
@@ -1071,8 +1071,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
               <t>NOTE: The notion of a "secure" protocol is not defined by
               this document.  Typically, user agents consider a protocol
               secure if the protocol makes use of transport-layer security,
-              such as TLS.  For example, most user agents consider "https"
-              to be a scheme that denotes a secure protocol.</t>
+              such as SSL or TLS.  For example, most user agents consider
+              "https" to be a scheme that denotes a secure protocol.</t>
             </list>
             </t>
 
@@ -1143,7 +1143,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         evict any cookie at any time on orders from the user.</t>
       </section>
       <section anchor="implementation-apis"
-               title="Application Programmer Interfaces">
+               title="Application Programming Interfaces">
         <t>One reason the Cookie and Set-Cookie headers uses such esoteric
         syntax is because many platforms (both in servers and user agents)
         provide a string-based application programmer interface (API) to
@@ -1155,7 +1155,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <t>Instead of providing string-based APIs to cookies, platforms would
         be well-served by providing more semantic APIs. It is beyond the scope
         of this document to recommend specific API designs, but there are
-        clear benefits to accepting a abstract "Date" object instead of a
+        clear benefits to accepting an abstract "Date" object instead of a
         serialized date string.</t>
       </section>
     </section>
@@ -1260,7 +1260,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         URLs as capabilities. Instead of storing secrets in cookies, this
         approach stores secrets in URLs, requiring the remote entity to supply
         the secret itself. Although this approach is not a panacea, judicious
-        use of these principles can lead to more robust security.</t>
+        application of these principles can lead to more robust security.</t>
       </section>
       <section anchor="clear-text" title="Clear Text">
         <t>Unless sent over a secure channel (such as TLS), the information in
@@ -1330,7 +1330,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <t>Cookies do not provide isolation by scheme. Although most commonly
         used with the http and https schemes, the cookies for a given host
         might also be available to other schemes, such as ftp and gopher.
-        Although this lack of isolation by scheme is most apparent in via
+        Although this lack of isolation by scheme is most apparent in
         non-HTTP APIs that permit access to cookies (e.g., HTML's
         document.cookie API), the lack of isolation by scheme is actually
         present in requirements for processing cookies themselves (e.g.,
