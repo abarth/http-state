@@ -283,11 +283,6 @@ extension-av      = <any CHAR except CTLs or ";">
             </artwork>
           </figure>
 
-          <t>Servers SHOULD NOT include two attributes with the same name.</t>
-
-          <t>Servers SHOULD NOT include two Set-Cookie header fields in the
-          same response with the same cookie-name.</t>
-
           <t>The cookie-value is opaque to the user agent and MAY be
           anything the origin server chooses to send. "Opaque" implies that
           the content is of interest and relevance only to the origin server.
@@ -297,6 +292,11 @@ extension-av      = <any CHAR except CTLs or ";">
           <t>To maximize compatibility with user agents, servers that wish to
           store non-ASCII data in a cookie-value SHOULD encode that data using
           a printable ASCII encoding.</t>
+
+          <t>Servers SHOULD NOT include two attributes with the same name.</t>
+
+          <t>Servers SHOULD NOT include two Set-Cookie header fields in the
+          same response with the same cookie-name.</t>
 
           <t>If a server sends multiple responses containing Set-Cookie headers
           concurrently to the user agent (e.g., when communicating with the
