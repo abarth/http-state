@@ -36,12 +36,12 @@
   </front>
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>This document defines the HTTP Cookie and Set-Cookie headers. Using
-      the Set-Cookie header, an HTTP server can store name/value pairs and
-      associated metadata (called cookies) at the user agent. When the user
+      <t>This document defines the HTTP Cookie and Set-Cookie headers.  Using
+      the Set-Cookie header, an HTTP server can pass name/value pairs and
+      associated metadata (called cookies) to a user agent.  When the user
       agent makes subsequent requests to the server, the user agent uses the
-      metadata to determine whether to return the name/value pairs in the
-      Cookie header.</t>
+      metadata and other information to determine whether to return the
+      name/value pairs in the Cookie header.</t>
 
       <t>Although simple on its surface, cookies have a number of
       complexities. For example, the server indicates a scope for each cookie
@@ -107,9 +107,7 @@ obs-fold       = CRLF
           </artwork>
         </figure>
         OWS SHOULD either not be produced or be produced as a single SP
-        character. Multiple OWS characters that occur within field-content
-        SHOULD be replaced with a single SP before interpreting the field value
-        or forwarding the message downstream.</t>
+        character.</t>
       </section>
       <section anchor="terminology" title="Terminology">
         <t>The terms user agent, client, server, proxy, and origin server have
