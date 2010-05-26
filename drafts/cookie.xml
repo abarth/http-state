@@ -62,9 +62,9 @@
       cookies: the so-called "Netscape cookie specification," RFC 2109 <xref
       target="RFC2109"/>, and RFC 2965 <xref target="RFC2965"/>.  However, none
       of these documents describe how the Cookie and Set-Cookie headers are
-      actually used on the Internet.  By contrast, this document attempts to
-      specify the syntax and semantics of these headers as they are actually
-      used on the Internet.</t>
+      actually used on the Internet.  This document attempts to specify the
+      syntax and semantics of these headers as they are actually used on the
+      Internet.</t>
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
@@ -136,7 +136,8 @@ obs-fold       = CRLF
       <t>Servers MAY return a Set-Cookie response header with any response.  An
       origin server MAY include multiple Set-Cookie header fields in a single
       response.  Gateways that wish to be transparent to cookies MUST NOT fold
-      multiple Set-Cookie header fields into a single header field.</t>
+      multiple Set-Cookie header fields into a single header field.  (Note that
+      <xref target="RFC2616"/> erroneously permits such folding.)</t>
 
       <section title="Examples">
         <t>Using the Set-Cookie header, a server can send the user agent a
