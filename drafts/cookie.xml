@@ -120,9 +120,9 @@ obs-fold       = CRLF
       </section>
     </section>
     <section anchor="overview" title="Overview">
-      <t>We outline here a way for an origin server to send state
-      information to a user agent and for the user agent to return the
-      state information to the origin server.</t>
+      <t>This section outlines a way for an origin server to send state
+      information to a user agent and for the user agent to return the state
+      information to the origin server.</t>
 
       <t>To store state, the origin server includes a Set-Cookie header in an
       HTTP response. In subsequent requests, the user agent returns a Cookie
@@ -158,10 +158,10 @@ Cookie: SID=31d4d96e407aad42
           </artwork>
         </figure>
 
-        <t>The server can alter the default scope of the cookie using the Path
-        and Domain attributes. For example, the server can instruct the user
-        agent to return the cookie to every path and every subdomain of
-        example.com.</t>
+        <t>The server can alter the default scope
+        of the cookie using the Path and Domain attributes. For example, the
+        server can instruct the user agent to return the cookie to every path
+        and every subdomain of example.com.</t>
 
         <figure>
           <artwork>
@@ -175,12 +175,12 @@ Cookie: SID=31d4d96e407aad42
           </artwork>
         </figure>
 
-        <t>The server can store multiple cookies at the user agent. For
-        example, the server can store a session identifier as well as the
-        user's preferred language by returning two Set-Cookie header fields.
-        Notice that the server uses the Secure and HttpOnly attributes to
-        provide additional security protections for the more-sensitive session
-        identifier.</t>
+        <t>As shown the next example, the server can store multiple cookies at
+        the user agent. For example, the server can store a session identifier
+        as well as the user's preferred language by returning two Set-Cookie
+        header fields.  Notice that the server uses the Secure and HttpOnly
+        attributes to provide additional security protections for the
+        more-sensitive session identifier.</t>
 
         <figure>
           <artwork>
@@ -196,11 +196,10 @@ Cookie: SID=31d4d96e407aad42; lang=en-US
         </figure>
 
         <t>If the server wishes the user agent to persist the cookie over
-        multiple sessions, the server can specify an expiration date in the
-        Expires attribute. Note that the user agent might delete the
-        cookie before the expiration date if the user agent's cookie store
-        exceeds its quota or if the user manually deletes the server's
-        cookie.</t>
+        multiple "sessions," the server can specify an expiration date in the
+        Expires attribute. Note that the user agent might delete the cookie
+        before the expiration date if the user agent's cookie store exceeds its
+        quota or if the user manually deletes the server's cookie.</t>
 
         <figure>
           <artwork>
@@ -238,10 +237,10 @@ Cookie: SID=31d4d96e407aad42
       profile of the Cookie and Set-Cookie headers. Servers SHOULD use the
       profile described in this section, both to maximize interoperability
       with existing user agents and because a future version of the Cookie or
-      Set-Cookie headers could remove support for some of the most esoteric
-      semantics. User agents, however, MUST implement the full semantics to
-      ensure interoperability with servers making use of the full
-      semantics.</t>
+      Set-Cookie headers could remove support for some of the esoteric
+      semantics described in the next section. User agents, however, MUST
+      implement the full semantics to ensure interoperability with servers
+      making use of the full semantics.</t>
  
       <section anchor="sane-set-cookie" title="Set-Cookie">
         <t>The Set-Cookie header is used to send cookies from the server to
@@ -273,7 +272,7 @@ max-age-av        = "Max-Age=" 1*DIGIT
 domain-av         = "Domain=" domain-value
 domain-value      = <subdomain, as defined in RFC 1034>
 path-av           = "Path=" path-value
-path-value        = <abs_path, except those containing ";">
+path-value        = <any CHAR except CTLs or ";">
 secure-av         = "Secure"
 httponly-av       = "HttpOnly"
 extension-av      = <any CHAR except CTLs or ";">
@@ -281,20 +280,20 @@ extension-av      = <any CHAR except CTLs or ";">
             </artwork>
           </figure>
 
-          <t>The cookie-value is opaque to the user agent and MAY be
-          anything the origin server chooses to send. "Opaque" implies that
-          the content is of interest and relevance only to the origin server.
-          The content is, in fact, readable by anyone who examines the
-          Set-Cookie header.</t>
+          <t>The semantics of the cookie-value are not defined by this
+          document.</t>
 
           <t>To maximize compatibility with user agents, servers that wish to
           store non-ASCII data in a cookie-value SHOULD encode that data using
           a printable ASCII encoding.</t>
 
-          <t>Servers SHOULD NOT include two attributes with the same name.</t>
+          <t>The portions of the set-cookie-string produced by the cookie-av
+          term are known as attributes.  To maximize compatibility with user
+          agents, servers SHOULD NOT produce two attributes with the same name
+          in the same set-cookie-string.</t>
 
-          <t>Servers SHOULD NOT include two Set-Cookie header fields in the
-          same response with the same cookie-name.</t>
+          <t>Servers SHOULD NOT include more than one Set-Cookie header fields
+          in the same response with the same cookie-name.</t>
 
           <t>If a server sends multiple responses containing Set-Cookie headers
           concurrently to the user agent (e.g., when communicating with the
@@ -315,17 +314,15 @@ extension-av      = <any CHAR except CTLs or ";">
           are described in <xref target="ua-requirements" />.</t>
 
           <t>When the user agent receives a Set-Cookie header, the user agent
-          stores the cookie in its cookie store. Subsequently, when the user
-          agent makes an HTTP request, the user agent consults its cookie
-          store and includes the applicable, non-expired cookies in the Cookie
-          header.</t>
+          stores the cookie. Subsequently, when the user agent makes an HTTP
+          request, the user agent includes the applicable, non-expired cookies
+          in the Cookie header.</t>
 
-          <t>If the user agent receives a new cookie with the same
-          cookie-name, domain-value, and path-value as a cookie that already
-          exists in its cookie store, the existing cookie is evicted from the
-          cookie store and replaced with the new cookie. Notice that servers
-          can delete cookies by sending the user agent a new cookie with an
-          Expires attribute with a value in the past.</t>
+          <t>If the user agent receives a new cookie with the same cookie-name,
+          domain-value, and path-value as a cookie that it has already stored,
+          the existing cookie is evicted and replaced with the new cookie.
+          Notice that servers can delete cookies by sending the user agent a
+          new cookie with an Expires attribute with a value in the past.</t>
 
           <t>Unless the cookie's attributes indicate otherwise, the cookie is
           returned only to the origin server, and it expires at the end of the
@@ -337,16 +334,14 @@ extension-av      = <any CHAR except CTLs or ";">
             cookie, represented as the date and time at which the cookie
             expires. The user agent is not required to retain the cookie
             until the specified date has passed. In fact, user agents often
-            evict cookies from the cookie store due to memory pressure or
-            privacy concerns.</t>
+            evict cookies due to memory pressure or privacy concerns.</t>
           </section>
           <section anchor="sane-max-age" title="The Max-Age Attribute">
             <t>The Max-Age attribute indicates the maximum lifetime of the
             cookie, represented as the number of seconds until the cookie
             expires. The user agent is not required to retain the cookie until
             the specified date has passed. In fact, user agents often evict
-            cookies from the cookie store due to memory pressure or privacy
-            concerns.
+            cookies from due to memory pressure or privacy concerns.
             <list>
               <t>WARNING: Not all user agents support the Max-Age attribute.
               User agents that do not support the Max-Age attribute will ignore
@@ -379,13 +374,12 @@ extension-av      = <any CHAR except CTLs or ";">
             </list>
             </t>
 
-            <t>The user agent will reject cookies (refuse to store them in the
-            cookie store) unless the Domain attribute specifies a scope for
-            the cookie that would include the origin server. For example, the
-            user agent will accept a Domain attribute of "example.com" or of
-            "foo.example.com" from foo.example.com, but the user agent will
-            not accept a Domain attribute of "bar.example.com" or of
-            "baz.foo.example.com".</t>
+            <t>The user agent will reject cookies unless the Domain attribute
+            specifies a scope for the cookie that would include the origin
+            server. For example, the user agent will accept a Domain attribute
+            of "example.com" or of "foo.example.com" from foo.example.com, but
+            the user agent will not accept a Domain attribute of
+            "bar.example.com" or of "baz.foo.example.com".</t>
 
             <t>NOTE: For security reasons, some user agents are configured to
             reject Domain attributes that correspond to "public suffixes." For
@@ -424,8 +418,8 @@ extension-av      = <any CHAR except CTLs or ";">
           <section anchor="sane-httponly" title="The HttpOnly Attribute">
             <t>The HttpOnly attribute limits the scope of the cookie to HTTP
             requests. In particular, the attribute instructs the user agent to
-            omit the cookie when providing access to its cookie store via
-            "non-HTTP" APIs (such as HTML's document.cookie API).</t>
+            omit the cookie when providing access to cookies via "non-HTTP"
+            APIs (such as HTML's document.cookie API).</t>
           </section>
         </section>
       </section>
@@ -1671,10 +1665,11 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
       provided invaluable advice on navigating the IETF process. We would also
       like to thank Thomas Broyer, Tyler Close, Bil Corry, corvid, Lisa
       Dusseault, Roy T. Fielding, Blake Frantz, Eran Hammer-Lahav, Jeff
-      Hodges, Achim Hoffmann, Georg Koppen, Dean McNamee, Mark Miller, Mark
-      Pauley, Yngve N. Pettersen, Julian Reschke, Peter Saint-Andre, Mark
-      Seaborn, Maciej Stachowiak, Daniel Stenberg, David Wagner, Dan Winship,
-      and Dan Witte for their valuable feedback on this document.</t>
+      Hodges, Bjoern Hoehrmann, Achim Hoffmann, Georg Koppen, Dean McNamee,
+      Mark Miller, Mark Pauley, Yngve N. Pettersen, Julian Reschke, Peter
+      Saint-Andre, Mark Seaborn, Maciej Stachowiak, Daniel Stenberg, David
+      Wagner, Dan Winship, and Dan Witte for their valuable feedback on this
+      document.</t>
     </section>
   </back>
 </rfc>
