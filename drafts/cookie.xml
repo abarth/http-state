@@ -340,11 +340,11 @@ extension-av      = <any CHAR except CTLs or ";">
           <section anchor="sane-max-age" title="The Max-Age Attribute">
             <t>The Max-Age attribute indicates the maximum lifetime of the
             cookie, represented as the number of seconds until the cookie
-            expires. The user agent is not required to retain the cookie until
-            the specified date has passed. In fact, user agents often evict
+            expires. The user agent is not required to retain the cookie for
+            the specified duration. In fact, user agents often evict
             cookies from due to memory pressure or privacy concerns.
             <list>
-              <t>WARNING: Not all user agents support the Max-Age attribute.
+              <t>NOTE: Not all user agents support the Max-Age attribute.
               User agents that do not support the Max-Age attribute will ignore
               the attribute.</t>
             </list>
@@ -358,14 +358,13 @@ extension-av      = <any CHAR except CTLs or ";">
           </section>
           <section anchor="sane-domain" title="The Domain Attribute">
             <t>The Domain attribute specifies those hosts to which the cookie
-            will be sent. For example, if the Domain attribute contains the
-            value "example.com", the user agent will include the cookie in
+            will be sent. For example, if the value of the Domain attribute
+            is "example.com", the user agent will include the cookie in
             the Cookie header when making HTTP requests to example.com,
             www.example.com, and www.corp.example.com. (Note that a leading
             U+002E ("."), if present, is ignored even though that character is
-            not permitted by the subdomain production in <xref target="RFC1034"
-            />.) If the server omits the Domain attribute, the user agent will
-            return the cookie only to the origin server.
+            not permitted.) If the server omits the Domain attribute, the user
+            agent will return the cookie only to the origin server.
             <list>
               <t>WARNING: Some legacy user agents treat an absent Domain
               attribute as if the Domain attribute were present and contained
@@ -377,10 +376,11 @@ extension-av      = <any CHAR except CTLs or ";">
 
             <t>The user agent will reject cookies unless the Domain attribute
             specifies a scope for the cookie that would include the origin
-            server. For example, the user agent will accept a Domain attribute
-            of "example.com" or of "foo.example.com" from foo.example.com, but
-            the user agent will not accept a Domain attribute of
-            "bar.example.com" or of "baz.foo.example.com".</t>
+            server. For example, the user agent will accept a cookie with a
+            Domain attribute of "example.com" or of "foo.example.com" from
+            foo.example.com, but the user agent will not accept a cookie with
+            a Domain attribute of "bar.example.com" or of
+            "baz.foo.example.com".</t>
 
             <t>NOTE: For security reasons, some user agents are configured to
             reject Domain attributes that correspond to "public suffixes." For
@@ -390,9 +390,9 @@ extension-av      = <any CHAR except CTLs or ";">
           <section anchor="sane-path" title="The Path Attribute">
             <t>The scope of each cookie is limited to a set of paths,
             controlled by the Path attribute.  If the server omits the Path
-            attribute, the user agent will use the directory of the
+            attribute, the user agent will use the "directory" of the
             request-uri's path component as the default value.</t>
-            
+
             <t>The user agent will include the cookie in an HTTP request only
             if the path portion of the request-uri matches (or is a
             subdirectory of) the cookie's Path attribute, where the U+002F
@@ -426,7 +426,7 @@ extension-av      = <any CHAR except CTLs or ";">
       </section>
       <section anchor="sane-cookie" title="Cookie">
         <section anchor="sane-cookie-syntax" title="Syntax">
-          <t>The user agent returns stored cookies to the origin server in
+          <t>The user agent sends stored cookies to the origin server in
           the Cookie header.  If the server conforms to the requirements in
           <xref target="sane-set-cookie" />, the requirements in the
           <xref target="ua-requirements" /> will cause the user agent to return
@@ -604,7 +604,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             if the request-uri contains just a path (and optional query
             string), then the uri-path is that path (without the U+003F ("?")
             character or query string), and if the request-uri contains a full
-            absoluteURI, the uri-path is the abs_path component of that
+            absoluteURI, the uri-path is the absolute path component of that
             URI.</t>
 
             <t>If the uri-path is empty or if first character of the uri-path
@@ -741,7 +741,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
 
           <t>If the user agent received the set-cookie-string from an HTTP
           response that contains a Date header field and the contents of the
-          last Date header field successfully parse as a cookie-date:
+          final Date header field successfully parse as a cookie-date:
           <list style="empty">
             <t>Let server-date be the date obtained by parsing the contents of
             the last Date header field as a cookie-date.</t>
@@ -763,9 +763,9 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           can represent, the user agent MAY replace the expiry-time with the
           last representable date.</t>
 
-          <t>If the expiry-time is earlier than the first date the user agent
-          can represent, the user agent MAY replace the expiry-time with the
-          first representable date.</t>
+          <t>If the expiry-time is earlier than the earliest date the user
+          agent can represent, the user agent MAY replace the expiry-time with
+          the earliest representable date.</t>
   
           <t>Append an attribute to the cookie-attribute-list with an
           attribute-name of Expires and an attribute-value of expiry-time.</t>
@@ -1019,9 +1019,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </list>
         </t>
 
-        <t>If two cookies have the same removal priority, the user agent
-        MUST evict the cookie with the oldest last-access date
-        first.</t>
+        <t>If two cookies have the same removal priority, the user agent MUST
+        evict the cookie with the earliest last-access date first.</t>
 
         <t>When "the current session is over" (as defined by the user agent),
         the user agent MUST remove from the cookie store all cookies with the
