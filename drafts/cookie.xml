@@ -117,6 +117,10 @@ obs-fold       = CRLF
         <t>The terms request-host and request-uri refer to the values the user
         agent would send to the server as, respectively, the host (but not
         port) and the absoluteURI (http_URL) of the HTTP Request-Line.</t>
+
+        <t>Two sequence of octets are said to case-insensitively match each
+        other if and only if they are equivalent under the i;ascii-casemap
+        collation defined in <xref target="RFC4790"/>.</t>
       </section>
     </section>
     <section anchor="overview" title="Overview">
@@ -344,9 +348,9 @@ extension-av      = <any CHAR except CTLs or ";">
             the specified duration. In fact, user agents often evict
             cookies from due to memory pressure or privacy concerns.
             <list>
-              <t>NOTE: Not all user agents support the Max-Age attribute.
-              User agents that do not support the Max-Age attribute will ignore
-              the attribute.</t>
+              <t>NOTE: Some legacy user agents do not support the Max-Age
+              attribute. User agents that do not support the Max-Age attribute
+              ignore the attribute.</t>
             </list>
             </t>
 
@@ -391,7 +395,8 @@ extension-av      = <any CHAR except CTLs or ";">
             <t>The scope of each cookie is limited to a set of paths,
             controlled by the Path attribute.  If the server omits the Path
             attribute, the user agent will use the "directory" of the
-            request-uri's path component as the default value.</t>
+            request-uri's path component as the default value. (See <xref
+            target="cookie-path" /> for more details.)</t>
 
             <t>The user agent will include the cookie in an HTTP request only
             if the path portion of the request-uri matches (or is a
@@ -426,11 +431,12 @@ extension-av      = <any CHAR except CTLs or ";">
       </section>
       <section anchor="sane-cookie" title="Cookie">
         <section anchor="sane-cookie-syntax" title="Syntax">
-          <t>The user agent sends stored cookies to the origin server in
-          the Cookie header.  If the server conforms to the requirements in
-          <xref target="sane-set-cookie" />, the requirements in the
-          <xref target="ua-requirements" /> will cause the user agent to return
-          a Cookie header that conforms to the following grammar:</t>
+          <t>The user agent sends stored cookies to the origin server in the
+          Cookie header. If the server conforms to the requirements in <xref
+          target="sane-set-cookie" /> (and the user agent conforms to the
+          requirements in the <xref target="ua-requirements" />), the user
+          agent will send a Cookie header that conforms to the following
+          grammar:</t>
 
           <figure>
             <artwork type="abnf">
@@ -545,7 +551,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             <t>If the year-value is greater than or equal to 0 and less than
             69, increment the year-value by 2000.</t>
 
-            <t>Abort these steps and fail to parse if
+            <t>Abort these steps and fail to parse the cookie-date if
             <list style="symbols">
               <t>at least one of the found-day-of-month, found-month,
               found-year, or found-time flags is not set,</t>
@@ -566,7 +572,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             month, year, hour, minute, and second (in GMT) are the
             day-of-month-value, the month-value, the year-value, the
             hour-value, the minute-value, and the second-value,
-            respectively.</t>
+            respectively. If no such date exists, abort these steps and fail
+            to parse the cookie-date.</t>
 
             <t>Return the parsed-cookie-date as the result of this
             algorithm.</t>
@@ -600,12 +607,12 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           <t>The user agent MUST use an algorithm equivalent to the following
           algorithm to compute the default-path of a cookie:
           <list style="numbers">
-            <t>Let uri-path be the path portion of the request-uri.  That is,
-            if the request-uri contains just a path (and optional query
-            string), then the uri-path is that path (without the U+003F ("?")
-            character or query string), and if the request-uri contains a full
-            absoluteURI, the uri-path is the absolute path component of that
-            URI.</t>
+            <t>Let uri-path be the path portion of the request-uri if such a
+            portion exists (and empty otherwise). For example, if the
+            request-uri contains just a path (and optional query string), then
+            the uri-path is that path (without the U+003F ("?") character or
+            query string), and if the request-uri contains a full absoluteURI,
+            the uri-path is the path component of that URI.</t>
 
             <t>If the uri-path is empty or if first character of the uri-path
             is not a U+002F ("/") character, output U+002F ("/") and skip the
@@ -1566,6 +1573,36 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <seriesInfo name="RFC" value="3629" />
         <format type="TXT" octets="33856"
                 target="ftp://ftp.rfc-editor.org/in-notes/rfc3629.txt" />
+      </reference>
+      <reference anchor='RFC4790'>
+        <front>
+          <title>Internet Application Protocol Collation Registry</title>
+          <author initials='C.' surname='Newman' fullname='C. Newman'>
+            <organization />
+          </author>
+          <author initials='M.' surname='Duerst' fullname='M. Duerst'>
+            <organization />
+          </author>
+          <author initials='A.' surname='Gulbrandsen'
+                  fullname='A. Gulbrandsen'>
+            <organization />
+          </author> 
+          <date year='2007' month='March' /> 
+          <abstract> 
+            <t>Many Internet application protocols include string-based
+            lookup, searching, or sorting operations. However, the problem
+            space for searching and sorting international strings is large,
+            not fully explored, and is outside the area of expertise for the
+            Internet Engineering Task Force (IETF). Rather than attempt to
+            solve such a large problem, this specification creates an
+            abstraction framework so that application protocols can precisely
+            identify a comparison function, and the repertoire of comparison
+            functions can be extended in the future.</t>
+          </abstract>
+        </front> 
+        <seriesInfo name='RFC' value='4790' /> 
+        <format type='TXT' octets='55591'
+                target='http://www.rfc-editor.org/rfc/rfc4790.txt' /> 
       </reference>
       <reference anchor="RFC5234">
         <front>
