@@ -1574,20 +1574,20 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <format type="TXT" octets="33856"
                 target="ftp://ftp.rfc-editor.org/in-notes/rfc3629.txt" />
       </reference>
-      <reference anchor='RFC4790'>
+      <reference anchor="RFC4790">
         <front>
           <title>Internet Application Protocol Collation Registry</title>
-          <author initials='C.' surname='Newman' fullname='C. Newman'>
+          <author initials="C." surname="Newman" fullname="C. Newman">
             <organization />
           </author>
-          <author initials='M.' surname='Duerst' fullname='M. Duerst'>
+          <author initials="M." surname="Duerst" fullname="M. Duerst">
             <organization />
           </author>
-          <author initials='A.' surname='Gulbrandsen'
-                  fullname='A. Gulbrandsen'>
+          <author initials="A." surname="Gulbrandsen"
+                  fullname="A. Gulbrandsen">
             <organization />
           </author> 
-          <date year='2007' month='March' /> 
+          <date year="2007" month="March" /> 
           <abstract> 
             <t>Many Internet application protocols include string-based
             lookup, searching, or sorting operations. However, the problem
@@ -1600,9 +1600,9 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             functions can be extended in the future.</t>
           </abstract>
         </front> 
-        <seriesInfo name='RFC' value='4790' /> 
-        <format type='TXT' octets='55591'
-                target='http://www.rfc-editor.org/rfc/rfc4790.txt' /> 
+        <seriesInfo name="RFC" value="4790" /> 
+        <format type="TXT" octets="55591"
+                target="http://www.rfc-editor.org/rfc/rfc4790.txt" /> 
       </reference>
       <reference anchor="RFC5234">
         <front>
@@ -1664,7 +1664,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
       <reference anchor="RFC2965">
         <front>
           <title>HTTP State Management Mechanism</title>
-          <author initials="D. M." surname="Kristol" fullname="David M. Kristol">
+          <author initials="D. M." surname="Kristol"
+                  fullname="David M. Kristol">
             <organization>Bell Laboratories, Lucent
             Technologies</organization>
             <address><email>dmk@bell-labs.com</email></address>
@@ -1676,24 +1677,24 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
          </front>
           <seriesInfo name="RFC" value="2965" />
       </reference>
-      <reference anchor="RFC2818"> 
-        <front> 
-          <title>HTTP Over TLS</title> 
-          <author initials="E." surname="Rescorla" fullname="E. Rescorla"> 
+      <reference anchor="RFC2818">
+        <front>
+          <title>HTTP Over TLS</title>
+          <author initials="E." surname="Rescorla" fullname="E. Rescorla">
             <organization />
-          </author> 
-          <date year="2000" month="May" /> 
-          <abstract> 
-            <t>This memo describes how to use Transport Layer Security (TLS) to
-            secure Hypertext Transfer Protocol (HTTP) connections over the
-            Internet.  This memo provides information for the Internet
+          </author>
+          <date year="2000" month="May" />
+          <abstract>
+            <t>This memo describes how to use Transport Layer Security (TLS)
+            to secure Hypertext Transfer Protocol (HTTP) connections over the
+            Internet. This memo provides information for the Internet
             community.</t>
           </abstract>
-        </front> 
-        <seriesInfo name="RFC" value="2818" /> 
+        </front>
+        <seriesInfo name="RFC" value="2818" />
         <format type="TXT" octets="15170"
-                target="http://www.rfc-editor.org/rfc/rfc2818.txt" /> 
-      </reference> 
+                target="http://www.rfc-editor.org/rfc/rfc2818.txt" />
+      </reference>
     </references>
     <section title="Acknowledgements">
       <t>This document borrows heavily from RFC 2109 <xref target="RFC2109"/>.
