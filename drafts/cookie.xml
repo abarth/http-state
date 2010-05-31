@@ -69,7 +69,7 @@
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
-        <t>The key wocds "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD
+        <t>The keywords "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD
         NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
         interpreted as described in <xref target="RFC2119"/>.</t>
 
