@@ -581,7 +581,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           </t>
         </section>
         <section anchor="cookie-domain" title="Domains">
-          <t>A canonicalized host-name is the host-name converted to lower
+          <t>A canonicalized string is the string converted to lower
           case and converted to ASCII according to the IDNA
           specification <xref target="RFC3490"/>.</t>
 
