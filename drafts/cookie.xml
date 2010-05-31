@@ -134,15 +134,14 @@ obs-fold       = CRLF
       request header to the origin server. The Cookie header contains a number
       of cookies the user agent received in previous Set-Cookie headers. The
       origin server is free to ignore the Cookie header or use its contents
-      for an application-defined purpose. The origin server MAY send the user
-      agent another Set-Cookie response header or it MAY send no Set-Cookie
-      header at all.</t>
+      for an application-defined purpose.</t>
 
-      <t>Servers MAY return a Set-Cookie response header with any response.  An
+      <t>Servers MAY return a Set-Cookie response header with any response. An
       origin server MAY include multiple Set-Cookie header fields in a single
-      response.  Gateways that wish to be transparent to cookies MUST NOT fold
-      multiple Set-Cookie header fields into a single header field.  (Note that
-      <xref target="RFC2616"/> erroneously permits such folding.)</t>
+      response. Note that folding multiple Set-Cookie header fields into a
+      single header field might change the semantics of the header because the
+      U+002C (",") character is used by the Set-Cookie header in a way that
+      conflicts with such folding.</t>
 
       <section title="Examples">
         <t>Using the Set-Cookie header, a server can send the user agent a
