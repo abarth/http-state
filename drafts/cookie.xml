@@ -59,12 +59,13 @@
       web browsers isolates content retrieved from different ports.</t>
 
       <t>Prior to this document, there were at least three descriptions of
-      cookies: the so-called "Netscape cookie specification," RFC 2109 <xref
-      target="RFC2109"/>, and RFC 2965 <xref target="RFC2965"/>.  However, none
-      of these documents describe how the Cookie and Set-Cookie headers are
-      actually used on the Internet.  This document attempts to specify the
-      syntax and semantics of these headers as they are actually used on the
-      Internet.</t>
+      cookies: the so-called "Netscape cookie specification" <xref
+      target="Netscape"/>, RFC 2109 <xref target="RFC2109"/>, and RFC 2965
+      <xref target="RFC2965"/>. However, none of these documents describe how
+      the Cookie and Set-Cookie headers are actually used on the Internet (see
+      <xref target="Kri2001"/> for historical context). This document attempts
+      to specify the syntax and semantics of these headers as they are
+      actually used on the Internet.</t>
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
@@ -1694,6 +1695,25 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <seriesInfo name="RFC" value="2818" />
         <format type="TXT" octets="15170"
                 target="http://www.rfc-editor.org/rfc/rfc2818.txt" />
+      </reference>
+      <reference anchor="Netscape">
+        <front>
+          <title>Persistent Client State -- HTTP Cookies</title>
+          <author fullname="Netscape Communications Corp.">
+            <organization/>
+          </author>
+          <date/>
+        </front>
+      </reference>
+      <reference anchor="Kri2001" target="http://arxiv.org/abs/cs.SE/0105018">
+        <front>
+          <title>HTTP Cookies: Standards, Privacy, and Politics</title>
+          <author initials="D." surname="Kristol"
+                  fullname="David M. Kristol"/>
+          <date year="2001" month="November"/>
+        </front>
+        <seriesInfo name="ACM Transactions on Internet Technology"
+                    value="Vol. 1, #2"/>
       </reference>
     </references>
     <section title="Acknowledgements">
