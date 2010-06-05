@@ -761,32 +761,11 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           <t>If the attribute-name case-insensitively matches the string
           "Expires", the user agent MUST process the cookie-av as follows.</t>
 
-          <t>Let the parsed-cookie-date be the result of parsing the
-          attribute-value as cookie-date (see <xref
-          target="cookie-date"/>).</t>
+          <t>Let the expiry-time be the result of parsing the attribute-value
+          as cookie-date (see <xref target="cookie-date"/>).</t>
 
           <t>If the attribute-value failed to parse as a cookie date, ignore
           the cookie-av.</t>
-
-          <t>If the user agent received the set-cookie-string from an HTTP
-          response that contains a Date header field and the contents of the
-          final Date header field successfully parses as a cookie-date:
-          <list style="empty">
-            <t>Let server-date be the date obtained by parsing the contents of
-            the last Date header field as a cookie-date.</t>
-
-            <t>Let delta-seconds be the number of seconds between the
-            server-date and the parsed-cookie-date (i.e., parsed-cookie-date
-            - server-date).</t>
-
-            <t>Let the expiry-time be the current date and time plus
-            delta-seconds seconds.</t>
-          </list>
-          Otherwise:
-          <list style="empty">
-            <t>Let the expiry-time be the parsed-cookie-date.</t>
-          </list>
-          </t>
 
           <t>If the expiry-time is later than the last date the user agent
           can represent, the user agent MAY replace the expiry-time with the
