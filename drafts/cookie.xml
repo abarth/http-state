@@ -2,6 +2,8 @@
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
 <rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-09pre"
      category="std" obsoletes="2109">
@@ -21,26 +23,28 @@
     <date month="April" year="2010"/>
     <workgroup>httpstate</workgroup>
     <abstract>
-      <t>This document defines the HTTP Cookie and Set-Cookie headers. These
-      headers can be used by HTTP servers to store state (called cookies) at
-      HTTP user agents, letting the servers maintain a stateful session over
-      the mostly stateless HTTP protocol. Although cookies have many
-      historical infelicities that degrade their security and privacy, the
-      Cookie and Set-Cookie headers are widely used on the Internet.</t>
+      <t>This document defines the HTTP Cookie and Set-Cookie header fields.
+      These header fields can be used by HTTP servers to store state (called
+      cookies) at HTTP user agents, letting the servers maintain a stateful
+      session over the mostly stateless HTTP protocol. Although cookies have
+      many historical infelicities that degrade their security and privacy, the
+      Cookie and Set-Cookie header fields are widely used on the Internet.</t>
     </abstract>
     <note title="Editorial Note (To be removed by RFC Editor)">
       <t>If you have suggestions for improving this document, please send
-      email to http-state@ietf.org. Suggestions with test cases are especially
-      appreciated. https://tools.ietf.org/wg/httpstate/</t>
+      email to <eref target="mailto:http-state@ietf.org"/>. Suggestions with
+      test cases are especially appreciated.  Further Working Group information
+      is available from <eref
+      target="https://tools.ietf.org/wg/httpstate/"/></t>
     </note>
   </front>
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>This document defines the HTTP Cookie and Set-Cookie headers.  Using
-      the Set-Cookie header, an HTTP server can pass name/value pairs and
-      associated metadata (called cookies) to a user agent.  When the user
-      agent makes subsequent requests to the server, the user agent uses the
-      metadata and other information to determine whether to return the
+      <t>This document defines the HTTP Cookie and Set-Cookie header fields.
+      Using the Set-Cookie header field, an HTTP server can pass name/value
+      pairs and associated metadata (called cookies) to a user agent.  When the
+      user agent makes subsequent requests to the server, the user agent uses
+      the metadata and other information to determine whether to return the
       name/value pairs in the Cookie header.</t>
 
       <t>Although simple on its surface, cookies have a number of
@@ -100,11 +104,9 @@
         linear whitespace characters MAY appear:
         <figure>
           <artwork type="abnf">
-            <![CDATA[
 OWS            = *( [ obs-fold ] WSP )
                  ; "optional" whitespace
 obs-fold       = CRLF
-            ]]>
           </artwork>
         </figure>
         OWS SHOULD either not be produced or be produced as a single SP
@@ -113,7 +115,7 @@ obs-fold       = CRLF
       <section anchor="terminology" title="Terminology">
         <t>The terms user agent, client, server, proxy, and origin server have
         the same meaning as in the HTTP/1.1 specification (<xref
-        target="RFC2616"/>).</t>
+        target="RFC2616"/>, Section 1.3).</t>
 
         <t>The terms request-host and request-uri refer to the values the user
         agent would send to the server as, respectively, the host (but not
@@ -136,8 +138,8 @@ obs-fold       = CRLF
       origin server is free to ignore the Cookie header or use its contents
       for an application-defined purpose.</t>
 
-      <t>Servers MAY return a Set-Cookie response header with any response. An
-      origin server MAY include multiple Set-Cookie header fields in a single
+      <t>Servers can send a Set-Cookie response header with any response. An
+      origin server can include multiple Set-Cookie header fields in a single
       response. Note that folding multiple Set-Cookie header fields into a
       single header field might change the semantics of the header because the
       U+002C (",") character is used by the Set-Cookie header in a way that
@@ -152,14 +154,19 @@ obs-fold       = CRLF
         requests.</t>
 
         <figure>
-          <artwork>
-            <![CDATA[
+          <preamble>
 == Server -> User Agent ==
+          </preamble>
+          <artwork type="example">
 Set-Cookie: SID=31d4d96e407aad42
-
+          </artwork>
+        </figure>
+        <figure>
+          <preamble>
 == User Agent -> Server ==
+          </preamble>
+          <artwork type="example">
 Cookie: SID=31d4d96e407aad42
-            ]]>
           </artwork>
         </figure>
 
@@ -169,14 +176,19 @@ Cookie: SID=31d4d96e407aad42
         and every subdomain of example.com.</t>
 
         <figure>
-          <artwork>
-            <![CDATA[
+          <preamble>
 == Server -> User Agent ==
+          </preamble>
+          <artwork type="example">
 Set-Cookie: SID=31d4d96e407aad42; Path=/; Domain=example.com
-
+          </artwork>
+        </figure>
+        <figure>
+          <preamble>
 == User Agent -> Server ==
+          </preamble>
+          <artwork type="example">
 Cookie: SID=31d4d96e407aad42
-            ]]>
           </artwork>
         </figure>
 
@@ -185,18 +197,24 @@ Cookie: SID=31d4d96e407aad42
         as well as the user's preferred language by returning two Set-Cookie
         header fields.  Notice that the server uses the Secure and HttpOnly
         attributes to provide additional security protections for the
-        more-sensitive session identifier.</t>
+        more-sensitive session identifier (see <xref
+        target="sane-set-cookie-semantics"/>.</t>
 
         <figure>
-          <artwork>
-            <![CDATA[
+          <preamble>
 == Server -> User Agent ==
+          </preamble>
+          <artwork type="example">
 Set-Cookie: SID=31d4d96e407aad42; Path=/; Secure; HttpOnly
 Set-Cookie: lang=en-US; Path=/; Domain=example.com
-
+          </artwork>
+        </figure>
+        <figure>
+          <preamble>
 == User Agent -> Server ==
+          </preamble>
+          <artwork type="example">
 Cookie: SID=31d4d96e407aad42; lang=en-US
-            ]]>
           </artwork>
         </figure>
 
@@ -207,14 +225,19 @@ Cookie: SID=31d4d96e407aad42; lang=en-US
         quota or if the user manually deletes the server's cookie.</t>
 
         <figure>
-          <artwork>
-            <![CDATA[
+          <preamble>
 == Server -> User Agent ==
+          </preamble>
+          <artwork type="example">
 Set-Cookie: lang=en-US; Expires=Wed, 09 Jun 2021 10:18:14 GMT
-
+          </artwork>
+        </figure>
+        <figure>
+          <preamble>
 == User Agent -> Server ==
+          </preamble>
+          <artwork type="example">
 Cookie: SID=31d4d96e407aad42; lang=en-US
-            ]]>
           </artwork>
         </figure>
 
@@ -225,14 +248,19 @@ Cookie: SID=31d4d96e407aad42; lang=en-US
         created.</t>
 
         <figure>
-          <artwork>
-            <![CDATA[
+          <preamble>
 == Server -> User Agent ==
+          </preamble>
+          <artwork type="example">
 Set-Cookie: lang=; Expires=Sun, 06 Nov 1994 08:49:37 GMT
-
+          </artwork>
+        </figure>
+        <figure>
+          <preamble>
 == User Agent -> Server ==
+          </preamble>
+          <artwork type="example">
 Cookie: SID=31d4d96e407aad42
-            ]]>
           </artwork>
         </figure>
       </section>
@@ -266,18 +294,19 @@ set-cookie-string = cookie-pair *( ";" SP cookie-av )
 cookie-pair       = cookie-name "=" cookie-value
 cookie-name       = token
 cookie-value      = token
-token             = <token, as defined in RFC 2616>
+token             = <token, defined in [RFC 2616], Section 2.2>
 
 cookie-av         = expires-av / max-age-av / domain-av /
                     path-av / secure-av / httponly-av /
                     extension-av
 expires-av        = "Expires=" sane-cookie-date
-sane-cookie-date  = <rfc1123-date, as defined in RFC 2616>
-                    ; Note that RFC 2616 uses a different grammatical notation
-                    ; than this document (which uses ABNF from RFC5234).
+sane-cookie-date  = <rfc1123-date, defined in [RFC 2616], Section 3.3.1>
+                    ; Note that RFC 2616 uses a different grammatical
+                    ; notation than this document (which uses ABNF
+                    ; from [RFC5234]).
 max-age-av        = "Max-Age=" 1*DIGIT
 domain-av         = "Domain=" domain-value
-domain-value      = <subdomain, as defined in RFC 1034>
+domain-value      = <subdomain, defined in [RFC 1034], Section 3.5>
 path-av           = "Path=" path-value
 path-value        = <any CHAR except CTLs or ";">
 secure-av         = "Secure"
@@ -388,7 +417,7 @@ extension-av      = <any CHAR except CTLs or ";">
             a Domain attribute of "bar.example.com" or of
             "baz.foo.example.com".</t>
 
-            <t>NOTE: For security reasons, some user agents are configured to
+            <t>NOTE: For security reasons, many user agents are configured to
             reject Domain attributes that correspond to "public suffixes." For
             example, some user agents will reject Domain attributes of "com"
             or "co.uk".</t>
@@ -427,7 +456,8 @@ extension-av      = <any CHAR except CTLs or ";">
             <t>The HttpOnly attribute limits the scope of the cookie to HTTP
             requests. In particular, the attribute instructs the user agent to
             omit the cookie when providing access to cookies via "non-HTTP"
-            APIs (such as HTML's document.cookie API).</t>
+            APIs (such as a web browser API that exposes cookies to
+            scripts).</t>
           </section>
         </section>
       </section>
@@ -442,10 +472,8 @@ extension-av      = <any CHAR except CTLs or ";">
 
           <figure>
             <artwork type="abnf">
-              <![CDATA[
 cookie-header = "Cookie:" OWS cookie-string OWS
 cookie-string = cookie-pair *( ";" SP cookie-pair )
-              ]]>
             </artwork>
           </figure>
         </section>
@@ -491,31 +519,24 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
             date-tokens.
             <figure>
               <artwork type="abnf">
-                <![CDATA[
 cookie-date     = *delimiter date-token-list *delimiter
 date-token-list = date-token *( 1*delimiter date-token )
-delimiter       = %x09 / %x20 / %x21 / %x22 / %x23 / %x24 /
-                  %x25 / %x26 / %x27 / %x28 / %x29 / %x2A /
-                  %x2B / %x2C / %x2D / %x2E / %x2F / %x3B /
-                  %x3C / %x3D / %x3E / %x3F / %x40 / %x5B /
-                  %x5C / %x5D / %x5E / %x5F / %x60 / %x7B /
-                  %x7C / %x7D / %x7E
+delimiter       = %x09 / %x20-2F / %x3B-40 / %x5B-60 / %x7B-7E
 date-token      = day-of-month / month / year / time / mystery
-day-of-month    = 2DIGIT / DIGIT
+day-of-month    = 1*2DIGIT
 month           = "jan" [ mystery ] / "feb" [ mystery ] /
                   "mar" [ mystery ] / "apr" [ mystery ] /
                   "may" [ mystery ] / "jun" [ mystery ] /
                   "jul" [ mystery ] / "aug" [ mystery ] /
                   "sep" [ mystery ] / "oct" [ mystery ] /
                   "nov" [ mystery ] / "dec" [ mystery ]
-year            = 4DIGIT / 3DIGIT / 2DIGIT / DIGIT
+year            = 1*4DIGIT
 time            = time-field ":" time-field ":" time-field
-time-field      = 2DIGIT / DIGIT
+time-field      = 1*2DIGIT
 CTLwoHTAB       = %x00-08 / %x0A-1F / %x7F
                   ; CTL except HTAB
 mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
                   ; any OCTET except a delimiter
-                ]]>
               </artwork>
             </figure>
             </t>
@@ -587,19 +608,19 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           case and converted to ASCII according to the IDNA
           specification <xref target="RFC3490"/>.</t>
 
-          <t>A host-name domain-matches a cookie-domain if at least one of the
+          <t>A string domain-matches a cookie-domain if at least one of the
           following conditions hold:
           <list style="symbols">
-            <t>The cookie-domain and the host-name are identical.</t>
+            <t>The cookie-domain and the string are identical.</t>
 
             <t>All of the following conditions hold:
             <list style="symbols">
-              <t>The cookie-domain is a suffix of the host-name.</t>
+              <t>The cookie-domain is a suffix of the string.</t>
 
-              <t>The last character of the host-name that is not included in
+              <t>The last character of the string that is not included in
               the cookie-domain is a U+002E (".") character.</t>
 
-              <t>The host-name is a host name (i.e., not an IP address).</t>
+              <t>The string is a host name (i.e., not an IP address).</t>
             </list>
             </t>
           </list>
@@ -644,9 +665,9 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </section>
       </section>
       <section anchor="set-cookie" title="The Set-Cookie Header">
-        <t>When a user agent receives a Set-Cookie header in an HTTP
-        response, the user agent receives a set-cookie-string
-        consisting of the value of the header.</t>
+        <t>When a user agent receives a Set-Cookie header field in an HTTP
+        response, the user agent receives a set-cookie-string consisting of
+        the contents of the header field.</t>
 
         <t>A user agent MUST use an algorithm equivalent to the following
         algorithm to parse set-cookie-strings:
@@ -727,7 +748,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
 
           <t>Process the attribute-name and attribute-value according to the
           requirements in the following subsections.  (Notice that attributes
-          with unrecognizeed attribute-names are ignored.)</t>
+          with unrecognized attribute-names are ignored.)</t>
 
           <t>Return to Step 1.</t>
         </list>
@@ -743,14 +764,15 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           "Expires", the user agent MUST process the cookie-av as follows.</t>
 
           <t>Let the parsed-cookie-date be the result of parsing the
-          attribute-value as cookie-date.</t>
+          attribute-value as cookie-date (see <xref
+          target="cookie-date"/>).</t>
 
           <t>If the attribute-value failed to parse as a cookie date, ignore
           the cookie-av.</t>
 
           <t>If the user agent received the set-cookie-string from an HTTP
           response that contains a Date header field and the contents of the
-          final Date header field successfully parse as a cookie-date:
+          final Date header field successfully parses as a cookie-date:
           <list style="empty">
             <t>Let server-date be the date obtained by parsing the contents of
             the last Date header field as a cookie-date.</t>
@@ -939,13 +961,13 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             suffixes (also known as "registry controlled domains") changes
             over time. If feasible, user agents SHOULD use an up-to-date
             public suffix list, such as the one maintained by the Mozilla
-            project at http://publicsuffix.org/.</t>
+            project at <eref target="http://publicsuffix.org/"/>.</t>
           </list>
           </t>
 
           <t>If the domain-attribute is non-empty:
           <list style="empty">
-            <t>If the cannonicalized request-host does not domain-match the
+            <t>If the canonicalized request-host does not domain-match the
             domain-attribute, ignore the cookie entirely and abort these
             steps.</t>
 
@@ -1178,14 +1200,14 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           user never visits the server directly.</t>
 
           <t>Some user agents restrict how third-party cookies behave. For
-          example, some user agents refuse to send the Cookie header in
-          third-party requests. Other user agents refuse to process the
-          Set-Cookie header in responses to third-party requests. User agents
-          vary widely in their third-party cookie policies. This document
-          grants user agents wide latitude to experiment with third-party
-          cookie policies that balance the privacy and compatibility needs of
-          their users. However, this document does not endorse any particular
-          third-party cookie policy.</t>
+          example, some of these user agents refuse to send the Cookie
+          header in third-party requests. Others refuse to process the
+          Set-Cookie header in responses to third-party requests. User
+          agents vary widely in their third-party cookie policies. This
+          document grants user agents wide latitude to experiment with
+          third-party cookie policies that balance the privacy and
+          compatibility needs of their users. However, this document does
+          not endorse any particular third-party cookie policy.</t>
 
           <t>Third-party cookie blocking policies are often ineffective at
           achieving their privacy goals if servers attempt to work around
@@ -1193,14 +1215,14 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           servers can often track users without using cookies at all.</t>
         </section>
         <section anchor="user-controls" title="User Controls">
-          <t>User agents SHOULD provide users with a mechanism for managing
+          <t>User agents should provide users with a mechanism for managing
           the cookies stored in the cookie store. For example, a user agent
           might let users delete all cookies received during a specified time
           period or all the cookies related to a particular domain. In
           addition, many user agent include a user interface element that lets
           users examine the cookies stored in their cookie store.</t>
 
-          <t>User agents SHOULD provide users with a mechanism for disabling
+          <t>User agents should provide users with a mechanism for disabling
           cookies. When cookies are disabled, the user agent MUST NOT include
           a Cookie header in outbound HTTP requests and the user agent MUST
           NOT process Set-Cookie headers in inbound HTTP responses.</t>
@@ -1288,9 +1310,10 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <t>In addition to encrypting and signing the contents of every
         cookie, servers that require a higher level of security SHOULD use the
         Cookie and Set-Cookie headers only over a secure channel. When using
-        cookies over a secure channel, servers SHOULD set the Secure attribute
-        for every cookie. If a server does not set the Secure attribute, the
-        protection provided by the secure channel will be largely moot.</t>
+        cookies over a secure channel, servers SHOULD set the Secure
+        attribute (see <xref target="sane-secure"/>) for every cookie. If a
+        server does not set the Secure attribute, the protection provided by
+        the secure channel will be largely moot.</t>
       </section>
       <section anchor="session-identifiers" title="Session Identifiers">
         <t>Instead of storing session information directly in a cookie (where
@@ -1362,7 +1385,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         header. For example, an HTTP response to a request for
         http://example.com/foo/bar can set a cookie with a Path attribute of
         "/qux". Consequently, servers SHOULD NOT both run mutually distrusting
-        services on different paths of the same host and use cookies store
+        services on different paths of the same host and use cookies to store
         security-sensitive information.</t>
 
         <t>An active network attacker can also inject cookies into the
