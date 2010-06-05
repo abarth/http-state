@@ -2,8 +2,6 @@
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
-<?rfc comments="yes"?>
-<?rfc inline="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
 <rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-09pre"
      category="std" obsoletes="2109">
