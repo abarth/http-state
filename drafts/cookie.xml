@@ -1391,6 +1391,26 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         to provide the security properties required by applications.</t>
       </section>
     </section>
+    <section title="IANA Considerations" anchor="iana-considerations">
+      <t>The permanent message header registry (see <xref target="RFC3864"/>)
+      should be updated with the following registrations:</t>
+
+      <section title="Cookie">
+        <t>Header field name: Cookie</t>
+        <t>Applicable protocol: http</t>
+        <t>Status: standard</t>
+        <t>Author/Change controller: IETF</t>
+        <t>Specification document: this specification (<xref target="cookie"/>)</t>
+      </section>
+
+      <section title="Set-Cookie">
+        <t>Header field name: Set-Cookie</t>
+        <t>Applicable protocol: http</t>
+        <t>Status: standard</t>
+        <t>Author/Change controller: IETF</t>
+        <t>Specification document: this specification (<xref target="set-cookie"/>)</t>
+      </section>
+    </section>
   </middle>
   <back>
     <references title="Normative References">
@@ -1491,19 +1511,19 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </front>
         <seriesInfo name="RFC" value="2616"/>
       </reference>
-      <reference anchor='RFC3490'> 
+      <reference anchor="RFC3490"> 
         <front> 
           <title>Internationalizing Domain Names in Applications (IDNA)</title> 
-            <author initials='P.' surname='Faltstrom' fullname='P. Faltstrom'>
+            <author initials="P." surname="Faltstrom" fullname="P. Faltstrom">
               <organization />
             </author> 
-            <author initials='P.' surname='Hoffman' fullname='P. Hoffman'> 
+            <author initials="P." surname="Hoffman" fullname="P. Hoffman"> 
               <organization />
             </author> 
-            <author initials='A.' surname='Costello' fullname='A. Costello'> 
+            <author initials="A." surname="Costello" fullname="A. Costello"> 
               <organization />
             </author> 
-            <date year='2003' month='March' /> 
+            <date year="2003" month="March" /> 
             <abstract> 
               <t>Until now, there has been no standard method for domain names
               to use characters outside the ASCII repertoire.  This document
@@ -1519,8 +1539,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
               processing domain names, not free text. [STANDARDS TRACK]</t>
             </abstract>
           </front> 
-          <seriesInfo name='RFC' value='3490' /> 
-        <format type='TXT' octets='51943' target='http://www.rfc-editor.org/rfc/rfc3490.txt' /> 
+          <seriesInfo name="RFC" value="3490" /> 
+        <format type="TXT" octets="51943" target="http://www.rfc-editor.org/rfc/rfc3490.txt" /> 
       </reference> 
       <!--
       <reference anchor="RFC3492"> 
@@ -1715,6 +1735,17 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </front>
         <seriesInfo name="ACM Transactions on Internet Technology"
                     value="Vol. 1, #2"/>
+      </reference>
+      <reference anchor="RFC3864">
+        <front>
+          <title>Registration Procedures for Message Header Fields</title>
+          <author initials="G." surname="Klyne" fullname="G. Klyne"/>
+          <author initials="M." surname="Nottingham" fullname="M. Nottingham"/>
+          <author initials="J." surname="Mogul" fullname="J. Mogul"/>
+          <date year="2004" month="September" />
+        </front>
+        <seriesInfo name="BCP" value="90" />
+        <seriesInfo name="RFC" value="3864" />
       </reference>
     </references>
     <section title="Acknowledgements">
