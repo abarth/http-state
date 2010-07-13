@@ -33,7 +33,7 @@
       email to <eref target="mailto:http-state@ietf.org"/>. Suggestions with
       test cases are especially appreciated.  Further Working Group information
       is available from <eref
-      target="https://tools.ietf.org/wg/httpstate/"/></t>
+      target="https://tools.ietf.org/wg/httpstate/"/>.</t>
     </note>
   </front>
   <middle>
@@ -136,12 +136,12 @@ obs-fold       = CRLF
       origin server is free to ignore the Cookie header or use its contents
       for an application-defined purpose.</t>
 
-      <t>Servers can send a Set-Cookie response header with any response. An
-      origin server can include multiple Set-Cookie header fields in a single
-      response. Note that folding multiple Set-Cookie header fields into a
-      single header field might change the semantics of the header because the
-      U+002C (",") character is used by the Set-Cookie header in a way that
-      conflicts with such folding.</t>
+      <t>Origin servers can send a Set-Cookie response header with any
+      response. An origin server can include multiple Set-Cookie header fields
+      in a single response. Note that folding multiple Set-Cookie header fields
+      into a single header field might change the semantics of the header
+      because the U+002C (",") character is used by the Set-Cookie header in a
+      way that conflicts with such folding.</t>
 
       <section title="Examples">
         <t>Using the Set-Cookie header, a server can send the user agent a
@@ -190,13 +190,13 @@ Cookie: SID=31d4d96e407aad42
           </artwork>
         </figure>
 
-        <t>As shown the next example, the server can store multiple cookies at
-        the user agent. For example, the server can store a session identifier
-        as well as the user's preferred language by returning two Set-Cookie
-        header fields.  Notice that the server uses the Secure and HttpOnly
-        attributes to provide additional security protections for the
+        <t>As shown in the next example, the server can store multiple cookies
+        at the user agent. For example, the server can store a session
+        identifier as well as the user's preferred language by returning two
+        Set-Cookie header fields.  Notice that the server uses the Secure and
+        HttpOnly attributes to provide additional security protections for the
         more-sensitive session identifier (see <xref
-        target="sane-set-cookie-semantics"/>.</t>
+        target="sane-set-cookie-semantics"/>.)</t>
 
         <figure>
           <preamble>
@@ -217,7 +217,7 @@ Cookie: SID=31d4d96e407aad42; lang=en-US
         </figure>
 
         <t>If the server wishes the user agent to persist the cookie over
-        multiple "sessions," the server can specify an expiration date in the
+        multiple "sessions", the server can specify an expiration date in the
         Expires attribute. Note that the user agent might delete the cookie
         before the expiration date if the user agent's cookie store exceeds its
         quota or if the user manually deletes the server's cookie.</t>
@@ -292,19 +292,19 @@ set-cookie-string = cookie-pair *( ";" SP cookie-av )
 cookie-pair       = cookie-name "=" cookie-value
 cookie-name       = token
 cookie-value      = token
-token             = <token, defined in [RFC 2616], Section 2.2>
+token             = <token, defined in [RFC2616], Section 2.2>
 
 cookie-av         = expires-av / max-age-av / domain-av /
                     path-av / secure-av / httponly-av /
                     extension-av
 expires-av        = "Expires=" sane-cookie-date
-sane-cookie-date  = <rfc1123-date, defined in [RFC 2616], Section 3.3.1>
+sane-cookie-date  = <rfc1123-date, defined in [RFC2616], Section 3.3.1>
                     ; Note that RFC 2616 uses a different grammatical
                     ; notation than this document (which uses ABNF
                     ; from [RFC5234]).
 max-age-av        = "Max-Age=" 1*DIGIT
 domain-av         = "Domain=" domain-value
-domain-value      = <subdomain, defined in [RFC 1034], Section 3.5>
+domain-value      = <subdomain, defined in [RFC1034], Section 3.5>
 path-av           = "Path=" path-value
 path-value        = <any CHAR except CTLs or ";">
 secure-av         = "Secure"
