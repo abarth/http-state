@@ -1077,8 +1077,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             </t>
 
             <t>If the cookie's http-only-flag is true, then exclude the
-            cookie unless the cookie-string is being generated for an
-            "HTTP" API (as defined by the user agent).</t>
+            cookie if the cookie-string is being generated for a
+            "non-HTTP" API (as defined by the user agent).</t>
           </list>
           </t>
 
