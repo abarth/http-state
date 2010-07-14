@@ -299,9 +299,6 @@ cookie-av         = expires-av / max-age-av / domain-av /
                     extension-av
 expires-av        = "Expires=" sane-cookie-date
 sane-cookie-date  = <rfc1123-date, defined in [RFC2616], Section 3.3.1>
-                    ; Note that RFC 2616 uses a different grammatical
-                    ; notation than this document (which uses ABNF
-                    ; from [RFC5234]).
 max-age-av        = "Max-Age=" 1*DIGIT
 domain-av         = "Domain=" domain-value
 domain-value      = <subdomain, defined in [RFC1034], Section 3.5>
@@ -313,6 +310,10 @@ extension-av      = <any CHAR except CTLs or ";">
               ]]>
             </artwork>
           </figure>
+
+          <t>Note that some of the grammatical terms above reference documents
+          that use different grammatical notations than this document (which
+          uses ABNF from <xref target="RFC5234" />).</t>
 
           <t>The semantics of the cookie-value are not defined by this
           document.</t>
