@@ -336,9 +336,7 @@ extension-av      = <any CHAR except CTLs or ";">
 
           <t>NOTE: Some user agents represent dates using 32-bit UNIX time_t
           values.  Some of these user agents might contain bugs that cause them
-          process dates after the year 2038 incorrectly. Servers wishing to
-          interoperate with these user agents might wish to use dates before
-          2038.</t>
+          to process dates after the year 2038 incorrectly.</t>
         </section>
         <section anchor="sane-set-cookie-semantics"
                  title="Semantics (Non-Normative)">
@@ -1042,6 +1040,10 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <t>A user agent MAY omit the Cookie header in its entirety. For
         example, the user agent might wish to block sending cookies during
         "third-party" requests.</t>
+
+        <t>If the user agent does attach a Cookie header field, the user agent
+        MUST send the cookie-string (defined below) as the value of the header
+        field.</t>
 
         <t>The user agent MUST use an algorithm equivalent to the following
         algorithm to compute the cookie-string from a cookie store and a
