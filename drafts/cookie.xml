@@ -663,11 +663,11 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
       </section>
       <section anchor="set-cookie" title="The Set-Cookie Header">
         <t>When a user agent receives a Set-Cookie header field in an HTTP
-        response, the user agent receives a set-cookie-string consisting of
-        the contents of the header field.</t>
+        response, the user agent MUST parse the contents of the header field as
+        a set-cookie-string (defined below).</t>
 
         <t>A user agent MUST use an algorithm equivalent to the following
-        algorithm to parse set-cookie-strings:
+        algorithm to parse a "set-cookie-string":
         <list style="numbers">
           <t>If the set-cookie-string contains a U+003B (";") character:
           <list style="empty">
@@ -751,10 +751,11 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         </list>
         </t>
 
-        <t>When the user agent finishes parsing the set-cookie-string,
-        the user agent receives a cookie from the request-uri with name
-        cookie-name, value cookie-value, and attributes
-        cookie-attribute-list.</t>
+        <t>When the user agent finishes parsing the set-cookie-string, the user
+        agent is said to "receive a cookie" from the request-uri with name
+        cookie-name, value cookie-value, and attributes cookie-attribute-list.
+        (See <xref target="storage-model" /> for additional requirements
+        triggered by receiving a cookie.)</t>
 
         <section anchor="expires-attribute" title="The Expires Attribute">
           <t>If the attribute-name case-insensitively matches the string
@@ -860,10 +861,9 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         persistent-flag, host-only-flag, secure-only-flag, and
         http-only-flag.</t>
 
-        <t>When the user agent receives a cookie from a request-uri with
-        name cookie-name, value cookie-value, and attributes
-        cookie-attribute-list, the user agent MUST process the cookie as
-        follows:
+        <t>When the user agent "receives a cookie" from a request-uri with name
+        cookie-name, value cookie-value, and attributes cookie-attribute-list,
+        the user agent MUST process the cookie as follows:
         <list style="numbers">
           <t>A user agent MAY ignore a received cookie in its entirety. For
           example, the user agent might wish to block receiving cookies from
@@ -973,7 +973,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           attribute-name of "HttpOnly", set the cookie's http-only-flag to
           true.  Otherwise, set cookie's http-only-flag to false.</t>
 
-          <t>If the cookie was received from a non-HTTP API and the
+          <t>If the cookie was received from a "non-HTTP" API and the
           cookie's http-only-flag is set, abort these steps and ignore the
           cookie entirely.</t>
 
@@ -985,7 +985,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             algorithm maintains the invariant that there is at most one such
             cookie.)</t>
 
-            <t>If the newly created cookie was received from an non-HTTP
+            <t>If the newly created cookie was received from an "non-HTTP"
             API and the old-cookie's http-only-flag is set, abort these
             steps and ignore the newly created cookie entirely.</t>
 
