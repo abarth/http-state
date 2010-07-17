@@ -113,7 +113,7 @@ obs-fold       = CRLF
       <section anchor="terminology" title="Terminology">
         <t>The terms user agent, client, server, proxy, and origin server have
         the same meaning as in the HTTP/1.1 specification (<xref
-        target="RFC2616"/>, Section 1.3).</t>
+        target="RFC2616" />, Section 1.3).</t>
 
         <t>The terms request-host and request-uri refer to the values the user
         agent would send to the server as, respectively, the host (but not
@@ -1034,20 +1034,19 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         persistent-flag set to false.</t>
       </section>
       <section anchor="cookie" title="The Cookie Header">
-        <t>When the user agent generates an HTTP request, the user agent
-        SHOULD attach exactly one HTTP header named Cookie if the
-        cookie-string (defined below) for the request-uri is non-empty.</t>
+        <t>When the user agent generates an HTTP request, the user agent MUST
+        NOT attach more than one Cookie header field.</t>
 
         <t>A user agent MAY omit the Cookie header in its entirety. For
         example, the user agent might wish to block sending cookies during
         "third-party" requests.</t>
 
-        <t>If the user agent does attach a Cookie header field, the user agent
-        MUST send the cookie-string (defined below) as the value of the header
-        field.</t>
+        <t>If the user agent does attach a Cookie header field to an HTTP
+        request, the user agent MUST send the cookie-string (defined below) as
+        the value of the header field.</t>
 
         <t>The user agent MUST use an algorithm equivalent to the following
-        algorithm to compute the cookie-string from a cookie store and a
+        algorithm to compute the "cookie-string" from a cookie store and a
         request-uri:
         <list style="numbers">
           <t>Let cookie-list be the set of cookies from the cookie store
