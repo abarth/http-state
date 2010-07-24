@@ -503,11 +503,11 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
       </section>
     </section>
     <section anchor="ua-requirements" title="User Agent Requirements">
-      <t>For historical reasons, the full semantics of cookies contain a
-      number of exotic quirks. This section is intended to specify the Cookie
-      and Set-Cookie headers in sufficient detail to allow a user agent
-      implementing these requirements precisely to interoperate with existing
-      servers.</t>
+      <t>For historical reasons, the full semantics of cookies (as presently
+      deployed on the Internet) contain a number of exotic quirks. This section
+      is intended to specify the Cookie and Set-Cookie headers in sufficient
+      detail to allow a user agent implementing these requirements precisely to
+      interoperate with existing servers.</t>
 
       <section anchor="algorithms" title="Algorithms">
         <t>This section defines a number of algorithms used by user agents to
@@ -605,22 +605,22 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           </list>
           </t>
         </section>
-        <section anchor="cookie-domain" title="Domains">
-          <t>A canonicalized string is the string converted to lower
-          case and converted to ASCII according to the IDNA
-          specification <xref target="RFC3490"/>.</t>
+        <section anchor="cookie-domain" title="Domains and domain-match">
+          <t>A canonicalized string is the string converted to ASCII according
+          to the IDNA specification <xref target="RFC3490"/> and converted to
+          lower case.</t>
 
-          <t>A string domain-matches a cookie-domain if at least one of the
-          following conditions hold:
+          <t>A string domain-matches a given domain string if at least one of
+          the following conditions hold:
           <list style="symbols">
-            <t>The cookie-domain and the string are identical.</t>
+            <t>The domain string and the string are identical.</t>
 
             <t>All of the following conditions hold:
             <list style="symbols">
-              <t>The cookie-domain is a suffix of the string.</t>
+              <t>The domain string is a suffix of the string.</t>
 
-              <t>The last character of the string that is not included in
-              the cookie-domain is a U+002E (".") character.</t>
+              <t>The last character of the string that is not included in the
+              domain string is a U+002E (".") character.</t>
 
               <t>The string is a host name (i.e., not an IP address).</t>
             </list>
@@ -628,7 +628,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           </list>
           </t>
         </section>
-        <section anchor="cookie-path" title="Paths">
+        <section anchor="cookie-path" title="Paths and path-match">
           <t>The user agent MUST use an algorithm equivalent to the following
           algorithm to compute the default-path of a cookie:
           <list style="numbers">
@@ -651,7 +651,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           </list>
           </t>
 
-          <t>A request-path path-matches a cookie-path if at least one of
+          <t>A request-path path-matches a given cookie-path if at least one of
           the following conditions hold:
           <list style="symbols">
             <t>The cookie-path and the request-path are identical.</t>
