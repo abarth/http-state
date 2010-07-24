@@ -277,8 +277,8 @@ Cookie: SID=31d4d96e407aad42
       making use of the full semantics.</t>
  
       <section anchor="sane-set-cookie" title="Set-Cookie">
-        <t>The Set-Cookie header is used to send cookies from the server to
-        the user agent.</t>
+        <t>The Set-Cookie HTTP response header is used to send cookies from the
+        server to the user agent.</t>
 
         <section anchor="sane-set-cookie-syntax" title="Syntax">
           <t>Informally, the Set-Cookie response header contains the header
@@ -330,7 +330,7 @@ extension-av      = <any CHAR except CTLs or ";">
           agents, servers SHOULD NOT produce two attributes with the same name
           in the same set-cookie-string.</t>
 
-          <t>Servers SHOULD NOT include more than one Set-Cookie header fields
+          <t>Servers SHOULD NOT include more than one Set-Cookie header field
           in the same response with the same cookie-name.</t>
 
           <t>If a server sends multiple responses containing Set-Cookie headers
@@ -346,13 +346,13 @@ extension-av      = <any CHAR except CTLs or ";">
                  title="Semantics (Non-Normative)">
           <t>This section describes a simplified semantics of the Set-Cookie
           header. These semantics are detailed enough to be useful for
-          understanding the most common uses of cookies. The full semantics
-          are described in <xref target="ua-requirements" />.</t>
+          understanding the most common uses of cookies by servers. The full
+          semantics are described in <xref target="ua-requirements" />.</t>
 
           <t>When the user agent receives a Set-Cookie header, the user agent
-          stores the cookie. Subsequently, when the user agent makes an HTTP
-          request, the user agent includes the applicable, non-expired cookies
-          in the Cookie header.</t>
+          stores the cookie together with its attributes. Subsequently, when
+          the user agent makes an HTTP request, the user agent includes the
+          applicable, non-expired cookies in the Cookie header.</t>
 
           <t>If the user agent receives a new cookie with the same cookie-name,
           domain-value, and path-value as a cookie that it has already stored,
