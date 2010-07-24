@@ -58,7 +58,7 @@
       does not provide integrity in the presence of an active network
       attackers. Similarly, cookies for a given host are shared across all the
       ports on that host, even though the usual "same-origin policy" used by
-      web browsers isolates content retrieved from different ports.</t>
+      web browsers isolates content retrieved via different ports.</t>
 
       <t>Prior to this document, there were at least three descriptions of
       cookies: the so-called "Netscape cookie specification" <xref
@@ -663,8 +663,8 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
       </section>
       <section anchor="set-cookie" title="The Set-Cookie Header">
         <t>When a user agent receives a Set-Cookie header field in an HTTP
-        response, the user agent MUST parse the contents of the header field as
-        a set-cookie-string (defined below).</t>
+        response, the user agent MUST parse the field-value of the Set-Cookie
+        header field as a set-cookie-string (defined below).</t>
 
         <t>A user agent MUST use an algorithm equivalent to the following
         algorithm to parse a "set-cookie-string":
