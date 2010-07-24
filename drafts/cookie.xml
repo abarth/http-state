@@ -450,7 +450,8 @@ extension-av      = <any CHAR except CTLs or ";">
             <t>Although seemingly useful for protecting cookies from active
             network attackers, the Secure attribute protects only the cookie's
             confidentiality. An active network attacker can overwrite Secure
-            cookies from an insecure channel, disrupting their integrity.</t>
+            cookies from an insecure channel, disrupting their integrity (see
+            <xref target="weak-integrity" /> for more details).</t>
           </section>
           <section anchor="sane-httponly" title="The HttpOnly Attribute">
             <t>The HttpOnly attribute limits the scope of the cookie to HTTP
@@ -479,8 +480,8 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
         </section>
         <section anchor="sane-cookie-semantics" title="Semantics">
           <t>Each cookie-pair represents a cookie stored by the user agent.
-          The cookie-name and the cookie-value are returned from the
-          corresponding parts of the Set-Cookie header.</t>
+          The cookie-pair contains the cookie-name and cookie-value the user
+          agent received in the Set-Cookie header.</t>
 
           <t>Notice that the cookie attributes are not returned. In
           particular, the server cannot determine from the Cookie header alone
@@ -495,8 +496,9 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
           <t>Although cookies are serialized linearly in the Cookie header,
           servers SHOULD NOT rely upon the serialization order. In particular,
           if the Cookie header contains two cookies with the same name (e.g.,
-          with different Path or Domain attributes), servers SHOULD NOT rely
-          upon the order in which these cookies appear in the header.</t>
+          that were set with different Path or Domain attributes), servers
+          SHOULD NOT rely upon the order in which these cookies appear in the
+          header.</t>
         </section>
       </section>
     </section>
