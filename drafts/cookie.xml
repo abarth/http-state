@@ -1013,7 +1013,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
 
         <t>At any time, the user agent MAY "remove excess cookies" from the
         cookie store if the number of cookies sharing a domain field exceeds
-        some predetermined upper bound (such as 50 cookies).</t>
+        some implementaiton defined upper bound (such as 50 cookies).</t>
 
         <t>At any time, the user agent MAY "remove excess cookies" from the
         cookie store if the cookie store exceeds some predetermined upper bound
@@ -1039,6 +1039,9 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         persistent-flag set to false.</t>
       </section>
       <section anchor="cookie" title="The Cookie Header">
+        <t>The user agent includes stored cookies in the Cookie HTTP request
+        header.</t>
+
         <t>When the user agent generates an HTTP request, the user agent MUST
         NOT attach more than one Cookie header field.</t>
 
@@ -1154,7 +1157,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
                title="Application Programming Interfaces">
         <t>One reason the Cookie and Set-Cookie headers uses such esoteric
         syntax is because many platforms (both in servers and user agents)
-        provide a string-based application programmer interface (API) to
+        provide a string-based application programing interface (API) to
         cookies, requiring application-layer programmers to generate and parse
         the syntax used by the Cookie and Set-Cookie headers, which many
         programmers have done incorrectly, resulting in interoperability
