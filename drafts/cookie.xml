@@ -131,8 +131,8 @@ obs-fold       = CRLF
 
       <t>To store state, the origin server includes a Set-Cookie header in an
       HTTP response. In subsequent requests, the user agent returns a Cookie
-      request header to the origin server. The Cookie header contains a number
-      of cookies the user agent received in previous Set-Cookie headers. The
+      request header to the origin server. The Cookie header contains
+      cookies the user agent received in previous Set-Cookie headers. The
       origin server is free to ignore the Cookie header or use its contents
       for an application-defined purpose.</t>
 
@@ -216,11 +216,13 @@ Cookie: SID=31d4d96e407aad42; lang=en-US
           </artwork>
         </figure>
 
-        <t>If the server wishes the user agent to persist the cookie over
-        multiple "sessions", the server can specify an expiration date in the
-        Expires attribute. Note that the user agent might delete the cookie
-        before the expiration date if the user agent's cookie store exceeds its
-        quota or if the user manually deletes the server's cookie.</t>
+        <t>Notice that the Cookie header above contains two cookies, one named
+        SID and one named lang.  If the server wishes the user agent to persist
+        the cookie over multiple "sessions" (e.g., user agent restarts), the
+        server can specify an expiration date in the Expires attribute. Note
+        that the user agent might delete the cookie before the expiration date
+        if the user agent's cookie store exceeds its quota or if the user
+        manually deletes the server's cookie.</t>
 
         <figure>
           <preamble>
@@ -265,12 +267,13 @@ Cookie: SID=31d4d96e407aad42
     </section>
     <section anchor="sane-profile" title="Server Requirements">
       <t>This section describes the syntax and semantics of a well-behaved
-      profile of the Cookie and Set-Cookie headers. Servers SHOULD use the
-      profile described in this section, both to maximize interoperability
-      with existing user agents and because a future version of the Cookie or
-      Set-Cookie headers could remove support for some of the esoteric
-      semantics described in the next section. User agents, however, MUST
-      implement the full semantics to ensure interoperability with servers
+      profile of the Cookie and Set-Cookie headers. Servers SHOULD limit
+      themselves to the profile described in this section, both to maximize
+      interoperability with existing user agents and because a future version
+      of the Cookie or Set-Cookie headers could remove support for some of the
+      esoteric semantics described in <xref target="ua-requirements" />. User
+      agents, however, MUST implement the requirements in <xref
+      target="ua-requirements" /> to ensure interoperability with servers
       making use of the full semantics.</t>
  
       <section anchor="sane-set-cookie" title="Set-Cookie">
