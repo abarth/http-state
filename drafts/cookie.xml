@@ -747,7 +747,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           requirements in the following subsections.  (Notice that attributes
           with unrecognized attribute-names are ignored.)</t>
 
-          <t>Return to Step 1.</t>
+          <t>Return to Step 1 of this algorithm.</t>
         </list>
         </t>
 
