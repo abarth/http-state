@@ -119,7 +119,7 @@ obs-fold       = CRLF
         agent would send to the server as, respectively, the host (but not
         port) and the absoluteURI (http_URL) of the HTTP Request-Line.</t>
 
-        <t>Two sequence of octets are said to case-insensitively match each
+        <t>Two sequences of octets are said to case-insensitively match each
         other if and only if they are equivalent under the i;ascii-casemap
         collation defined in <xref target="RFC4790"/>.</t>
       </section>
@@ -1753,16 +1753,15 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
     </references>
     <section title="Acknowledgements">
       <t>This document borrows heavily from RFC 2109 <xref target="RFC2109"/>.
-      We are indebted to David M. Kristol and Lou Montulli for their efforts
-      to specify the cookie protocol. David M. Kristol, in particular,
-      provided invaluable advice on navigating the IETF process. We would also
-      like to thank Thomas Broyer, Tyler Close, Bil Corry, corvid, Lisa
-      Dusseault, Roy T. Fielding, Blake Frantz, Anne van Kesteren, Eran
-      Hammer-Lahav, Jeff Hodges, Bjoern Hoehrmann, Achim Hoffmann, Georg
-      Koppen, Dean McNamee, Mark Miller, Mark Pauley, Yngve N. Pettersen,
-      Julian Reschke, Peter Saint-Andre, Mark Seaborn, Maciej Stachowiak,
-      Daniel Stenberg, David Wagner, Dan Winship, and Dan Witte for their
-      valuable feedback on this document.</t>
+      We are indebted to David M. Kristol and Lou Montulli for their efforts to
+      specify cookies. David M. Kristol, in particular, provided invaluable
+      advice on navigating the IETF process. We would also like to thank Thomas
+      Broyer, Tyler Close, Bil Corry, corvid, Lisa Dusseault, Roy T. Fielding,
+      Blake Frantz, Anne van Kesteren, Eran Hammer-Lahav, Jeff Hodges, Bjoern
+      Hoehrmann, Achim Hoffmann, Georg Koppen, Dean McNamee, Mark Miller, Mark
+      Pauley, Yngve N. Pettersen, Julian Reschke, Peter Saint-Andre, Mark
+      Seaborn, Maciej Stachowiak, Daniel Stenberg, David Wagner, Dan Winship,
+      and Dan Witte for their valuable feedback on this document.</t>
     </section>
   </back>
 </rfc>
