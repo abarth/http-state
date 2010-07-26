@@ -671,6 +671,15 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         response, the user agent MUST parse the field-value of the Set-Cookie
         header field as a set-cookie-string (defined below).</t>
 
+        <t>NOTE: The algorithm below is more permissive than the grammar in
+        <xref target="sane-set-cookie" />. For example, the algorithm strips
+        leading and trailing whitespace from the cookie name and value (but
+        maintains internal whitespace), whereas the grammar in <xref
+        target="sane-set-cookie" /> forbids whitespace in these positions.
+        User agents use this algorithm so as to interoperate with servers that
+        do not follow the recommendations in <xref target="sane-profile"
+        />.</t>
+
         <t>A user agent MUST use an algorithm equivalent to the following
         algorithm to parse a "set-cookie-string":
         <list style="numbers">
