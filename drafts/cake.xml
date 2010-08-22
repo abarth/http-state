@@ -65,7 +65,7 @@
       </t>
 
       <t>This document defines a simple HTTP state management mechanism that
-      addresses these shortcommings of cookies.  In this mechanism, the
+      addresses these shortcomings of cookies.  In this mechanism, the
       server stores a secret key at the user agent, called the cake-key.
       When the user agent issues subsequent HTTP requests to the server, the
       user agent sends a string, called a cake, containing a HMAC (using the
