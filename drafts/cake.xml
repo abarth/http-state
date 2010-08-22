@@ -44,7 +44,7 @@
       <list style="numbers">
         <t>Cookies provide no integrity protection against active network
         attackers.  Even if the example.com HTTP server always employs TLS,
-        a network attacker manipulate the server's cookies by spoofing
+        a network attacker can manipulate the server's cookies by spoofing
         responses from http://example.com/ (assuming the user agent makes a
         single non-TLS protected HTTP request, which, of course, the
         attacker can redirect to http://example.com/).</t>
