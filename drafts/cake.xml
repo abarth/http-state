@@ -20,7 +20,7 @@
     <date month="August" year="2010"/>
     <workgroup>httpstate</workgroup>
     <abstract>
-      <t>This document describes a simple HTTP state mangement mechanism,
+      <t>This document describes a simple HTTP state management mechanism,
       called cake, that lets HTTP servers maintain stateful sessions with
       HTTP user agents.  This mechanism is harmonized with the same-origin
       security model and provides both confidentiality and integrity
@@ -192,13 +192,13 @@ $ echo "Origin: http://example.com" |
       </figure>
       </t>
 
-      <t>By pre-computing the cake for the various security-origins the
-      server expects to receive HTTP requests from, the server can whitelist
+      <t>By pre-computing the cake for the security-origins the
+      server expects to receive requests from, the server can whitelist
       the security-origins that have access to its session state.  Notice
-      that if the server does not whitelist a particular security-origin
-      (e.g., http://attacker.com), the server will not link the incoming
-      HTTP request with an existing session, making it difficult for the
-      attacker to mount a cross-site request forgery attack.</t>
+      that if the server does not whitelist a particular security-origin,
+      the server will not link the request with the session, making it
+      difficult for the attacker to mount a cross-site request forgery
+      attack.</t>
     </section>
     <section anchor="server-requirements" title="Server Requirements">
       <t>TODO</t>
