@@ -9,7 +9,7 @@
       Simple HTTP State Management Mechanism
     </title>
     <author initials="A." surname="Barth" fullname="Adam Barth">
-      <organization abbrev="Google">
+      <organization abbrev="Google, Inc.">
         Google, Inc.
       </organization>
       <address>
@@ -136,7 +136,7 @@ obs-fold       = CRLF
       </section>
     </section>
     <section anchor="overview" title="Overview">
-      <t>The cake state managment mechanism consists of two HTTP headers, an
+      <t>The cake state management mechanism consists of two HTTP headers, an
       HTTP response header named Set-Cake-Key and an HTTP request header
       named Cake.  The server can use the Set-Cake-Key response header to
       store a secret key at the user agent:
@@ -221,7 +221,7 @@ $ echo "Origin: http://example.com" |
       server expects to receive HTTP requests from, the server can whitelist
       those security-origins that have access to this "session".  Notice
       that if the server does not whitelist a particular origin (e.g.,
-      http://attacker.com), the server will not link the incomming HTTP
+      http://attacker.com), the server will not link the incoming HTTP
       request with an existing session, making it difficult for the attacker
       to mount a cross-site request forgery attack.</t>
     </section>
