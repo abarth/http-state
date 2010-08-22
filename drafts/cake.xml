@@ -136,11 +136,49 @@ obs-fold       = CRLF
       </section>
     </section>
     <section anchor="overview" title="Overview">
-      <t>TODO</t>
+      <t>The cake state managment mechanism consists of two HTTP headers, an
+      HTTP response header named Set-Cake-Key and an HTTP request header
+      named Cake.  The server can use the Set-Cake-Key response header to
+      store a secret key at the user agent:</t>
 
-      <section title="Examples">
-        <t>TODO</t>
-      </section>
+      <figure>
+        <artwork type="abnf">
+          <![CDATA[
+set-cake-key-header = "Set-Cake-Key:" OWS set-cake-key-string OWS
+set-cake-key-string = cake-key *( ";" SP cake-av )
+cake-key            = 1*BASE64CHAR
+BASE64CHAR          = ALPHA / DIGIT / "+" / "/" / "="
+cake-av             = max-age-av / extension-av
+max-age-av          = "Max-Age=" 1*DIGIT
+extension-av        = <any CHAR except CTLs or ";">
+          ]]>
+        </artwork>
+      </figure>
+
+      <t>For example, the following header stores a 128-bit secret key for
+      two weeks:</t>
+
+      <figure>
+        <artwork>
+          <![CDATA[ 
+Set-Cake-Key: 515BYea21GY7xRbZTLCekQ==; Max-Age=1209600
+          ]]>
+        </artwork>
+      </figure>
+
+      <t>Notice that high-quality base64 encoded random number can easily be
+      generated using the openssl library:</t>
+
+      <figure>
+        <artwork>
+          <![CDATA[ 
+$ openssl rand -base64 16
+          ]]>
+        </artwork>
+      </figure>
+
+
+
     </section>
     <section anchor="server-requirements" title="Server Requirements">
       <t>TODO</t>
