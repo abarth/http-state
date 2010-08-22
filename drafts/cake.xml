@@ -9,8 +9,8 @@
       Simple HTTP State Management Mechanism
     </title>
     <author initials="A." surname="Barth" fullname="Adam Barth">
-      <organization abbrev="Abeca">
-        Abeca Security
+      <organization abbrev="Google">
+        Google, Inc.
       </organization>
       <address>
         <email>ietf@adambarth.com</email>
@@ -31,7 +31,33 @@
   </front>
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>TODO</t>
+      <t>HTTP does not provide servers with a robust mechanism for tracking
+      state between requests.  The dominant HTTP state management mechanism
+      in use on the Internet, known as cookies, has a number of historical
+      infelicities that impair its security and privacy.  In particular,
+      cookies have the following serious defects:
+      <list style="numbers">
+        <t>Cookies assume that a given host name trusts all of its
+        superdomains and siblings.  In particular, students.example.edu can
+        manipulate the cookies used by grades.example.edu, potentially
+        resulting in security vulnerabilities.</t>
+
+        <t>Cookies provide no integrity protection against active network
+        attackers.  Even if the example.com HTTP server always employs TLS,
+        a network attacker manipulate the server's cookies by spoofing
+        responses to requests for http://example.com (assuming the user
+        agent makes a single non-TLS HTTP request, which, of course, the
+        attacker can redirect to http://example.com).</t>
+
+        <t>Cookies indicate only which user agent issued a given HTTP
+        request.  They provide no information about why the user agent
+        issued that request.  This design flaw leads many HTTP servers to be
+        vulnerable to cross-site request forgery, in which the attacker
+        tricks the honest server into performing an action on behalf of the
+        user by causing the user agent to issue an HTTP request to the
+        honest server with the user's cookies.</t>
+      </list>
+      </t>
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
