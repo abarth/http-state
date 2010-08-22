@@ -58,6 +58,27 @@
         honest server with the user's cookies.</t>
       </list>
       </t>
+
+      <t>This document defines a simple HTTP state management mechanism that
+      addresses these shortcommings of cookies.  In this mechanism, the
+      server stores a secret key at the user agent, called the cake-key.
+      When the user agent issues subsequent HTTP requests to the server, the
+      user agent sends a string, called a cake, containing a message
+      authentication code (keyed by the cake-key) of the origin (see
+      draft-abarth-origin) of the request.  By whitelisting acceptable
+      cakes, the server can accept requests from origins of its choice,
+      mitigating cross-site request forgery vulnerabilities.</t>
+
+      <t>Unlike cookies, which can leak from one host name to another and
+      from one scheme to another, the cake-key is scoped to the origin from
+      which it was received.  In particular, http://students.example.edu and
+      http://grades.example.edu have independent cake-keys.  Likewise,
+      http://example.com and https://example.com have independent cake-keys.
+      Therefore, a network attacker (who controls http://example.com) cannot
+      manipulate the state for https://example.com.</t>
+
+      <t>Cake, then, is a simple HTTP state management mechanism that
+      resists a number of common attacks against previous mechanisms.</t>
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
