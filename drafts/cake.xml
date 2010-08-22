@@ -20,7 +20,12 @@
     <date month="August" year="2010"/>
     <workgroup>httpstate</workgroup>
     <abstract>
-      <t>TODO</t>
+      <t>This document describes a simple HTTP state mangement mechanism,
+      called cake, that lets HTTP servers maintain stateful sessions with
+      HTTP user agents.  This mechanism is harmonized with the same-origin
+      security model and provides both confidentiality and integrity
+      protection against active network attackers.  In addition, the
+      mechanism is robust to cross-site request forgery attacks.</t>
     </abstract>
     <note title="Editorial Note (To be removed by RFC Editor)">
       <t>If you have suggestions for improving this document, please send
@@ -34,28 +39,28 @@
       <t>HTTP does not provide servers with a robust mechanism for tracking
       state between requests.  The dominant HTTP state management mechanism
       in use on the Internet, known as cookies, has a number of historical
-      infelicities that impair its security and privacy.  In particular,
-      cookies have the following serious defects:
+      infelicities that impair its security.  In particular, cookies have
+      the following serious defects:
       <list style="numbers">
+        <t>Cookies provide no integrity protection against active network
+        attackers.  Even if the example.com HTTP server always employs TLS,
+        a network attacker manipulate the server's cookies by spoofing
+        responses from http://example.com/ (assuming the user agent makes a
+        single non-TLS protected HTTP request, which, of course, the
+        attacker can redirect to http://example.com/).</t>
+
         <t>Cookies assume that a given host name trusts all of its
         superdomains and siblings.  In particular, students.example.edu can
         manipulate the cookies used by grades.example.edu, potentially
         resulting in security vulnerabilities.</t>
 
-        <t>Cookies provide no integrity protection against active network
-        attackers.  Even if the example.com HTTP server always employs TLS,
-        a network attacker manipulate the server's cookies by spoofing
-        responses to requests for http://example.com (assuming the user
-        agent makes a single non-TLS HTTP request, which, of course, the
-        attacker can redirect to http://example.com).</t>
-
         <t>Cookies indicate only which user agent issued a given HTTP
         request.  They provide no information about why the user agent
         issued that request.  This design flaw leads many HTTP servers to be
-        vulnerable to cross-site request forgery, in which the attacker
-        tricks the honest server into performing an action on behalf of the
-        user by causing the user agent to issue an HTTP request to the
-        honest server with the user's cookies.</t>
+        vulnerable to cross-site request forgery attacks, in which the
+        attacker tricks the server into performing an action on behalf of
+        the user by causing the user agent to issue an HTTP request to the
+        server with the user's cookies.</t>
       </list>
       </t>
 
@@ -63,22 +68,20 @@
       addresses these shortcommings of cookies.  In this mechanism, the
       server stores a secret key at the user agent, called the cake-key.
       When the user agent issues subsequent HTTP requests to the server, the
-      user agent sends a string, called a cake, containing a message
-      authentication code (keyed by the cake-key) of the origin (see
-      draft-abarth-origin) of the request.  By whitelisting acceptable
-      cakes, the server can accept requests from origins of its choice,
-      mitigating cross-site request forgery vulnerabilities.</t>
+      user agent sends a string, called a cake, containing a HMAC (using the
+      cake-key) of the security-origin that generated the request.  By
+      whitelisting expected cakes, the server can accept requests from
+      origins of its choice, mitigating cross-site request forgery
+      vulnerabilities.</t>
 
-      <t>Unlike cookies, which can leak from one host name to another and
-      from one scheme to another, the cake-key is scoped to the origin from
-      which it was received.  In particular, http://students.example.edu and
+      <t>Unlike cookies, which can leak from one host to another and from
+      one scheme to another, the cake-key is scoped to a security-origin.
+      In particular, http://students.example.edu and
       http://grades.example.edu have independent cake-keys.  Likewise,
       http://example.com and https://example.com have independent cake-keys.
-      Therefore, a network attacker (who controls http://example.com) cannot
-      manipulate the state for https://example.com.</t>
-
-      <t>Cake, then, is a simple HTTP state management mechanism that
-      resists a number of common attacks against previous mechanisms.</t>
+      Therefore, an active network attacker (who can compromise
+      http://example.com) cannot manipulate the state for
+      https://example.com.</t>
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
@@ -138,25 +141,11 @@ obs-fold       = CRLF
     <section anchor="overview" title="Overview">
       <t>The cake state management mechanism consists of two HTTP headers, an
       HTTP response header named Set-Cake-Key and an HTTP request header
-      named Cake.  The server can use the Set-Cake-Key response header to
-      store a secret key at the user agent:
-      <figure>
-        <artwork type="abnf">
-          <![CDATA[
-set-cake-key-header = "Set-Cake-Key:" OWS set-cake-key-string OWS
-set-cake-key-string = cake-key *( ";" SP cake-av )
-cake-key            = 1*BASE64CHAR
-BASE64CHAR          = ALPHA / DIGIT / "+" / "/" / "="
-cake-av             = max-age-av / extension-av
-max-age-av          = "Max-Age=" 1*DIGIT
-extension-av        = <any CHAR except CTLs or ";">
-          ]]>
-        </artwork>
-      </figure>
-      </t>
+      named Cake.</t>
 
-      <t>For example, the following header instructs the user agent to store
-      a 128-bit secret key for two weeks:
+      <t>The server can use the Set-Cake-Key response header to store a
+      secret key at the user agent.  For example, the following header
+      instructs the user agent to store a 128-bit secret key for two weeks:
       <figure>
         <artwork>
           <![CDATA[ 
@@ -164,10 +153,8 @@ Set-Cake-Key: 515BYea21GY7xRbZTLCekQ==; Max-Age=1209600
           ]]>
         </artwork>
       </figure>
-      </t>
-
-      <t>Notice that the server can generate a base64 encoded random number
-      easily using the openssl library:
+      Notice that the server can easily generate a base64-encoded random
+      number using the openssl library:
       <figure>
         <artwork>
           <![CDATA[ 
@@ -177,24 +164,14 @@ $ openssl rand -base64 16
       </figure>
       </t>
 
-      <t>The user agent then associated that cake-key with the
-      security-origin it received the response from.  When making subsequent
-      HTTP requests to that security-origin, the user agent includes the
-      Cake request header:
-      <figure>
-        <artwork type="abnf">
-          <![CDATA[
-cake-header         = "Cake:" OWS cake OWS
-cake                = 1*BASE64CHAR
-          ]]>
-        </artwork>
-      </figure>
-      </t>
-
-      <t>The Cake header contains a SHA-1 HMAC (keyed by the cake-key) of
-      the security-origin that generated the request.  For example, if the
-      request was generated on behalf of an HTML document from
-      http://example.com, the user agent would send the following header:
+      <t>The user agent then associated the given cake-key with the
+      security-origin from which it received the Set-Cake-Key header.  When
+      making subsequent HTTP requests to that security-origin, the user
+      agent includes the Cake request header, which contains a SHA-1 HMAC
+      (keyed by the cake-key) of the security-origin that generated the
+      request.  For example, if the request was generated by the user agent
+      on behalf of http://example.com, the user agent sends the following
+      header:
       <figure>
         <artwork>
           <![CDATA[ 
@@ -202,10 +179,8 @@ Cake: Z32dI5wav1Cqj07ToG++DRXV18c=
           ]]>
         </artwork>
       </figure>
-      </t>
-
-      <t>Notice that the server can generate the cake it will receive for
-      various security-origins easily using the openssl library:
+      Notice that the server can easily generate the cake it will receive
+      for a given security-origins using the openssl library:
       <figure>
         <artwork>
           <![CDATA[ 
@@ -219,14 +194,37 @@ $ echo "Origin: http://example.com" |
 
       <t>By pre-computing the cake for the various security-origins the
       server expects to receive HTTP requests from, the server can whitelist
-      those security-origins that have access to this "session".  Notice
-      that if the server does not whitelist a particular origin (e.g.,
-      http://attacker.com), the server will not link the incoming HTTP
-      request with an existing session, making it difficult for the attacker
-      to mount a cross-site request forgery attack.</t>
+      the security-origins that have access to its session state.  Notice
+      that if the server does not whitelist a particular security-origin
+      (e.g., http://attacker.com), the server will not link the incoming
+      HTTP request with an existing session, making it difficult for the
+      attacker to mount a cross-site request forgery attack.</t>
     </section>
     <section anchor="server-requirements" title="Server Requirements">
       <t>TODO</t>
+
+      <figure>
+        <artwork type="abnf">
+          <![CDATA[
+set-cake-key-header = "Set-Cake-Key:" OWS set-cake-key-string OWS
+set-cake-key-string = cake-key *( ";" SP cake-av )
+cake-key            = 1*BASE64CHAR
+BASE64CHAR          = ALPHA / DIGIT / "+" / "/" / "="
+cake-av             = max-age-av / extension-av
+max-age-av          = "Max-Age=" 1*DIGIT
+extension-av        = <any CHAR except CTLs or ";">
+          ]]>
+        </artwork>
+      </figure>
+
+      <figure>
+        <artwork type="abnf">
+          <![CDATA[
+cake-header         = "Cake:" OWS cake OWS
+cake                = 1*BASE64CHAR
+          ]]>
+        </artwork>
+      </figure>
     </section>
     <section anchor="ua-requirements" title="User Agent Requirements">
       <t>TODO</t>
