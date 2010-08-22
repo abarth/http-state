@@ -139,8 +139,7 @@ obs-fold       = CRLF
       <t>The cake state managment mechanism consists of two HTTP headers, an
       HTTP response header named Set-Cake-Key and an HTTP request header
       named Cake.  The server can use the Set-Cake-Key response header to
-      store a secret key at the user agent:</t>
-
+      store a secret key at the user agent:
       <figure>
         <artwork type="abnf">
           <![CDATA[
@@ -154,10 +153,10 @@ extension-av        = <any CHAR except CTLs or ";">
           ]]>
         </artwork>
       </figure>
+      </t>
 
-      <t>For example, the following header stores a 128-bit secret key for
-      two weeks:</t>
-
+      <t>For example, the following header instructs the user agent to store
+      a 128-bit secret key for two weeks:
       <figure>
         <artwork>
           <![CDATA[ 
@@ -165,10 +164,10 @@ Set-Cake-Key: 515BYea21GY7xRbZTLCekQ==; Max-Age=1209600
           ]]>
         </artwork>
       </figure>
+      </t>
 
-      <t>Notice that high-quality base64 encoded random number can easily be
-      generated using the openssl library:</t>
-
+      <t>Notice that the server can generate a base64 encoded random number
+      easily using the openssl library:
       <figure>
         <artwork>
           <![CDATA[ 
@@ -176,8 +175,29 @@ $ openssl rand -base64 16
           ]]>
         </artwork>
       </figure>
+      </t>
 
+      <t>The user agent then associated that cake-key with the
+      security-origin it received the response from.  When making subsequent
+      HTTP requests to that security-origin, the user agent includes the
+      Cake request header:
+      <figure>
+        <artwork type="abnf">
+          <![CDATA[
+cake-header         = "Cake:" OWS cake OWS
+cake                = 1*BASE64CHAR
+          ]]>
+        </artwork>
+      </figure>
+      </t>
 
+      <figure>
+        <artwork>
+          <![CDATA[ 
+Cake: Z32dI5wav1Cqj07ToG++DRXV18c=
+          ]]>
+        </artwork>
+      </figure>
 
     </section>
     <section anchor="server-requirements" title="Server Requirements">
@@ -534,7 +554,7 @@ $ openssl rand -base64 16
       </reference>
       <reference anchor="Netscape">
         <front>
-          <title>Persistent Client State -- HTTP Cookies</title>
+          <title>Persistent Client State - HTTP Cookies</title>
           <author fullname="Netscape Communications Corp.">
             <organization/>
           </author>
