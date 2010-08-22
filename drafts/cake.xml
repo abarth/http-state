@@ -191,6 +191,10 @@ cake                = 1*BASE64CHAR
       </figure>
       </t>
 
+      <t>The Cake header contains a SHA-1 HMAC (keyed by the cake-key) of
+      the security-origin that generated the request.  For example, if the
+      request was generated on behalf of an HTML document from
+      http://example.com, the user agent would send the following header:
       <figure>
         <artwork>
           <![CDATA[ 
@@ -198,7 +202,28 @@ Cake: Z32dI5wav1Cqj07ToG++DRXV18c=
           ]]>
         </artwork>
       </figure>
+      </t>
 
+      <t>Notice that the server can generate the cake it will receive for
+      various security-origins easily using the openssl library:
+      <figure>
+        <artwork>
+          <![CDATA[ 
+$ echo "Origin: http://example.com" |
+  openssl dgst -hmac 515BYea21GY7xRbZTLCekQ== -sha1 -binary |
+  openssl enc -base64
+          ]]>
+        </artwork>
+      </figure>
+      </t>
+
+      <t>By pre-computing the cake for the various security-origins the
+      server expects to receive HTTP requests from, the server can whitelist
+      those security-origins that have access to this "session".  Notice
+      that if the server does not whitelist a particular origin (e.g.,
+      http://attacker.com), the server will not link the incomming HTTP
+      request with an existing session, making it difficult for the attacker
+      to mount a cross-site request forgery attack.</t>
     </section>
     <section anchor="server-requirements" title="Server Requirements">
       <t>TODO</t>
