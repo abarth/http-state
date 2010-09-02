@@ -338,6 +338,10 @@ extension-av      = <any CHAR except CTLs or ";">
           user agent over multiple sockets), these responses create a "race
           condition" that can lead to unpredictable behavior.</t>
 
+          <t>NOTE: Some legacy user agents differ on their interpretation of
+          two-digit years. To avoid compatibility issues, servers SHOULD use
+          the rfc1123-date format, which requires a four-digit year.</t>
+
           <t>NOTE: Some user agents represent dates using 32-bit UNIX time_t
           values.  Some of these user agents might contain bugs that cause them
           to process dates after the year 2038 incorrectly.</t>
@@ -570,11 +574,16 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             </list>
             </t>
 
-            <t>If the year-value is greater than 68 and less than 100,
-            increment the year-value by 1900.</t>
+            <t>If the year-value is greater than or equal to 70 and less than
+            or equal to 99, increment the year-value by 1900.</t>
 
             <t>If the year-value is greater than or equal to 0 and less than
-            69, increment the year-value by 2000.</t>
+            or equal to 69, increment the year-value by 2000.
+            <list style="none">
+              <t>NOTE: Some legacy user agents interpret two-digit years
+              differently.</t>
+            </list>
+            </t>
 
             <t>Abort these steps and fail to parse the cookie-date if
             <list style="symbols">
