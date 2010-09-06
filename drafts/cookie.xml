@@ -579,7 +579,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
 
             <t>If the year-value is greater than or equal to 0 and less than
             or equal to 69, increment the year-value by 2000.
-            <list style="none">
+            <list>
               <t>NOTE: Some legacy user agents interpret two-digit years
               differently.</t>
             </list>
