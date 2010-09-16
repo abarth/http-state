@@ -115,9 +115,13 @@ obs-fold       = CRLF
         the same meaning as in the HTTP/1.1 specification (<xref
         target="RFC2616" />, Section 1.3).</t>
 
-        <t>The terms request-host and request-uri refer to the values the user
-        agent would send to the server as, respectively, the host (but not
-        port) and the absoluteURI (http_URL) of the HTTP Request-Line.</t>
+        <t>The request-host is the fully-qualified domain name of the host to
+        which the user agent is sending an HTTP request or is receiving an
+        HTTP response from (i.e., the fully-qualified domain name of the host
+        to which it sent the corresponding HTTP request).</t>
+
+        <t>The term request-uri is defined in Section 5.1.2 of <xref
+        target="RFC2616" />.</t>
 
         <t>Two sequences of octets are said to case-insensitively match each
         other if and only if they are equivalent under the i;ascii-casemap
