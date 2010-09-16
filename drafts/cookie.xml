@@ -145,7 +145,7 @@ obs-fold       = CRLF
       (",") character is used by the Set-Cookie header in a way that conflicts
       with such folding.  This historical infelicity is incompatible with
       the usual mechanism for folding HTTP headers as defined in
-      <xref href="RFC2616" />.</t>
+      <xref target="RFC2616" />.</t>
 
       <section title="Examples">
         <t>Using the Set-Cookie header, a server can send the user agent a
@@ -308,7 +308,9 @@ expires-av        = "Expires=" sane-cookie-date
 sane-cookie-date  = <rfc1123-date, defined in [RFC2616], Section 3.3.1>
 max-age-av        = "Max-Age=" 1*DIGIT
 domain-av         = "Domain=" domain-value
-domain-value      = <subdomain, defined in [RFC1034], Section 3.5>
+domain-value      = <subdomain>
+                      ; defined in [RFC1034], Section 3.5, as
+                      ; enhanced by [RFC1123], Section 2.1>
 path-av           = "Path=" path-value
 path-value        = <any CHAR except CTLs or ";">
 secure-av         = "Secure"
@@ -1460,7 +1462,32 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <seriesInfo name="STD" value="13" /> 
         <seriesInfo name="RFC" value="1034" /> 
         <format type="TXT" octets="129180" target="http://www.rfc-editor.org/rfc/rfc1034.txt" /> 
-      </reference> 
+      </reference>
+      <reference anchor='RFC1123'> 
+        <front>
+          <title>Requirements for Internet Hosts - Application and
+          Support</title>
+          <author initials="R." surname="Braden" fullname="Robert Braden">
+            <organization>University of Southern California (USC), Information
+            Sciences Institute</organization>
+            <address>
+              <postal>
+                <street>4676 Admiralty Way</street>
+                <city>Marina del Rey</city>
+                <region>CA</region>
+                <code>90292-6695</code>
+                <country>US</country>
+              </postal>
+              <phone>+1 213 822 1511</phone>
+              <email>Braden@ISI.EDU</email>
+            </address>
+          </author>
+          <date year="1989" month="October" />
+        </front>
+        <seriesInfo name="STD" value="3" />
+        <seriesInfo name="RFC" value="1123" />
+        <format type="TXT" octets="245503" target="http://www.rfc-editor.org/rfc/rfc1123.txt" />
+        </reference> 
       <reference anchor="RFC2119">
         <front>
           <title abbrev="RFC Key Words">
