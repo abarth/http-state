@@ -1782,13 +1782,13 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <format type="TXT" octets="15170"
                 target="http://www.rfc-editor.org/rfc/rfc2818.txt" />
       </reference>
-      <reference anchor="Netscape">
+      <reference anchor="Netscape" target="http://web.archive.org/web/20020803110822/http://wp.netscape.com/newsref/std/cookie_spec.html">
         <front>
           <title>Persistent Client State -- HTTP Cookies</title>
           <author fullname="Netscape Communications Corp.">
-            <organization/>
+            <organization>Netscape Communications Corp.</organization>
           </author>
-          <date/>
+          <date year="c1999" />
         </front>
       </reference>
       <reference anchor="Kri2001" target="http://arxiv.org/abs/cs.SE/0105018">
