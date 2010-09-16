@@ -523,13 +523,14 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
       detail to allow a user agent implementing these requirements precisely to
       interoperate with existing servers.</t>
 
-      <section anchor="algorithms" title="Algorithms">
-        <t>This section defines a number of algorithms used by user agents to
-        process the Cookie and Set-Cookie headers.</t>
+      <section anchor="algorithms" title="Subcomponent Algorithms">
+        <t>This section defines some algorithms used by user agents to process
+        specific subcomponents of the Cookie and Set-Cookie headers.</t>
 
         <section anchor="cookie-date" title="Dates">
           <t>The user agent MUST use an algorithm equivalent to the following
-          algorithm to parse a cookie-date:
+          algorithm to parse a cookie-date. Note that the various boolean
+          flags defined as a part of the algorithm are initially "not set".
           <list style="numbers">
             <t>Using the grammar below, divide the cookie-date into
             date-tokens.
