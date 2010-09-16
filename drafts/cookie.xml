@@ -1855,7 +1855,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           <author fullname="Netscape Communications Corp.">
             <organization>Netscape Communications Corp.</organization>
           </author>
-          <date year="c1999" />
+          <date year="1999" />
         </front>
       </reference>
       <reference anchor="Kri2001" target="http://arxiv.org/abs/cs.SE/0105018">
