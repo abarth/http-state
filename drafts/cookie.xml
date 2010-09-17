@@ -145,7 +145,7 @@ obs-fold       = CRLF
       in a single response.</t>
 
       <t>Note that folding multiple Set-Cookie header fields into a single
-      header field might change the semantics of the header because the U+002C
+      header field might change the semantics of the header because the %x2C
       (",") character is used by the Set-Cookie header in a way that conflicts
       with such folding.  This historical infelicity is incompatible with
       the usual mechanism for folding HTTP headers as defined in
@@ -411,7 +411,7 @@ extension-av      = <any CHAR except CTLs or ";">
             is "example.com", the user agent will include the cookie in
             the Cookie header when making HTTP requests to example.com,
             www.example.com, and www.corp.example.com. (Note that a leading
-            U+002E ("."), if present, is ignored even though that character is
+            %x2E ("."), if present, is ignored even though that character is
             not permitted.) If the server omits the Domain attribute, the user
             agent will return the cookie only to the origin server.
             <list>
@@ -445,7 +445,7 @@ extension-av      = <any CHAR except CTLs or ";">
 
             <t>The user agent will include the cookie in an HTTP request only
             if the path portion of the request-uri matches (or is a
-            subdirectory of) the cookie's Path attribute, where the U+002F
+            subdirectory of) the cookie's Path attribute, where the %x2F
             ("/") character is interpreted as a directory separator.</t>
 
             <t>Although seemingly useful for isolating cookies between
@@ -639,7 +639,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             <t>Convert the labels to lower case.</t>
 
             <t>Concatenate the labels, separating each label from the next
-            with a U+002E (".") character.</t>
+            with a %x2E (".") character.</t>
           </list>
           </t>
         </section>
@@ -654,7 +654,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
               <t>The domain string is a suffix of the string.</t>
 
               <t>The last character of the string that is not included in the
-              domain string is a U+002E (".") character.</t>
+              domain string is a %x2E (".") character.</t>
 
               <t>The string is a host name (i.e., not an IP address).</t>
             </list>
@@ -669,19 +669,19 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             <t>Let uri-path be the path portion of the request-uri if such a
             portion exists (and empty otherwise). For example, if the
             request-uri contains just a path (and optional query string), then
-            the uri-path is that path (without the U+003F ("?") character or
+            the uri-path is that path (without the %x3F ("?") character or
             query string), and if the request-uri contains a full absoluteURI,
             the uri-path is the path component of that URI.</t>
 
             <t>If the uri-path is empty or if first character of the uri-path
-            is not a U+002F ("/") character, output U+002F ("/") and skip the
+            is not a %x2F ("/") character, output %x2F ("/") and skip the
             remaining steps.</t>
 
-            <t>If the uri-path contains only a single U+002F ("/") character,
-            output U+002F ("/") and skip the remaining steps.</t>
+            <t>If the uri-path contains only a single %x2F ("/") character,
+            output %x2F ("/") and skip the remaining steps.</t>
 
             <t>Output the characters of the uri-path from the first character
-            up to, but not including, the right-most U+002F ("/").</t>
+            up to, but not including, the right-most %x2F ("/").</t>
           </list>
           </t>
 
@@ -691,11 +691,11 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
             <t>The cookie-path and the request-path are identical.</t>
 
             <t>The cookie-path is a prefix of the request-path and the last
-            character of the cookie-path is U+002F ("/").</t>
+            character of the cookie-path is %x2F ("/").</t>
 
             <t>The cookie-path is a prefix of the request-path and the first
             character of the request-path that is not included in the
-            cookie-path is a U+002F ("/") character.</t>
+            cookie-path is a %x2F ("/") character.</t>
           </list>
           </t>
         </section>
@@ -717,12 +717,12 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
         <t>A user agent MUST use an algorithm equivalent to the following
         algorithm to parse a "set-cookie-string":
         <list style="numbers">
-          <t>If the set-cookie-string contains a U+003B (";") character:
+          <t>If the set-cookie-string contains a %x3B (";") character:
           <list style="empty">
             <t>The name-value-pair string consists of the characters up to,
-            but not including, the first U+003B (";"), and the
+            but not including, the first %x3B (";"), and the
             unparsed-attributes consist of the remainder of the
-            set-cookie-string (including the U+003B (";") in question).</t>
+            set-cookie-string (including the %x3B (";") in question).</t>
           </list>
           Otherwise:
           <list style="empty">
@@ -732,13 +732,13 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           </list>
           </t>
 
-          <t>If the name-value-pair string lacks a U+003D ("=") character,
+          <t>If the name-value-pair string lacks a %x3D ("=") character,
           ignore the set-cookie-string entirely.</t>
 
           <t>The (possibly empty) name string consists of the characters up to,
-          but not including, the first U+003D ("=") character, and the
+          but not including, the first %x3D ("=") character, and the
           (possibly empty) value string consists of the characters after the
-          first U+003D ("=") character.</t>
+          first %x3D ("=") character.</t>
 
           <t>Remove any leading or trailing WSP characters from the name
           string and the value string.</t>
@@ -758,13 +758,13 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           these steps.</t>
 
           <t>Discard the first character of the unparsed-attributes (which
-          will be a U+003B (";") character).</t>
+          will be a %x3B (";") character).</t>
 
-          <t>If the remaining unparsed-attributes contains a U+003B (";")
+          <t>If the remaining unparsed-attributes contains a %x3B (";")
           character:
           <list style="empty">
             <t>Consume the characters of the unparsed-attributes up to, but
-            not including, the first U+003B (";") character.</t>
+            not including, the first %x3B (";") character.</t>
           </list>
           Otherwise:
           <list style="empty">
@@ -773,12 +773,12 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           Let the cookie-av string be the characters consumed in this
           step.</t>
 
-          <t>If the cookie-av string contains a U+003D ("=") character:
+          <t>If the cookie-av string contains a %x3D ("=") character:
           <list style="empty">
             <t>The (possibly empty) attribute-name string consists of the
-            characters up to, but not including, the first U+003D ("=")
+            characters up to, but not including, the first %x3D ("=")
             character, and the (possibly empty) attribute-value string
-            consists of the characters after the first U+003D ("=")
+            consists of the characters after the first %x3D ("=")
             character.</t>
           </list>
           Otherwise:
@@ -854,11 +854,11 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           <t>If the attribute-value is empty, the behavior is undefined.
           However, user agent SHOULD ignore the cookie-av entirely.</t>
 
-          <t>If the first character of the attribute-value string is U+002E
+          <t>If the first character of the attribute-value string is %x2E
           ("."):
           <list style="empty">
             <t>Let cookie-domain be the attribute-value without the leading
-            U+002E (".") character.</t>
+            %x2E (".") character.</t>
           </list>
           Otherwise:
           <list style="empty">
@@ -877,7 +877,7 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           "Path", the user agent MUST process the cookie-av as follows.</t>
 
           <t>If the attribute-value is empty or if the first character of the
-          attribute-value is not U+002F ("/"):
+          attribute-value is not %x2F ("/"):
           <list style="empty">
             <t>Let cookie-path be the default-path.</t>
           </list>
@@ -1156,11 +1156,11 @@ mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
           <t>Serialize the cookie-list into a cookie-string by processing each
           cookie in the cookie-list in order:
           <list style="numbers">
-            <t>Output the cookie's name, the U+003D ("=") character, and the
+            <t>Output the cookie's name, the %x3D ("=") character, and the
             cookie's value.</t>
 
             <t>If there is an unprocessed cookie in the cookie-list, output
-            the characters U+003B and U+0020 ("; ").</t>
+            the characters %x3B and %x20 ("; ").</t>
           </list>
           </t>
         </list>
