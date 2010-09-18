@@ -539,14 +539,14 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
 cookie-date     = *delimiter date-token-list *delimiter
 date-token-list = date-token *( 1*delimiter date-token )
 delimiter       = %x09 / %x20-2F / %x3B-40 / %x5B-60 / %x7B-7E
-date-token      = day-of-month / month / year / time / mystery
+date-token      = day-of-month / month / year / time / 1*mystery
 day-of-month    = 1*2DIGIT
-month           = "jan" [ mystery ] / "feb" [ mystery ] /
-                  "mar" [ mystery ] / "apr" [ mystery ] /
-                  "may" [ mystery ] / "jun" [ mystery ] /
-                  "jul" [ mystery ] / "aug" [ mystery ] /
-                  "sep" [ mystery ] / "oct" [ mystery ] /
-                  "nov" [ mystery ] / "dec" [ mystery ]
+month           = "jan" [ 1*mystery ] / "feb" [ 1*mystery ] /
+                  "mar" [ 1*mystery ] / "apr" [ 1*mystery ] /
+                  "may" [ 1*mystery ] / "jun" [ 1*mystery ] /
+                  "jul" [ 1*mystery ] / "aug" [ 1*mystery ] /
+                  "sep" [ 1*mystery ] / "oct" [ 1*mystery ] /
+                  "nov" [ 1*mystery ] / "dec" [ 1*mystery ]
 year            = 1*4DIGIT
 time            = time-field ":" time-field ":" time-field
 time-field      = 1*2DIGIT
