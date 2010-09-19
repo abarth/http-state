@@ -538,22 +538,18 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
               <artwork type="abnf">
 cookie-date     = *delimiter date-token-list *delimiter
 date-token-list = date-token *( 1*delimiter date-token )
+date-token      = 1*non-delimiter
+
 delimiter       = %x09 / %x20-2F / %x3B-40 / %x5B-60 / %x7B-7E
-date-token      = day-of-month / month / year / time / *mystery
+non-delimiter   = %x00-08 / %x0A-1F / DIGIT / ":" / ALPHA / %x7F-FF
+
 day-of-month    = 1*2DIGIT
-month           = "jan" [ *mystery ] / "feb" [ *mystery ] /
-                  "mar" [ *mystery ] / "apr" [ *mystery ] /
-                  "may" [ *mystery ] / "jun" [ *mystery ] /
-                  "jul" [ *mystery ] / "aug" [ *mystery ] /
-                  "sep" [ *mystery ] / "oct" [ *mystery ] /
-                  "nov" [ *mystery ] / "dec" [ *mystery ]
+month           = ( "jan" / "feb" / "mar" / "apr" /
+                    "may" / "jun" / "jul" / "aug" /
+                    "sep" / "oct" / "nov" / "dec" ) *non-delimiter
 year            = 1*4DIGIT
 time            = time-field ":" time-field ":" time-field
 time-field      = 1*2DIGIT
-CTLwoHTAB       = %x00-08 / %x0A-1F / %x7F
-                  ; CTL except HTAB
-mystery         = CTLwoHTAB / ":" / ALPHA / DIGIT / %x80-FF
-                  ; any OCTET except a delimiter
               </artwork>
             </figure>
             </t>
