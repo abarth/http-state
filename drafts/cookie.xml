@@ -126,6 +126,8 @@ obs-fold       = CRLF
         <t>Two sequences of octets are said to case-insensitively match each
         other if and only if they are equivalent under the i;ascii-casemap
         collation defined in <xref target="RFC4790"/>.</t>
+
+        <t>The term string means a sequence of octets.</t>
       </section>
     </section>
     <section anchor="overview" title="Overview">
@@ -314,7 +316,7 @@ max-age-av        = "Max-Age=" 1*DIGIT
 domain-av         = "Domain=" domain-value
 domain-value      = <subdomain>
                       ; defined in [RFC1034], Section 3.5, as
-                      ; enhanced by [RFC1123], Section 2.1>
+                      ; enhanced by [RFC1123], Section 2.1
 path-av           = "Path=" path-value
 path-value        = <any CHAR except CTLs or ";">
 secure-av         = "Secure"
@@ -1218,7 +1220,7 @@ time-field      = 1*2DIGIT
         MAY implement [Unicode Technical Standard #46
         &lt;http://unicode.org/reports/tr46/&gt;] in order to facilitate a
         smoother IDNA transition. If a user agent does not implement IDNA2008,
-        the user agents MUST implement IDNA2003 <xref target="RFC3490" />.</t>
+        the user agent MUST implement IDNA2003 <xref target="RFC3490" />.</t>
       </section>
     </section>
     <section anchor="privacy-considerations"
