@@ -3,7 +3,7 @@
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
-<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-13"
+<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-14"
      category="std" obsoletes="2109">
   <front>
     <title abbrev="HTTP State Management Mechanism">
@@ -1630,6 +1630,11 @@ time-field      = 1*2DIGIT
           </front>
           <seriesInfo name="RFC" value="3490" />
         <format type="TXT" octets="51943" target="http://www.rfc-editor.org/rfc/rfc3490.txt" />
+        <annotation>
+
+          See <xref target="idna-migration" /> for an explanation why the
+          normative reference to an obsoleted specification is needed.
+        </annotation>
       </reference>
       <!--
       <reference anchor="RFC3492">
