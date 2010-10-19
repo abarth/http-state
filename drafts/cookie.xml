@@ -3,7 +3,7 @@
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
-<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-15"
+<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-16pre"
      category="std" obsoletes="2109">
   <front>
     <title abbrev="HTTP State Management Mechanism">
