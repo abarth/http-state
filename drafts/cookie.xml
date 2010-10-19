@@ -3,7 +3,7 @@
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
-<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-14"
+<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-15"
      category="std" obsoletes="2109">
   <front>
     <title abbrev="HTTP State Management Mechanism">
@@ -18,7 +18,7 @@
         <uri>http://www.adambarth.com/</uri>
       </address>
     </author>
-    <date month="September" year="2010"/>
+    <date month="October" year="2010"/>
     <workgroup>httpstate</workgroup>
     <abstract>
       <t>This document defines the HTTP Cookie and Set-Cookie header fields.
@@ -1456,8 +1456,9 @@ time-field      = 1*2DIGIT
       </section>
     </section>
     <section title="IANA Considerations" anchor="iana-considerations">
-      <t>The permanent message header registry (see <xref target="RFC3864"/>)
-      should be updated with the following registrations:</t>
+      <t>The permanent message header field registry (see <xref
+      target="RFC3864"/>) should be updated with the following
+      registrations:</t>
 
       <section title="Cookie">
         <t>Header field name: Cookie</t>
