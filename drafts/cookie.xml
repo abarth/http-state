@@ -45,9 +45,9 @@
       the metadata and other information to determine whether to return the
       name/value pairs in the Cookie header.</t>
 
-      <t>Although simple on its surface, cookies have a number of
+      <t>Although simple on their surface, cookies have a number of
       complexities. For example, the server indicates a scope for each cookie
-      when sending them to the user agent. The scope indicates the maximum
+      when sending it to the user agent. The scope indicates the maximum
       amount of time the user agent should return the cookie, the servers to
       which the user agent should return the cookie, and the URI schemes for
       which the cookie is applicable.</t>
@@ -56,7 +56,7 @@
       privacy infelicities. For example, a server can indicate that a given
       cookie is intended for "secure" connections, but the Secure attribute
       does not provide integrity in the presence of an active network
-      attackers. Similarly, cookies for a given host are shared across all the
+      attacker. Similarly, cookies for a given host are shared across all the
       ports on that host, even though the usual "same-origin policy" used by
       web browsers isolates content retrieved via different ports.</t>
 
@@ -379,7 +379,7 @@ extension-av      = <any CHAR except CTLs or ";">
           <t>Unless the cookie's attributes indicate otherwise, the cookie is
           returned only to the origin server, and it expires at the end of the
           current session (as defined by the user agent). User agents ignore
-          unrecognized cookie attributes.</t>
+          unrecognized cookie attributes (but not the entire cookie).</t>
 
           <section anchor="sane-expires" title="The Expires Attribute">
             <t>The Expires attribute indicates the maximum lifetime of the
@@ -434,9 +434,9 @@ extension-av      = <any CHAR except CTLs or ";">
             "baz.foo.example.com".</t>
 
             <t>NOTE: For security reasons, many user agents are configured to
-            reject Domain attributes that correspond to "public suffixes." For
-            example, some user agents will reject Domain attributes of "com"
-            or "co.uk".</t>
+            reject Domain attributes that correspond to "public suffixes".  For
+            example, some user agents will reject Domain attributes of "com" or
+            "co.uk".</t>
           </section>
           <section anchor="sane-path" title="The Path Attribute">
             <t>The scope of each cookie is limited to a set of paths,
@@ -459,9 +459,10 @@ extension-av      = <any CHAR except CTLs or ";">
             <t>The Secure attribute limits the scope of the cookie to "secure"
             channels (where "secure" is defined by the user agent). When a
             cookie has the Secure attribute, the user agent will include the
-            cookie in an HTTP request only if the request is transmitted over
-            a secure channel (typically HTTP over SSL, HTTP over TLS <xref
-            target="RFC2818" />, and TLS <xref target="RFC5246" /> itself).</t>
+            cookie in an HTTP request only if the request is transmitted over a
+            secure channel (typically HTTP over Secure Sockets Layer (SSL),
+            HTTP over Transport Layer Security (TLS) <xref target="RFC2818" />,
+            and TLS <xref target="RFC5246" /> itself).</t>
 
             <t>Although seemingly useful for protecting cookies from active
             network attackers, the Secure attribute protects only the cookie's
@@ -483,7 +484,7 @@ extension-av      = <any CHAR except CTLs or ";">
           <t>The user agent sends stored cookies to the origin server in the
           Cookie header. If the server conforms to the requirements in <xref
           target="sane-set-cookie" /> (and the user agent conforms to the
-          requirements in the <xref target="ua-requirements" />), the user
+          requirements in <xref target="ua-requirements" />), the user
           agent will send a Cookie header that conforms to the following
           grammar:</t>
 
@@ -614,7 +615,7 @@ time-field      = 1*2DIGIT
             </t>
 
             <t>Let the parsed-cookie-date be the date whose day-of-month,
-            month, year, hour, minute, and second (in GMT) are the
+            month, year, hour, minute, and second (in UTC) are the
             day-of-month-value, the month-value, the year-value, the
             hour-value, the minute-value, and the second-value,
             respectively. If no such date exists, abort these steps and fail
@@ -673,9 +674,9 @@ time-field      = 1*2DIGIT
             query string), and if the request-uri contains a full absoluteURI,
             the uri-path is the path component of that URI.</t>
 
-            <t>If the uri-path is empty or if first character of the uri-path
-            is not a %x2F ("/") character, output %x2F ("/") and skip the
-            remaining steps.</t>
+            <t>If the uri-path is empty or if the first character of the
+            uri-path is not a %x2F ("/") character, output %x2F ("/") and skip
+            the remaining steps.</t>
 
             <t>If the uri-path contains only a single %x2F ("/") character,
             output %x2F ("/") and skip the remaining steps.</t>
@@ -973,7 +974,7 @@ time-field      = 1*2DIGIT
             </list>
             Otherwise:
             <list style="empty">
-              <t>Ignore the cookie entirely and abort these steps</t>
+              <t>Ignore the cookie entirely and abort these steps.</t>
             </list>
             </t>
 
@@ -1260,7 +1261,7 @@ time-field      = 1*2DIGIT
           the cookies stored in the cookie store. For example, a user agent
           might let users delete all cookies received during a specified time
           period or all the cookies related to a particular domain. In
-          addition, many user agent include a user interface element that lets
+          addition, many user agents include a user interface element that lets
           users examine the cookies stored in their cookie store.</t>
 
           <t>User agents should provide users with a mechanism for disabling
