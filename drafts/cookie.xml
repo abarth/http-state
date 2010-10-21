@@ -450,7 +450,8 @@ extension-av      = <any CHAR except CTLs or ";">
             <t>NOTE: For security reasons, many user agents are configured to
             reject Domain attributes that correspond to "public suffixes".  For
             example, some user agents will reject Domain attributes of "com" or
-            "co.uk".</t>
+            "co.uk".  (See <xref target="storage-model" /> for more
+            information.)</t>
           </section>
           <section anchor="sane-path" title="The Path Attribute">
             <t>The scope of each cookie is limited to a set of paths,
@@ -646,8 +647,8 @@ time-field      = 1*2DIGIT
           following algorithm:
           <list style="numbers">
             <t>Convert the host name to a sequence of NR-LDH labels (see
-            Section 2.3.2.2 of <xref target="RFC5890" />) and/or A-labels
-            according to the appropriate IDNA specification <xref
+            Section 2.3.2.2 of <xref target="RFC5890" />) or a sequence of
+            A-labels according to the appropriate IDNA specification <xref
             target="RFC5891" /> or <xref target="RFC3490" /> (see <xref
             target="idna-migration" /> of this specification)</t>
 
@@ -717,7 +718,12 @@ time-field      = 1*2DIGIT
       </section>
       <section anchor="set-cookie" title="The Set-Cookie Header">
         <t>When a user agent receives a Set-Cookie header field in an HTTP
-        response, the user agent MUST parse the field-value of the Set-Cookie
+        response, the user agent MAY ignore the Set-Cookie header field in its
+        entirety. For example, the user agent might wish to block responses to
+        "third-party" requests from setting cookies.</t>
+
+        <t>If the user agent does not ignore the Set-Cookie header field in its
+        entirety, the user agent MUST parse the field-value of the Set-Cookie
         header field as a set-cookie-string (defined below).</t>
 
         <t>NOTE: The algorithm below is more permissive than the grammar in
