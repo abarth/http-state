@@ -1013,12 +1013,17 @@ time-field      = 1*2DIGIT
           <t>If the domain-attribute is non-empty:
           <list style="empty">
             <t>If the canonicalized request-host does not domain-match the
-            domain-attribute, ignore the cookie entirely and abort these
-            steps.</t>
+            domain-attribute:
+            <list>
+              <t>Ignore the cookie entirely and abort these steps.</t>
+            </list>
+            Otherwise:
+            <list>
+              <t>Set the cookie's host-only-flag to false.</t>
 
-            <t>Set the cookie's host-only-flag to false.</t>
-
-            <t>Set the cookie's domain to the domain-attribute.</t>
+              <t>Set the cookie's domain to the domain-attribute.</t>
+            </list>
+            </t>
           </list>
           Otherwise:
           <list style="empty">
