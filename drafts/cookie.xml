@@ -348,7 +348,7 @@ extension-av      = <any CHAR except CTLs or ";">
 
           <t>To maximize compatibility with user agents, servers that wish to
           store non-ASCII data in a cookie-value SHOULD encode that data using
-          a printable ASCII encoding such as Base64 <xref target="RFC3548"
+          a printable ASCII encoding such as Base 16 <xref target="RFC3548"
           />.</t>
 
           <t>The portions of the set-cookie-string produced by the cookie-av
