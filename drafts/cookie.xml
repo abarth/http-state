@@ -4,7 +4,7 @@
 <?rfc symrefs="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
 <rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-16pre"
-     category="std" obsoletes="2109">
+     category="std" obsoletes="2965">
   <front>
     <title abbrev="HTTP State Management Mechanism">
       HTTP State Management Mechanism
@@ -68,6 +68,19 @@
       <xref target="Kri2001"/> for historical context). This document attempts
       to specify the syntax and semantics of these headers as they are
       actually used on the Internet.</t>
+
+      <t>Therefore, in relation to previous IETF specifications of HTTP state
+      management mechanisms, this document requests the following actions:
+      <list style="numbers">
+        <t>Change the status of <xref target="RFC2109" /> to Historic (it has
+        already been obsoleted by <xref target="RFC2965"/>).</t>
+
+        <t>Change the status of <xref target="RFC2965" /> to Historic.</t>
+
+        <t>Indicate that <xref target="RFC2965" /> is obsoleted by this
+        document.</t>
+      </list>
+      </t>
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
@@ -335,7 +348,8 @@ extension-av      = <any CHAR except CTLs or ";">
 
           <t>To maximize compatibility with user agents, servers that wish to
           store non-ASCII data in a cookie-value SHOULD encode that data using
-          a printable ASCII encoding.</t>
+          a printable ASCII encoding such as Base64 <xref target="RFC3548"
+          />.</t>
 
           <t>The portions of the set-cookie-string produced by the cookie-av
           term are known as attributes.  To maximize compatibility with user
@@ -350,7 +364,7 @@ extension-av      = <any CHAR except CTLs or ";">
           user agent over multiple sockets), these responses create a "race
           condition" that can lead to unpredictable behavior.</t>
 
-          <t>NOTE: Some legacy user agents differ on their interpretation of
+          <t>NOTE: Some existing user agents differ on their interpretation of
           two-digit years. To avoid compatibility issues, servers SHOULD use
           the rfc1123-date format, which requires a four-digit year.</t>
 
@@ -395,7 +409,7 @@ extension-av      = <any CHAR except CTLs or ";">
             the specified duration. In fact, user agents often evict
             cookies from due to memory pressure or privacy concerns.
             <list>
-              <t>NOTE: Some legacy user agents do not support the Max-Age
+              <t>NOTE: Some existing user agents do not support the Max-Age
               attribute. User agents that do not support the Max-Age attribute
               ignore the attribute.</t>
             </list>
@@ -417,7 +431,7 @@ extension-av      = <any CHAR except CTLs or ";">
             not permitted.) If the server omits the Domain attribute, the user
             agent will return the cookie only to the origin server.
             <list>
-              <t>WARNING: Some legacy user agents treat an absent Domain
+              <t>WARNING: Some existing user agents treat an absent Domain
               attribute as if the Domain attribute were present and contained
               the current host name. For example, if example.com returns a
               Set-Cookie header without a Domain attribute, these user agents
@@ -592,7 +606,7 @@ time-field      = 1*2DIGIT
             <t>If the year-value is greater than or equal to 0 and less than
             or equal to 69, increment the year-value by 2000.
             <list>
-              <t>NOTE: Some legacy user agents interpret two-digit years
+              <t>NOTE: Some existing user agents interpret two-digit years
               differently.</t>
             </list>
             </t>
@@ -1875,6 +1889,25 @@ time-field      = 1*2DIGIT
         <seriesInfo name="ACM Transactions on Internet Technology"
                     value="Vol. 1, #2"/>
       </reference>
+      <reference anchor="RFC3548"> 
+        <front> 
+          <title>The Base16, Base32, and Base64 Data Encodings</title> 
+          <author initials="S." surname="Josefsson" fullname="S. Josefsson"> 
+            <organization />
+          </author> 
+          <date year="2003" month="July" /> 
+          <abstract> 
+            <t>This document describes the commonly used base 64, base 32, and
+            base 16 encoding schemes.  It also discusses the use of line-feeds
+            in encoded data, use of padding in encoded data, use of
+            non-alphabet characters in encoded data, and use of different
+            encoding alphabets.  This memo provides information for the
+            Internet community.</t>
+          </abstract>
+        </front> 
+        <seriesInfo name="RFC" value="3548" /> 
+        <format type="TXT" octets="26363" target="http://www.rfc-editor.org/rfc/rfc3548.txt" /> 
+      </reference> 
       <reference anchor="RFC3864">
         <front>
           <title>Registration Procedures for Message Header Fields</title>
