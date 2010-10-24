@@ -1060,7 +1060,7 @@ time-field      = 1*2DIGIT
             algorithm maintains the invariant that there is at most one such
             cookie.)</t>
 
-            <t>If the newly created cookie was received from an "non-HTTP"
+            <t>If the newly created cookie was received from a "non-HTTP"
             API and the old-cookie's http-only-flag is set, abort these
             steps and ignore the newly created cookie entirely.</t>
 
