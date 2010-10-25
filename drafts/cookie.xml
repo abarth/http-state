@@ -651,9 +651,6 @@ time-field      = 1*2DIGIT
             target="RFC5891" /> or <xref target="RFC3490" /> (see <xref
             target="idna-migration" /> of this specification)</t>
 
-            <t>Convert the labels resulting from the previous step to lower
-            case.</t>
-
             <t>Concatenate the labels resulting from the previous step,
             separating each label from the next with a %x2E (".")
             character.</t>
