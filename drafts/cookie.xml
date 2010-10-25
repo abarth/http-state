@@ -1231,13 +1231,17 @@ time-field      = 1*2DIGIT
       </section>
       <section anchor="idna-migration" title="IDNA dependency and migration">
         <t>IDNA2008 <xref target="RFC5890" /> supersedes IDNA2003 <xref
-        target="RFC3490" /> but is not backwards-compatible. For this reason,
-        there will be a transition period (possibly of a number of years).
-        User agents SHOULD implement IDNA2008 <xref target="RFC5890" /> and
-        MAY implement [Unicode Technical Standard #46
-        &lt;http://unicode.org/reports/tr46/&gt;] in order to facilitate a
-        smoother IDNA transition. If a user agent does not implement IDNA2008,
-        the user agent MUST implement IDNA2003 <xref target="RFC3490" />.</t>
+        target="RFC3490" />.  However, there are differences between the two
+        specifications, and thus there can be differences in processing (e.g.
+        converting) domain name labels that have been registered under one from
+        those registered under the other.  There will be a transition period of
+        some time during which IDNA2003-based domain name labels will exist in
+        the wild.  User agents SHOULD implement IDNA2008 <xref target="RFC5890"
+        /> and MAY implement [Unicode Technical Standard #46 (UTS46)
+        <http://unicode.org/reports/tr46/>] or <xref target="RFC3495" /> in
+        order to facilitate their IDNA transition.  If a user agent does not
+        implement IDNA2008, the user agent MUST implement IDNA2003 <xref
+        target="RFC3490" />.</t>
       </section>
     </section>
     <section anchor="privacy-considerations"
