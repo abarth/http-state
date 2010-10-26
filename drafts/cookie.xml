@@ -1073,7 +1073,7 @@ time-field      = 1*2DIGIT
 
         <t>At any time, the user agent MAY "remove excess cookies" from the
         cookie store if the number of cookies sharing a domain field exceeds
-        some implementaiton defined upper bound (such as 50 cookies).</t>
+        some implementation defined upper bound (such as 50 cookies).</t>
 
         <t>At any time, the user agent MAY "remove excess cookies" from the
         cookie store if the cookie store exceeds some predetermined upper bound
