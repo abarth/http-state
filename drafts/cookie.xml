@@ -1245,10 +1245,9 @@ time-field      = 1*2DIGIT
         those registered under the other.  There will be a transition period of
         some time during which IDNA2003-based domain name labels will exist in
         the wild.  User agents SHOULD implement IDNA2008 <xref target="RFC5890"
-        /> and MAY implement [Unicode Technical Standard #46 (UTS46)
-        &lt;http://unicode.org/reports/tr46/&gt;] or <xref target="RFC5895" />
-        in order to facilitate their IDNA transition.  If a user agent does not
-        implement IDNA2008, the user agent MUST implement IDNA2003 <xref
+        /> and MAY implement <xref target="UTS46" /> or <xref target="RFC5895"
+        /> in order to facilitate their IDNA transition.  If a user agent does
+        not implement IDNA2008, the user agent MUST implement IDNA2003 <xref
         target="RFC3490" />.</t>
       </section>
     </section>
@@ -1837,7 +1836,19 @@ time-field      = 1*2DIGIT
         </front> 
         <seriesInfo name='RFC' value='5895' /> 
         <format type='TXT' octets='16556' target='http://www.rfc-editor.org/rfc/rfc5895.txt' /> 
-      </reference> 
+      </reference>
+      <reference anchor="UTS46" target="http://unicode.org/reports/tr46/">
+        <front>
+          <title>Unicode IDNA Compatibility Processing</title>
+          <author initials="M." surname="Davis" fullname="M. Davis">
+            <organization />
+          </author>
+          <author initials="M." surname="Suignard" fullname="M. Suignard">
+            <organization />
+          </author>
+          <date year="2010" />
+        </front>
+      </reference>
       <reference anchor="RFC5891">
         <front>
           <title>Internationalized Domain Names in Applications (IDNA):
