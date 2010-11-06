@@ -1807,18 +1807,18 @@ time-field      = 1*2DIGIT
         <seriesInfo name="RFC" value="5890" />
         <format type="TXT" octets="54245" target="http://www.rfc-editor.org/rfc/rfc5890.txt" />
       </reference>
-      <reference anchor='RFC5895'> 
-        <front> 
+      <reference anchor="RFC5895">
+        <front>
           <title>Mapping Characters for Internationalized Domain Names in
-          Applications (IDNA) 2008</title> 
-          <author initials='P.' surname='Resnick' fullname='P. Resnick'> 
+          Applications (IDNA) 2008</title>
+          <author initials="P." surname="Resnick" fullname="P. Resnick">
             <organization />
-          </author> 
-          <author initials='P.' surname='Hoffman' fullname='P. Hoffman'> 
+          </author>
+          <author initials="P." surname="Hoffman" fullname="P. Hoffman">
             <organization />
-          </author> 
-          <date year='2010' month='September' /> 
-          <abstract> 
+          </author>
+          <date year="2010" month="September" />
+          <abstract>
             <t>In the original version of the Internationalized Domain Names in
             Applications (IDNA) protocol, any Unicode code points taken from
             user input were mapped into a set of Unicode code points that "made
@@ -1833,9 +1833,9 @@ time-field      = 1*2DIGIT
             Internet Standards Track specification; it is published for
             informational purposes.</t>
           </abstract>
-        </front> 
-        <seriesInfo name='RFC' value='5895' /> 
-        <format type='TXT' octets='16556' target='http://www.rfc-editor.org/rfc/rfc5895.txt' /> 
+        </front>
+        <seriesInfo name="RFC" value="5895" />
+        <format type="TXT" octets="16556" target="http://www.rfc-editor.org/rfc/rfc5895.txt" /> 
       </reference>
       <reference anchor="UTS46" target="http://unicode.org/reports/tr46/">
         <front>
