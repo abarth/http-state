@@ -1840,14 +1840,15 @@ time-field      = 1*2DIGIT
       <reference anchor="UTS46" target="http://unicode.org/reports/tr46/">
         <front>
           <title>Unicode IDNA Compatibility Processing</title>
-          <author initials="M." surname="Davis" fullname="M. Davis">
+          <author initials="M." surname="Davis" fullname="Mark Davis">
             <organization />
           </author>
-          <author initials="M." surname="Suignard" fullname="M. Suignard">
+          <author initials="M." surname="Suignard" fullname="Michel Suignard">
             <organization />
           </author>
           <date year="2010" />
         </front>
+        <seriesInfo name="Unicode Technical Standards" value="# 46" />
       </reference>
     </references>
     <references title="Informative References">
