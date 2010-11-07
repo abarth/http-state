@@ -1807,49 +1807,6 @@ time-field      = 1*2DIGIT
         <seriesInfo name="RFC" value="5890" />
         <format type="TXT" octets="54245" target="http://www.rfc-editor.org/rfc/rfc5890.txt" />
       </reference>
-      <reference anchor="RFC5895">
-        <front>
-          <title>Mapping Characters for Internationalized Domain Names in
-          Applications (IDNA) 2008</title>
-          <author initials="P." surname="Resnick" fullname="P. Resnick">
-            <organization />
-          </author>
-          <author initials="P." surname="Hoffman" fullname="P. Hoffman">
-            <organization />
-          </author>
-          <date year="2010" month="September" />
-          <abstract>
-            <t>In the original version of the Internationalized Domain Names in
-            Applications (IDNA) protocol, any Unicode code points taken from
-            user input were mapped into a set of Unicode code points that "made
-            sense", and then encoded and passed to the domain name system
-            (DNS).  The IDNA2008 protocol (described in RFCs 5890, 5891, 5892,
-            and 5893) presumes that the input to the protocol comes from a set
-            of "permitted" code points, which it then encodes and passes to the
-            DNS, but does not specify what to do with the result of user input.
-            This document describes the actions that can be taken by an
-            implementation between receiving user input and passing permitted
-            code points to the new IDNA protocol.  This document is not an
-            Internet Standards Track specification; it is published for
-            informational purposes.</t>
-          </abstract>
-        </front>
-        <seriesInfo name="RFC" value="5895" />
-        <format type="TXT" octets="16556" target="http://www.rfc-editor.org/rfc/rfc5895.txt" /> 
-      </reference>
-      <reference anchor="UTS46" target="http://unicode.org/reports/tr46/">
-        <front>
-          <title>Unicode IDNA Compatibility Processing</title>
-          <author initials="M." surname="Davis" fullname="Mark Davis">
-            <organization />
-          </author>
-          <author initials="M." surname="Suignard" fullname="Michel Suignard">
-            <organization />
-          </author>
-          <date year="2010" />
-        </front>
-        <seriesInfo name="Unicode Technical Standards" value="# 46" />
-      </reference>
     </references>
     <references title="Informative References">
       <reference anchor="RFC2109">
@@ -1949,6 +1906,49 @@ time-field      = 1*2DIGIT
         </front>
         <seriesInfo name="BCP" value="90" />
         <seriesInfo name="RFC" value="3864" />
+      </reference>
+      <reference anchor="RFC5895">
+        <front>
+          <title>Mapping Characters for Internationalized Domain Names in
+          Applications (IDNA) 2008</title>
+          <author initials="P." surname="Resnick" fullname="P. Resnick">
+            <organization />
+          </author>
+          <author initials="P." surname="Hoffman" fullname="P. Hoffman">
+            <organization />
+          </author>
+          <date year="2010" month="September" />
+          <abstract>
+            <t>In the original version of the Internationalized Domain Names in
+            Applications (IDNA) protocol, any Unicode code points taken from
+            user input were mapped into a set of Unicode code points that "made
+            sense", and then encoded and passed to the domain name system
+            (DNS).  The IDNA2008 protocol (described in RFCs 5890, 5891, 5892,
+            and 5893) presumes that the input to the protocol comes from a set
+            of "permitted" code points, which it then encodes and passes to the
+            DNS, but does not specify what to do with the result of user input.
+            This document describes the actions that can be taken by an
+            implementation between receiving user input and passing permitted
+            code points to the new IDNA protocol.  This document is not an
+            Internet Standards Track specification; it is published for
+            informational purposes.</t>
+          </abstract>
+        </front>
+        <seriesInfo name="RFC" value="5895" />
+        <format type="TXT" octets="16556" target="http://www.rfc-editor.org/rfc/rfc5895.txt" /> 
+      </reference>
+      <reference anchor="UTS46" target="http://unicode.org/reports/tr46/">
+        <front>
+          <title>Unicode IDNA Compatibility Processing</title>
+          <author initials="M." surname="Davis" fullname="Mark Davis">
+            <organization />
+          </author>
+          <author initials="M." surname="Suignard" fullname="Michel Suignard">
+            <organization />
+          </author>
+          <date year="2010" />
+        </front>
+        <seriesInfo name="Unicode Technical Standards" value="# 46" />
       </reference>
     </references>
     <section title="Acknowledgements">
