@@ -348,7 +348,7 @@ extension-av      = <any CHAR except CTLs or ";">
 
           <t>To maximize compatibility with user agents, servers that wish to
           store arbitrary data in a cookie-value SHOULD encode that data, for
-          example, using Base 16 <xref target="RFC3548" />.</t>
+          example, using Base 16 <xref target="RFC4648" />.</t>
 
           <t>The portions of the set-cookie-string produced by the cookie-av
           term are known as attributes.  To maximize compatibility with user
@@ -1921,24 +1921,22 @@ time-field      = 1*2DIGIT
         <seriesInfo name="ACM Transactions on Internet Technology"
                     value="Vol. 1, #2"/>
       </reference>
-      <reference anchor="RFC3548"> 
+      <reference anchor="RFC4648"> 
         <front> 
           <title>The Base16, Base32, and Base64 Data Encodings</title> 
           <author initials="S." surname="Josefsson" fullname="S. Josefsson"> 
             <organization />
           </author> 
-          <date year="2003" month="July" /> 
+          <date year="2006" month="October" /> 
           <abstract> 
             <t>This document describes the commonly used base 64, base 32, and
             base 16 encoding schemes.  It also discusses the use of line-feeds
             in encoded data, use of padding in encoded data, use of
-            non-alphabet characters in encoded data, and use of different
-            encoding alphabets.  This memo provides information for the
-            Internet community.</t>
+            non-alphabet characters in encoded data, use of different encoding
+            alphabets, and canonical encodings.</t>
           </abstract>
         </front> 
-        <seriesInfo name="RFC" value="3548" /> 
-        <format type="TXT" octets="26363" target="http://www.rfc-editor.org/rfc/rfc3548.txt" /> 
+        <seriesInfo name="RFC" value="4648" /> 
       </reference> 
       <reference anchor="RFC3864">
         <front>
