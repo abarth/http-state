@@ -1849,29 +1849,6 @@ time-field      = 1*2DIGIT
           <date year="2010" />
         </front>
       </reference>
-      <reference anchor="RFC5891">
-        <front>
-          <title>Internationalized Domain Names in Applications (IDNA):
-          Protocol</title>
-          <author initials="J." surname="Klensin" fullname="J. Klensin">
-            <organization />
-          </author>
-          <date year="2010" month="August" />
-          <abstract>
-            <t>This document is the revised protocol definition for
-            Internationalized Domain Names (IDNs). The rationale for changes,
-            the relationship to the older specification, and important
-            terminology are provided in other documents. This document
-            specifies the protocol mechanism, called Internationalized Domain
-            Names in Applications (IDNA), for registering and looking up IDNs
-            in a way that does not require changes to the DNS itself. IDNA is
-            only meant for processing domain names, not free text. [STANDARDS
-            TRACK]</t>
-          </abstract>
-        </front>
-        <seriesInfo name="RFC" value="5891" />
-        <format type="TXT" octets="38105" target="http://www.rfc-editor.org/rfc/rfc5891.txt" />
-      </reference>
     </references>
     <references title="Informative References">
       <reference anchor="RFC2109">
