@@ -18,7 +18,7 @@
         <uri>http://www.adambarth.com/</uri>
       </address>
     </author>
-    <date month="October" year="2010"/>
+    <date month="November" year="2010"/>
     <workgroup>httpstate</workgroup>
     <abstract>
       <t>This document defines the HTTP Cookie and Set-Cookie header fields.
