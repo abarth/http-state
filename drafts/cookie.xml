@@ -170,10 +170,10 @@ obs-fold       = CRLF
       <section title="Examples">
         <t>Using the Set-Cookie header, a server can send the user agent a
         short string in an HTTP response that the user agent will return in
-        future HTTP requests. For example, the server can send the user agent
-        a "session identifier" named SID with the value 31d4d96e407aad42. The
-        user agent then returns the session identifier in subsequent
-        requests.</t>
+        future HTTP requests that are within the scope of the cookie. For
+        example, the server can send the user agent a "session identifier"
+        named SID with the value 31d4d96e407aad42. The user agent then returns
+        the session identifier in subsequent requests.</t>
 
         <figure>
           <preamble>
@@ -391,9 +391,10 @@ extension-av      = <any CHAR except CTLs or ";">
           new cookie with an Expires attribute with a value in the past.</t>
 
           <t>Unless the cookie's attributes indicate otherwise, the cookie is
-          returned only to the origin server, and it expires at the end of the
-          current session (as defined by the user agent). User agents ignore
-          unrecognized cookie attributes (but not the entire cookie).</t>
+          returned only to the origin server (and not, e.g., to any
+          subdomains), and it expires at the end of the current session (as
+          defined by the user agent). User agents ignore unrecognized cookie
+          attributes (but not the entire cookie).</t>
 
           <section anchor="sane-expires" title="The Expires Attribute">
             <t>The Expires attribute indicates the maximum lifetime of the
@@ -491,6 +492,10 @@ extension-av      = <any CHAR except CTLs or ";">
             omit the cookie when providing access to cookies via "non-HTTP"
             APIs (such as a web browser API that exposes cookies to
             scripts).</t>
+
+            <t>Note that the HttpOnly attribute is independent of the Secure
+            attribute: a cookie can have both the HttpOnly and the Secure
+            attribute.</t>
           </section>
         </section>
       </section>
