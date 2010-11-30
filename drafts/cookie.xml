@@ -69,6 +69,14 @@
       to specify the syntax and semantics of these headers as they are
       actually used on the Internet.</t>
 
+      <t>In particular, this document does not create new syntax or semantics
+      beyond those in use today, but neither does it recommend all of the
+      syntactic and semantic variations in use today.  The recommendations in
+      this document represent a preferred subset of current behaviors.  Where
+      some existing software differs from the recommended protocol in
+      significant ways, the document contains a note explaining the
+      difference.</t>
+
       <t>Therefore, in relation to previous IETF specifications of HTTP state
       management mechanisms, this document requests the following actions:
       <list style="numbers">
@@ -80,7 +88,9 @@
         <t>Indicate that <xref target="RFC2965" /> is obsoleted by this
         document.</t>
       </list>
-      </t>
+      In particular, in moving RFC 2965 to Historic and obsoleting it, this
+      document deprecates the use of the Cookie2 and Set-Cookie2 header
+      fields.</t>
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
@@ -160,12 +170,11 @@ obs-fold       = CRLF
       response. An origin server can include multiple Set-Cookie header fields
       in a single response.</t>
 
-      <t>Note that folding multiple Set-Cookie header fields into a single
-      header field might change the semantics of the header because the %x2C
-      (",") character is used by the Set-Cookie header in a way that conflicts
-      with such folding.  This historical infelicity is incompatible with
-      the usual mechanism for folding HTTP headers as defined in
-      <xref target="RFC2616" />.</t>
+      <t>Origin servers SHOULD NOT fold multiple Set-Cookie header fields into
+      a single header field.  The usual mechanism for folding HTTP headers
+      fields (i.e., as defined in <xref target="RFC2616" />) might change the
+      semantics of the Set-Cookie header field because the %x2C (",") character
+      is used by Set-Cookie in a way that conflicts with such folding.</t>
 
       <section title="Examples">
         <t>Using the Set-Cookie header, a server can send the user agent a
@@ -553,7 +562,8 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
         <section anchor="cookie-date" title="Dates">
           <t>The user agent MUST use an algorithm equivalent to the following
           algorithm to parse a cookie-date. Note that the various boolean
-          flags defined as a part of the algorithm are initially "not set".
+          flags defined as a part of the algorithm (i.e., found-time,
+          found-day-of-month, found-month, found-year) are initially "not set".
           <list style="numbers">
             <t>Using the grammar below, divide the cookie-date into
             date-tokens.
@@ -1322,9 +1332,9 @@ time-field      = 1*2DIGIT
 
         <t>In particular, cookies encourage developers to rely on ambient
         authority for authentication, often becoming vulnerable to attacks
-        such as cross-site request forgery. Also, when storing session
-        identifiers in cookies, developers often create session fixation
-        vulnerabilities.</t>
+        such as cross-site request forgery <xref target="CSRF" />. Also, when
+        storing session identifiers in cookies, developers often create session
+        fixation vulnerabilities.</t>
 
         <t>Transport-layer encryption, such as that employed in HTTPS, is
         insufficient to prevent a network attacker from obtaining or altering
@@ -1955,6 +1965,21 @@ time-field      = 1*2DIGIT
           <date year="2010" />
         </front>
         <seriesInfo name="Unicode Technical Standards" value="# 46" />
+      </reference>
+      <reference anchor="CSRF" target="http://www.adambarth.com/papers/2008/barth-jackson-mitchell-b.pdf">
+        <front>
+          <title>Robust Defenses for Cross-Site Request Forgery</title>
+          <author initials="A." surname="Barth" fullname="Adam Barth">
+            <organization />
+          </author>
+          <author initials="C." surname="Jackson" fullname="Collin Jackson">
+            <organization />
+          </author>
+          <author initials="J." surname="Mitchell" fullname="John C. Mitchell">
+            <organization />
+          </author>
+          <date year="2008" />
+        </front>
       </reference>
     </references>
     <section title="Acknowledgements">
