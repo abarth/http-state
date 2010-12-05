@@ -1307,7 +1307,8 @@ time-field      = 1*2DIGIT
           <t>Third-party cookie blocking policies are often ineffective at
           achieving their privacy goals if servers attempt to work around
           their restrictions to track users. In particular, two collaborating
-          servers can often track users without using cookies at all.</t>
+          servers can often track users without using cookies at all by
+          injecting identifying information into dynamic URLs.</t>
         </section>
         <section anchor="user-controls" title="User Controls">
           <t>User agents should provide users with a mechanism for managing
