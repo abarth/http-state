@@ -3,7 +3,7 @@
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
-<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-19"
+<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-20pre"
      category="std" obsoletes="2965">
   <front>
     <title abbrev="HTTP State Management Mechanism">
@@ -117,10 +117,10 @@
         <t>The following core rules are included by reference, as defined in
         <xref target="RFC5234"/>, Appendix B.1: ALPHA (letters), CR (carriage
         return), CRLF (CR LF), CTL (controls), DIGIT (decimal 0-9), DQUOTE
-        (double quote), HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed), OCTET
-        (any 8-bit sequence of data), SP (space), HTAB (horizontal tab), CHAR
-        (any US-ASCII character), VCHAR (any visible US-ASCII character), and
-        WSP (whitespace).</t>
+        (double quote), HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed), NUL
+        (null octet), OCTET (any 8-bit sequence of data except NUL), SP (space),
+        HTAB (horizontal tab), CHAR (any US-ASCII character), VCHAR (any
+        visible US-ASCII character), and WSP (whitespace).</t>
 
         <t>The OWS (optional whitespace) rule is used where zero or more
         linear whitespace characters MAY appear:
@@ -151,7 +151,7 @@ obs-fold       = CRLF
         other if and only if they are equivalent under the i;ascii-casemap
         collation defined in <xref target="RFC4790"/>.</t>
 
-        <t>The term string means a sequence of octets.</t>
+        <t>The term string means a sequence of non-NUL octets.</t>
       </section>
     </section>
     <section anchor="overview" title="Overview">
@@ -335,7 +335,11 @@ cookie-av         = expires-av / max-age-av / domain-av /
                     extension-av
 expires-av        = "Expires=" sane-cookie-date
 sane-cookie-date  = <rfc1123-date, defined in [RFC2616], Section 3.3.1>
-max-age-av        = "Max-Age=" 1*DIGIT
+max-age-av        = "Max-Age=" non-zero-digit *DIGIT
+                      ; In practice, both expires-av and max-age-av are limited
+                      ; to dates representable by the user agent.
+non-zero-digit    = %x31-39
+                      ; digits 1 through 9
 domain-av         = "Domain=" domain-value
 domain-value      = <subdomain>
                       ; defined in [RFC1034], Section 3.5, as
@@ -363,10 +367,12 @@ extension-av      = <any CHAR except CTLs or ";">
           <t>The portions of the set-cookie-string produced by the cookie-av
           term are known as attributes.  To maximize compatibility with user
           agents, servers SHOULD NOT produce two attributes with the same name
-          in the same set-cookie-string.</t>
+          in the same set-cookie-string.  (See <xref target="storage-model" />
+          for how user agents handle this case.)</t>
 
           <t>Servers SHOULD NOT include more than one Set-Cookie header field
-          in the same response with the same cookie-name.</t>
+          in the same response with the same cookie-name.  (See <xref
+          target="set-cookie" /> for how user agents handle this case.)</t>
 
           <t>If a server sends multiple responses containing Set-Cookie headers
           concurrently to the user agent (e.g., when communicating with the
@@ -438,8 +444,10 @@ extension-av      = <any CHAR except CTLs or ";">
             the Cookie header when making HTTP requests to example.com,
             www.example.com, and www.corp.example.com. (Note that a leading
             %x2E ("."), if present, is ignored even though that character is
-            not permitted.) If the server omits the Domain attribute, the user
-            agent will return the cookie only to the origin server.
+            not permitted, but a trailing %x2E ("."), if present, will cause
+            the user agent to ignore the attribute.) If the server omits the
+            Domain attribute, the user agent will return the cookie only to the
+            origin server.
             <list>
               <t>WARNING: Some existing user agents treat an absent Domain
               attribute as if the Domain attribute were present and contained
@@ -485,9 +493,8 @@ extension-av      = <any CHAR except CTLs or ";">
             channels (where "secure" is defined by the user agent). When a
             cookie has the Secure attribute, the user agent will include the
             cookie in an HTTP request only if the request is transmitted over a
-            secure channel (typically HTTP over Secure Sockets Layer (SSL),
-            HTTP over Transport Layer Security (TLS) <xref target="RFC2818" />,
-            and TLS <xref target="RFC5246" /> itself).</t>
+            secure channel (typically HTTP over Transport Layer Security (TLS)
+            <xref target="RFC2818" />).</t>
 
             <t>Although seemingly useful for protecting cookies from active
             network attackers, the Secure attribute protects only the cookie's
@@ -642,6 +649,7 @@ time-field      = 1*2DIGIT
 
               <t>the second-value is greater than 59.</t>
             </list>
+            (Note that leap seconds cannot be represented in this syntax.)
             </t>
 
             <t>Let the parsed-cookie-date be the date whose day-of-month,
@@ -678,7 +686,9 @@ time-field      = 1*2DIGIT
           <t>A string domain-matches a given domain string if at least one of
           the following conditions hold:
           <list style="symbols">
-            <t>The domain string and the string are identical.</t>
+            <t>The domain string and the string are identical.  (Note that both
+            the domain string and the string will have been canonicalized to
+            lower case at this point.)</t>
 
             <t>All of the following conditions hold:
             <list style="symbols">
@@ -1519,6 +1529,22 @@ time-field      = 1*2DIGIT
         <t>Author/Change controller: IETF</t>
         <t>Specification document: this specification (<xref target="set-cookie"/>)</t>
       </section>
+
+      <section title="Cookie2">
+        <t>Header field name: Cookie2</t>
+        <t>Applicable protocol: http</t>
+        <t>Status: obsoleted</t>
+        <t>Author/Change controller: IETF</t>
+        <t>Specification document: <xref target="RFC2965"/></t>
+      </section>
+
+      <section title="Set-Cookie2">
+        <t>Header field name: Set-Cookie2</t>
+        <t>Applicable protocol: http</t>
+        <t>Status: obsoleted</t>
+        <t>Author/Change controller: IETF</t>
+        <t>Specification document: <xref target="RFC2965"/></t>
+      </section>
     </section>
   </middle>
   <back>
@@ -1710,31 +1736,6 @@ time-field      = 1*2DIGIT
               target="ftp://ftp.isi.edu/in-notes/rfc3492.txt" />
       </reference>
       -->
-      <reference anchor="RFC3629">
-        <front>
-          <title>UTF-8, a transformation format of ISO 10646</title>
-          <author initials="F." surname="Yergeau" fullname="F. Yergeau">
-            <organization />
-          </author>
-          <date year="2003" month="November" />
-          <abstract>
-            <t>ISO/IEC 10646-1 defines a large character set called the
-            Universal Character Set (UCS) which encompasses most of the
-            world's writing systems. The originally proposed encodings of
-            the UCS, however, were not compatible with many current
-            applications and protocols, and this has led to the development
-            of UTF-8, the object of this memo. UTF-8 has the characteristic
-            of preserving the full US-ASCII range, providing compatibility
-            with file systems, parsers and other software that rely on
-            US-ASCII values but are transparent to other values. This memo
-            obsoletes and replaces RFC 2279.</t>
-          </abstract>
-        </front>
-        <seriesInfo name="STD" value="63" />
-        <seriesInfo name="RFC" value="3629" />
-        <format type="TXT" octets="33856"
-                target="ftp://ftp.rfc-editor.org/in-notes/rfc3629.txt" />
-      </reference>
       <reference anchor="RFC4790">
         <front>
           <title>Internet Application Protocol Collation Registry</title>
@@ -1895,6 +1896,31 @@ time-field      = 1*2DIGIT
         <seriesInfo name="ACM Transactions on Internet Technology"
                     value="Vol. 1, #2"/>
       </reference>
+      <reference anchor="RFC3629">
+        <front>
+          <title>UTF-8, a transformation format of ISO 10646</title>
+          <author initials="F." surname="Yergeau" fullname="F. Yergeau">
+            <organization />
+          </author>
+          <date year="2003" month="November" />
+          <abstract>
+            <t>ISO/IEC 10646-1 defines a large character set called the
+            Universal Character Set (UCS) which encompasses most of the
+            world's writing systems. The originally proposed encodings of
+            the UCS, however, were not compatible with many current
+            applications and protocols, and this has led to the development
+            of UTF-8, the object of this memo. UTF-8 has the characteristic
+            of preserving the full US-ASCII range, providing compatibility
+            with file systems, parsers and other software that rely on
+            US-ASCII values but are transparent to other values. This memo
+            obsoletes and replaces RFC 2279.</t>
+          </abstract>
+        </front>
+        <seriesInfo name="STD" value="63" />
+        <seriesInfo name="RFC" value="3629" />
+        <format type="TXT" octets="33856"
+                target="ftp://ftp.rfc-editor.org/in-notes/rfc3629.txt" />
+      </reference>
       <reference anchor="RFC4648"> 
         <front> 
           <title>The Base16, Base32, and Base64 Data Encodings</title> 
@@ -1989,11 +2015,11 @@ time-field      = 1*2DIGIT
       advice on navigating the IETF process. We would also like to thank Thomas
       Broyer, Tyler Close, Bil Corry, corvid, Lisa Dusseault, Roy T. Fielding,
       Blake Frantz, Anne van Kesteren, Eran Hammer-Lahav, Jeff Hodges, Bjoern
-      Hoehrmann, Achim Hoffmann, Georg Koppen, Dean McNamee, Mark Miller, Mark
-      Pauley, Yngve N. Pettersen, Julian Reschke, Peter Saint-Andre, Mark
-      Seaborn, Maciej Stachowiak, Daniel Stenberg, Tatsuhiro Tsujikawa, David
-      Wagner, Dan Winship, and Dan Witte for their valuable feedback on this
-      document.</t>
+      Hoehrmann, Achim Hoffmann, Georg Koppen, Dean McNamee, Alexey Melnikov,
+      Mark Miller, Mark Pauley, Yngve N. Pettersen, Julian Reschke, Peter
+      Saint-Andre, Mark Seaborn, Maciej Stachowiak, Daniel Stenberg, Tatsuhiro
+      Tsujikawa, David Wagner, Dan Winship, and Dan Witte for their valuable
+      feedback on this document.</t>
     </section>
   </back>
 </rfc>
