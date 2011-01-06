@@ -385,9 +385,10 @@ extension-av      = <any CHAR except CTLs or ";">
           two-digit years. To avoid compatibility issues, servers SHOULD use
           the rfc1123-date format, which requires a four-digit year.</t>
 
-          <t>NOTE: Some user agents represent dates using 32-bit UNIX time_t
-          values.  Some of these user agents might contain bugs that cause them
-          to process dates after the year 2038 incorrectly.</t>
+          <t>NOTE: Some user agents store and process dates in cookies as
+          32-bit UNIX time_t values.  Implementation bugs in the libraries
+          supporting time_t processing on some systems might cause such user
+          agents to process dates after the year 2038 incorrectly.</t>
         </section>
         <section anchor="sane-set-cookie-semantics"
                  title="Semantics (Non-Normative)">
