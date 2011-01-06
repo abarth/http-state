@@ -747,7 +747,8 @@ time-field      = 1*2DIGIT
         <t>When a user agent receives a Set-Cookie header field in an HTTP
         response, the user agent MAY ignore the Set-Cookie header field in its
         entirety. For example, the user agent might wish to block responses to
-        "third-party" requests from setting cookies.</t>
+        "third-party" requests from setting cookies (See <xref
+        target="third-party-cookies" />).</t>
 
         <t>If the user agent does not ignore the Set-Cookie header field in its
         entirety, the user agent MUST parse the field-value of the Set-Cookie
@@ -1143,7 +1144,8 @@ time-field      = 1*2DIGIT
 
         <t>A user agent MAY omit the Cookie header in its entirety. For
         example, the user agent might wish to block sending cookies during
-        "third-party" requests.</t>
+        "third-party" requests from setting cookies (See <xref
+        target="third-party-cookies" />).</t>
 
         <t>If the user agent does attach a Cookie header field to an HTTP
         request, the user agent MUST send the cookie-string (defined below) as
