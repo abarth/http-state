@@ -1314,14 +1314,14 @@ time-field      = 1*2DIGIT
           injecting identifying information into dynamic URLs.</t>
         </section>
         <section anchor="user-controls" title="User Controls">
-          <t>User agents should provide users with a mechanism for managing
+          <t>User agents SHOULD provide users with a mechanism for managing
           the cookies stored in the cookie store. For example, a user agent
           might let users delete all cookies received during a specified time
           period or all the cookies related to a particular domain. In
           addition, many user agents include a user interface element that lets
           users examine the cookies stored in their cookie store.</t>
 
-          <t>User agents should provide users with a mechanism for disabling
+          <t>User agents SHOULD provide users with a mechanism for disabling
           cookies. When cookies are disabled, the user agent MUST NOT include
           a Cookie header in outbound HTTP requests and the user agent MUST
           NOT process Set-Cookie headers in inbound HTTP responses.</t>
@@ -1399,12 +1399,12 @@ time-field      = 1*2DIGIT
         </list>
         </t>
 
-        <t>Servers SHOULD encrypt and sign the contents of cookies when
-        transmitting them to the user agent (even when sending the cookies
-        over a secure channel). However, encrypting and signing cookie
-        contents does not prevent an attacker from transplanting a cookie from
-        one user agent to another or from replaying the cookie at a later
-        time.</t>
+        <t>Servers SHOULD encrypt and sign the contents of cookies (using
+        whatever format the server desires) when transmitting them to the user
+        agent (even when sending the cookies over a secure channel). However,
+        encrypting and signing cookie contents does not prevent an attacker
+        from transplanting a cookie from one user agent to another or from
+        replaying the cookie at a later time.</t>
 
         <t>In addition to encrypting and signing the contents of every
         cookie, servers that require a higher level of security SHOULD use the
@@ -1413,6 +1413,18 @@ time-field      = 1*2DIGIT
         attribute (see <xref target="sane-secure"/>) for every cookie. If a
         server does not set the Secure attribute, the protection provided by
         the secure channel will be largely moot.</t>
+
+        <t>For example, consider a webmail server that stores a session
+        identifier in a cookie and is typically accessed over HTTPS.  If the
+        server does not set the Secure attribute on its cookies, an active
+        network attacker can intercept any outbound HTTP request from the user
+        agent and redirect that request to the webmail server over HTTP.  Even
+        if the webmail server is not listening for HTTP connections, the user
+        agent will still include cookies in the request.  The active network
+        attacker can intercept these cookies, reply them against the server,
+        and learn the contents of the user's email.  If, instead, the server
+        had set the Secure attribute on its cookies, the user agent would not
+        have included the cookies in the clear-text request.</t>
       </section>
       <section anchor="session-identifiers" title="Session Identifiers">
         <t>Instead of storing session information directly in a cookie (where
