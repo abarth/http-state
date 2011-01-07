@@ -1332,13 +1332,23 @@ time-field      = 1*2DIGIT
           <t>Some user agents provide users the option of preventing
           persistent storage of cookies across sessions. When configured
           thusly, user agents MUST treat all received cookies as if the
-          persistent-flag were set to false.</t>
+          persistent-flag were set to false.  Some popular user agents expose
+          this functionality via "private browsing" mode <xref
+          target="Aggarwal2010" /></t>
 
           <t>Some user agents provide users with the ability to approve
           individual writes to the cookie store. In many common usage
           scenarios, these controls generate a large number of prompts.
           However, some privacy-conscious users find these controls useful
           nonetheless.</t>
+        </section>
+        <section anchor="expiration-dates" title="Expiration Dates">
+          <t>Although servers can set the expiration date for cookies to the
+          distant future, most user agents do not actually retain cookies for
+          multiple decades.  Rather that chosing gratiously long expiration
+          periods, servers SHOULD promote user privacy by selecting reasonable
+          cookie expiration periods.  For example, a typical session identifier
+          might reasonably be set to expire in two weeks.</t>
         </section>
     </section>
     <section anchor="security-considerations"
@@ -2024,6 +2034,24 @@ time-field      = 1*2DIGIT
             <organization />
           </author>
           <date year="2008" />
+        </front>
+      </reference>
+      <reference anchor="Aggarwal2010" target="http://www.collinjackson.com/research/private-browsing.pdf">
+        <front>
+          <title>An Analysis of Private Browsing Modes in Modern Browsers</title>
+          <author initials="G." surname="Aggarwal" fullname="Gaurav Aggarwal">
+            <organization />
+          </author>
+          <author initials="E." surname="Burzstein" fullname="Elie Burzstein">
+            <organization />
+          </author>
+          <author initials="C." surname="Jackson" fullname="Collin Jackson">
+            <organization />
+          </author>
+          <author initials="D." surname="Boneh" fullname="Dan Boneh">
+            <organization />
+          </author>
+          <date year="2010" />
         </front>
       </reference>
     </references>
