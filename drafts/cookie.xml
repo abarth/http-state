@@ -329,7 +329,7 @@ set-cookie-header = "Set-Cookie:" SP set-cookie-string
 set-cookie-string = cookie-pair *( ";" SP cookie-av )
 cookie-pair       = cookie-name "=" cookie-value
 cookie-name       = token
-cookie-value      = token
+cookie-value      = token / ""
 token             = <token, defined in [RFC2616], Section 2.2>
 
 cookie-av         = expires-av / max-age-av / domain-av /
