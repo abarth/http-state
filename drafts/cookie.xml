@@ -1345,7 +1345,7 @@ time-field      = 1*2DIGIT
         <section anchor="expiration-dates" title="Expiration Dates">
           <t>Although servers can set the expiration date for cookies to the
           distant future, most user agents do not actually retain cookies for
-          multiple decades.  Rather that chosing gratiously long expiration
+          multiple decades.  Rather than chosing gratiously long expiration
           periods, servers SHOULD promote user privacy by selecting reasonable
           cookie expiration periods.  For example, a typical session identifier
           might reasonably be set to expire in two weeks.</t>
