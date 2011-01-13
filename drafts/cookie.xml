@@ -1297,8 +1297,11 @@ time-field      = 1*2DIGIT
           <t>Particularly worrisome are so-called "third-party" cookies. In
           rendering an HTML document, a user agent often requests resources
           from other servers (such as advertising networks). These third-party
-          servers can use cookies to track the user even if the
-          user never visits the server directly.</t>
+          servers can use cookies to track the user even if the user never
+          visits the server directly.  For example, if a user visits a site
+          that contains content from a third party and then later visits
+          another site that contains content from the same third party, the
+          third party can track the user between the two sites.</t>
 
           <t>Some user agents restrict how third-party cookies behave. For
           example, some of these user agents refuse to send the Cookie
