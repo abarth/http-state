@@ -1350,8 +1350,9 @@ time-field      = 1*2DIGIT
           distant future, most user agents do not actually retain cookies for
           multiple decades.  Rather than chosing gratiously long expiration
           periods, servers SHOULD promote user privacy by selecting reasonable
-          cookie expiration periods.  For example, a typical session identifier
-          might reasonably be set to expire in two weeks.</t>
+          cookie expiration periods based on the purpose of the cookie.  For
+          example, a typical session identifier might reasonably be set to
+          expire in two weeks.</t>
         </section>
     </section>
     <section anchor="security-considerations"
@@ -2063,13 +2064,13 @@ time-field      = 1*2DIGIT
       We are indebted to David M. Kristol and Lou Montulli for their efforts to
       specify cookies. David M. Kristol, in particular, provided invaluable
       advice on navigating the IETF process. We would also like to thank Thomas
-      Broyer, Tyler Close, Bil Corry, corvid, Lisa Dusseault, Roy T. Fielding,
-      Blake Frantz, Anne van Kesteren, Eran Hammer-Lahav, Jeff Hodges, Bjoern
-      Hoehrmann, Achim Hoffmann, Georg Koppen, Dean McNamee, Alexey Melnikov,
-      Mark Miller, Mark Pauley, Yngve N. Pettersen, Julian Reschke, Peter
-      Saint-Andre, Mark Seaborn, Maciej Stachowiak, Daniel Stenberg, Tatsuhiro
-      Tsujikawa, David Wagner, Dan Winship, and Dan Witte for their valuable
-      feedback on this document.</t>
+      Broyer, Tyler Close, Alissa Cooper, Bil Corry, corvid, Lisa Dusseault,
+      Roy T. Fielding, Blake Frantz, Anne van Kesteren, Eran Hammer-Lahav, Jeff
+      Hodges, Bjoern Hoehrmann, Achim Hoffmann, Georg Koppen, Dean McNamee,
+      Alexey Melnikov, Mark Miller, Mark Pauley, Yngve N. Pettersen, Julian
+      Reschke, Peter Saint-Andre, Mark Seaborn, Maciej Stachowiak, Daniel
+      Stenberg, Tatsuhiro Tsujikawa, David Wagner, Dan Winship, and Dan Witte
+      for their valuable feedback on this document.</t>
     </section>
   </back>
 </rfc>
