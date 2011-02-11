@@ -335,7 +335,8 @@ set-cookie-header = "Set-Cookie:" SP set-cookie-string
 set-cookie-string = cookie-pair *( ";" SP cookie-av )
 cookie-pair       = cookie-name "=" cookie-value
 cookie-name       = token
-cookie-value      = token / ""
+cookie-value      = token / *base64-character
+base64-character  = ALPHA / DIGIT / "+" / "/" / "="
 token             = <token, defined in [RFC2616], Section 2.2>
 
 cookie-av         = expires-av / max-age-av / domain-av /
@@ -370,7 +371,7 @@ extension-av      = <any CHAR except CTLs or ";">
 
           <t>To maximize compatibility with user agents, servers that wish to
           store arbitrary data in a cookie-value SHOULD encode that data, for
-          example, using Base 16 <xref target="RFC4648" />.</t>
+          example, using Base64 <xref target="RFC4648" />.</t>
 
           <t>The portions of the set-cookie-string produced by the cookie-av
           term are known as attributes.  To maximize compatibility with user
