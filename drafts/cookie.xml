@@ -571,6 +571,11 @@ cookie-string = cookie-pair *( ";" SP cookie-pair )
       interoperate with existing servers (even those that do not conform to the
       well-behaved profile described in <xref target="sane-profile"/>.</t>
 
+      <t>A user agent could enforce a more restrictive syntax (e.g., as
+      described in the preceeding section); however, experiments have shown
+      that such strictness reduces the likelihood that a user agent will be
+      able to interoperate with existing servers.</t>
+
       <section anchor="algorithms" title="Subcomponent Algorithms">
         <t>This section defines some algorithms used by user agents to process
         specific subcomponents of the Cookie and Set-Cookie headers.</t>
