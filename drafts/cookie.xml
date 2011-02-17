@@ -179,12 +179,14 @@ obs-fold       = CRLF
       origin server is free to ignore the Cookie header or use its contents
       for an application-defined purpose.</t>
 
-      <t>Origin servers can send a Set-Cookie response header with any
-      response, but user agents might ignore these headers in some cases (e.g.,
-      for "100 Continue" responses). An origin server can include multiple
-      Set-Cookie header fields in a single response.  The presence of a Cookie
-      or a Set-Cookie header field does not preclude HTTP caches from storing
-      and reusing a response.</t>
+      <t>Origin servers MAY send a Set-Cookie response header with any
+      response.  User agents MAY ignore Set-Cookie headers contained in
+      responses with 100-level status codes but MUST process Set-Cookie headers
+      contained in other responses (including responses with 400- and 500-level
+      status codes).  An origin server can include multiple Set-Cookie header
+      fields in a single response.  The presence of a Cookie or a Set-Cookie
+      header field does not preclude HTTP caches from storing and reusing a
+      response.</t>
 
       <t>Origin servers SHOULD NOT fold multiple Set-Cookie header fields into
       a single header field.  The usual mechanism for folding HTTP headers
