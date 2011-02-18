@@ -1836,6 +1836,7 @@ time-field      = 1*2DIGIT
         <seriesInfo name="STD" value="68"/>
         <seriesInfo name="RFC" value="5234"/>
       </reference>
+      <!--
       <reference anchor="RFC5246">
         <front>
           <title>
@@ -1851,6 +1852,7 @@ time-field      = 1*2DIGIT
         </front>
         <seriesInfo name="RFC" value="5246" />
       </reference>
+      -->
       <reference anchor="RFC5890">
         <front>
           <title>Internationalized Domain Names for Applications (IDNA):
