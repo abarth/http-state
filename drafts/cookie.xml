@@ -3,7 +3,7 @@
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
-<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-22"
+<rfc ipr="pre5378Trust200902" docName="draft-ietf-httpstate-cookie-23"
      category="std" obsoletes="2965">
   <front>
     <title abbrev="HTTP State Management Mechanism">
@@ -18,7 +18,7 @@
         <uri>http://www.adambarth.com/</uri>
       </address>
     </author>
-    <date month="February" year="2011"/>
+    <date month="March" year="2011"/>
     <workgroup>httpstate</workgroup>
     <abstract>
       <t>This document defines the HTTP Cookie and Set-Cookie header fields.
