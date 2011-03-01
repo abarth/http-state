@@ -26,7 +26,8 @@
       cookies) at HTTP user agents, letting the servers maintain a stateful
       session over the mostly stateless HTTP protocol. Although cookies have
       many historical infelicities that degrade their security and privacy, the
-      Cookie and Set-Cookie header fields are widely used on the Internet.</t>
+      Cookie and Set-Cookie header fields are widely used on the Internet.
+      This document obsoletes <xref target="RFC2965" /></t>
     </abstract>
     <note title="Editorial Note (To be removed by RFC Editor)">
       <t>If you have suggestions for improving this document, please send
@@ -131,9 +132,10 @@
         <xref target="RFC5234"/>, Appendix B.1: ALPHA (letters), CR (carriage
         return), CRLF (CR LF), CTL (controls), DIGIT (decimal 0-9), DQUOTE
         (double quote), HEXDIG (hexadecimal 0-9/A-F/a-f), LF (line feed), NUL
-        (null octet), OCTET (any 8-bit sequence of data except NUL), SP (space),
-        HTAB (horizontal tab), CHAR (any US-ASCII character), VCHAR (any
-        visible US-ASCII character), and WSP (whitespace).</t>
+        (null octet), OCTET (any 8-bit sequence of data except NUL), SP
+        (space), HTAB (horizontal tab), CHAR (any <xref target="USASCII" />
+        character), VCHAR (any visible <xref target="USASCII" /> character),
+        and WSP (whitespace).</t>
 
         <t>The OWS (optional whitespace) rule is used where zero or more
         linear whitespace characters MAY appear:
@@ -338,8 +340,11 @@ set-cookie-header = "Set-Cookie:" SP set-cookie-string
 set-cookie-string = cookie-pair *( ";" SP cookie-av )
 cookie-pair       = cookie-name "=" cookie-value
 cookie-name       = token
-cookie-value      = token / *base64-character
-base64-character  = ALPHA / DIGIT / "+" / "/" / "="
+cookie-value      = *cookie-octet / ( DQUOTE *cookie-octet DQUOTE )
+cookie-octet      = %x21 / %x23-2B / %x2D-3A / %x3C-5B / %x5D-7E
+                      ; US-ASCII characters excluding CTLs,
+                      ; whitespace DQUOTE, comma, semicolon,
+                      ; and backslash
 token             = <token, defined in [RFC2616], Section 2.2>
 
 cookie-av         = expires-av / max-age-av / domain-av /
@@ -1873,6 +1878,17 @@ time-field      = 1*2DIGIT
         </front>
         <seriesInfo name="RFC" value="5890" />
         <format type="TXT" octets="54245" target="http://www.rfc-editor.org/rfc/rfc5890.txt" />
+      </reference>
+      <reference anchor="USASCII">
+        <front>
+          <title>Coded Character Set -- 7-bit American Standard Code for
+          Information Interchange</title>
+          <author>
+            <organization>American National Standards Institute</organization>
+          </author>
+          <date year="1986"/>
+        </front>
+        <seriesInfo name="ANSI" value="X3.4"/>
       </reference>
     </references>
     <references title="Informative References">
