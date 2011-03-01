@@ -27,7 +27,7 @@
       session over the mostly stateless HTTP protocol. Although cookies have
       many historical infelicities that degrade their security and privacy, the
       Cookie and Set-Cookie header fields are widely used on the Internet.
-      This document obsoletes <xref target="RFC2965" /></t>
+      This document obsoletes <xref target="RFC2965" />.</t>
     </abstract>
     <note title="Editorial Note (To be removed by RFC Editor)">
       <t>If you have suggestions for improving this document, please send
