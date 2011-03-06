@@ -20,7 +20,11 @@
     <date month="March" year="2011"/>
     <workgroup>httpstate</workgroup>
     <abstract>
-      <t>TODO</t>
+      <t>This document defines the Origin attribute for cookies, which lets
+      servers harmonize the security policy of their cookies with the widely
+      used same-origin policy.  Origin cookies provide both confidentiality and
+      integrity, unlike the Secure attribute, which provides only
+      confidentiality.</t>
     </abstract>
     <note title="Editorial Note (To be removed by RFC Editor)">
       <t>If you have suggestions for improving this document, please send
@@ -32,6 +36,12 @@
   <middle>
     <section anchor="intro" title="Introduction">
       <t>TODO</t>
+
+      <t>This document defines the Origin attribute for cookies, which lets
+      servers harmonize the security policy of their cookies with the widely
+      used same-origin policy.  Origin cookies provide both confidentiality and
+      integrity, unlike the Secure attribute, which provides only
+      confidentiality.</t>
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
