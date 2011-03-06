@@ -3,10 +3,10 @@
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
 <!--<!DOCTYPE rfc SYSTEM "rfc2629.dtd">-->
-<rfc ipr="trust200902" docName="draft-abarth-cake-01pre" category="std">
+<rfc ipr="trust200902" docName="draft-abarth-cake-01" category="std">
   <front>
-    <title abbrev="Cookie Signatures">
-      Cookie Signatures
+    <title abbrev="Origin Cookies">
+      Origin Cookies
     </title>
     <author initials="A." surname="Barth" fullname="Adam Barth">
       <organization abbrev="Google, Inc.">
@@ -17,7 +17,7 @@
         <uri>http://www.adambarth.com/</uri>
       </address>
     </author>
-    <date month="February" year="2011"/>
+    <date month="March" year="2011"/>
     <workgroup>httpstate</workgroup>
     <abstract>
       <t>TODO</t>
@@ -31,52 +31,7 @@
   </front>
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>HTTP does not provide servers with a robust mechanism for tracking
-      state between requests.  The dominant HTTP state management mechanism
-      in use on the Internet, known as cookies, has a number of historical
-      infelicities that impair its security.  In particular, cookies have
-      the following serious defects:
-      <list style="numbers">
-        <t>Cookies provide no integrity protection against active network
-        attackers.  Even if the example.com HTTP server always employs TLS,
-        a network attacker can manipulate the server's cookies by spoofing
-        responses from http://example.com/ (assuming the user agent makes a
-        single non-TLS protected HTTP request, which, of course, the
-        attacker can redirect to http://example.com/).</t>
-
-        <t>Cookies assume that a given host name trusts all of its
-        superdomains and siblings.  In particular, students.example.edu can
-        manipulate the cookies used by grades.example.edu, potentially
-        resulting in security vulnerabilities.</t>
-
-        <t>Cookies indicate only which user agent issued a given HTTP
-        request.  They provide no information about why the user agent
-        issued that request.  This design flaw leads many HTTP servers to be
-        vulnerable to cross-site request forgery attacks, in which the
-        attacker tricks the server into performing an action on behalf of
-        the user by causing the user agent to issue an HTTP request to the
-        server with the user's cookies.</t>
-      </list>
-      </t>
-
-      <t>This document defines a simple HTTP state management mechanism that
-      addresses these shortcomings of cookies.  In this mechanism, the
-      server stores a secret key at the user agent, called the cake-key.
-      When the user agent issues subsequent HTTP requests to the server, the
-      user agent sends a string, called a cake, containing a HMAC (using the
-      cake-key) of the security-origin that generated the request.  By
-      whitelisting expected cakes, the server can accept requests from
-      origins of its choice, mitigating cross-site request forgery
-      vulnerabilities.</t>
-
-      <t>Unlike cookies, which can leak from one host to another and from
-      one scheme to another, the cake-key is scoped to a security-origin.
-      In particular, http://students.example.edu and
-      http://grades.example.edu have independent cake-keys.  Likewise,
-      http://example.com and https://example.com have independent cake-keys.
-      Therefore, an active network attacker (who can compromise
-      http://example.com) cannot manipulate the state for
-      https://example.com.</t>
+      <t>TODO</t>
     </section>
     <section anchor="conventions" title="Conventions">
       <section anchor="conformance-criteria" title="Conformance Criteria">
@@ -106,31 +61,11 @@
         OCTET (any 8-bit sequence of data), SP (space), HTAB (horizontal tab),
         CHAR (any US-ASCII character), VCHAR (any visible US-ASCII character),
         and WSP (whitespace).</t>
-
-        <t>The OWS (optional whitespace) rule is used where zero or more
-        linear whitespace characters MAY appear:
-        <figure>
-          <artwork type="abnf">
-OWS            = *( [ obs-fold ] WSP )
-                 ; "optional" whitespace
-obs-fold       = CRLF
-          </artwork>
-        </figure>
-        OWS SHOULD either not be produced or be produced as a single SP
-        character.</t>
       </section>
       <section anchor="terminology" title="Terminology">
-        <t>The terms user agent, client, server, proxy, and origin server have
-        the same meaning as in the HTTP/1.1 specification (<xref
-        target="RFC2616" />, Section 1.3).</t>
-
-        <t>The request-host is the name of the host, as known by the user
-        agent, to which the user agent is sending an HTTP request or is
-        receiving an HTTP response from (i.e., the name of the host to which
-        it sent the corresponding HTTP request).</t>
-
-        <t>The term request-uri is defined in Section 5.1.2 of <xref
-        target="RFC2616" />.</t>
+        <t>The terms user agent, client, server, proxy, origin server,
+        request-host, and request-uri have the same meaning as in cookie
+        specification ([cite: Cookies], Section 2.3).</t>
 
         <t>Two sequences of octets are said to case-insensitively match each
         other if and only if they are equivalent under the i;ascii-casemap
@@ -140,103 +75,77 @@ obs-fold       = CRLF
       </section>
     </section>
     <section anchor="overview" title="Overview">
-      
-      <figure>
-        <artwork>
-          <![CDATA[ 
+        <t>Using the Origin attribute, a server can set a cookie for its
+        origin.  Unlike the Path, Domain, and Secure attributes, the Origin
+        attribute harmonizes the security properties of the cookie with the
+        same-origin policy [cite: Principles of Origin].  In particular, the Origin
+        attribute provides both confidentiality and integrity from other
+        origins.</t>
 
-          ]]>
-        </artwork>
-      </figure>
-      </t>
+        <t>The Origin attribute superceeds the Path, Domain, and Secure
+        attributes.  The server can set these attributes as well to control the
+        scope of cookies in legacy user agents.  User agents that support
+        origin cookies will ignore these attributes when the Origin attribute
+        is present.</t>
 
-      
-      <t>The cake state management mechanism consists of two HTTP headers, an
-      HTTP response header named Set-Cake-Key and an HTTP request header
-      named Cake.</t>
+        <t>Origin cookies are returned from the user agent to the server in the
+        Origin-Cookie header field and not the Cookie header field because the
+        Cookie header field does not provide any information about the source
+        of the cookie.  When the server receives a cookie in the Origin-Cookie
+        header field, the server can reason that the cookie was set by its own
+        origin, and not injected by another origin.</t>
 
-      <t>The server can use the Set-Mac-Key response header to store a
-      secret key at the user agent.  For example, the following header
-      instructs the user agent to store a 128-bit secret key for two weeks:
-      <figure>
-        <artwork>
-          <![CDATA[ 
-Set-Mac-Key: 515BYea21GY7xRbZTLCekQ==; Max-Age=1209600
-          ]]>
-        </artwork>
-      </figure>
-      Notice that the server can easily generate a base64-encoded random
-      number using the openssl library:
-      <figure>
-        <artwork>
-          <![CDATA[ 
-$ openssl rand -base64 16
-          ]]>
-        </artwork>
-      </figure>
-      </t>
+      <section title="Examples">
 
-      <t>The user agent then associates the mac-key with the security-origin
-      from which it received the Set-Mac-Key header.  When making subsequent
-      HTTP requests to that security-origin, the user agent includes the Mac
-      request header, which contains a SHA-1 HMAC (keyed by the mac-key) of the
-      following portions of the request:
-      <list style="numbers">
-        <t>The Request-Line.</t>
-        <t>The Host header.</t>
-        <t>The entity-body (if present).</t>
-      </list>
-      </t>
+        <t>The server can set an origin cookie, which is returned in the
+        Origin-Cookie header field.  Origin cookies support all the same
+        attributes as other kinds of cookies, except Path, Domain, and Secure,
+        which are ignored.</t>
 
-      <t>For example, the following HTTP request has a valid Mac header:
-      <figure>
-        <artwork>
-          <![CDATA[ 
-POST /friend/add HTTP/1.1
-Host: example.com
-User-Agent: ExampleHTTPClient/1.0
-Mac: 23yJQ5vkmdhSFooAsoG3Lx9dArY=
-Origin: https://example.com
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 32
+        <figure>
+          <preamble>
+== Server -> User Agent ==
+          </preamble>
+          <artwork type="example">
+Set-Cookie: SID=31d4d96e407aad42; Origin
+          </artwork>
+        </figure>
+        <figure>
+          <preamble>
+== User Agent -> Server ==
+          </preamble>
+          <artwork type="example">
+Origin-Cookie: SID=31d4d96e407aad42
+          </artwork>
+        </figure>
 
-friend-id=309470752075&token=DftmyqELGarOrWtLzWDLA
-          ]]>
-        </artwork>
-      </figure>
-      </t>
+        <t>Non-origin cookies are returned in the Cookie header as usual.  If
+        the user agent sends the server both origin and non-origin cookies, the
+        origin cookies are returned in the Origin-Cookie header field and the
+        non-origin cookies are returned in the Origin-Cookie header field.</t>
 
-      <t>Notice that the request does not indicate to the server which key was
-      used to sign the request.  To recover the MAC, the server should include
-      a secret token in the request (depicted above as "token").  In addition
-      to indicating which MAC key to use, this token also protects the server
-      from cross-site request forgery attacks.</t>
+        <figure>
+          <preamble>
+== Server -> User Agent ==
+          </preamble>
+          <artwork type="example">
+Set-Cookie: SID=31d4d96e407aad42; Origin
+Set-Cookie: lang=en-US; Path=/; Domain=example.com
+          </artwork>
+        </figure>
+        <figure>
+          <preamble>
+== User Agent -> Server ==
+          </preamble>
+          <artwork type="example">
+Cookie: lang=en-US
+Origin-Cookie: SID=31d4d96e407aad42
+          </artwork>
+        </figure>
+      </section>
     </section>
     <section anchor="server-requirements" title="Server Requirements">
       <t>TODO</t>
-
-      <figure>
-        <artwork type="abnf">
-          <![CDATA[
-set-mac-key-header = "Set-Mac-Key:" OWS set-mac-key-string OWS
-set-mac-key-string = mac-key *( ";" SP mac-av )
-mac-key            = 1*BASE64CHAR
-BASE64CHAR         = ALPHA / DIGIT / "+" / "/" / "="
-mac-av             = max-age-av / extension-av
-max-age-av         = "Max-Age=" 1*DIGIT
-extension-av       = <any CHAR except CTLs or ";">
-          ]]>
-        </artwork>
-      </figure>
-
-      <figure>
-        <artwork type="abnf">
-          <![CDATA[
-cake-header         = "Mac:" OWS cake OWS
-cake                = 1*BASE64CHAR
-          ]]>
-        </artwork>
-      </figure>
     </section>
     <section anchor="ua-requirements" title="User Agent Requirements">
       <t>TODO</t>
@@ -253,20 +162,12 @@ cake                = 1*BASE64CHAR
       <t>The permanent message header registry (see <xref target="RFC3864"/>)
       should be updated with the following registrations:</t>
 
-      <section title="Cake">
-        <t>Header field name: Mac</t>
+      <section title="Origin-Cookie">
+        <t>Header field name: Origin-Cookie</t>
         <t>Applicable protocol: http</t>
         <t>Status: standard</t>
         <t>Author/Change controller: IETF</t>
         <t>Specification document: this specification <!-- (<xref target="cake"/>) --></t>
-      </section>
-
-      <section title="Set-Cake-Key">
-        <t>Header field name: Set-Mac-Key</t>
-        <t>Applicable protocol: http</t>
-        <t>Status: standard</t>
-        <t>Author/Change controller: IETF</t>
-        <t>Specification document: this specification <!-- (<xref target="set-cake-key"/>) --></t>
       </section>
     </section>
   </middle>
