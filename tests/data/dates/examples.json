@@ -13,10 +13,10 @@
     "expected": "Mon, 10 Dec 2007 16:32:30 GMT"
   }, {
     "test": "Wednesday, 01-Jan-10 00:00:00 GMT",
-    "expected": "Wed, 01 Jan 2010 00:00:00 GMT"
+    "expected": "Fri, 01 Jan 2010 00:00:00 GMT"
   }, {
     "test": "Mon, 10-Dec-07 20:35:03 GMT",
-    "expected": "Mon, 10 Dec 07 20:35:03 GMT"
+    "expected": "Mon, 10 Dec 2007 20:35:03 GMT"
   }, {
     "test": "Wed, 1 Jan 2020 00:00:00 GMT",
     "expected": "Wed, 01 Jan 2020 00:00:00 GMT"
@@ -34,13 +34,13 @@
     "expected": "Wed, 12 Dec 2007 08:44:07 GMT"
   }, {
     "test": "Mon, 01-Jan-2011 00: 00:00 GMT",
-    "expected": "Mon, 01 Jan 2011 00:00:00 GMT"
+    "expected": null
   }, {
     "test": "Sun, 1-Jan-1995 00:00:00 GMT",
     "expected": "Sun, 01 Jan 1995 00:00:00 GMT"
   }, {
     "test": "Wednesday, 01-Jan-10 0:0:00 GMT",
-    "expected": "Wed, 01 Jan 10 00:00:00 GMT"
+    "expected": "Fri, 01 Jan 2010 00:00:00 GMT"
   }, {
     "test": "Thu, 10 Dec 2009 13:57:2 GMT",
     "expected": "Thu, 10 Dec 2009 13:57:02 GMT"

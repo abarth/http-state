@@ -122,25 +122,25 @@
     "expected": null
   }, {
     "test": "Thu Apr 18 22:50:12 2007 GMT",
-    "expected": "Thu, 18 Apr 2007 22:50:12 GMT"
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
   }, {
     "test": "22:50:12 Thu Apr 18 2007 GMT",
-    "expected": "Thu, 18 Apr 2007 22:50:12 GMT"
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
   }, {
     "test": "Thu 22:50:12 Apr 18 2007 GMT",
-    "expected": "Thu, 18 Apr 2007 22:50:12 GMT"
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
   }, {
     "test": "Thu Apr 22:50:12 18 2007 GMT",
-    "expected": "Thu, 18 Apr 2007 22:50:12 GMT"
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
   }, {
     "test": "Thu Apr 18 22:50:12 2007 GMT",
-    "expected": "Thu, 18 Apr 2007 22:50:12 GMT"
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
   }, {
     "test": "Thu Apr 18 2007 22:50:12 GMT",
-    "expected": "Thu, 18 Apr 2007 22:50:12 GMT"
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
   }, {
     "test": "Thu Apr 18 2007 GMT 22:50:12",
-    "expected": "Thu, 18 Apr 2007 22:50:12 GMT"
+    "expected": "Wed, 18 Apr 2007 22:50:12 GMT"
   }, {
     "test": "Sat, 15-Apr-17 21:01:22 GMT",
     "expected": "Sat, 15 Apr 2017 21:01:22 GMT"
