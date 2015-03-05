@@ -54,7 +54,8 @@ class TestDataEncoder(json.JSONEncoder):
 
         elif isinstance(o, dict):
             if 'name' in o and 'value' in o:
-                return json.dumps(o)
+                encoded_items = [json.dumps(key) + ": " + json.dumps(value) for key, value in o.iteritems()]
+                return '{ ' + ', '.join(encoded_items) + ' }'
 
             prev_indent = self.indent
             self.indent += TestDataEncoder.indentUnit
@@ -87,7 +88,7 @@ def parse_test_file(file_path):
 
     with open(file_path, 'r') as f:
         for line in f:
-            name, value = re.findall('(\S+):\s*(.*)', line)[0]
+            name, value = re.findall('(\S+): ?(.*)', line)[0]
 
             if name.lower() == 'location':
                 location = value
@@ -132,7 +133,7 @@ def read_data_dir(data_dir):
 
         # NOTE: use OrderedDict here to keep fields order in the original parser.json file
         test_case = [
-            ('test', test_name.upper()),
+            ('test', test_name.upper().replace('-', '_')),
             ('received', set_cookies),
             ('sent', parse_expected_file(expected_file))
         ]
