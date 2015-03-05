@@ -253,7 +253,7 @@
     "test": "0028",
     "received": [
       "foo",
-      "   "
+      "\t"
     ],
     "sent": []
   },
@@ -456,40 +456,37 @@
   {
     "test": "CHARSET0001",
     "received": [
-      "foo=\u6625\u8282\u56DE\u5BB6\u8DEF\u00B7\u6625\u8FD0\u5B8C\u5168\u624B\u518C"
+      "foo=\u6625\u8282\u56de\u5bb6\u8def\u00b7\u6625\u8fd0\u5b8c\u5168\u624b\u518c"
     ],
     "sent": [
-      { "name": "foo",
-	"value": "\u6625\u8282\u56DE\u5BB6\u8DEF\u00B7\u6625\u8FD0\u5B8C\u5168\u624B\u518C" }
+      { "name": "foo", "value": "\u6625\u8282\u56de\u5bb6\u8def\u00b7\u6625\u8fd0\u5b8c\u5168\u624b\u518c" }
     ]
   },
   {
     "test": "CHARSET0002",
     "received": [
-      "\u6625\u8282\u56DE=\u5BB6\u8DEF\u00B7\u6625\u8FD0\u5B8C\u5168\u624B\u518C"
+      "\u6625\u8282\u56de=\u5bb6\u8def\u00b7\u6625\u8fd0\u5b8c\u5168\u624b\u518c"
     ],
     "sent": [
-      { "name": "\u6625\u8282\u56DE",
-	"value": "\u5BB6\u8DEF\u00B7\u6625\u8FD0\u5B8C\u5168\u624B\u518C" }
+      { "name": "\u6625\u8282\u56de", "value": "\u5bb6\u8def\u00b7\u6625\u8fd0\u5b8c\u5168\u624b\u518c" }
     ]
   },
   {
     "test": "CHARSET0003",
     "received": [
-      "\u6625\u8282\u56DE=\u5BB6\u8DEF\u00B7\u6625\u8FD0; \u5B8C\u5168\u624B\u518C"
+      "\u6625\u8282\u56de=\u5bb6\u8def\u00b7\u6625\u8fd0; \u5b8c\u5168\u624b\u518c"
     ],
     "sent": [
-      { "name": "\u6625\u8282\u56DE", "value": "\u5BB6\u8DEF\u00B7\u6625\u8FD0" }
+      { "name": "\u6625\u8282\u56de", "value": "\u5bb6\u8def\u00b7\u6625\u8fd0" }
     ]
   },
   {
     "test": "CHARSET0004",
     "received": [
-      "foo=\"\u6625\u8282\u56DE\u5BB6\u8DEF\u00B7\u6625\u8FD0\u5B8C\u5168\u624B\u518C\""
+      "foo=\"\u6625\u8282\u56de\u5bb6\u8def\u00b7\u6625\u8fd0\u5b8c\u5168\u624b\u518c\""
     ],
     "sent": [
-      { "name": "foo",
-	"value": "\"\u6625\u8282\u56DE\u5BB6\u8DEF\u00B7\u6625\u8FD0\u5B8C\u5168\u624B\u518C\"" }
+      { "name": "foo", "value": "\"\u6625\u8282\u56de\u5bb6\u8def\u00b7\u6625\u8fd0\u5b8c\u5168\u624b\u518c\"" }
     ]
   },
   {
@@ -755,7 +752,7 @@
     "received": [
       "foo=bar; path=/cookie-parser-result/foo/bar"
     ],
-    "sent-to": "/cookie-parser-result/f%6Fo/bar?disabled-path0028",
+    "sent-to": "/cookie-parser-result/f%6Fo/bar?disabled-path0029",
     "sent": [
       { "name": "foo", "value": "bar" }
     ]
@@ -1547,7 +1544,6 @@
   {
     "test": "NAME0032",
     "received": [
-      "\"foo\\\"bar",
       "\"foo\\\"bar;baz\"=qux"
     ],
     "sent": []
@@ -1608,10 +1604,10 @@
     ],
     "sent-to": "/cookie-parser-result/foo/baz?ordering0001",
     "sent": [
+      { "name": "key", "value": "val5" },
       { "name": "key", "value": "val1" },
       { "name": "key", "value": "val2" },
-      { "name": "key", "value": "val4" },
-      { "name": "key", "value": "val5" }
+      { "name": "key", "value": "val4" }
     ]
   },
   {
@@ -1871,8 +1867,8 @@
   {
     "test": "PATH0029",
     "received": [
-      "a=b;       path    =       /cookie-parser-result   ",
-      "x=y;       path    =       /book   "
+      "a=b; \tpath\t=\t/cookie-parser-result\t",
+      "x=y; \tpath\t=\t/book\t"
     ],
     "sent": [
       { "name": "a", "value": "b" }
@@ -1954,7 +1950,7 @@
   {
     "test": "VALUE0006",
     "received": [
-      "   foo     =       bar             ;       ttt"
+      "\tfoo\t=\tbar\t \t;\tttt"
     ],
     "sent": [
       { "name": "foo", "value": "bar" }
