@@ -8,3 +8,6 @@ You can get a list of the test URLs by running ./list-test-urls.  The run-test
 script can also automatically run the tests for a number of user agents, but
 you might need to compile them from source to have the necessary binaries.
 
+Related Test Suites:
+
+js-cookie library: https://github.com/js-cookie/js-cookie/blob/master/CONTRIBUTING.md#integration-with-server-side
